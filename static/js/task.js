@@ -843,9 +843,9 @@ var vvr_ = {
 
 var timeline = [];
 
-// timeline.push(parameters.parameters_instrumental_conditioning);
-// timeline.push(parameters.parameters_contingency_degradation);
-// timeline.push(parameters.parameters_contingency_restoration);
+timeline.push(parameters.parameters_instrumental_conditioning);
+timeline.push(parameters.parameters_contingency_degradation);
+timeline.push(parameters.parameters_contingency_restoration);
 
 timeline.push(vvr_.vvr_a());
 timeline.push(vvr_.vvr_b());
@@ -854,15 +854,15 @@ timeline.push(vvr_.vvr_c());
 function startExperiment(){
     jsPsych.init({
 			timeline: timeline,
-            on_finish: function(){ jsPsych.data.displayData(); }, // Debug
-            // on_finish: function() {
-            //     psiTurk.saveData({
-            //         success: function() { 
-            //             psiTurk.completeHIT();
-            //         },
-            //         error: prompt_resubmit
-            //     });
-            // },   
+            // on_finish: function(){ jsPsych.data.displayData(); }, // Debug
+            on_finish: function() {
+                psiTurk.saveData({
+                    success: function() { 
+                        psiTurk.completeHIT();
+                    },
+                    error: prompt_resubmit
+                });
+            }, 
             on_data_update: function(data) {
                 psiTurk.recordTrialData(data),
                 psiTurk.recordUnstructuredData(),
