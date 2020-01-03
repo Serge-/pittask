@@ -1,0 +1,260 @@
+/*
+ * CSS for jsPsych experiments.
+ *
+ * This stylesheet provides minimal styling to make jsPsych
+ * experiments look polished without any additional styles.
+ */
+
+ @import url(https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700);
+
+/* Container holding jsPsych content */
+
+ .jspsych-display-element {
+   display: flex;
+   flex-direction: column;
+   overflow-y: auto;
+ }
+
+ .jspsych-display-element:focus {
+   outline: none;
+ }
+
+ .jspsych-content-wrapper {
+   display: flex;
+   margin: auto;
+   flex: 1 1 100%;
+   width: 100%;
+ }
+
+ .jspsych-content {
+   max-width: 95%; /* this is mainly an IE 10-11 fix */
+   text-align: center;
+   margin: auto; /* this is for overflowing content */
+ }
+
+ .jspsych-top {
+   align-items: flex-start;
+ }
+
+ .jspsych-middle {
+   align-items: center;
+ }
+
+/* fonts and type */
+
+.jspsych-display-element {
+  font-family: 'Open Sans', 'Arial', sans-serif;
+  font-size: 18px;
+  line-height: 1.6em;
+}
+
+/* Form elements like input fields and buttons */
+
+.jspsych-display-element input[type="text"] {
+  font-family: 'Open Sans', 'Arial', sans-serif;
+  font-size: 14px;
+}
+
+/* borrowing Bootstrap style for btn elements, but combining styles a bit */
+.jspsych-btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin: 0px;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: 'Open Sans', 'Arial', sans-serif;
+  cursor: pointer;
+  line-height: 1.4;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
+}
+
+.jspsych-btn:hover {
+  background-color: #ddd;
+  border-color: #aaa;
+}
+
+.jspsych-btn:disabled {
+  background-color: #eee;
+  color: #aaa;
+  border-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* jsPsych progress bar */
+
+#jspsych-progressbar-container {
+  color: #555;
+  border-bottom: 1px solid #dedede;
+  background-color: #f9f9f9;
+  margin-bottom: 1em;
+  text-align: center;
+  padding: 8px 0px;
+  width: 100%;
+  line-height: 1em;
+}
+#jspsych-progressbar-container span {
+  font-size: 14px;
+  padding-right: 14px;
+}
+#jspsych-progressbar-outer {
+  background-color: #eee;
+  width: 50%;
+  margin: auto;
+  height: 14px;
+  display: inline-block;
+  vertical-align: middle;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+}
+#jspsych-progressbar-inner {
+  background-color: #aaa;
+  width: 0%;
+  height: 100%;
+}
+
+/* Control appearance of jsPsych.data.displayData() */
+#jspsych-data-display {
+  text-align: left;
+}
+
+/* Helpers */
+
+.hidden {
+  display: none;
+}
+li span {
+  /* position: relative;
+  left: -10px; */
+}
+/* SLIDER <= */
+
+#slider,
+#slider {
+    margin: 3.5rem auto;
+    width: 500px;
+    height: 1px;
+    position: relative;
+    cursor: pointer;
+}
+
+#slider {
+    margin-bottom: 3rem;
+}
+#slider label,
+#slider label {
+    position: absolute;
+    width: 20px;
+    height: 10px;
+    margin-top: 25px;
+    margin-left: -10px;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+}
+
+#slider:after {
+    content: '|';
+    position: absolute;
+    top: -15px;
+    left: -5px;
+    cursor: pointer;
+    color: #fff;
+}
+#slider:before {
+    content: '|';
+    position: absolute;
+    top: -15px;
+    right: -5px;
+    cursor: pointer;
+    color: #fff;
+}
+#slider label + .visible_el {
+    visibility: visible;
+}
+#slider label.\30 .visible_el {
+    visibility: visible;
+}
+
+.ui-slider {
+  background-color: #fff;
+}
+.ui-slider .ui-slider-handle {
+    position: absolute;
+    top: -10px;
+    width: 20px;
+    height: 20px;
+    margin-left:-11px;
+    background-color: #fff;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.description {
+  width: 580px;
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  color: #fff;
+  top: -3.7rem;
+  right: -2rem;
+}
+.description p {
+  line-height: 0;
+  font-weight: 100;
+}
+.description .description--center {
+  margin-right: 0.4rem;
+}
+.description > div {
+  text-align: center;
+}
+.confirm-button {
+  color: #000;
+  border-radius: 3px;
+  margin: 3rem 0;
+}
+/* SLIDER => */
+
+/* Vending machine VVR */
+.vvr-question-container {
+  display: flex;
+}
+.vvr-question-container > div {
+  padding: 0 5rem;
+}
+.vvr-question-b {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.vvr-question-b ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  outline: 1px solid #fff;
+  padding: 2rem;
+}
+
+.vending-machine {
+  height: 350px;
+  width: 350px; 
+}
+.outcome-container {
+  padding-top: 50px;
+  height: 250px;
+}
+.outcome {
+  height: 250px;
+  width: auto;
+}
+.outcome-container-learning img {
+  height: 220px;
+}

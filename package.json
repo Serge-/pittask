@@ -1,0 +1,52 @@
+{
+  "name": "jspsych",
+  "version": "6.1.0",
+  "description": "Behavioral experiments in a browser",
+  "main": "jspsych.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "jest",
+    "tst": "jest-pippeteer"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jodeleeuw/jsPsych.git"
+  },
+  "author": "Yenin Sergey",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jodeleeuw/jsPsych/issues"
+  },
+  "homepage": "https://github.com/jodeleeuw/jsPsych#readme",
+  "devDependencies": {
+    "jest": "^24.9.0",
+    "jest-puppeteer": "^4.3.0",
+    "puppeteer": "^2.0.0"
+  },
+  "jest": {
+    "resetModules": true,
+    "testEnvironmentOptions": {
+      "fetchExternalResources": true,
+      "pretendToBeVisual": true
+    },
+    "testURL": "http://localhost:22362/"
+  },
+  "jest-pippeteer": {
+    "preset": "jest-puppeteer",
+    "globalSetup": "jest-environment-puppeteer/setup",
+    "globalTeardown": "jest-environment-puppeteer/teardown",
+    "testEnvironment": "jest-environment-puppeteer",
+    "resetModules": true,
+    "testEnvironmentOptions": {
+      "fetchExternalResources": true,
+      "pretendToBeVisual": true
+    },
+    "testURL": "http://localhost:22362/exp?hitId=debugkjyl1&assignmentId=debugZS9yU&workerId=debugMHgla&mode=debug",
+    "globals": {
+      "window": {},
+      "document": {}
+    }
+  }
+}
