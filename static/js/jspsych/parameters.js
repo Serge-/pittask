@@ -91,3 +91,7 @@ var vvr = {
         close_instruct_latency: 1500,
     }
 }
+
+var survey = {
+    modal: 'Sorry, all questions need to be answered prior to submission.',
+}

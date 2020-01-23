@@ -10,6 +10,7 @@ body {
 
 
 /* text styling */
+.navbar-text,
 strong {
   font-weight: 600;         
 }
@@ -74,4 +75,54 @@ h1 {
 #error img {
   padding-right: 10px;
   padding-top: 15px;
+}
+
+
+.form-radio {
+     -webkit-appearance: none;
+     -moz-appearance: none;
+     appearance: none;
+     display: inline-block;
+     position: relative;
+     background-color: #f1f1f1;
+     color: #5bc0de;
+     top: 10px;
+     height: 20px;
+     width: 20px;
+     border: 0;
+     border-radius: 0px;
+     cursor: pointer;     
+     margin-right: 7px;
+     outline: none;
+}
+.form-radio:checked::before {
+     position: absolute;
+     font: 40px/1 'Open Sans', sans-serif;
+     left: 1px;
+     top: -18px;
+     content: '\02143';
+     transform: rotate(40deg);
+}
+.form-radio:hover {
+     background-color: #f7f7f7;
+}
+.form-radio:checked {
+     background-color: #f1f1f1;
+}
+/* remove focus outline */
+input[type=file]:focus, input[type=radio]:focus, input[type=checkbox]:focus {
+    outline: none;
+}
+.survey-error::before {
+  content: "\002A";
+  position: absolute;
+  left: -15px;
+}
+.survey-error-after::after {
+  content: "\002A";
+}
+.survey-error-after,
+.survey-error {
+  position: relative;
+  color: #d9534f;
 }

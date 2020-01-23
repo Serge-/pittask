@@ -841,30 +841,63 @@ var vvr_ = {
     }
 }
 
+
 var timeline = [];
 
-timeline.push(parameters.parameters_instrumental_conditioning);
-timeline.push(parameters.parameters_contingency_degradation);
-timeline.push(parameters.parameters_contingency_restoration);
+// Demographics
+// Intro: We'd like to briefly ask you about some symptoms before the online game.
+// OCI-R
+// MOVES
+// DASS-21
+// Adult Attention-Deficit/Hyperactivity Disorder Self-Report Screening Scale for DSM-5 (ASRS-5)
+// Internet-based form EAT-26
+// The RAADS Screen
+timeline.push(RAADS)
+// PHQ-9
+timeline.push(PHQ9);
+// GAD-7
+timeline.push(GAD7);
+// ASRM
+timeline.push(ASRM);
+// The Primary Care PTSD Screen for DSM-5 (PC-PTSD-5)
+timeline.push(PTSD);
+// The PRIME Screen – Revised
+timeline.push(PRIME_R);
+// AUDIT
+// PGSI
+// YIAT
+// Smoking status
+// FTND
+// Insomnia Severity Index
+timeline.push(ISI);
+// The Personality Inventory for DSM-5—Brief Form (PID-5-BF)— Adult
+timeline.push(PID);
+// SDS
+// Close: That's it for the symptom questions. Now we're ready to start the online game
 
-timeline.push(vvr_.vvr_a());
-timeline.push(vvr_.vvr_b());
-timeline.push(vvr_.vvr_c());
+
+// timeline.push(parameters.parameters_instrumental_conditioning);
+// timeline.push(parameters.parameters_contingency_degradation);
+// timeline.push(parameters.parameters_contingency_restoration);
+
+// timeline.push(vvr_.vvr_a());
+// timeline.push(vvr_.vvr_b());
+// timeline.push(vvr_.vvr_c());
 
 function startExperiment(){
     jsPsych.init({
 			timeline: timeline,
-            // on_finish: function(){ jsPsych.data.displayData(); }, // Debug
-            on_finish: function() {
-                psiTurk.saveData({
-                    success: function() { 
-                        psiTurk.completeHIT();
-                    },
-                    error: prompt_resubmit
-                });
-            }, 
+            on_finish: function(){ jsPsych.data.displayData(); }, // Debug
+            // on_finish: function() {
+            //     psiTurk.saveData({
+            //         success: function() { 
+            //             psiTurk.completeHIT();
+            //         },
+            //         error: prompt_resubmit
+            //     });
+            // }, 
             on_data_update: function(data) {
-                psiTurk.recordTrialData(data),
+                psiTurk.recordTrialData(data),``
                 psiTurk.recordUnstructuredData(),
                 psiTurk.saveData();
 			}

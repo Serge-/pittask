@@ -2063,7 +2063,8 @@ jsPsych.pluginAPI = (function() {
       if (valid_response) {
         // if this is a valid response, then we don't want the key event to trigger other actions
         // like scrolling via the spacebar.
-        e.preventDefault();
+        // disabled for developing mode
+        // e.preventDefault();
 
         parameters.callback_function({
           key: e.keyCode,
