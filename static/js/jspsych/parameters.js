@@ -12,7 +12,7 @@ var vvr = {
     instrumental_conditioning: {
         open_instruct: true,
         open_instruct_text: '<p>You can now interact with the vending machine to earn snacks.</p>',
-        open_instruct_latency: 1500,
+        open_instruct_latency: 3000,
         degrad_pattern: ['d1', 'd2'],
         prob_value: [1, 1],
         interval_duration: 3000,
@@ -34,12 +34,12 @@ var vvr = {
         feedback_duration: 2000,
         close_instruct: true,
         close_instruct_text: '<p>Some text for close instructions VVR "instrumental conditioning"</p>',
-        close_instruct_latency: 1500,
+        close_instruct_latency: 3000,
     },
     contingency_degradation: {
         open_instruct: true,
         open_instruct_text: '<p>You can now interact with the vending machine to earn snacks.</p>',
-        open_instruct_latency: 1500,
+        open_instruct_latency: 3000,
         degrad_pattern: ['d1', 'd2'],
         prob_value: [1, 1],
         interval_duration: 2000,
@@ -61,12 +61,12 @@ var vvr = {
         feedback_duration: 2000,
         close_instruct: true,
         close_instruct_text: '<p>Some text for close instructions VVR "contingency degradation"</p>',
-        close_instruct_latency: 1500,
+        close_instruct_latency: 3000,
     },
     contingency_restoration: {
         open_instruct: true,
         open_instruct_text: '<p>You can now interact with the vending machine to earn snacks.</p>',
-        open_instruct_latency: 1500,
+        open_instruct_latency: 3000,
         degrad_pattern: ['d1', 'd2'],
         prob_value: [1, 1],
         interval_duration: 2000,
@@ -88,7 +88,7 @@ var vvr = {
         feedback_duration: 2000,
         close_instruct: true,
         close_instruct_text: '<p>Some text for close instructions VVR "contingency restoration"</p>',
-        close_instruct_latency: 1500,
+        close_instruct_latency: 3000,
     }
 }
 

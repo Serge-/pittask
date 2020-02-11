@@ -780,8 +780,8 @@ var vvr_ = {
             timeline: [{ 
                 stage_name: 'contingency degradation open instructions page',
                 type: 'html-keyboard-response',
-                stimulus: vvr.instrumental_conditioning.open_instruct_text,
-                trial_duration: vvr.instrumental_conditioning.open_instruct_latency,
+                stimulus: vvr.contingency_degradation.open_instruct_text,
+                trial_duration: vvr.contingency_degradation.open_instruct_latency,
                 response_ends_trial: false,
                 event_type: 'text appears',
                 event_raw_details: 'open_instruct_text',
@@ -795,8 +795,8 @@ var vvr_ = {
             timeline: [{
                 stage_name: 'contingency degradation close instructions page',
                 type: 'html-keyboard-response',
-                stimulus: vvr.instrumental_conditioning.close_instruct_text,
-                trial_duration: vvr.instrumental_conditioning.close_instruct_latency,
+                stimulus: vvr.contingency_degradation.close_instruct_text,
+                trial_duration: vvr.contingency_degradation.close_instruct_latency,
                 response_ends_trial: false,
                 event_type: 'text appears',
                 event_raw_details: 'close_instruct_text',
@@ -812,8 +812,8 @@ var vvr_ = {
             timeline: [{ 
                 stage_name: 'contingency restoration open instructions page',
                 type: 'html-keyboard-response',
-                stimulus: vvr.instrumental_conditioning.open_instruct_text,
-                trial_duration: vvr.instrumental_conditioning.open_instruct_latency,
+                stimulus: vvr.contingency_restoration.open_instruct_text,
+                trial_duration: vvr.contingency_restoration.open_instruct_latency,
                 response_ends_trial: false,
                 event_type: 'text appears',
                 event_raw_details: 'open_instruct_text',
@@ -827,8 +827,8 @@ var vvr_ = {
             timeline: [{
                 stage_name: 'contingency restoration close instructions page',
                 type: 'html-keyboard-response',
-                stimulus: vvr.instrumental_conditioning.close_instruct_text,
-                trial_duration: vvr.instrumental_conditioning.close_instruct_latency,
+                stimulus: vvr.contingency_restoration.close_instruct_text,
+                trial_duration: vvr.contingency_restoration.close_instruct_latency,
                 response_ends_trial: false,
                 event_type: 'text appears',
                 event_raw_details: 'close_instruct_text',
@@ -843,14 +843,21 @@ var vvr_ = {
 
 
 var timeline = [];
+// Init parameters
+timeline.push(parameters.parameters_instrumental_conditioning);
+timeline.push(parameters.parameters_contingency_degradation);
+timeline.push(parameters.parameters_contingency_restoration);
 
 // Demographics
+// timeline.push(Demographics)
 // Intro: We'd like to briefly ask you about some symptoms before the online game.
 // OCI-R
+// timeline.push(OCIR);
 // MOVES
 // DASS-21
 // Adult Attention-Deficit/Hyperactivity Disorder Self-Report Screening Scale for DSM-5 (ASRS-5)
 // Internet-based form EAT-26
+// timeline.push(EAT26)
 // The RAADS Screen
 timeline.push(RAADS)
 // PHQ-9
@@ -875,27 +882,28 @@ timeline.push(PID);
 // SDS
 // Close: That's it for the symptom questions. Now we're ready to start the online game
 
-
-// timeline.push(parameters.parameters_instrumental_conditioning);
-// timeline.push(parameters.parameters_contingency_degradation);
-// timeline.push(parameters.parameters_contingency_restoration);
-
-// timeline.push(vvr_.vvr_a());
-// timeline.push(vvr_.vvr_b());
-// timeline.push(vvr_.vvr_c());
+timeline.push(vvr_.instructions_a.instructions_open);
+timeline.push(vvr_.vvr_a());
+timeline.push(vvr_.instructions_a.instructions_close);
+timeline.push(vvr_.instructions_b.instructions_open);
+timeline.push(vvr_.vvr_b());
+timeline.push(vvr_.instructions_b.instructions_close);
+timeline.push(vvr_.instructions_c.instructions_open);
+timeline.push(vvr_.vvr_c());
+timeline.push(vvr_.instructions_c.instructions_close);
 
 function startExperiment(){
     jsPsych.init({
 			timeline: timeline,
-            on_finish: function(){ jsPsych.data.displayData(); }, // Debug
-            // on_finish: function() {
-            //     psiTurk.saveData({
-            //         success: function() { 
-            //             psiTurk.completeHIT();
-            //         },
-            //         error: prompt_resubmit
-            //     });
-            // }, 
+            // on_finish: function(){ jsPsych.data.displayData(); }, // Debug
+            on_finish: function() {
+                psiTurk.saveData({
+                    success: function() { 
+                        psiTurk.completeHIT();
+                    },
+                    error: prompt_resubmit
+                });
+            }, 
             on_data_update: function(data) {
                 psiTurk.recordTrialData(data),``
                 psiTurk.recordUnstructuredData(),

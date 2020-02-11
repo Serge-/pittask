@@ -1,3 +1,139 @@
+var Demographics = {
+    type: 'Demographics',
+    preamble: `
+        <p>We would like to ask you a few questions about your personal information to better understand our study
+        population. All your responses will be confidential.</p>
+    `,
+    questions: [
+        {
+            prompt: 'Gender',
+            options: ['Male', 'Female', 'Other'], 
+            horizontal: true
+        },{
+            prompt: 'Age',
+            options: ['Years', 'Months'], 
+            horizontal: true
+        },{
+            prompt: 'Height',
+            options: ['cm', 'feet'], 
+            horizontal: true
+        },{
+            prompt: 'Weight',
+            options: ['kg', 'Pounds'], 
+            horizontal: true
+        },{
+            prompt: 'Education level',
+            options: ['Primary', 'Secondary', 'Associate or vocational education', 'Bachelor', 'Masters or above'], 
+            horizontal: true
+        },{
+            prompt: 'Marital status',
+            options: ['Married', 'Separated', 'Divorced', 'Widowed', 'Never married'], 
+            horizontal: true
+        },{
+            prompt: 'Employment status',
+            options: ['Employed - full time', 'Employed - part-time', 'Self-employed', 'Student', 'Unemployed', 'Retired'], 
+            horizontal: true
+        },{
+            prompt: 'Gross annual household income (US dollars)',
+            options: ['< $15,000', '$15,000 - $24,999', '$25,000 - $74,999', '> $75,000'], 
+            horizontal: true
+        }
+
+    ],
+    button_label: 'submit answers',
+    event_type: 'survey appears',
+    event_raw_details: "Demographics, options",
+    event_converted_details: 'Demographics survey appears'
+}
+
+
+var OCIR = {
+    type: 'OCI-R',
+    preamble: 
+        `<p>The following statements refer to experiences that many people have in their everyday lives. Select
+        the number that best describes <b>HOW MUCH</b> that experience has <b>DISTRESSED</b> or <b>BOTHERED</b>
+        you during the <b>PAST MONTH</b>. The numbers refer to the following verbal labels:</p>`,
+    questions: [
+        {      
+                prompt: "I have saved up so many things that they get in the way.",
+                options: [0, 1, 2, 3, 4],
+                horizontal: true
+        },{
+                prompt: "I check things more often than necessary.",
+                options: [0, 1, 2, 3, 4],
+                horizontal: true
+        },{
+                prompt: 'I get upset if objects are not arranged properly.',
+                options: [0, 1, 2, 3, 4],
+                horizontal: true
+        },{
+                prompt: 'I feel compelled to count while I am doing things.',
+                options: [0, 1, 2, 3, 4],
+                horizontal: true
+        },{
+                prompt: 'I find it difficult to touch an object when I know it has been touched by strangers or certain people.',
+                options: [0, 1, 2, 3, 4],
+                horizontal: true
+        },{
+                prompt: 'I find it difficult to control my own thoughts.',
+                options: [0, 1, 2, 3, 4],
+                horizontal: true
+        },{
+                prompt: 'I collect things I don’t need.',
+                options: [0, 1, 2, 3, 4],
+                horizontal: true
+        },{
+                prompt: 'I repeatedly check doors, windows, drawers, etc.',
+                options: [0, 1, 2, 3, 4],
+                horizontal: true
+        },{
+                prompt: 'I get upset if others change the way I have arranged things.',
+                options: [0, 1, 2, 3, 4],
+                horizontal: true
+        },{
+                prompt: 'I feel I have to repeat certain numbers.',
+                options: [0, 1, 2, 3, 4],
+                horizontal: true
+        },{ 
+                prompt: 'I sometimes have to wash or clean myself simply because I feel contaminated.',
+                options: [0, 1, 2, 3, 4],
+                horizontal: true
+        },{ 
+                prompt: 'I am upset by unpleasant thoughts that come into my mind against my will.',
+                options: [0, 1, 2, 3, 4],
+                horizontal: true
+        },{     
+                prompt: 'I avoid throwing things away because I am afraid I might need them later.',
+                options: [0, 1, 2, 3, 4],
+                horizontal: true
+        },{
+                prompt: 'I repeatedly check gas and water taps and light switches after turning them off.',
+                options: [0, 1, 2, 3, 4],
+                horizontal: true
+        },{
+                prompt: 'I need things to be arranged in a particular way.',
+                options: [0, 1, 2, 3, 4],
+                horizontal: true
+        },{
+                prompt: 'I feel that there are good and bad numbers.',
+                options: [0, 1, 2, 3, 4],
+                horizontal: true
+        },{
+                prompt: 'I wash my hands more often and longer than necessary.',
+                options: [0, 1, 2, 3, 4],
+                horizontal: true
+        },{
+                prompt: 'I frequently get nasty thoughts and have difficulty in getting rid of them.',
+                options: [0, 1, 2, 3, 4],
+                horizontal: true
+        }
+    ],
+    button_label: 'submit answers',
+    event_type: 'survey appears',
+    event_raw_details: "OCI-R, options",
+    event_converted_details: 'OCI-R survey appears'
+}
+
 var ASRM = {
     type: 'ASRM',
     preamble: `
@@ -166,6 +302,154 @@ var ISI = {
     event_raw_details: "ISI, options",
     event_converted_details: 'ISI survey appears'
 };
+
+var EAT26 = {
+    type: 'EAT-26',
+    preamble: `
+        <p>Please fill out the below form as accurately, honestly and completely as possible. There are no right or wrong answers. All of
+        your responses are confidential.</p>
+    `,
+    questions: [
+        {
+            prompt: 'Am terrified about being overweight.',
+            options: ['Always', 'Usually', 'Often', 'Sometimes', 'Rarely', 'Never'],
+            horizontal: true
+        },{
+            prompt: 'I feel like I act totally on impulse.',
+            options: ['Always', 'Usually', 'Often', 'Sometimes', 'Rarely', 'Never'],
+            horizontal: true
+        },{
+            prompt: 'Find myself preoccupied with food.',
+            options: ['Always', 'Usually', 'Often', 'Sometimes', 'Rarely', 'Never'],
+            horizontal: true
+        },{
+            prompt: 'Have gone on eating binges where I feel that I may not be able to stop',
+            options: ['Always', 'Usually', 'Often', 'Sometimes', 'Rarely', 'Never'],
+            horizontal: true
+        },{
+            prompt: 'Cut my food into small pieces.',
+            options: ['Always', 'Usually', 'Often', 'Sometimes', 'Rarely', 'Never'],
+            horizontal: true
+        },{
+            prompt: 'Aware of the calorie content of foods that I eat.',
+            options: ['Always', 'Usually', 'Often', 'Sometimes', 'Rarely', 'Never'],
+            horizontal: true
+        },{
+            prompt: 'Particularly avoid food with a high carbohydrate content (i.e. bread, rice, potatoes, etc.)',
+            options: ['Always', 'Usually', 'Often', 'Sometimes', 'Rarely', 'Never'],
+            horizontal: true
+        },{
+            prompt: 'Feel that others would prefer if I ate more.',
+            options: ['Always', 'Usually', 'Often', 'Sometimes', 'Rarely', 'Never'],
+            horizontal: true
+        },{
+            prompt: 'Vomit after I have eaten.',
+            options: ['Always', 'Usually', 'Often', 'Sometimes', 'Rarely', 'Never'],
+            horizontal: true
+        },{
+            prompt: 'Feel extremely guilty after eating.',
+            options: ['Always', 'Usually', 'Often', 'Sometimes', 'Rarely', 'Never'],
+            horizontal: true
+        },{
+            prompt: 'Am preoccupied with a desire to be thinner.',
+            options: ['Always', 'Usually', 'Often', 'Sometimes', 'Rarely', 'Never'],
+            horizontal: true
+        },{
+            prompt: 'Think about burning up calories when I exercise',
+            options: ['Always', 'Usually', 'Often', 'Sometimes', 'Rarely', 'Never'],
+            horizontal: true
+        },{
+            prompt: 'Other people think that I am too thin.',
+            options: ['Always', 'Usually', 'Often', 'Sometimes', 'Rarely', 'Never'],
+            horizontal: true
+        },{
+            prompt: 'Am preoccupied with the thought of having fat on my body.',
+            options: ['Always', 'Usually', 'Often', 'Sometimes', 'Rarely', 'Never'],
+            horizontal: true
+        },{
+            prompt: 'Take longer than others to eat my meals.',
+            options: ['Always', 'Usually', 'Often', 'Sometimes', 'Rarely', 'Never'],
+            horizontal: true
+        },{
+            prompt: 'Avoid foods with sugar in them.',
+            options: ['Always', 'Usually', 'Often', 'Sometimes', 'Rarely', 'Never'],
+            horizontal: true
+        },{
+            prompt: 'Eat diet foods.',
+            options: ['Always', 'Usually', 'Often', 'Sometimes', 'Rarely', 'Never'],
+            horizontal: true
+        },{
+            prompt: 'Feel that food controls my life.',
+            options: ['Always', 'Usually', 'Often', 'Sometimes', 'Rarely', 'Never'],
+            horizontal: true
+        },{
+            prompt: 'Display self-control around food.',
+            options: ['Always', 'Usually', 'Often', 'Sometimes', 'Rarely', 'Never'],
+            horizontal: true
+        },{
+            prompt: 'Feel that others pressure me to eat.',
+            options: ['Always', 'Usually', 'Often', 'Sometimes', 'Rarely', 'Never'],
+            horizontal: true
+        },{
+            prompt: 'Give too much time and thought to food.',
+            options: ['Always', 'Usually', 'Often', 'Sometimes', 'Rarely', 'Never'],
+            horizontal: true
+        },{
+            prompt: 'Feel uncomfortable after eating sweets.',
+            options: ['Always', 'Usually', 'Often', 'Sometimes', 'Rarely', 'Never'],
+            horizontal: true
+        },{
+            prompt: 'Engage in dieting behaviour.',
+            options: ['Always', 'Usually', 'Often', 'Sometimes', 'Rarely', 'Never'],
+            horizontal: true
+        },{
+            prompt: 'Like my stomach to be empty.',
+            options: ['Always', 'Usually', 'Often', 'Sometimes', 'Rarely', 'Never'],
+            horizontal: true
+        },{
+            prompt: 'Have the impulse to vomit after meals.',
+            options: ['Always', 'Usually', 'Often', 'Sometimes', 'Rarely', 'Never'],
+            horizontal: true
+        },{
+            prompt: 'Enjoy trying new rich foods.',
+            options: ['Always', 'Usually', 'Often', 'Sometimes', 'Rarely', 'Never'],
+            horizontal: true
+        },
+
+
+        {
+            prompt: 'Gone on eating where you feel that you may not be able to stop?',
+            options: ['Never', 'Once a month or less', '2-3 times a month', 'Once a week', '2-6 times a week', 'Once a day or more'],
+            horizontal: true
+        },
+        {
+            prompt: 'Ever made yourself sick (vomited) to control your weight or shape?',
+            options: ['Never', 'Once a month or less', '2-3 times a month', 'Once a week', '2-6 times a week', 'Once a day or more'],
+            horizontal: true
+        },
+        {
+            prompt: 'Ever used laxatives, diet pills or diuretics (water pills) to control your weight or shape?',
+            options: ['Never', 'Once a month or less', '2-3 times a month', 'Once a week', '2-6 times a week', 'Once a day or more'],
+            horizontal: true
+        },
+        {
+            prompt: 'Exercised more than 60 minutes a day to lose or to control your weight?',
+            options: ['Never', 'Once a month or less', '2-3 times a month', 'Once a week', '2-6 times a week', 'Once a day or more'],
+            horizontal: true
+        },
+        {
+            prompt: 'Lost 20 pounds or more in the past 6 months',
+            options: ['Yes','No'],
+            horizontal: true
+        },
+        
+    ],
+    button_label: 'submit answers',
+    event_type: 'survey appears',
+    event_raw_details: "EAT-26, options",
+    event_converted_details: 'EAT-26 survey appears'
+};
+
 
 var PID = {
     type: 'PID-5-BF',
