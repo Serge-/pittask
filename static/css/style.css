@@ -124,5 +124,5 @@ input[type=file]:focus, input[type=radio]:focus, input[type=checkbox]:focus {
 .survey-error-after,
 .survey-error {
   position: relative;
-  color: #d9534f;
+  color: #dc3545;
 }

@@ -94,4 +94,9 @@ var vvr = {
 
 var survey = {
     modal: 'Sorry, all questions need to be answered prior to submission.',
+    clinical_text: {
+        clinical_latency_period: 1000,
+        clinical_intro_text: "<p class='v-center-txt'>We'd like to briefly ask you about some symptoms before the online game. <br> Press any key when you are ready. </p>",
+        clinical_close_text: "<p class='v-center-txt'>That's it for the symptom questions. Now we're ready to start the online game. <br> Press any key when you are ready. </p>"
+    }
 }

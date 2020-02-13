@@ -339,6 +339,7 @@ jsPsych.plugins['ISI'] = (function () {
         };
 
         display_element.innerHTML = '';
+        $('.navbar').remove();
 
         // next trial
         jsPsych.finishTrial(trial_data);

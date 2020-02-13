@@ -1,9 +1,9 @@
-jsPsych.plugins['PHQ-9'] = (function() {
+jsPsych.plugins['OCI-R'] = (function() {
     var plugin = {};
   
     plugin.info = {
-      name: 'Severity Measure for Depression-Adult',
-      stage_name: 'PHQ-9',
+      name: 'OCI-R',
+      stage_name: 'OCI-R',
       description: '',
       parameters: {
         questions: {
@@ -105,8 +105,7 @@ jsPsych.plugins['PHQ-9'] = (function() {
           <div class="container-fluid">
             <div class="navbar-header">
             <p class="navbar-text">
-                <b>${plugin.info.name}</b> <br>
-                Adapted from the Patient Health Questionnaire–9 (PHQ-9)
+                <b>${plugin.info.name}</b>
             </p>
             </div>
           </div>
@@ -116,7 +115,7 @@ jsPsych.plugins['PHQ-9'] = (function() {
       // inject CSS for trial
       html += '<style id="jspsych-survey-multi-choice-css">';
       html += ".jspsych-survey-multi-choice-question { display: flex; text-align: left; border-bottom: 1px solid }"+
-        ".jspsych-survey-multi-choice-question:nth-child(2n+1) { background-color: #444; }"+
+        ".jspsych-survey-multi-choice-question:nth-child(2n-2) { background-color: #444; }"+
         ".jspsych-survey-multi-choice-text span.required {color: darkred;}"+
         ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-text {  text-align: center;}"+
         ".jspsych-survey-multi-choice-option { display: flex; justify-content: center; align-items: center; line-height: 2; padding: 1rem 0; }"+
@@ -130,10 +129,10 @@ jsPsych.plugins['PHQ-9'] = (function() {
         ".jspsych-survey-multi-choice { margin-top: 10rem; }" +
         ".jspsych-survey-multi-choice-number { display: flex; align-items: center; height: 100%; width: 30px; outline: 1px solid; text-align: center; justify-content: center; }" +
         ".jspsych-survey-multi-choice-preamble { text-align: left; max-width: 1000px; padding-bottom: 1rem; }" +
-        ".jspsych-survey-multi-choice-instructions { display: flex; justify-content: space-between;  border-bottom: 1px solid;  border: 1px solid; background-color: #444; }" +
-        ".jspsych-survey-multi-choice-instructions ul { display: flex; width: 50%; justify-content: space-around; padding-inline-start: 0; margin-bottom: 0; }" +
-        ".jspsych-survey-multi-choice-instructions li { display: flex; justify-content: center; width: 100%; border-left: 1px solid; }" +
-        ".jspsych-survey-multi-choice-instructions li div { width: 100px}" +
+        ".jspsych-survey-multi-choice-instructions { border-top: 1px solid #fff; border-bottom: 1px solid #fff;  }" +
+        ".jspsych-survey-multi-choice-instructions ul { display: flex; justify-content: space-around; padding-inline-start: 0; margin-bottom: 0; }" +
+        ".jspsych-survey-multi-choice-instructions li { display: flex; justify-content: center; width: 100%; border-right: 1px solid #fff; padding: 1rem;  }" +
+        ".jspsych-survey-multi-choice-instructions li:last-child { border-right: none;  }" +
         "label.jspsych-survey-multi-choice-text input[type='radio'] {margin-right: 1em;}" +
         ".jspsych-survey-highlight { width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; }" +
         "p { margin: 0 0 0px; }"
@@ -152,12 +151,12 @@ jsPsych.plugins['PHQ-9'] = (function() {
 
       html += 
       `<div id="jspsych-survey-multi-choice-preamble" class="jspsych-survey-multi-choice-instructions">
-          <div></div>
           <ul>
-            <li><div>Very False or Often False</div></li>
-            <li><div>Sometimes or Somewhat False</div></li>
-            <li><div>Sometimes or Somewhat True</div></li>
-            <li><div>Very True or Often True</div></li>
+            <li><div><p>0</p><p>Not at all</p></div></li>
+            <li><div><p>1</p><p>A little</p></div></li>
+            <li><div><p>2</p><p>Moderately</p></div></li>
+            <li><div><p>3</p><p>A lot</p></div></li>
+            <li><div><p>4</p><p>Extremely</p></div></li>
           </ul>
       </div>`
 
@@ -312,7 +311,6 @@ jsPsych.plugins['PHQ-9'] = (function() {
   
           display_element.innerHTML = '';
           $('.navbar').remove();
-  
           // next trial
           jsPsych.finishTrial(trial_data);
         } else {

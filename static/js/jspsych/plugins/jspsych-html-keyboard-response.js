@@ -37,10 +37,16 @@ jsPsych.plugins["html-keyboard-response"] = (function() {
         default: null,
         description: 'How long to show trial before it ends.'
       },
+      trial_latency: {
+        type: jsPsych.plugins.parameterType.INT,
+        pretty_name: 'Trial latency',
+        default: null,
+        description: 'How long to show trial before key press it ends.'
+      },
       response_ends_trial: {
         type: jsPsych.plugins.parameterType.BOOL,
         pretty_name: 'Response ends trial',
-        default: true,
+        default: false,
         description: 'If true, trial will end when subject makes a response.'
       },
       stage_name: {
@@ -103,9 +109,10 @@ jsPsych.plugins["html-keyboard-response"] = (function() {
       }
 
       // gather the data to store for the trial
+      // JSON.stringify(
       var trial_data = {
-        "stage_name": trial.stage_name,
-        "events": response.trial_events
+        "stage_name": JSON.stringify(trial.stage_name),
+        "events": JSON.stringify(response.trial_events)
       };
 
       // clear the display
@@ -117,7 +124,6 @@ jsPsych.plugins["html-keyboard-response"] = (function() {
 
     // function to handle responses by the subject
     var after_response = function(info) {
-     
       if(info.key_release === undefined) {
         response.trial_events.push({
           "event_type": "key press",
@@ -132,10 +138,9 @@ jsPsych.plugins["html-keyboard-response"] = (function() {
             "event_converted_details": jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(info.key_release) + ' key released',
             "timestamp": jsPsych.totalTime()
           });
-      }
-
-      if (trial.response_ends_trial) {
-        end_trial();
+          if (trial.response_ends_trial) {
+            end_trial();
+          }
       }
     };
 
@@ -145,14 +150,14 @@ jsPsych.plugins["html-keyboard-response"] = (function() {
           callback_function: after_response,
           valid_responses: trial.choices,
           rt_method: 'performance',
-          persist: false,
+          persist: true,
           allow_held_key: false
         });
         var clickListener = jsPsych.pluginAPI.getMouseResponse({
           callback_function: after_response,
           valid_responses: trial.choices,
           rt_method: 'date',
-          persist: false,
+          persist: true,
           allow_held_key: false
         });
     }
@@ -169,6 +174,13 @@ jsPsych.plugins["html-keyboard-response"] = (function() {
       jsPsych.pluginAPI.setTimeout(function() {
         end_trial();
       }, trial.trial_duration);
+    }
+
+    // end trial if trial_duration is set
+    if (trial.trial_latency !== null) {
+      jsPsych.pluginAPI.setTimeout(function() {
+        trial.response_ends_trial = true;
+      }, trial.trial_latency);
     }
 
   };

@@ -15,7 +15,7 @@ var Demographics = {
             horizontal: true
         },{
             prompt: 'Height',
-            options: ['cm', 'feet'], 
+            options: ['cm', 'inches'], 
             horizontal: true
         },{
             prompt: 'Weight',

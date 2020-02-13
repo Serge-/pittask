@@ -749,7 +749,7 @@ var vvr_ = {
                 stage_name: 'instrumental conditioning open instructions page',
                 type: 'html-keyboard-response',
                 stimulus: vvr.instrumental_conditioning.open_instruct_text,
-                trial_duration: vvr.instrumental_conditioning.open_instruct_latency,
+                trial_latency: vvr.instrumental_conditioning.open_instruct_latency,
                 response_ends_trial: false,
                 event_type: 'text appears',
                 event_raw_details: 'open_instruct_text',
@@ -764,7 +764,7 @@ var vvr_ = {
                 stage_name: 'instrumental conditioning close instructions page',
                 type: 'html-keyboard-response',
                 stimulus: vvr.instrumental_conditioning.close_instruct_text,
-                trial_duration: vvr.instrumental_conditioning.close_instruct_latency,
+                trial_latency: vvr.instrumental_conditioning.close_instruct_latency,
                 response_ends_trial: false,
                 event_type: 'text appears',
                 event_raw_details: 'VVR_A_CLOSE_INSTRUCTIONS_TEXT',
@@ -781,7 +781,7 @@ var vvr_ = {
                 stage_name: 'contingency degradation open instructions page',
                 type: 'html-keyboard-response',
                 stimulus: vvr.contingency_degradation.open_instruct_text,
-                trial_duration: vvr.contingency_degradation.open_instruct_latency,
+                trial_latency: vvr.contingency_degradation.open_instruct_latency,
                 response_ends_trial: false,
                 event_type: 'text appears',
                 event_raw_details: 'open_instruct_text',
@@ -796,7 +796,7 @@ var vvr_ = {
                 stage_name: 'contingency degradation close instructions page',
                 type: 'html-keyboard-response',
                 stimulus: vvr.contingency_degradation.close_instruct_text,
-                trial_duration: vvr.contingency_degradation.close_instruct_latency,
+                trial_latency: vvr.contingency_degradation.close_instruct_latency,
                 response_ends_trial: false,
                 event_type: 'text appears',
                 event_raw_details: 'close_instruct_text',
@@ -813,7 +813,7 @@ var vvr_ = {
                 stage_name: 'contingency restoration open instructions page',
                 type: 'html-keyboard-response',
                 stimulus: vvr.contingency_restoration.open_instruct_text,
-                trial_duration: vvr.contingency_restoration.open_instruct_latency,
+                trial_latency: vvr.contingency_restoration.open_instruct_latency,
                 response_ends_trial: false,
                 event_type: 'text appears',
                 event_raw_details: 'open_instruct_text',
@@ -828,7 +828,7 @@ var vvr_ = {
                 stage_name: 'contingency restoration close instructions page',
                 type: 'html-keyboard-response',
                 stimulus: vvr.contingency_restoration.close_instruct_text,
-                trial_duration: vvr.contingency_restoration.close_instruct_latency,
+                trial_latency: vvr.contingency_restoration.close_instruct_latency,
                 response_ends_trial: false,
                 event_type: 'text appears',
                 event_raw_details: 'close_instruct_text',
@@ -842,6 +842,31 @@ var vvr_ = {
 }
 
 
+var clinicalIntro = {
+    stage_name: 'Clinical intro',
+    type: 'html-keyboard-response',
+    stimulus: survey.clinical_text.clinical_intro_text,
+    trial_latency: survey.clinical_text.clinical_latency_period,
+    trial_duration: null,
+    response_ends_trial: false,
+    event_type: 'text appears',
+    event_raw_details: 'clinical_intro_text',
+    event_converted_details: 'Clinical intro text appears'
+}
+
+var clinicalClose = {
+    stage_name: 'Clinical close',
+    type: 'html-keyboard-response',
+    stimulus: survey.clinical_text.clinical_close_text,
+    trial_latency: survey.clinical_text.clinical_latency_period,
+    trial_duration: null,
+    response_ends_trial: false,
+    event_type: 'text appears',
+    event_raw_details: 'clinical_close_text',
+    event_converted_details: 'Clinical close text appears'
+};
+
+
 var timeline = [];
 // Init parameters
 timeline.push(parameters.parameters_instrumental_conditioning);
@@ -849,15 +874,16 @@ timeline.push(parameters.parameters_contingency_degradation);
 timeline.push(parameters.parameters_contingency_restoration);
 
 // Demographics
-// timeline.push(Demographics)
+timeline.push(Demographics)
 // Intro: We'd like to briefly ask you about some symptoms before the online game.
+timeline.push(clinicalIntro);
 // OCI-R
-// timeline.push(OCIR);
+timeline.push(OCIR);
 // MOVES
 // DASS-21
 // Adult Attention-Deficit/Hyperactivity Disorder Self-Report Screening Scale for DSM-5 (ASRS-5)
 // Internet-based form EAT-26
-// timeline.push(EAT26)
+timeline.push(EAT26)
 // The RAADS Screen
 timeline.push(RAADS)
 // PHQ-9
@@ -881,6 +907,7 @@ timeline.push(ISI);
 timeline.push(PID);
 // SDS
 // Close: That's it for the symptom questions. Now we're ready to start the online game
+timeline.push(clinicalClose);
 
 timeline.push(vvr_.instructions_a.instructions_open);
 timeline.push(vvr_.vvr_a());
