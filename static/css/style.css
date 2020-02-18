@@ -114,15 +114,19 @@ input[type=file]:focus, input[type=radio]:focus, input[type=checkbox]:focus {
     outline: none;
 }
 .survey-error::before {
-  content: "\002A";
+  content: "\002A ";
   position: absolute;
   left: -15px;
 }
 .survey-error-after::after {
-  content: "\002A";
+  content: " \002A";
 }
 .survey-error-after,
 .survey-error {
   position: relative;
   color: #dc3545;
+}
+
+.jspsych-survey-highlight {
+  cursor: pointer;
 }

@@ -842,7 +842,7 @@ var vvr_ = {
 }
 
 
-var clinicalIntro = {
+var CLINICAL_INTRO = {
     stage_name: 'Clinical intro',
     type: 'html-keyboard-response',
     stimulus: survey.clinical_text.clinical_intro_text,
@@ -854,7 +854,7 @@ var clinicalIntro = {
     event_converted_details: 'Clinical intro text appears'
 }
 
-var clinicalClose = {
+var CLINICAL_CLOSE = {
     stage_name: 'Clinical close',
     type: 'html-keyboard-response',
     stimulus: survey.clinical_text.clinical_close_text,
@@ -874,14 +874,17 @@ timeline.push(parameters.parameters_contingency_degradation);
 timeline.push(parameters.parameters_contingency_restoration);
 
 // Demographics
-timeline.push(Demographics)
+timeline.push(DEMOGRAPHICS);
 // Intro: We'd like to briefly ask you about some symptoms before the online game.
-timeline.push(clinicalIntro);
+timeline.push(CLINICAL_INTRO);
 // OCI-R
 timeline.push(OCIR);
 // MOVES
+timeline.push(MOVES);
 // DASS-21
+timeline.push(DASS21)
 // Adult Attention-Deficit/Hyperactivity Disorder Self-Report Screening Scale for DSM-5 (ASRS-5)
+timeline.push(ASRS5)
 // Internet-based form EAT-26
 timeline.push(EAT26)
 // The RAADS Screen
@@ -897,17 +900,24 @@ timeline.push(PTSD);
 // The PRIME Screen – Revised
 timeline.push(PRIME_R);
 // AUDIT
+timeline.push(AUDIT)
 // PGSI
+timeline.push(PGSI)
 // YIAT
+timeline.push(YIAT)
 // Smoking status
+timeline.push(SMOKE_FTND)
+// LSAS
+timeline.push(LSAS);
 // FTND
 // Insomnia Severity Index
 timeline.push(ISI);
 // The Personality Inventory for DSM-5—Brief Form (PID-5-BF)— Adult
 timeline.push(PID);
 // SDS
+timeline.push(SDS)
 // Close: That's it for the symptom questions. Now we're ready to start the online game
-timeline.push(clinicalClose);
+timeline.push(CLINICAL_CLOSE);
 
 timeline.push(vvr_.instructions_a.instructions_open);
 timeline.push(vvr_.vvr_a());

@@ -1,9 +1,9 @@
-jsPsych.plugins['EAT-26'] = (function () {
+jsPsych.plugins['ASRS-5'] = (function () {
     var plugin = {};
   
     plugin.info = {
-      name: 'EAT-26',
-      stage_name: 'EAT-26',
+      name: 'Adult Attention-Deficit/Hyperactivity Disorder Self-Report Screening Scale for DSM-5',
+      stage_name: 'ASRS-5',
       description: '',
       parameters: {
         questions: {
@@ -104,7 +104,9 @@ jsPsych.plugins['EAT-26'] = (function () {
           <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
               <div class="navbar-header">
-              <p class="navbar-text">${plugin.info.name}</p>
+              <p class="navbar-text">
+                  <b>${plugin.info.name}</b>
+              </p>
               </div>
             </div>
           </nav>
@@ -112,49 +114,48 @@ jsPsych.plugins['EAT-26'] = (function () {
   
       // inject CSS for trial
       html += '<style id="jspsych-survey-multi-choice-css">';
-      html += ".jspsych-survey-multi-choice-question { display: flex; text-align: left; border-bottom: 1px solid;}" +
+      html += ".jspsych-survey-multi-choice-question { display: flex; text-align: left; border-bottom: 1px solid }" +
         ".jspsych-survey-multi-choice-text span.required {color: darkred;}" +
         ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-text {  text-align: center;}" +
-        ".jspsych-survey-multi-choice-option { height: 100px; display: flex; justify-content: center; align-items: center; }" +
-        ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-option {  width: 100%; border-left: 1px solid; text-align: center; padding: 0 1rem;}" +
+        ".jspsych-survey-multi-choice-option { display: flex; justify-content: center; align-items: center; line-height: 2; padding: 1rem 0; }" +
+        ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-option {  width: 100%; border-left: 1px solid;}" +
         ".jspsych-survey-highlight { cursor: pointer; width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; }" +
-        ".jspsych-content { width: 1000px}" +
+        ".form-radio { top: 0; }" +
+        ".jspsych-survey-multi-choice-form { max-width: 1000px; }" +
         ".jspsych-btn { margin: 100px 0; }" +
         ".jspsych-content { margin-top: 130px;}" +
         "ul {list-style: none}" +
-        ".form-radio { top: 0; }" +
-        ".jspsych-survey-multi-choice-number { display: flex; align-items: center; height: 100%; width: 45px; border-right: 1px solid; text-align: center; justify-content: center; }" +
-        ".jspsych-survey-multi-choice-preamble { text-align: left; padding-bottom: 3rem; }" +
-        ".jspsych-survey-multi-choice-instructions { display: flex; justify-content: space-between;  border-bottom: 3px solid; font-weight: bold; font-size: 1.5rem;   }" +
-        ".jspsych-survey-multi-choice-instructions ul { display: flex; width: 60%; justify-content: space-around; padding-inline-start: 0; margin-bottom: 0; }" +
-        ".jspsych-survey-multi-choice-instructions li { display: flex; justify-content: center; align-items: center; width: 100%; border-left: 1px solid; }" +
+        ".jspsych-survey-multi-choice { margin-top: 10rem; }" +
+        ".jspsych-survey-multi-choice-number { display: flex; height: 100%; width: 30px; text-align: center; justify-content: center; }" +
+        ".jspsych-survey-multi-choice-preamble { text-align: left; max-width: 1000px; padding-bottom: 1rem; }" +
+        ".jspsych-survey-multi-choice-instructions { display: flex; justify-content: space-between; border-bottom: 1px solid; font-weight: bold; }" +
+        ".jspsych-survey-multi-choice-instructions ul { display: flex; justify-content: space-between; padding-inline-start: 0; margin-bottom: 0; width: 60%; }" +
+        ".jspsych-survey-multi-choice-instructions li { display: flex; justify-content: center; border-left: 1px solid; width: 164px; align-items: center; }" +
         "label.jspsych-survey-multi-choice-text input[type='radio'] {margin-right: 1em;}" +
         ".jspsych-survey-highlight { width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; }" +
-        "p {     margin: 0 0 0px;}"
+        "p { margin: 0 0 0px; }"
       html += '</style>';
+  
+      // show preamble text
+      if (trial.preamble !== null) {
+        html += '<div id="jspsych-survey-multi-choice-preamble" class="jspsych-survey-multi-choice-preamble">' + trial.preamble + '</div>';
+      }
   
   
       // form element
       html += '<form id="jspsych-survey-multi-choice-form" class="jspsych-survey-multi-choice-form">';
   
-      // show preamble text
-  
-      // show preamble text
-      if (trial.preamble !== null) {
-        html += '<div class="jspsych-survey-multi-choice-content"><div id="jspsych-survey-multi-choice-preamble" class="jspsych-survey-multi-choice-preamble">' + trial.preamble + '</div>';
-      }
   
       html +=
         `<div id="jspsych-survey-multi-choice-preamble" class="jspsych-survey-multi-choice-instructions">
-            <div style="width: 40%; text-align: left;"><p style=" padding-bottom: 1rem;">Please check a response for each of the
-            following statements:</p></div>
+            <div style="width: 40%; text-align: left;">
+            <p><b>Check the box that best describes how you have felt and conducted yourself over the past 6 months.</b></p>
+            </div>
             <ul>
-              <li><div>Always</div></li>
-              <li><div>Usually</div></li>
-              <li><div>Often</div></li>
-              <li><div>Sometimes</div></li>
-              <li><div>Rarely</div></li>
               <li><div>Never</div></li>
+              <li><div>Sometimes</div></li>
+              <li><div>Often</div></li>
+              <li><div>Always</div></li>
             </ul>
         </div>`
   
@@ -170,7 +171,7 @@ jsPsych.plugins['EAT-26'] = (function () {
       }
   
       // add multiple-choice questions
-      for (var i = 0; i < 26; i++) {
+      for (var i = 0; i < trial.questions.length; i++) {
   
         // get question based on question_order
         var question = trial.questions[question_order[i]];
@@ -182,13 +183,13 @@ jsPsych.plugins['EAT-26'] = (function () {
           question_classes.push('jspsych-survey-multi-choice-horizontal');
         }
   
-        html += '<div id="jspsych-survey-multi-choice-' + question_id + '" class="' + question_classes.join(' ') + '"  data-name="' + (i + 1) + '">';
+        html += '<div id="jspsych-survey-multi-choice-' + question_id + '" class="' + question_classes.join(' ') + '"  data-name="' + question.name + '">';
   
         // add question text
-        html += '<div style="display: flex; align-items: center; width: 40%; border-right: 1px solid #fff;"><span class="jspsych-survey-multi-choice-number">' + (i + 1) + '</span><p class="jspsych-survey-multi-choice-text survey-multi-choice jspsych-survey-multi-choice-question-text" style="text-align: left; padding-left: 10px; width: 100%;">' + question.prompt
+        html += '<div style="display: flex; align-items: center; width: 40%;"><span class="jspsych-survey-multi-choice-number">' + (i + 1) + '.</span><p class="jspsych-survey-multi-choice-text survey-multi-choice jspsych-survey-multi-choice-question-text" style="text-align: left; padding: 0 10px; width: 100%;">' + question.prompt
         // question.required
         html += '</p></div>';
-        html += '<div style="display: flex; width: 60%; justify-content: space-around;">';
+        html += '<div style="display: flex; width: 60%; justify-content: space-around; border-left: 1px solid;">';
   
         // create option radio buttons
         for (var j = 0; j < question.options.length; j++) {
@@ -201,102 +202,18 @@ jsPsych.plugins['EAT-26'] = (function () {
   
           // add radio button container
           html += '<div id="' + option_id_name + '" class="jspsych-survey-multi-choice-option">';
-          html += '<label class="jspsych-survey-multi-choice-text jspsych-survey-highlight hidden" for="' + input_id + '">' + question.options[j] + '</label>';
-          html += '<input hidden type="radio" name="' + input_name + '" id="' + input_id + '" class="form-radio" value="' + question.options[j] + '" ' + required_attr + '></input>';
+          html += '<label hidden class="jspsych-survey-multi-choice-text" for="' + input_id + '">' + question.options[j] + '</label>';
+          html += '<input hidden type="radio" name="' + input_name + '" id="' + input_id + '" class="form-radio" value="' + trial.title[j] + '" ' + required_attr + '></input>';
           html += '</div>';
         }
   
         html += '</div></div>';
       }
-
-      // add title questions
-      for (var i = 0; i < 1; i++) {
-  
-        // get question based on question_order
-        var question = trial.questions[question_order[i]];
-        var question_id = question_order[i];
-  
-        // create question container
-        var question_classes = ['jspsych-survey-multi-choice-question'];
-        if (question.horizontal) {
-          question_classes.push('jspsych-survey-multi-choice-horizontal');
-        }
-  
-        html += '<div style="font-weight: bold;" id="jspsych-survey-multi-choice-' + question_id + '" class="' + question_classes.join(' ') + '"  data-name="' + question.name + '">';
-  
-        // add question text
-        html += '<div style="display: flex; align-items: center; width: 40%; border-right: 1px solid #fff;"><p class="jspsych-survey-multi-choice-text survey-multi-choice jspsych-survey-multi-choice-question-text" style="text-align: left; padding-left: 10px; width: 100%;">Behavioural questions. In the past 6 months have you:'
-        // question.required
-        html += '</p></div>';
-        html += '<div style="display: flex; width: 60%; justify-content: space-around;">';
-
-        var questionsTitle = ['Never', 'Once a month or less', '2-3 times a month', 'Once a week', '2-6 times a week', 'Once a day or more'];
-        // create option radio buttons
-        for (var j = 0; j < questionsTitle.length; j++) {
-          // add label and question text
-          var option_id_name = "jspsych-survey-multi-choice-option-" + question_id + "-" + j;
-          var input_name = 'jspsych-survey-multi-choice-response-' + question_id;
-          var input_id = 'jspsych-survey-multi-choice-response-' + question_id + '-' + j;
-          
-          // add radio button container
-          html += '<div id="' + option_id_name + '" class="jspsych-survey-multi-choice-option">';
-          html += '<p>' + questionsTitle[j] + '</p>';
-          html += '</div>';
-        }
-  
-        html += '</div></div>';
-      }
-
-      // add multiple-choice questions A, B, C, D, E
-      var letterArray = ['A', 'B', 'C', 'D', 'E'];
-  
-      for (var i = 26, k = 0; i < trial.questions.length; i++, k++) {
-  
-        // get question based on question_order
-        var question = trial.questions[question_order[i]];
-        var question_id = question_order[i];
-  
-        // create question container
-        var question_classes = ['jspsych-survey-multi-choice-question'];
-        if (question.horizontal) {
-          question_classes.push('jspsych-survey-multi-choice-horizontal');
-        }
-  
-        html += '<div id="jspsych-survey-multi-choice-' + question_id + '" class="' + question_classes.join(' ') + '"  data-name="' + letterArray[k] + '">';
-  
-        // add question text
-        html += '<div style="display: flex; align-items: center; width: 40%; border-right: 1px solid #fff;"><span class="jspsych-survey-multi-choice-number">' + letterArray[k] + '</span><p class="jspsych-survey-multi-choice-text survey-multi-choice jspsych-survey-multi-choice-question-text" style="text-align: left; padding-left: 10px; width: 100%;">' + question.prompt
-        // question.required
-        html += '</p></div>';
-        html += '<div style="display: flex; width: 60%; justify-content: space-around;">';
-  
-        // create option radio buttons
-        for (var j = 0; j < question.options.length; j++) {
-          // add label and question text
-          var option_id_name = "jspsych-survey-multi-choice-option-" + question_id + "-" + j;
-          var input_name = 'jspsych-survey-multi-choice-response-' + question_id;
-          var input_id = 'jspsych-survey-multi-choice-response-' + question_id + '-' + j;
-  
-          var required_attr = question.required ? 'required' : '';
-  
-          // add radio button container
-          html += '<div id="' + option_id_name + '" class="jspsych-survey-multi-choice-option">';
-          html += '<input hidden type="radio" name="' + input_name + '" id="' + input_id + '" class="form-radio" value="' + question.options[j] + '" ' + required_attr + '></input>';
-          if(i === 30) {
-            html += '<label class="jspsych-survey-multi-choice-text" style="padding-left: 1rem; margin-bottom: 0;" for="' + input_id + '">' + question.options[j] + '</label>';
-          } else {
-            html += '<label class="jspsych-survey-multi-choice-text jspsych-survey-highlight hidden" for="' + input_id + '">' + question.options[j] + '</label>';
-          }
-          html += '</div>';
-        }
-  
-        html += '</div></div>';
-      }
-
-      html += '</div>';
   
       // add submit button
-      html += '<p><input type="submit" id="' + plugin_id_name + '-next" class="' + plugin_id_name + ' jspsych-btn"' + (trial.button_label ? ' value="' + trial.button_label + '"' : '') + '></input></p>';
+      html += '<input type="submit" id="' + plugin_id_name + '-next" class="' + plugin_id_name + ' jspsych-btn"' + (trial.button_label ? ' value="' + trial.button_label + '"' : '') + '></input>';
+  
+  
       html += '</form>';
   
       html +=
@@ -310,9 +227,7 @@ jsPsych.plugins['EAT-26'] = (function () {
                     <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
                   </header>
                   <main class="modal__content" id="modal-1-content">
-                    <p>
-                    ${survey.modal}
-                    </p>
+                    <p>${survey.modal}</p>
                   </main>
                   <footer class="modal__footer">
                     <button class="modal__btn" data-micromodal-close aria-label="Close this dialog window">Close</button>
@@ -345,9 +260,9 @@ jsPsych.plugins['EAT-26'] = (function () {
       }
   
       $('.jspsych-survey-highlight').click(function () {
+        $(this).next('input').prop("checked", true);
         $(this).parent().parent().find('.jspsych-survey-highlight').removeClass('bg-primary');
         $(this).addClass('bg-primary');
-        $(this).next('input').prop("checked", true);
         $(this).closest('input').click();
       })
   
@@ -356,13 +271,11 @@ jsPsych.plugins['EAT-26'] = (function () {
         // measure response time
         var endTime = performance.now();
         var response_time = endTime - startTime;
-  
         // create object to hold responses
         var question_data = {};
         for (var i = 0; i < trial.questions.length; i++) {
           var match = display_element.querySelector('#jspsych-survey-multi-choice-' + i);
           var id = (i + 1);
-          
           if (match.querySelector("input[type=radio]:checked") !== null) {
             var val = match.querySelector("input[type=radio]:checked").value;
             $(match).find('.jspsych-survey-multi-choice-question-text').removeClass('survey-error-after');
@@ -372,7 +285,6 @@ jsPsych.plugins['EAT-26'] = (function () {
           }
           var obje = {};
           var name = id;
-      
           if (match.attributes['data-name'].value !== '') {
             name = match.attributes['data-name'].value;
           }
