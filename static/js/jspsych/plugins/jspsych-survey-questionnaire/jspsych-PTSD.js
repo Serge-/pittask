@@ -272,7 +272,7 @@ jsPsych.plugins['PC-PTSD-5'] = (function() {
       var question_data = {};
       for(var i=0; i<trial.questions.length; i++){
         var match = display_element.querySelector('#jspsych-survey-multi-choice-'+i);
-        var id = "Q" + (i + 1);
+        var id = i + 1;
 
         if(match.querySelector("input[type=radio]:checked") !== null){
           var val = match.querySelector("input[type=radio]:checked").value;
@@ -288,13 +288,13 @@ jsPsych.plugins['PC-PTSD-5'] = (function() {
           val = 'NA';
           $(match).find('.jspsych-survey-multi-choice-question-text').removeClass('survey-error-after');
         }
-        
        
         var obje = {};
         var name = id;
         if(match.attributes['data-name'].value !== ''){
           name = match.attributes['data-name'].value;
         }
+
         obje[name] = val;
         Object.assign(question_data, obje);
       }

@@ -125,7 +125,7 @@ jsPsych.plugins['LSAS'] = (function () {
         ".jspsych-content { margin-top: 130px;}" +
         "ul {list-style: none}" +
         ".jspsych-survey-multi-choice { margin-top: 10rem; }" +
-        ".jspsych-survey-multi-choice-number { display: flex; align-items: center; height: 100%; width: 30px; text-align: center; justify-content: center; }" +
+        ".jspsych-survey-multi-choice-number { display: flex; height: 100%; width: 30px; text-align: center; justify-content: center; }" +
         ".jspsych-survey-multi-choice-preamble { text-align: left; max-width: 1400px; padding-bottom: 1rem; }" +
         ".jspsych-survey-multi-choice-preamble ul {  list-style-type: disc; }" +
         ".jspsych-survey-multi-choice-instructions { display: flex; justify-content: space-between; border-bottom: 2px solid; }" +
@@ -199,7 +199,7 @@ jsPsych.plugins['LSAS'] = (function () {
         html += '<div id="jspsych-survey-multi-choice-' + question_id + '" class="' + question_classes.join(' ') + '"  data-name="' + question.name + '">';
   
         // add question text
-        html += '<div style="display: flex; align-items: center; width: 30%; border-right: 3px solid #fff;"><span class="jspsych-survey-multi-choice-number">' + (i + 1) + '</span><p class="jspsych-survey-multi-choice-text survey-multi-choice jspsych-survey-multi-choice-question-text" style="text-align: left; padding: 0 10px; width: 100%;">' + question.prompt
+        html += '<div style="display: flex; width: 30%; border-right: 3px solid #fff;"><span class="jspsych-survey-multi-choice-number">' + (i + 1) + '.</span><p class="jspsych-survey-multi-choice-text survey-multi-choice jspsych-survey-multi-choice-question-text" style="text-align: left; padding: 0 10px; width: 100%;">' + question.prompt
         // question.required
         html += '</p></div>';
         html += '<div style="display: flex; width: 70%; justify-content: space-around;">';
@@ -301,8 +301,10 @@ jsPsych.plugins['LSAS'] = (function () {
                 var val_f = match.querySelector(".f input[type=radio]:checked").value;
                 var val_a = match.querySelector(".a input[type=radio]:checked").value;
                 $(match).find('.jspsych-survey-multi-choice-question-text').removeClass('survey-error-after');
+                $(match).find('.jspsych-survey-multi-choice-number').removeClass('survey-error-text');
             } else {
                 $(match).find('.jspsych-survey-multi-choice-question-text').addClass('survey-error-after');
+                $(match).find('.jspsych-survey-multi-choice-number').addClass('survey-error-text');
             }
             var obje_f = {};
             var obje_a = {};

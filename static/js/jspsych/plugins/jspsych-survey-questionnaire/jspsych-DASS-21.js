@@ -1,8 +1,8 @@
-jsPsych.plugins['DASS-21'] = (function() {
+jsPsych.plugins['DASS'] = (function() {
     var plugin = {};
   
     plugin.info = {
-      name: 'DASS-21',
+      name: 'DASS',
       stage_name: 'DASS',
       description: '',
       parameters: {
@@ -126,7 +126,7 @@ jsPsych.plugins['DASS-21'] = (function() {
         "#jspsych-survey-multi-choice-0 .jspsych-survey-multi-choice-question-text { border-top: 1px solid #fff; }" +
         "#jspsych-survey-multi-choice-0 .jspsych-survey-multi-choice-option { border-top: 1px solid #fff; }" +
         ".jspsych-survey-multi-choice { margin-top: 10rem; }" +
-        ".jspsych-survey-multi-choice-number { display: flex; align-items: center; height: 100%; width: 50px; border-right: 1px solid; text-align: center; justify-content: center; }" +
+        ".jspsych-survey-multi-choice-number { display: flex; align-items: center; height: 100%; width: 50px; border-right: 1px solid #fff; text-align: center; justify-content: center; }" +
         ".jspsych-survey-multi-choice-preamble { text-align: left; max-width: 1000px; padding-bottom: 1rem; padding-left: 3rem; }" +
         ".jspsych-survey-multi-choice-instructions { display: flex; justify-content: space-between;  }" +
         ".jspsych-survey-multi-choice-instructions ul { display: flex; width: 30%; justify-content: space-around; padding-inline-start: 0; margin-bottom: 0; }" +
@@ -260,10 +260,10 @@ jsPsych.plugins['DASS-21'] = (function() {
       }
 
       $('.jspsych-survey-highlight').click(function() {
-          $( this ).next('input').prop( "checked", true );
+          $(this).next('input').prop( "checked", true );
           $(this).parent().parent().find('.jspsych-survey-highlight').removeClass('bg-primary');
           $(this).addClass('bg-primary');
-          $( this ).closest('input').click();
+          $(this).closest('input').click();
       })
   
       document.querySelector('form').addEventListener('submit', function(event) {
@@ -275,13 +275,15 @@ jsPsych.plugins['DASS-21'] = (function() {
         var question_data = {};
         for(var i=0; i<trial.questions.length; i++){
           var match = display_element.querySelector('#jspsych-survey-multi-choice-'+i);
-          var id = + (i + 1);
+          var id = + i + 1;
           if(match.querySelector("input[type=radio]:checked") !== null){
             var val = match.querySelector("input[type=radio]:checked").value;
             $(match).find('.jspsych-survey-multi-choice-question-text').removeClass('survey-error-after');
+            $(match).find('.jspsych-survey-multi-choice-number').removeClass('survey-error-text');
           } else {
             var val = "";
             $(match).find('.jspsych-survey-multi-choice-question-text').addClass('survey-error-after');
+            $(match).find('.jspsych-survey-multi-choice-number').addClass('survey-error-text');
           }
           var obje = {};
           var name = id;

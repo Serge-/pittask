@@ -126,6 +126,10 @@ input[type=file]:focus, input[type=radio]:focus, input[type=checkbox]:focus {
   position: relative;
   color: #dc3545;
 }
+.survey-error-text {
+  color: #dc3545;
+}
+
 
 .jspsych-survey-highlight {
   cursor: pointer;

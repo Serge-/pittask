@@ -123,7 +123,7 @@ jsPsych.plugins['EAT-26'] = (function () {
         ".jspsych-content { margin-top: 130px;}" +
         "ul {list-style: none}" +
         ".form-radio { top: 0; }" +
-        ".jspsych-survey-multi-choice-number { display: flex; align-items: center; height: 100%; width: 45px; border-right: 1px solid; text-align: center; justify-content: center; }" +
+        ".jspsych-survey-multi-choice-number { display: flex; align-items: center; height: 100%; width: 45px; border-right: 1px solid #fff; text-align: center; justify-content: center; }" +
         ".jspsych-survey-multi-choice-preamble { text-align: left; padding-bottom: 3rem; }" +
         ".jspsych-survey-multi-choice-instructions { display: flex; justify-content: space-between;  border-bottom: 3px solid; font-weight: bold; font-size: 1.5rem;   }" +
         ".jspsych-survey-multi-choice-instructions ul { display: flex; width: 60%; justify-content: space-around; padding-inline-start: 0; margin-bottom: 0; }" +
@@ -361,14 +361,16 @@ jsPsych.plugins['EAT-26'] = (function () {
         var question_data = {};
         for (var i = 0; i < trial.questions.length; i++) {
           var match = display_element.querySelector('#jspsych-survey-multi-choice-' + i);
-          var id = (i + 1);
+          var id = i + 1;
           
           if (match.querySelector("input[type=radio]:checked") !== null) {
             var val = match.querySelector("input[type=radio]:checked").value;
             $(match).find('.jspsych-survey-multi-choice-question-text').removeClass('survey-error-after');
+            $(match).find('.jspsych-survey-multi-choice-number').removeClass('survey-error-text');
           } else {
             var val = "";
             $(match).find('.jspsych-survey-multi-choice-question-text').addClass('survey-error-after');
+            $(match).find('.jspsych-survey-multi-choice-number').addClass('survey-error-text');
           }
           var obje = {};
           var name = id;

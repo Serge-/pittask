@@ -877,43 +877,12 @@ timeline.push(parameters.parameters_contingency_restoration);
 timeline.push(DEMOGRAPHICS);
 // Intro: We'd like to briefly ask you about some symptoms before the online game.
 timeline.push(CLINICAL_INTRO);
-// OCI-R
-timeline.push(OCIR);
-// MOVES
-timeline.push(MOVES);
-// DASS-21
-timeline.push(DASS21)
-// Adult Attention-Deficit/Hyperactivity Disorder Self-Report Screening Scale for DSM-5 (ASRS-5)
-timeline.push(ASRS5)
-// Internet-based form EAT-26
-timeline.push(EAT26)
-// The RAADS Screen
-timeline.push(RAADS)
-// PHQ-9
-timeline.push(PHQ9);
-// GAD-7
-timeline.push(GAD7);
-// ASRM
-timeline.push(ASRM);
-// The Primary Care PTSD Screen for DSM-5 (PC-PTSD-5)
-timeline.push(PTSD);
-// The PRIME Screen – Revised
-timeline.push(PRIME_R);
-// AUDIT
-timeline.push(AUDIT)
-// PGSI
-timeline.push(PGSI)
-// YIAT
-timeline.push(YIAT)
-// Smoking status
-timeline.push(SMOKE_FTND)
-// LSAS
-timeline.push(LSAS);
-// FTND
-// Insomnia Severity Index
-timeline.push(ISI);
-// The Personality Inventory for DSM-5—Brief Form (PID-5-BF)— Adult
-timeline.push(PID);
+// Randomisation function for Symptom Inventories
+var symptom_inventories_random = jsPsych.randomization.shuffle(survey.symptom_inventory);
+for(var item of symptom_inventories_random ){
+    timeline.push(item); 
+ }
+
 // SDS
 timeline.push(SDS)
 // Close: That's it for the symptom questions. Now we're ready to start the online game

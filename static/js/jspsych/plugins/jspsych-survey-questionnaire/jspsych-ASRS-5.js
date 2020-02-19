@@ -153,9 +153,10 @@ jsPsych.plugins['ASRS-5'] = (function () {
             </div>
             <ul>
               <li><div>Never</div></li>
+              <li><div>Rarely</div></li>
               <li><div>Sometimes</div></li>
               <li><div>Often</div></li>
-              <li><div>Always</div></li>
+              <li><div>Very often</div></li>
             </ul>
         </div>`
   
@@ -275,13 +276,15 @@ jsPsych.plugins['ASRS-5'] = (function () {
         var question_data = {};
         for (var i = 0; i < trial.questions.length; i++) {
           var match = display_element.querySelector('#jspsych-survey-multi-choice-' + i);
-          var id = (i + 1);
+          var id = i + 1;
           if (match.querySelector("input[type=radio]:checked") !== null) {
             var val = match.querySelector("input[type=radio]:checked").value;
             $(match).find('.jspsych-survey-multi-choice-question-text').removeClass('survey-error-after');
+            $(match).find('.jspsych-survey-multi-choice-number').removeClass('survey-error-text');
           } else {
             var val = "";
             $(match).find('.jspsych-survey-multi-choice-question-text').addClass('survey-error-after');
+            $(match).find('.jspsych-survey-multi-choice-number').addClass('survey-error-text');
           }
           var obje = {};
           var name = id;

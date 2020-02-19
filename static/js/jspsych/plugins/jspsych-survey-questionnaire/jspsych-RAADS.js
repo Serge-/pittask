@@ -272,7 +272,7 @@ jsPsych.plugins['RAADS-14'] = (function () {
       for (var i = 0; i < trial.questions.length; i++) {
         var match = display_element.querySelector('#jspsych-survey-multi-choice-' + i);
 
-        var id = "Q" + (i + 1);
+        var id = i + 1;
         if (match.querySelector("input[type=radio]:checked") !== null) {
           var val = match.querySelector("input[type=radio]:checked").value;
           $(match).find('.jspsych-survey-multi-choice-question').removeClass('survey-error');

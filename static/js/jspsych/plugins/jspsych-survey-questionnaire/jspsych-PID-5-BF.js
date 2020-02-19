@@ -124,8 +124,7 @@ jsPsych.plugins['PID-5-BF'] = (function () {
       ".jspsych-btn { margin: 100px 0; }" +
       ".jspsych-content { margin-top: 130px;}" +
       "ul {list-style: none}" +
-      // ".survey-error::before { top: -10px; left: 0px; }" +
-      ".jspsych-survey-multi-choice-number { display: flex; align-items: center; height: 100%; width: 45px; outline: 1px solid; text-align: center; justify-content: center; }" +
+      ".jspsych-survey-multi-choice-number { display: flex; align-items: center; height: 100%; width: 45px; border-left: 1px solid #fff; border-right: 1px solid #fff; text-align: center; justify-content: center; }" +
       ".jspsych-survey-multi-choice-preamble { text-align: left; padding: 1rem; background-color: #444; }" +
       ".jspsych-survey-multi-choice-instructions { display: flex; justify-content: space-between;  border-bottom: 1px solid;  border-top: 1px solid; background-color: #444; }" +
       ".jspsych-survey-multi-choice-instructions ul { display: flex; width: 50%; justify-content: space-around; padding-inline-start: 0; margin-bottom: 0; }" +
@@ -278,13 +277,15 @@ jsPsych.plugins['PID-5-BF'] = (function () {
       var question_data = {};
       for (var i = 0; i < trial.questions.length; i++) {
         var match = display_element.querySelector('#jspsych-survey-multi-choice-' + i);
-        var id = "Q" + (i + 1);
+        var id = i + 1;
         if (match.querySelector("input[type=radio]:checked") !== null) {
           var val = match.querySelector("input[type=radio]:checked").value;
           $(match).find('.jspsych-survey-multi-choice-question-text').removeClass('survey-error-after');
+          $(match).find('.jspsych-survey-multi-choice-number').removeClass('survey-error-text');
         } else {
           var val = "";
           $(match).find('.jspsych-survey-multi-choice-question-text').addClass('survey-error-after');
+          $(match).find('.jspsych-survey-multi-choice-number').addClass('survey-error-text');
         }
         var obje = {};
         var name = id;

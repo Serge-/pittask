@@ -1206,7 +1206,7 @@ var YIAT = {
 
 
 var DASS21 = {
-    type: 'DASS-21',
+    type: 'DASS',
     preamble:
         `
         <p>Please read each statement and select a number (0, 1, 2 or 3) which indicates how much the statement applied to you

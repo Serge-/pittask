@@ -98,5 +98,43 @@ var survey = {
         clinical_latency_period: 1000,
         clinical_intro_text: "<p class='v-center-txt'>We'd like to briefly ask you about some symptoms before the online game. <br> Press any key when you are ready. </p>",
         clinical_close_text: "<p class='v-center-txt'>That's it for the symptom questions. Now we're ready to start the online game. <br> Press any key when you are ready. </p>"
-    }
+    },
+    symptom_inventory: [
+        // OCI-R
+        OCIR,
+        // MOVES
+        MOVES,
+        // DASS-21
+        DASS21,
+        // Adult Attention-Deficit/Hyperactivity Disorder Self-Report Screening Scale for DSM-5 (ASRS-5)
+        ASRS5,
+        // Internet-based form EAT-26
+        EAT26,
+        // The RAADS Screen
+        RAADS,
+        // PHQ-9
+        PHQ9,
+        // GAD-7
+        GAD7,
+        // ASRM
+        ASRM,
+        // The Primary Care PTSD Screen for DSM-5 (PC-PTSD-5)
+        PTSD,
+        // The PRIME Screen – Revised
+        PRIME_R,
+        // AUDIT
+        AUDIT,
+        // PGSI
+        PGSI,
+        // YIAT
+        YIAT,
+        // Smoking status
+        SMOKE_FTND,
+        // LSAS
+        LSAS,
+        // Insomnia Severity Index
+        ISI,
+        // The Personality Inventory for DSM-5—Brief Form (PID-5-BF)— Adult
+        PID
+    ]
 }

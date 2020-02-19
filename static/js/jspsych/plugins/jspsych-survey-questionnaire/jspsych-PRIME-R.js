@@ -125,9 +125,9 @@ jsPsych.plugins['PRIME-R'] = (function () {
       ".jspsych-content { margin-top: 130px;}" +
       "ul {list-style: none}" +
       ".jspsych-survey-multi-choice { margin-top: 10rem; }" +
-      ".jspsych-survey-multi-choice-number { display: flex; align-items: center; height: 100%; width: 30px; text-align: center; justify-content: center; }" +
+      ".jspsych-survey-multi-choice-number { display: flex; height: 100%; width: 30px; text-align: center; justify-content: center; }" +
       ".jspsych-survey-multi-choice-preamble { text-align: left; max-width: 1000px; padding-bottom: 1rem; }" +
-      ".jspsych-survey-multi-choice-instructions { display: flex; justify-content: space-between; border-bottom: 1px solid; }" +
+      ".jspsych-survey-multi-choice-instructions { display: flex; justify-content: space-between; border-bottom: 2px solid #fff; }" +
       ".jspsych-survey-multi-choice-instructions ul { display: flex; justify-content: space-around; padding-inline-start: 0; margin-bottom: 0; width: 70%; }" +
       ".jspsych-survey-multi-choice-instructions li { display: flex; justify-content: center; border-left: 1px solid; }" +
       ".jspsych-survey-multi-choice-instructions li div { width: 98px; }" +
@@ -150,8 +150,8 @@ jsPsych.plugins['PRIME-R'] = (function () {
     html +=
       `<div id="jspsych-survey-multi-choice-preamble" class="jspsych-survey-multi-choice-instructions">
           <div></div>
-          <ul>
-            <li><div>Definitely disagree</div></li>
+          <ul style="border-left: 1px solid #fff;">
+            <li ><div>Definitely disagree</div></li>
             <li><div>Somewhat disagree</div></li>
             <li><div>Slightly disagree</div></li>
             <li><div>Not sure</div></li>
@@ -188,7 +188,7 @@ jsPsych.plugins['PRIME-R'] = (function () {
       html += '<div id="jspsych-survey-multi-choice-' + question_id + '" class="' + question_classes.join(' ') + '"  data-name="' + question.name + '">';
 
       // add question text
-      html += '<div style="display: flex; align-items: center; width: 30%;"><span class="jspsych-survey-multi-choice-number">' + (i + 1) + '</span><p class="jspsych-survey-multi-choice-text survey-multi-choice jspsych-survey-multi-choice-question-text" style="text-align: left; padding: 0 10px; width: 100%;">' + question.prompt
+      html += '<div style="display: flex; width: 30%;"><span class="jspsych-survey-multi-choice-number">' + (i + 1) + '</span><p class="jspsych-survey-multi-choice-text survey-multi-choice jspsych-survey-multi-choice-question-text" style="text-align: left; padding: 0 10px; width: 100%;">' + question.prompt
       // question.required
       html += '</p></div>';
       html += '<div style="display: flex; width: 70%; justify-content: space-around; border-left: 1px solid;">';
@@ -278,13 +278,15 @@ jsPsych.plugins['PRIME-R'] = (function () {
       var question_data = {};
       for (var i = 0; i < trial.questions.length; i++) {
         var match = display_element.querySelector('#jspsych-survey-multi-choice-' + i);
-        var id = "Q" + (i + 1);
+        var id = i + 1;
         if (match.querySelector("input[type=radio]:checked") !== null) {
           var val = match.querySelector("input[type=radio]:checked").value;
           $(match).find('.jspsych-survey-multi-choice-question-text').removeClass('survey-error-after');
+          $(match).find('.jspsych-survey-multi-choice-number').removeClass('survey-error-text');
         } else {
           var val = "";
           $(match).find('.jspsych-survey-multi-choice-question-text').addClass('survey-error-after');
+          $(match).find('.jspsych-survey-multi-choice-number').addClass('survey-error-text');
         }
         var obje = {};
         var name = id;
