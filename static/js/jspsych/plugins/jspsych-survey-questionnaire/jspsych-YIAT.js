@@ -83,7 +83,7 @@ jsPsych.plugins['YIAT'] = (function () {
       }
     }
     plugin.trial = function (display_element, trial) {
-      var plugin_id_name = "jspsych-survey-multi-choice";
+      var plugin_id_name = "jspsych-survey-multi-choice-YIAT";
   
       var html = "";
   
@@ -143,6 +143,7 @@ jsPsych.plugins['YIAT'] = (function () {
   
   
       // form element
+      html += '<div id="' + plugin_id_name + '">';
       html += '<form id="jspsych-survey-multi-choice-form" class="jspsych-survey-multi-choice-form">';
   
   

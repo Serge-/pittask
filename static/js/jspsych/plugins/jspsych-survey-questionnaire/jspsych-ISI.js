@@ -65,7 +65,7 @@ jsPsych.plugins['ISI'] = (function () {
     }
   }
   plugin.trial = function (display_element, trial) {
-    var plugin_id_name = "jspsych-survey-multi-choice";
+    var plugin_id_name = "jspsych-survey-multi-choice-ISI";
 
     var html = "";
 
@@ -118,6 +118,7 @@ jsPsych.plugins['ISI'] = (function () {
     }
 
     // form element
+    html += '<div id="' + plugin_id_name + '">';
     html += '<form id="jspsych-survey-multi-choice-form" novalidate>';
 
     // generate question order. this is randomized here as opposed to randomizing the order of trial.questions

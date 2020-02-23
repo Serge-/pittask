@@ -83,7 +83,7 @@ jsPsych.plugins['PID-5-BF'] = (function () {
     }
   }
   plugin.trial = function (display_element, trial) {
-    var plugin_id_name = "jspsych-survey-multi-choice";
+    var plugin_id_name = "jspsych-survey-multi-choice-PID-5-BF";
 
     var html = "";
 
@@ -137,6 +137,7 @@ jsPsych.plugins['PID-5-BF'] = (function () {
 
 
     // form element
+    html += '<div id="' + plugin_id_name + '">';
     html += '<form id="jspsych-survey-multi-choice-form" class="jspsych-survey-multi-choice-form">';
 
     // show preamble text

@@ -83,7 +83,7 @@ jsPsych.plugins['MOVES'] = (function () {
       }
     }
     plugin.trial = function (display_element, trial) {
-      var plugin_id_name = "jspsych-survey-multi-choice";
+      var plugin_id_name = "jspsych-survey-multi-choice-MOVES";
   
       var html = "";
   
@@ -140,7 +140,7 @@ jsPsych.plugins['MOVES'] = (function () {
         html += '<div id="jspsych-survey-multi-choice-preamble" class="jspsych-survey-multi-choice-preamble">' + trial.preamble + '</div>';
       }
   
-  
+      html += '<div id="'+ plugin_id_name + '">'
       // form element
       html += '<form id="jspsych-survey-multi-choice-form" class="jspsych-survey-multi-choice-form">';
   

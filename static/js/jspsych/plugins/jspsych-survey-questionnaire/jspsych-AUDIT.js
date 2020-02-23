@@ -83,7 +83,7 @@ jsPsych.plugins['AUDIT'] = (function () {
       }
     }
     plugin.trial = function (display_element, trial) {
-      var plugin_id_name = "jspsych-survey-multi-choice";
+      var plugin_id_name = "jspsych-survey-multi-choice-AUDIT";
   
       var html = "";
   
@@ -136,6 +136,7 @@ jsPsych.plugins['AUDIT'] = (function () {
   
   
       // form element
+      html += '<div id="' + plugin_id_name + '">';
       html += '<form id="jspsych-survey-multi-choice-form" class="jspsych-survey-multi-choice-form">';
   
       // show preamble text

@@ -83,7 +83,7 @@ jsPsych.plugins['SDS'] = (function () {
       }
     }
     plugin.trial = function (display_element, trial) {
-      var plugin_id_name = "jspsych-survey-multi-choice";
+      var plugin_id_name = "jspsych-survey-multi-choice-SDS";
   
       var html = "";
   
@@ -140,6 +140,7 @@ jsPsych.plugins['SDS'] = (function () {
   
   
       // form element
+      html += '<div id="' + plugin_id_name + '">';
       html += '<form id="jspsych-survey-multi-choice-form" class="jspsych-survey-multi-choice-form">';
 
       // show preamble text
@@ -264,7 +265,7 @@ jsPsych.plugins['SDS'] = (function () {
           // create option radio buttons
           html += '<span style="position: absolute; right: 0;">';
           html += '<label for="' + question_name + '">Select answer:</label>';
-          html += '<select id="' + question_name + '" name="carlist"><option value="None">-</option>';
+          html += '<select id="' + question_name + '" class="select-days-' + i + '"><option value="None">-</option>';
           
           for (var j = 0; j < question.options.length; j++) {
             // add label and question text

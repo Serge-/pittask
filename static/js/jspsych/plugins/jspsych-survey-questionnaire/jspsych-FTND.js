@@ -83,7 +83,7 @@ jsPsych.plugins['FTND'] = (function () {
       }
     }
     plugin.trial = function (display_element, trial) {
-      var plugin_id_name = "jspsych-survey-multi-choice";
+      var plugin_id_name = "jspsych-survey-multi-choice-FTND";
   
       var html = "";
   
@@ -135,6 +135,7 @@ jsPsych.plugins['FTND'] = (function () {
   
   
       // form element
+      html += '<div id="' + plugin_id_name + '">';
       html += '<form id="jspsych-survey-multi-choice-form" class="jspsych-survey-multi-choice-form">';
   
       // show preamble text
@@ -201,13 +202,12 @@ jsPsych.plugins['FTND'] = (function () {
   
         html += '</div></div>';
       }
-
-      html += '</div>';
   
       // add submit button
       html += '<p><input type="submit" id="' + plugin_id_name + '-next" class="' + plugin_id_name + ' jspsych-btn"' + (trial.button_label ? ' value="' + trial.button_label + '"' : '') + '></input></p>';
       html += '</form>';
-  
+      html += '</div>';
+      
       html +=
         `<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
               <div class="modal__overlay" tabindex="-1" data-micromodal-close>

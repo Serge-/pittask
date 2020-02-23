@@ -137,7 +137,7 @@ resubmit = function() {
 // Trial for parameters
 var parameters = {
     parameters_instrumental_conditioning: {
-        type: 'parameters-instrumental-conditioning',
+        type: 'parameters-VVR',
         stage_name: 'parameters instrumental conditioning',
         variables: {
             open_instruct: vvr.instrumental_conditioning.open_instruct,
@@ -168,7 +168,7 @@ var parameters = {
         }
     },
     parameters_contingency_degradation: {
-        type: 'parameters-instrumental-conditioning',
+        type: 'parameters-VVR',
         stage_name: 'parameters contingency degradation',
         variables: {
             open_instruct: vvr.contingency_degradation.open_instruct,
@@ -199,7 +199,7 @@ var parameters = {
         }
     },
     parameters_contingency_restoration: {
-        type: 'parameters-instrumental-conditioning',
+        type: 'parameters-VVR',
         stage_name: 'parameters contingency restoration',
         variables: {
             open_instruct: vvr.contingency_restoration.open_instruct,
@@ -842,16 +842,16 @@ var vvr_ = {
 }
 
 
-var CLINICAL_INTRO = {
-    stage_name: 'Clinical intro',
+var CLINICAL_OPEN = {
+    stage_name: 'Clinical open',
     type: 'html-keyboard-response',
-    stimulus: survey.clinical_text.clinical_intro_text,
+    stimulus: survey.clinical_text.clinical_open_text,
     trial_latency: survey.clinical_text.clinical_latency_period,
     trial_duration: null,
     response_ends_trial: false,
     event_type: 'text appears',
-    event_raw_details: 'clinical_intro_text',
-    event_converted_details: 'Clinical intro text appears'
+    event_raw_details: 'clinical_open_text',
+    event_converted_details: 'Clinical open text appears'
 }
 
 var CLINICAL_CLOSE = {
@@ -869,6 +869,11 @@ var CLINICAL_CLOSE = {
 
 var timeline = [];
 // Init parameters
+timeline.push({
+    type: 'Parameters',
+    stage_name: 'Parameters',
+});
+
 timeline.push(parameters.parameters_instrumental_conditioning);
 timeline.push(parameters.parameters_contingency_degradation);
 timeline.push(parameters.parameters_contingency_restoration);
@@ -876,15 +881,16 @@ timeline.push(parameters.parameters_contingency_restoration);
 // Demographics
 timeline.push(DEMOGRAPHICS);
 // Intro: We'd like to briefly ask you about some symptoms before the online game.
-timeline.push(CLINICAL_INTRO);
+timeline.push(CLINICAL_OPEN);
 // Randomisation function for Symptom Inventories
 var symptom_inventories_random = jsPsych.randomization.shuffle(survey.symptom_inventory);
-for(var item of symptom_inventories_random ){
-    timeline.push(item); 
- }
-
+// required for testing
+var symptom_inventories_ordered = survey.symptom_inventory; 
+for(var item of symptom_inventories_ordered ){
+    timeline.push(item);
+}
 // SDS
-timeline.push(SDS)
+timeline.push(SDS);
 // Close: That's it for the symptom questions. Now we're ready to start the online game
 timeline.push(CLINICAL_CLOSE);
 

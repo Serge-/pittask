@@ -1,9 +1,9 @@
-jsPsych.plugins['parameters-instrumental-conditioning'] = (function(){
+jsPsych.plugins['parameters-VVR'] = (function(){
 
     var plugin = {};
   
     plugin.info = {
-        name: 'parameters-instrumental-conditioning',
+        name: 'parameters-VVR',
         stage_name: {
             type: jsPsych.plugins.parameterType.STRING,
             pretty_name: 'Stage Name',
@@ -50,8 +50,8 @@ jsPsych.plugins['parameters-instrumental-conditioning'] = (function(){
         } = trial.variables;
 
         var trial_data = {
-            "stage_name": trial.stage_name,
-            "parameters": [
+            "stage_name": JSON.stringify(trial.stage_name),
+            "parameters": JSON.stringify([
                 {
                     'Parameter': 'open_instruct',
                     'Units of measure': 'string',
@@ -252,7 +252,7 @@ jsPsych.plugins['parameters-instrumental-conditioning'] = (function(){
                     'Function, brief': 'Minimum time, display of instructions.',
                     'Function, full': 'This number of milliseconds determines the minimum amount of time that the instructions are shown to participants.',
                 }
-            ]
+            ])
 
         };
 

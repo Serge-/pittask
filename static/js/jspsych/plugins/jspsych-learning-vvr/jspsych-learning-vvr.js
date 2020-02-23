@@ -69,7 +69,7 @@ jsPsych.plugins['survey-vvr'] = (function() {
           let x = 0;
           let duration = VVR_INTERVAL_DURATION;
           timerId = jsPsych.pluginAPI.setTimeout(function request() {
-
+            
             var random_boolean = Math.random() < probability_value;
             var outcome_present = DEGRAD_PATTERN[condition_outcome][degradation_pattern_condition];
 
@@ -91,7 +91,7 @@ jsPsych.plugins['survey-vvr'] = (function() {
                 }
      
               }, VVR_OUTCOME_DURATION);
-              duration += VVR_OUTCOME_DURATION;
+              duration = VVR_OUTCOME_DURATION + VVR_INTERVAL_DURATION;
             } else {
               if (++x === VVR_INTERVAL_NUM) {
                 clearTimeout(timerId);
@@ -198,7 +198,7 @@ jsPsych.plugins['survey-vvr'] = (function() {
             var trial_data = {
                 "stage_name": trial.stage_name,
                 "stimulus": trial.stimulus,
-                "events": response.trial_events
+                "events": JSON.stringify(response.trial_events)
             };
 
             // clear the display

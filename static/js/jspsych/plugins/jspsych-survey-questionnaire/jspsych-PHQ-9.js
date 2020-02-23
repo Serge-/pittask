@@ -83,7 +83,7 @@ jsPsych.plugins['PHQ-9'] = (function() {
       }
     }
     plugin.trial = function(display_element, trial) {
-      var plugin_id_name = "jspsych-survey-multi-choice";
+      var plugin_id_name = "jspsych-survey-multi-choice-PHQ-9";
   
       var html = "";
 
@@ -146,7 +146,7 @@ jsPsych.plugins['PHQ-9'] = (function() {
             
 
       // form element
-      html += '<div >';
+      html += '<div id="' + plugin_id_name + '">';
       html += '<form id="jspsych-survey-multi-choice-form" class="jspsych-survey-multi-choice-form">';
       
 

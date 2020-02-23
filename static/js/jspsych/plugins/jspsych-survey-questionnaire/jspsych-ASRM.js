@@ -83,7 +83,7 @@ jsPsych.plugins['ASRM'] = (function () {
     }
   }
   plugin.trial = function (display_element, trial) {
-    var plugin_id_name = "jspsych-survey-multi-choice";
+    var plugin_id_name = "jspsych-survey-multi-choice-ASRM";
 
     var html = "";
 
@@ -131,6 +131,7 @@ jsPsych.plugins['ASRM'] = (function () {
     }
 
     // form element
+    html += '<div id="' + plugin_id_name + '">';
     html += '<form id="jspsych-survey-multi-choice-form">';
 
     // generate question order. this is randomized here as opposed to randomizing the order of trial.questions

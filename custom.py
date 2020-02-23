@@ -30,6 +30,29 @@ custom_code = Blueprint('custom_code', __name__,
 #  add them here
 ###########################################################
 
+
+import subprocess
+import re
+
+leading_4_spaces = re.compile('^    ')
+
+def get_commits():
+    lines = subprocess.check_output(
+        ['git', 'log', "-1"], stderr=subprocess.STDOUT
+    ).split('\n')
+
+    current_commit = {}
+
+    for line in lines:
+        if line.startswith('commit '):
+            current_commit = line.split('commit ')[1]
+
+    return current_commit
+
+f = open("templates/git_commits.txt", "w")
+f.write(get_commits() + "\n")
+f.close()
+
 # ----------------------------------------------
 # example custom route
 # ----------------------------------------------

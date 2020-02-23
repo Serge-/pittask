@@ -147,7 +147,7 @@ window.jsPsych = (function() {
 
     // add CSS class to DOM_target
     if(opts.display_element.className.indexOf('jspsych-display-element') == -1){
-      opts.display_element.className += ' jspsych-display-element';
+      opts.display_element.className += 'jspsych-display-element';
     }
     DOM_target.className += 'jspsych-content';
 

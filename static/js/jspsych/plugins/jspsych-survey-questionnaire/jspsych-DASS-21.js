@@ -83,7 +83,7 @@ jsPsych.plugins['DASS'] = (function() {
       }
     }
     plugin.trial = function(display_element, trial) {
-      var plugin_id_name = "jspsych-survey-multi-choice";
+      var plugin_id_name = "jspsych-survey-multi-choice-DASS";
   
       var html = "";
 
@@ -143,7 +143,7 @@ jsPsych.plugins['DASS'] = (function() {
             
 
       // form element
-      html += '<div >';
+      html += '<div id='+ plugin_id_name + '>';
       html += '<form id="jspsych-survey-multi-choice-form" class="jspsych-survey-multi-choice-form">';
       
 

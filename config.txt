@@ -1,16 +1,16 @@
 [HIT Configuration]
-title = Stroop task
-description = Judge the color of a series of words.
-amt_keywords = Perception, Psychology
+title = Food reward learning games
+description = Earn all the snacks you want
+amt_keywords = reward, learning, decision-making, Psychology, experiment
 lifetime = 24
 us_only = true
 approve_requirement = 95
 number_hits_approved = 0
 require_master_workers = false
-contact_email_on_error = youremail@gmail.com
+contact_email_on_error = iain.perkes@unsw.edu.au
 ad_group = Default psiTurk Stroop Example
 psiturk_keywords = stroop
-organization_name = New Great University
+organization_name = University of New South Wales
 browser_exclude_rule = MSIE, mobile, tablet
 allow_repeats = false
 

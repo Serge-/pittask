@@ -241,9 +241,9 @@ jsPsych.plugins['survey-vvr-questions-right'] = (function() {
 
             // gather the data to store for the trial
             var trial_data = {
-                "stage_name": trial.stage_name,
+                "stage_name": JSON.stringify(trial.stage_name),
                 "stimulus": trial.stimulus,
-                "events": response.trial_events
+                "events": JSON.stringify(response.trial_events)
             };
 
             // clear the display

@@ -83,7 +83,7 @@ jsPsych.plugins['PC-PTSD-5'] = (function() {
     }
   }
   plugin.trial = function(display_element, trial) {
-    var plugin_id_name = "jspsych-survey-multi-choice";
+    var plugin_id_name = "jspsych-survey-multi-choice-PC-PTSD-5";
     var isHidden = false;
     var html = "";
 
@@ -131,6 +131,7 @@ jsPsych.plugins['PC-PTSD-5'] = (function() {
     }
 
     // form element
+    html += '<div id="' + plugin_id_name + '">';
     html += '<form id="jspsych-survey-multi-choice-form">';
     
     // generate question order. this is randomized here as opposed to randomizing the order of trial.questions

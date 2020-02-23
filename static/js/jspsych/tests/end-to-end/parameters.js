@@ -1,16 +1,3 @@
-// main settings
-var full_screen_mode = false;
-
-// vending machine rules configuration
-var left_tilt = 37;
-var right_tilt = 39;
-var shake_right_rotate = 15;
-var shake_right_translateX = 15;
-var shake_left_rotate = -15;
-var shake_left_translateX = -15;
-var shake_return_time = 300;
-var shake_transition = 0.05;
-
 var vvr = {
     instrumental_conditioning: {
         open_instruct: true,
@@ -95,49 +82,4 @@ var vvr = {
     }
 }
 
-var survey = {
-    modal: 'Sorry, all questions need to be answered prior to submission.',
-    clinical_text: {
-        clinical_latency_period: 1000,
-        clinical_open_text: "<p class='v-center-txt'>We'd like to briefly ask you about some symptoms before the online game. <br> Press any key when you are ready. </p>",
-        clinical_close_text: "<p class='v-center-txt'>That's it for the symptom questions. Now we're ready to start the online game. <br> Press any key when you are ready. </p>"
-    },
-    symptom_inventory: [
-        // OCI-R
-        OCIR,
-        // MOVES
-        MOVES,
-        // DASS
-        DASS,
-        // Adult Attention-Deficit/Hyperactivity Disorder Self-Report Screening Scale for DSM-5 (ASRS-5)
-        ASRS5,
-        // Internet-based form EAT-26
-        EAT26,
-        // The RAADS Screen
-        RAADS,
-        // PHQ-9
-        PHQ9,
-        // GAD-7
-        GAD7,
-        // ASRM
-        ASRM,
-        // The Primary Care PTSD Screen for DSM-5 (PC-PTSD-5)
-        PTSD,
-        // The PRIME Screen – Revised
-        PRIME_R,
-        // AUDIT
-        AUDIT,
-        // PGSI
-        PGSI,
-        // YIAT
-        YIAT,
-        // Smoking status
-        SMOKE_FTND,
-        // LSAS
-        LSAS,
-        // Insomnia Severity Index
-        ISI,
-        // The Personality Inventory for DSM-5—Brief Form (PID-5-BF)— Adult
-        PID
-    ]
-}
+exports.parameters = vvr;

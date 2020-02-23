@@ -1205,7 +1205,7 @@ var YIAT = {
 }
 
 
-var DASS21 = {
+var DASS = {
     type: 'DASS',
     preamble:
         `
