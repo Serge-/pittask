@@ -886,7 +886,7 @@ timeline.push(CLINICAL_OPEN);
 var symptom_inventories_random = jsPsych.randomization.shuffle(survey.symptom_inventory);
 // required for testing
 var symptom_inventories_ordered = survey.symptom_inventory; 
-for(var item of symptom_inventories_ordered ){
+for(var item of symptom_inventories_random ){
     timeline.push(item);
 }
 // SDS
