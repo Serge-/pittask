@@ -41,9 +41,9 @@ var DEMOGRAPHICS = {
 
     ],
     button_label: 'submit answers',
-    event_type: 'survey appears',
+    event_type: 'questions appears',
     event_raw_details: "Demographics, options",
-    event_converted_details: 'Demographics survey appears'
+    event_converted_details: 'Demographics questions appears'
 }
 
 
@@ -129,9 +129,9 @@ var OCIR = {
         }
     ],
     button_label: 'submit answers',
-    event_type: 'survey appears',
+    event_type: 'questions appears',
     event_raw_details: "OCI-R, options",
-    event_converted_details: 'OCI-R survey appears'
+    event_converted_details: 'OCI-R questions appears'
 }
 
 var ASRM = {
@@ -199,9 +199,9 @@ var ASRM = {
 
     ],
     button_label: 'submit answers',
-    event_type: 'survey appears',
+    event_type: 'questions appears',
     event_raw_details: "ASRM, options",
-    event_converted_details: 'ASRM survey appears'
+    event_converted_details: 'ASRM questions appears'
 
 }
 
@@ -248,9 +248,9 @@ var GAD7 = {
 
     ],
     button_label: 'submit answers',
-    event_type: 'survey appears',
+    event_type: 'questions appears',
     event_raw_details: "GAD-7, options",
-    event_converted_details: 'GAD-7 survey appears'
+    event_converted_details: 'GAD-7 questions appears'
 }
 
 var ISI = {
@@ -298,9 +298,9 @@ var ISI = {
 
     ],
     button_label: 'submit answers',
-    event_type: 'survey appears',
+    event_type: 'questions appears',
     event_raw_details: "ISI, options",
-    event_converted_details: 'ISI survey appears'
+    event_converted_details: 'ISI questions appears'
 };
 
 var EAT26 = {
@@ -445,9 +445,9 @@ var EAT26 = {
 
     ],
     button_label: 'submit answers',
-    event_type: 'survey appears',
+    event_type: 'questions appears',
     event_raw_details: "EAT-26, options",
-    event_converted_details: 'EAT-26 survey appears'
+    event_converted_details: 'EAT-26 questions appears'
 };
 
 
@@ -563,9 +563,9 @@ var PID = {
         },
     ],
     button_label: 'submit answers',
-    event_type: 'survey appears',
+    event_type: 'questions appears',
     event_raw_details: "PC-PTSD-5, options",
-    event_converted_details: 'PC-PTSD-5 survey appears'
+    event_converted_details: 'PC-PTSD-5 questions appears'
 };
 
 var PHQ9 = {
@@ -613,9 +613,9 @@ var PHQ9 = {
         }
     ],
     button_label: 'submit answers',
-    event_type: 'survey appears',
+    event_type: 'questions appears',
     event_raw_details: "PHQ-9, options",
-    event_converted_details: 'PHQ-9 survey appears'
+    event_converted_details: 'PHQ-9 questions appears'
 }
 
 var PTSD = {
@@ -658,9 +658,9 @@ var PTSD = {
         },
     ],
     button_label: 'submit answers',
-    event_type: 'survey appears',
+    event_type: 'questions appears',
     event_raw_details: "PTSD, options",
-    event_converted_details: 'PTSD survey appears'
+    event_converted_details: 'PTSD questions appears'
 }
 
 var RAADS = {
@@ -735,9 +735,9 @@ var RAADS = {
 
     ],
     button_label: 'submit answers',
-    event_type: 'survey appears',
+    event_type: 'questions appears',
     event_raw_details: "The RAADS-14 Screen, options",
-    event_converted_details: 'The RAADS-14 Screen survey appears'
+    event_converted_details: 'The RAADS-14 Screen questions appears'
 }
 
 var PRIME_R = {
@@ -803,9 +803,9 @@ var PRIME_R = {
         },
     ],
     button_label: 'submit answers',
-    event_type: 'survey appears',
+    event_type: 'questions appears',
     event_raw_details: "PRIME-R, options",
-    event_converted_details: 'PRIME-R survey appears'
+    event_converted_details: 'PRIME-R questions appears'
 }
 
 
@@ -992,9 +992,9 @@ var LSAS = {
 
     ],
     button_label: 'submit answers',
-    event_type: 'survey appears',
+    event_type: 'questions appears',
     event_raw_details: "LSAS, options",
-    event_converted_details: 'LSAS survey appears'
+    event_converted_details: 'LSAS questions appears'
 }
 
 
@@ -1091,9 +1091,9 @@ var MOVES = {
         }
     ],
     button_label: 'submit answers',
-    event_type: 'survey appears',
+    event_type: 'questions appears',
     event_raw_details: "MOVES, options",
-    event_converted_details: 'MOVES survey appears'
+    event_converted_details: 'MOVES questions appears'
 }
 
 var ASRS5 = {
@@ -1133,9 +1133,9 @@ var ASRS5 = {
         }
     ],
     button_label: 'submit answers',
-    event_type: 'survey appears',
+    event_type: 'questions appears',
     event_raw_details: "ASRS-5, options",
-    event_converted_details: 'ASRS-5 survey appears'
+    event_converted_details: 'ASRS-5 questions appears'
 }
 
 var YIAT = {
@@ -1199,9 +1199,9 @@ var YIAT = {
         }
     ],
     button_label: 'submit answers',
-    event_type: 'survey appears',
+    event_type: 'questions appears',
     event_raw_details: "YIAT, options",
-    event_converted_details: 'YIAT survey appears'
+    event_converted_details: 'YIAT questions appears'
 }
 
 
@@ -1308,9 +1308,9 @@ var DASS = {
         }
     ],
     button_label: 'submit answers',
-    event_type: 'survey appears',
+    event_type: 'questions appears',
     event_raw_details: "DASS-21, options",
-    event_converted_details: 'DASS-21 survey appears'
+    event_converted_details: 'DASS-21 questions appears'
 }
 
 
@@ -1370,9 +1370,9 @@ var AUDIT = {
         }
     ],
     button_label: 'submit answers',
-    event_type: 'survey appears',
+    event_type: 'questions appears',
     event_raw_details: "AUDIT, options",
-    event_converted_details: 'AUDIT survey appears'
+    event_converted_details: 'AUDIT questions appears'
 };
 
 var isSmokingStatus = true;
@@ -1393,9 +1393,9 @@ var SMOKE_FTND = {
                 }
             ],
             button_label: 'submit answers',
-            event_type: 'survey appears',
+            event_type: 'questions appears',
             event_raw_details: "FTND, options",
-            event_converted_details: 'FTND survey appears'
+            event_converted_details: 'FTND questions appears'
         },
         {
             type: 'FTND',
@@ -1427,9 +1427,9 @@ var SMOKE_FTND = {
                 }
             ],
             button_label: 'submit answers',
-            event_type: 'survey appears',
+            event_type: 'questions appears',
             event_raw_details: "FTND, options",
-            event_converted_details: 'FTND survey appears'
+            event_converted_details: 'FTND questions appears'
         }
 
     ]
@@ -1477,9 +1477,9 @@ var PGSI = {
         }
     ],
     button_label: 'submit answers',
-    event_type: 'survey appears',
+    event_type: 'questions appears',
     event_raw_details: "FTND, options",
-    event_converted_details: 'FTND survey appears'
+    event_converted_details: 'FTND questions appears'
 }
 
 

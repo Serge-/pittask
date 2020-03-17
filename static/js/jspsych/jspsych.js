@@ -2171,7 +2171,9 @@ jsPsych.pluginAPI = (function() {
 
           parameters.callback_function({
               key: e.which,
-              rt: key_time - start_time
+              rt: key_time - start_time,
+              el: e.target,
+              e: e
           });
 
           var after_up = function(up) {
