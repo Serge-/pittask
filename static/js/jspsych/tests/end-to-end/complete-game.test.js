@@ -64,6 +64,7 @@ describe('Demographics', () => {
     const input_height = await page.$('.jspsych-survey-multi-choice-radio-cm');
     await input_height.type('180');
     await page.click('.jspsych-survey-multi-choice-radio-kg');
+    await page.click('.option-input-weight');
     const input_weight = await page.$('.option-input-weight');
     await input_weight.type('100');
   }, timeout);
@@ -94,16 +95,14 @@ describe('Clinical Intro', () => {
 }, timeout);
 
 describe('OCI-R', () => {
-  test('click after delay', async () => {
+  test('check inputs', async () => {
     await page.waitForSelector('#jspsych-survey-multi-choice-OSC-R');
-    await page.evaluate(() => {
-      let elements = document.getElementsByClassName('jspsych-survey-highlight');
-      for (let element of elements)
-          element.click();
-    });
+    for (let index = 0; index < 18; index++) {
+      await page.click("#jspsych-survey-multi-choice-option-" + index + "-0 .jspsych-survey-highlight");
+    }
   }, timeout);
 
-  test('ASRS-5 submit survey', async () => {
+  test('submit survey', async () => {
     await page.evaluate(() => {
       document.querySelector('#jspsych-survey-multi-choice-OSC-R-next').click();
     });
@@ -113,11 +112,10 @@ describe('OCI-R', () => {
 describe('MOVES', () => {
   test('check inputs', async () => {
     await page.waitForSelector('#jspsych-survey-multi-choice-MOVES');
-    await page.evaluate(() => {
-      let elements = document.getElementsByClassName('form-radio');
-      for (let element of elements)
-          element.click();
-    });
+    for (let index = 0; index < 20; index++) {
+      await page.waitForSelector("#jspsych-survey-multi-choice-option-" + index + "-0 .form-radio");
+      await page.click("#jspsych-survey-multi-choice-option-" + index + "-0 .form-radio");
+    }
   }, timeout);
 
   test('submit survey', async () => {
@@ -130,12 +128,10 @@ describe('MOVES', () => {
 describe('DASS', () => {
   test('check inputs', async () => {
     await page.waitForSelector('#jspsych-survey-multi-choice-DASS');
-    await page.evaluate(() => {
-      let elements = document.getElementsByClassName('jspsych-survey-highlight');
-      for (let element of elements) {
-        element.click();
-      }
-    });
+    for (let index = 0; index < 21; index++) {
+      await page.waitForSelector("#jspsych-survey-multi-choice-" + index + " .jspsych-survey-highlight");
+      await page.click("#jspsych-survey-multi-choice-" + index + " .jspsych-survey-highlight");
+    }
   }, timeout);
 
   test('submit survey', async () => {
@@ -148,13 +144,10 @@ describe('DASS', () => {
 describe('ASRS-5', () => {
   test('check inputs', async () => {
     await page.waitForSelector('#jspsych-survey-multi-choice-ASRS-5');
-    await page.evaluate(() => {
-      let elements = document.getElementsByClassName('form-radio');
-      for (let element of elements) {
-        element.click();
-      }
-    });
-
+    for (let index = 0; index < 6; index++) {
+      await page.waitForSelector("#jspsych-survey-multi-choice-" + index + " .form-radio");
+      await page.click("#jspsych-survey-multi-choice-" + index + " .form-radio");
+    }
   }, timeout);
 
   test('submit survey', async () => {
@@ -167,13 +160,10 @@ describe('ASRS-5', () => {
 describe('EAT-26', () => {
   test('check inputs', async () => {
     await page.waitForSelector('#jspsych-survey-multi-choice-EAT-26');
-    await page.evaluate(() => {
-      let elements = document.getElementsByClassName('form-radio');
-      for (let element of elements) {
-        element.click();
-      }
-    });
-
+    for (let index = 0; index < 31; index++) {
+      await page.waitForSelector("#jspsych-survey-multi-choice-option-" + index + "-0 .form-radio");
+      await page.click("#jspsych-survey-multi-choice-option-" + index + "-0 .form-radio");
+    }
   }, timeout);
 
   test('submit survey', async () => {
@@ -186,13 +176,10 @@ describe('EAT-26', () => {
 describe('RAADS-14', () => {
   test('check inputs', async () => {
     await page.waitForSelector('#jspsych-survey-multi-choice-RAADS-14');
-    await page.evaluate(() => {
-      let elements = document.getElementsByClassName('form-radio');
-      for (let element of elements) {
-        element.click();
-      }
-    });
-
+    for (let index = 0; index < 14; index++) {
+      await page.waitForSelector("#jspsych-survey-multi-choice-" + index + " .form-radio");
+      await page.click("#jspsych-survey-multi-choice-" + index + " .form-radio");
+    }
   }, timeout);
 
   test('submit survey', async () => {
@@ -205,13 +192,10 @@ describe('RAADS-14', () => {
 describe('PHQ-9', () => {
   test('check inputs', async () => {
     await page.waitForSelector('#jspsych-survey-multi-choice-PHQ-9');
-    await page.evaluate(() => {
-      let elements = document.getElementsByClassName('jspsych-survey-highlight');
-      for (let element of elements) {
-        element.click();
-      }
-    });
-
+    for (let index = 0; index < 9; index++) {
+      await page.waitForSelector("#jspsych-survey-multi-choice-" + index + " .jspsych-survey-highlight");
+      await page.click("#jspsych-survey-multi-choice-" + index + " .jspsych-survey-highlight");
+    }
   }, timeout);
 
   test('submit survey', async () => {
@@ -224,13 +208,11 @@ describe('PHQ-9', () => {
 describe('GAD-7', () => {
   test('check inputs', async () => {
     await page.waitForSelector('#jspsych-survey-multi-choice-GAD-7');
-    await page.evaluate(() => {
-      let elements = document.getElementsByClassName('jspsych-survey-highlight');
-      for (let element of elements) {
-        element.click();
-      }
-    });
-
+    for (let index = 0; index < 7; index++) {
+      await page.waitForSelector("#jspsych-survey-multi-choice-" + index + " .jspsych-survey-highlight");
+      await page.click("#jspsych-survey-multi-choice-" + index + " .jspsych-survey-highlight");
+      await page.click("#jspsych-survey-multi-choice-response-checkbox-0-0");
+    }
   }, timeout);
 
   test('submit survey', async () => {
@@ -243,13 +225,10 @@ describe('GAD-7', () => {
 describe('ASRM', () => {
   test('check inputs', async () => {
     await page.waitForSelector('#jspsych-survey-multi-choice-ASRM');
-    await page.evaluate(() => {
-      let elements = document.getElementsByClassName('jspsych-survey-highlight');
-      for (let element of elements) {
-        element.click();
-      }
-    });
-
+    for (let index = 0; index < 5; index++) {
+      await page.waitForSelector("#jspsych-survey-multi-choice-" + index + " .jspsych-survey-highlight");
+      await page.click("#jspsych-survey-multi-choice-" + index + " .jspsych-survey-highlight");
+    }
   }, timeout);
 
   test('submit survey', async () => {
@@ -262,12 +241,10 @@ describe('ASRM', () => {
 describe('PC-PTSD-5', () => {
   test('check inputs', async () => {
     await page.waitForSelector('#jspsych-survey-multi-choice-PC-PTSD-5');
-    await page.evaluate(() => {
-      for (let index = 0; index < 6; index++) {
-        document.querySelector('#jspsych-survey-multi-choice-response-' + index + '-0').click();
-      }
-    });
-
+    for (let index = 0; index < 6; index++) {
+      await page.waitForSelector("#jspsych-survey-multi-choice-" + index + " .jspsych-survey-highlight");
+      await page.click("#jspsych-survey-multi-choice-" + index + " .jspsych-survey-highlight");
+    }
   }, timeout);
 
   test('submit survey', async () => {
@@ -280,13 +257,10 @@ describe('PC-PTSD-5', () => {
 describe('PRIME Screen', () => {
   test('check inputs', async () => {
     await page.waitForSelector('#jspsych-survey-multi-choice-PRIME');
-    await page.evaluate(() => {
-      let elements = document.getElementsByClassName('jspsych-survey-highlight');
-      for (let element of elements) {
-        element.click();
-      }
-    });
-
+    for (let index = 0; index < 12; index++) {
+      await page.waitForSelector("#jspsych-survey-multi-choice-" + index + " .jspsych-survey-highlight");
+      await page.click("#jspsych-survey-multi-choice-" + index + " .jspsych-survey-highlight");
+    }
   }, timeout);
 
   test('submit survey', async () => {
@@ -299,13 +273,10 @@ describe('PRIME Screen', () => {
 describe('AUDIT', () => {
   test('check inputs', async () => {
     await page.waitForSelector('#jspsych-survey-multi-choice-AUDIT');
-    await page.evaluate(() => {
-      let elements = document.getElementsByClassName('form-radio');
-      for (let element of elements) {
-        element.click();
-      }
-    });
-
+    for (let index = 0; index < 10; index++) {
+      await page.waitForSelector("#jspsych-survey-multi-choice-" + index + " .form-radio");
+      await page.click("#jspsych-survey-multi-choice-" + index + " .form-radio");
+    }
   }, timeout);
 
   test('submit survey', async () => {
@@ -318,13 +289,10 @@ describe('AUDIT', () => {
 describe('PGSI', () => {
   test('check inputs', async () => {
     await page.waitForSelector('#jspsych-survey-multi-choice-PGSI');
-    await page.evaluate(() => {
-      let elements = document.getElementsByClassName('form-radio');
-      for (let element of elements) {
-        element.click();
-      }
-    });
-
+    for (let index = 0; index < 9; index++) {
+      await page.waitForSelector("#jspsych-survey-multi-choice-" + index + " .form-radio");
+      await page.click("#jspsych-survey-multi-choice-" + index + " .form-radio");
+    }
   }, timeout);
 
   test('submit survey', async () => {
@@ -337,13 +305,10 @@ describe('PGSI', () => {
 describe('YIAT', () => {
   test('check inputs', async () => {
     await page.waitForSelector('#jspsych-survey-multi-choice-YIAT');
-    await page.evaluate(() => {
-      let elements = document.getElementsByClassName('form-radio');
-      for (let element of elements) {
-        element.click();
-      }
-    });
-
+    for (let index = 0; index < 12; index++) {
+      await page.waitForSelector("#jspsych-survey-multi-choice-" + index + " .form-radio");
+      await page.click("#jspsych-survey-multi-choice-" + index + " .form-radio");
+    }
   }, timeout);
 
   test('submit survey', async () => {
@@ -356,11 +321,8 @@ describe('YIAT', () => {
 describe('Smoking Status', () => {
   test('check inputs', async () => {
     await page.waitForSelector('#jspsych-survey-multi-choice-smoking-status');
-    await page.evaluate(() => {
-      document.querySelector('#jspsych-survey-multi-choice-response-0-0').click();
-      document.querySelector('#jspsych-survey-multi-choice-response-1-0').click();
-    });
-
+    await page.click("#jspsych-survey-multi-choice-option-0-0 .form-radio");
+    await page.click("#jspsych-survey-multi-choice-option-1-0 .form-radio");
   }, timeout);
 
   test('submit survey', async () => {
@@ -373,13 +335,9 @@ describe('Smoking Status', () => {
 describe('FTND', () => {
   test('check inputs', async () => {
     await page.waitForSelector('#jspsych-survey-multi-choice-FTND');
-    await page.evaluate(() => {
-      let elements = document.getElementsByClassName('form-radio');
-      for (let element of elements) {
-        element.click();
-      }
-    });
-
+    for (let index = 0; index < 6; index++) {
+      await page.click("#jspsych-survey-multi-choice-" + index + " .form-radio");
+    }
   }, timeout);
 
   test('submit survey', async () => {
@@ -392,13 +350,12 @@ describe('FTND', () => {
 describe('LSAS', () => {
   test('check inputs', async () => {
     await page.waitForSelector('#jspsych-survey-multi-choice-LSAS');
-    await page.evaluate(() => {
-      let elements = document.getElementsByClassName('jspsych-survey-highlight');
-      for (let element of elements) {
-        element.click();
-      }
-    });
-
+    for (let index = 0; index < 24; index++) {
+      await page.waitForSelector("#jspsych-survey-multi-choice-" + index + " .f .jspsych-survey-highlight");
+      await page.waitForSelector("#jspsych-survey-multi-choice-" + index + " .a .jspsych-survey-highlight");
+      await page.click("#jspsych-survey-multi-choice-" + index + " .f .jspsych-survey-highlight");
+      await page.click("#jspsych-survey-multi-choice-" + index + " .a .jspsych-survey-highlight");
+    }
   }, timeout);
 
   test('submit survey', async () => {
@@ -409,15 +366,15 @@ describe('LSAS', () => {
 }, timeout);
 
 describe('ISI', () => {
-  test('check inputs', async () => {
+  test('check inputs', async () => {  
     await page.waitForSelector('#jspsych-survey-multi-choice-ISI');
-    await page.evaluate(() => {
-      let elements = document.getElementsByClassName('jspsych-survey-highlight');
-      for (let element of elements) {
-        element.click();
-      }
-    });
-
+    for (let index = 0; index < 3; index++) {
+      await page.click("#jspsych-survey-multi-choice-1-" + index + " .jspsych-survey-highlight");
+    }
+    for (let index = 1; index < 5; index++) {
+      await page.waitForSelector("#jspsych-survey-multi-choice-" + index + " .jspsych-survey-highlight");
+      await page.click("#jspsych-survey-multi-choice-" + index + " .jspsych-survey-highlight");
+    }
   }, timeout);
 
   test('submit survey', async () => {
@@ -430,13 +387,10 @@ describe('ISI', () => {
 describe('PID-5-BF', () => {
   test('check inputs', async () => {
     await page.waitForSelector('#jspsych-survey-multi-choice-PID-5-BF');
-    await page.evaluate(() => {
-      let elements = document.getElementsByClassName('jspsych-survey-highlight');
-      for (let element of elements) {
-        element.click();
-      }
-    });
-
+    for (let index = 0; index < 25; index++) {
+      await page.waitForSelector("#jspsych-survey-multi-choice-" + index + " .jspsych-survey-highlight");
+      await page.click("#jspsych-survey-multi-choice-" + index + " .jspsych-survey-highlight");
+    }
   }, timeout);
 
   test('submit survey', async () => {
@@ -450,12 +404,10 @@ describe('PID-5-BF', () => {
 describe('SDS', () => {
   test('check inputs', async () => {
     await page.waitForSelector('#jspsych-survey-multi-choice-SDS');
-    await page.evaluate(() => {
-      let elements = document.getElementsByClassName('jspsych-survey-highlight');
-      for (let element of elements) {
-        element.click();
-      }
-    });
+    for (let index = 0; index < 3; index++) {
+      await page.waitForSelector("#jspsych-survey-multi-choice-" + index + " .jspsych-survey-highlight");
+      await page.click("#jspsych-survey-multi-choice-" + index + " .jspsych-survey-highlight");
+    }
     await page.select('.select-days-3', '5');
     await page.select('.select-days-4', '5');
 

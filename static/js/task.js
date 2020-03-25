@@ -868,7 +868,7 @@ var CLINICAL_CLOSE = {
 
 
 var timeline = [];
-// Init parameters
+// Init parameters main
 timeline.push({
     type: 'Parameters',
     stage_name: 'Parameters',

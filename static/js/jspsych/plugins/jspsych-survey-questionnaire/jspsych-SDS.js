@@ -3,7 +3,7 @@ jsPsych.plugins['SDS'] = (function () {
   
     plugin.info = {
       name: 'Sheehan Disability Scale',
-      stage_name: 'Sheehan Disability Scale',
+      stage_name: 'SDS',
       description: '',
       parameters: {
         questions: {
@@ -61,6 +61,12 @@ jsPsych.plugins['SDS'] = (function () {
           pretty_name: 'Button label',
           default: 'Continue',
           description: 'Label of the button.'
+        },
+        time_stamp: {
+          type: jsPsych.plugins.parameterType.OBJECT,
+          pretty_name: 'Timestamp',
+          default: {},
+          description: 'Object for collecting timestamp'
         },
         event_type: {
           type: jsPsych.plugins.parameterType.STRING,
@@ -226,14 +232,14 @@ jsPsych.plugins['SDS'] = (function () {
           // add radio button container
           html += '<div id="' + option_id_name + '" class="jspsych-survey-multi-choice-option">';
           html += '<input type="radio" name="' + input_name + '" id="' + input_id + '" class="form-radio hidden" value="' + question.options[j] + '" ' + required_attr + '></input>';
-          html += '<label class="jspsych-survey-multi-choice-text jspsych-survey-highlight" for="' + input_id + '">' + question.options[j] + '</label>';
+          html += '<label class="jspsych-survey-multi-choice-text jspsych-survey-highlight" data-time-stamp="Q' + (i+1) + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" for="' + input_id + '">' + question.options[j] + '</label>';
           html += '</div>';
         }
   
         html += '</div>';
         if(i === 0) {
           html += '<div style="display: flex; padding: 2rem 0 2rem 2rem;">' +
-          '<div class="input-not-working"><input type="radio" name="" class="form-radio" value="Checkbox question.: I have not worked/studies at all during the past week..."></input></div>' +
+          '<div class="input-not-working"><input type="radio" data-time-stamp="Q1S1" data-question-number="Q1S1" name="" class="form-radio" value="Checkbox question.: I have not worked/studies at all during the past week..."></input></div>' +
           '<div style="text-align: left; padding-left: 2rem;"><p>I have not worked / studies at all during the past week for reasons unrelated to the disorder.</p>' +
           '<p>* Work includes paid, unpaid volunteer work or training</p></div></div>';
         }
@@ -278,7 +284,7 @@ jsPsych.plugins['SDS'] = (function () {
             // add radio button container
             // html += '<div id="' + option_id_name + '" class="jspsych-survey-multi-choice-option">';
             // html += '<label class="jspsych-survey-multi-choice-text jspsych-survey-highlight hidden" for="' + input_id + '">' + question.options[j] + '</label>';
-            html += '<option type="select" name="' + input_name + '" id="' + input_id + '" value="' + question.options[j] + '" ' + required_attr + '>' + question.options[j] + '</option>';
+            html += '<option type="select" data-time-stamp="Q' + (i+1) + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" name="' + input_name + '" id="' + input_id + '" value="' + question.options[j] + '" ' + required_attr + '>' + question.options[j] + '</option>';
             // html += '</div>';
           }
           html += '</select>';
@@ -322,7 +328,6 @@ jsPsych.plugins['SDS'] = (function () {
   
       // function to handle key press responses
       var after_response = function (info) {
-  
         if (info.key_release === undefined) {
           response.trial_events.push({
             "event_type": "key press",
@@ -330,6 +335,28 @@ jsPsych.plugins['SDS'] = (function () {
             "event_converted_details": jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(info.key) + ' key pressed',
             "timestamp": jsPsych.totalTime()
           });
+
+          if(info.el) {
+            if(info.el.dataset.timeStamp) {
+              trial.time_stamp[info.el.dataset.timeStamp] = jsPsych.totalTime();
+            }
+            if(info.el.dataset.questionNumber) {
+              response.trial_events.push({
+                "event_type": "answer displayed",
+                "event_raw_details": info.el.dataset.questionNumber,
+                "event_converted_details": info.el.dataset.questionNumber + ' answer displayed',
+                "timestamp": jsPsych.totalTime()
+              });
+            }
+            if(info.el.type === 'submit') {
+              response.trial_events.push({
+                "event_type": "button clicked",
+                "event_raw_details": 'Submit',
+                "event_converted_details": '"Submit" selected',
+                "timestamp": jsPsych.totalTime()
+              });
+            }
+          }
         } else {
           response.trial_events.push({
             "event_type": "key release",
@@ -346,6 +373,18 @@ jsPsych.plugins['SDS'] = (function () {
         $(this).next('input').prop("checked", true);
         $(this).closest('input').click();
       })
+
+      $("select").change(function() {
+        var questionNumber = $(this)['context'].selectedOptions[0].getAttribute('data-question-number');
+        var questionTimestamp = $(this)['context'].selectedOptions[0].getAttribute('data-time-stamp');
+        trial.time_stamp[questionTimestamp] = jsPsych.totalTime();
+        response.trial_events.push({
+          "event_type": "answer displayed",
+          "event_raw_details": questionNumber,
+          "event_converted_details": questionNumber + ' answer displayed',
+          "timestamp": jsPsych.totalTime()
+        });
+      });
   
       document.querySelector('form').addEventListener('submit', function (event) {
         event.preventDefault();
@@ -355,6 +394,7 @@ jsPsych.plugins['SDS'] = (function () {
   
         // create object to hold responses
         var question_data = {};
+        var timestamp_data = {};
         for (var i = 0; i < 3; i++) {
           var match = display_element.querySelector('#jspsych-survey-multi-choice-' + i);
           var id = (i + 1);
@@ -364,11 +404,13 @@ jsPsych.plugins['SDS'] = (function () {
             if (match.querySelector(".input-not-working input[type=radio]:checked") !== null) {
               val_not_working = {
                 'Checkbox question.: I have not worked/studies at all during the past week...' : 'Checked'
-              } 
+              }
+              timestamp_data['Checkbox question.: I have not worked/studies at all during the past week...'] = trial.time_stamp['Q1S1'];
             } else {
               val_not_working = {
               'Checkbox question.: I have not worked/studies at all during the past week...': 'NA'
               }
+              timestamp_data['Checkbox question.: I have not worked/studies at all during the past week...'] = 0;
             }
           }
           if (match.querySelector(".jspsych-survey-multi-choice-option input[type=radio]:checked") !== null) {
@@ -387,6 +429,7 @@ jsPsych.plugins['SDS'] = (function () {
             name = match.attributes['data-name'].value;
           }
           obje[name] = val;
+          timestamp_data[name] = trial.time_stamp['Q' + (i+1)];
           Object.assign(question_data, obje, val_not_working);
         }
         
@@ -409,10 +452,10 @@ jsPsych.plugins['SDS'] = (function () {
             name = match.attributes['data-name'].value;
           }
           obje[name] = val;
+          timestamp_data[name] = trial.time_stamp['Q' + (i+1)];
           Object.assign(question_data, obje);
         }
 
-  
         if ($(".survey-error-after").length < 1) {
           // kill keyboard listeners
           if (typeof keyboardListener !== 'undefined') {
@@ -424,6 +467,7 @@ jsPsych.plugins['SDS'] = (function () {
           var trial_data = {
             "stage_name": JSON.stringify(plugin.info.stage_name),
             "responses": JSON.stringify(question_data),
+            "timestamp": JSON.stringify(timestamp_data),
             "question_order": JSON.stringify(question_order),
             "events": JSON.stringify(response.trial_events)
           };

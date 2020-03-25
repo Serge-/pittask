@@ -62,6 +62,12 @@ jsPsych.plugins['MOVES'] = (function () {
           default: 'Continue',
           description: 'Label of the button.'
         },
+        time_stamp: {
+          type: jsPsych.plugins.parameterType.OBJECT,
+          pretty_name: 'Timestamp',
+          default: {},
+          description: 'Object for collecting timestamp'
+        },
         event_type: {
           type: jsPsych.plugins.parameterType.STRING,
           pretty_name: 'Event type',
@@ -202,7 +208,7 @@ jsPsych.plugins['MOVES'] = (function () {
           // add radio button container
           html += '<div id="' + option_id_name + '" class="jspsych-survey-multi-choice-option">';
           html += '<label hidden class="jspsych-survey-multi-choice-text" for="' + input_id + '">' + question.options[j] + '</label>';
-          html += '<input hidden type="radio" name="' + input_name + '" id="' + input_id + '" class="form-radio" value="' + trial.title[j] + '" ' + required_attr + '></input>';
+          html += '<input hidden type="radio" name="' + input_name + '" data-time-stamp="Q' + (i+1) + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" id="' + input_id + '" class="form-radio" value="' + trial.title[j] + '" ' + required_attr + '></input>';
           html += '</div>';
         }
   
@@ -248,6 +254,28 @@ jsPsych.plugins['MOVES'] = (function () {
             "event_converted_details": jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(info.key) + ' key pressed',
             "timestamp": jsPsych.totalTime()
           });
+
+          if(info.el) {
+            if(info.el.dataset.timeStamp) {
+              trial.time_stamp[info.el.dataset.timeStamp] = jsPsych.totalTime();
+            }
+            if(info.el.dataset.questionNumber) {
+              response.trial_events.push({
+                "event_type": "answer displayed",
+                "event_raw_details": info.el.dataset.questionNumber,
+                "event_converted_details": info.el.dataset.questionNumber + ' answer displayed',
+                "timestamp": jsPsych.totalTime()
+              });
+            }
+            if(info.el.type === 'submit') {
+              response.trial_events.push({
+                "event_type": "button clicked",
+                "event_raw_details": 'Submit',
+                "event_converted_details": '"Submit" selected',
+                "timestamp": jsPsych.totalTime()
+              });
+            }
+          }
         } else {
           response.trial_events.push({
             "event_type": "key release",
@@ -272,6 +300,8 @@ jsPsych.plugins['MOVES'] = (function () {
         var response_time = endTime - startTime;
         // create object to hold responses
         var question_data = {};
+        var timestamp_data = {};
+
         for (var i = 0; i < trial.questions.length; i++) {
           var match = display_element.querySelector('#jspsych-survey-multi-choice-' + i);
           var id = i + 1;
@@ -290,6 +320,7 @@ jsPsych.plugins['MOVES'] = (function () {
             name = match.attributes['data-name'].value;
           }
           obje[name] = val;
+          timestamp_data[name] = trial.time_stamp['Q' + (i+1)];
           Object.assign(question_data, obje);
         }
   
@@ -304,6 +335,7 @@ jsPsych.plugins['MOVES'] = (function () {
           var trial_data = {
             "stage_name": JSON.stringify(plugin.info.stage_name),
             "responses": JSON.stringify(question_data),
+            "timestamp": JSON.stringify(timestamp_data),
             "question_order": JSON.stringify(question_order),
             "events": JSON.stringify(response.trial_events)
           };

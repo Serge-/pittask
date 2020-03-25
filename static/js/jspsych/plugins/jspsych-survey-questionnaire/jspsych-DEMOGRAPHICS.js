@@ -62,6 +62,12 @@ jsPsych.plugins['Demographics'] = (function () {
           default: 'Continue',
           description: 'Label of the button.'
         },
+        time_stamp: {
+          type: jsPsych.plugins.parameterType.OBJECT,
+          pretty_name: 'Timestamp',
+          default: {},
+          description: 'Object for collecting timestamp'
+        },
         event_type: {
           type: jsPsych.plugins.parameterType.STRING,
           pretty_name: 'Event type',
@@ -197,7 +203,7 @@ jsPsych.plugins['Demographics'] = (function () {
             // add radio button container
             html += '<div id="' + option_id_name + '" class="jspsych-survey-multi-choice-option">';
             html += '<label class="jspsych-survey-multi-choice-text"  for="' + input_id + '">' + question.options[j] + '</label>';
-            html += '<input type="radio" name="' + input_name + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" id="' + input_id + '" class="form-radio" value="' + question.options[j] + '" ' + required_attr + '></input>';
+            html += '<input type="radio" name="' + input_name + '" data-time-stamp="Q' + (i+1) + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" id="' + input_id + '" class="form-radio" value="' + question.options[j] + '" ' + required_attr + '></input>';
             html += '</div>';
             }
     
@@ -238,9 +244,9 @@ jsPsych.plugins['Demographics'] = (function () {
               html += '<div id="' + option_id_name + '" class="jspsych-survey-multi-choice-option">';
               html += '<label class="jspsych-survey-multi-choice-text " for="' + input_id + '">' + question.options[j] + '</label>';
               if(j === 0) {
-                  html += '<input type="number" name="2a. Age (years)" data-question-number="Q' + (i+1) +'A' + (j+1) +'" id="' + input_id + '" class="input-year option-input-age" max="100" ' + required_attr + '></input>';
+                  html += '<input type="number" name="2a. Age (years)" data-time-stamp="Q' + (i+1) + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" id="' + input_id + '" class="input-year option-input-age" max="100" ' + required_attr + '></input>';
               } else {
-                  html += '<input type="number" name="2b. Age (months)" data-question-number="Q' + (i+1) +'A' + (j+1) +'" id="' + input_id + '" class="input-month option-input-age" max="11" ' + required_attr + '></input>';
+                  html += '<input type="number" name="2b. Age (months)" data-time-stamp="Q' + (i+1) + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" id="' + input_id + '" class="input-month option-input-age" max="11" ' + required_attr + '></input>';
               }
               
               html += '</div>';
@@ -282,13 +288,13 @@ jsPsych.plugins['Demographics'] = (function () {
               html += '<div id="' + option_id_name + '" class="jspsych-survey-multi-choice-option" style="flex-flow: row; ">';
               
               if(j === 0) {
-                html += '<input type="radio" data-enable="cm" name="Height (units selected)" id="' + input_id + '" class="form-radio" value="' + question.options[j] + '" ' + required_attr + '></input>';
-                html += '<input type="number" name="3a. Height (cm)" data-question-number="Q' + (i+1) +'A' + (j+1) +'" id="' + input_id + '" class="jspsych-survey-multi-choice-radio-cm" max="250" ' + required_attr + ' disabled></input>';
+                html += '<input type="radio" data-time-stamp="Q' + (i+1) + '" data-enable="cm" name="Height (units selected)" id="' + input_id + '" class="form-radio" value="' + question.options[j] + '" ' + required_attr + '></input>';
+                html += '<input type="number" name="3a. Height (cm)" data-time-stamp="Q' + (i+1) + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" id="' + input_id + '" class="jspsych-survey-multi-choice-radio-cm" max="250" ' + required_attr + ' disabled></input>';
               } else {
-                  html += '<input type="radio" data-enable="feet" name="Height (units selected)" id="' + input_id + '" class="form-radio" value="' + question.options[j] + '" ' + required_attr + '></input>';
-                  html += '<input type="number" name="3b. Height (feet)" data-question-number="Q' + (i+1) +'A' + (j+1) +'" id="' + input_id + '" class="jspsych-survey-multi-choice-radio-feet" max="8" ' + required_attr + ' disabled></input>';
+                  html += '<input type="radio" data-time-stamp="Q' + (i+1) + '" data-enable="feet" name="Height (units selected)" id="' + input_id + '" class="form-radio" value="' + question.options[j] + '" ' + required_attr + '></input>';
+                  html += '<input type="number" name="3b. Height (feet)" data-time-stamp="Q' + (i+1) + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" id="' + input_id + '" class="jspsych-survey-multi-choice-radio-feet" max="8" ' + required_attr + ' disabled></input>';
                   html += '<label class="jspsych-survey-multi-choice-text " for="' + input_id + '">feet</label>';
-                  html += '<input type="number" name="3c. Height (inches)" data-question-number="Q' + (i+1) +'A' + (j+1) +'" id="' + input_id + '" class="jspsych-survey-multi-choice-radio-inches" max="11" ' + required_attr + ' disabled></input>';
+                  html += '<input type="number" name="3c. Height (inches)" data-time-stamp="Q' + (i+1) + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" id="' + input_id + '" class="jspsych-survey-multi-choice-radio-inches" max="11" ' + required_attr + ' disabled></input>';
               }
               html += '<label class="jspsych-survey-multi-choice-text " for="' + input_id + '">' + question.options[j] + '</label>';
             
@@ -329,18 +335,18 @@ jsPsych.plugins['Demographics'] = (function () {
     
             if(j === 0) {
               html += '<div style="position: absolute; left: 30%;">';
-              html += '<input type="number" name="4b. Weight" class="option-input-weight" max="440" ' + required_attr + ' disabled></input>';
+              html += '<input type="number" name="4b. Weight" data-time-stamp="Q' + (i+1) + 'A' + (j+1) + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" class="option-input-weight" max="440" ' + required_attr + ' disabled></input>';
               html += '</div>';
 
               html += '<div>';
               html += '<div style="display: flex; justify-content: flex-end; margin: 1rem; width: 120px; padding-right: 1rem; flex-direction: row-reverse;" id="' + option_id_name + '" class="jspsych-survey-multi-choice-option">';
               html += '<label style="padding-left: 1rem;" class="jspsych-survey-multi-choice-text " for="' + input_id + '">' + question.options[j] + '</label>';
-              html += '<input type="radio" data-enable="weight" name="weight" value="kg" data-question-number="Q' + (i+1) +'A' + (j+1) +'" id="' + input_id + '" class="form-radio jspsych-survey-multi-choice-radio-kg" value="' + question.options[j] + '" ' + required_attr + '></input>';
+              html += '<input type="radio" data-enable="weight" name="weight" value="kg" data-time-stamp="Q' + (i+1) + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" id="' + input_id + '" class="form-radio jspsych-survey-multi-choice-radio-kg" value="' + question.options[j] + '" ' + required_attr + '></input>';
             } else {
               html += '<div>';
               html += '<div style="display: flex; justify-content: flex-end; margin: 1rem; width: 120px; padding-right: 1rem; flex-direction: row-reverse;" id="' + option_id_name + '" class="jspsych-survey-multi-choice-option">';
               html += '<label style="padding-left: 1rem;" class="jspsych-survey-multi-choice-text " for="' + input_id + '">' + question.options[j] + '</label>';
-              html += '<input type="radio" data-enable="weight" name="weight" value="pounds" data-question-number="Q' + (i+1) +'A' + (j+1) +'" id="' + input_id + '" class="form-radio jspsych-survey-multi-choice-radio-pounds" value="' + question.options[j] + '" ' + required_attr + '></input>';
+              html += '<input type="radio" data-enable="weight" name="weight" value="pounds" data-time-stamp="Q' + (i+1) + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" id="' + input_id + '" class="form-radio jspsych-survey-multi-choice-radio-pounds" value="' + question.options[j] + '" ' + required_attr + '></input>';
             }
 
             html += '</div>';
@@ -384,7 +390,7 @@ jsPsych.plugins['Demographics'] = (function () {
                 // add radio button container
                 html += '<div id="' + option_id_name + '" class="jspsych-survey-multi-choice-option">';
                 html += '<label style="padding-bottom: 2rem;" class="jspsych-survey-multi-choice-text " for="' + input_id + '">' + question.options[j] + '</label>';
-                html += '<input type="radio" name="' + input_name + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" id="' + input_id + '" class="form-radio" value="' + question.options[j] + '" ' + required_attr + '></input>';
+                html += '<input type="radio" name="' + input_name + '" data-time-stamp="Q' + (i+1) + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" id="' + input_id + '" class="form-radio" value="' + question.options[j] + '" ' + required_attr + '></input>';
                 html += '</div>';
             }
         
@@ -423,7 +429,7 @@ jsPsych.plugins['Demographics'] = (function () {
   
       // render
       display_element.innerHTML = html;
-  
+
       // function to handle key press responses
       var after_response = function (info) {
 
@@ -436,6 +442,9 @@ jsPsych.plugins['Demographics'] = (function () {
           });
 
           if(info.el) {
+            if(info.el.dataset.timeStamp) {
+              trial.time_stamp[info.el.dataset.timeStamp] = jsPsych.totalTime();
+            }
             if(info.el.dataset.questionNumber) {
               response.trial_events.push({
                 "event_type": "answer displayed",
@@ -453,8 +462,6 @@ jsPsych.plugins['Demographics'] = (function () {
               });
             }
           }
-
- 
         } else {
           response.trial_events.push({
             "event_type": "key release",
@@ -473,6 +480,7 @@ jsPsych.plugins['Demographics'] = (function () {
   
         // create object to hold responses
         var question_data = {};
+        var timestamp_data = {};
 
         for (var i = 0; i < 1; i++) {
           var match = display_element.querySelector('#jspsych-survey-multi-choice-' + i);
@@ -490,6 +498,7 @@ jsPsych.plugins['Demographics'] = (function () {
           if (match.attributes['data-name'].value !== '') {
             name = match.attributes['data-name'].value;
           }
+          timestamp_data[name] = trial.time_stamp['Q' + (i+1)];
           obje[name] = val;
           Object.assign(question_data, obje);
         }
@@ -512,6 +521,8 @@ jsPsych.plugins['Demographics'] = (function () {
             var object2b = {
               '2b. Age (months)': $("input[name='2b. Age (months)']").val() ? $("input[name='2b. Age (months)']").val() : 'NA'
             };
+            timestamp_data['2a. Age (years)'] = trial.time_stamp['Q2'];
+            timestamp_data['2b. Age (months)'] = trial.time_stamp['Q2'];
             Object.assign(question_data, object2a, object2b);
           } else {
             $('.jspsych-survey-multi-choice-question-age').addClass('survey-error-after');
@@ -569,6 +580,9 @@ jsPsych.plugins['Demographics'] = (function () {
                   var object3c = {
                     '3c. Height (inches)': $("input[name='3c. Height (inches)']").val() ? $("input[name='3c. Height (inches)']").val() : 'NA'
                   };
+                  timestamp_data['3a. Height (cm)'] =  $("input[name='3a. Height (cm)']").val() ? trial.time_stamp['Q3'] : 0;
+                  timestamp_data['3b. Height (feet)'] = $("input[name='3b. Height (feet)']").val() ? trial.time_stamp['Q3'] : 0;
+                  timestamp_data['3c. Height (inches)'] = $("input[name='3c. Height (inches)']").val() ? trial.time_stamp['Q3'] : 0;
                   Object.assign(question_data, object3a, object3b, object3c);
                 }
             } else {
@@ -611,7 +625,8 @@ jsPsych.plugins['Demographics'] = (function () {
             var object4b = {
               'Weight': $("input[name='4b. Weight']").val() 
             }
-
+            timestamp_data['Weight (unit)'] = trial.time_stamp['Q4'];
+            timestamp_data['Weight'] = trial.time_stamp['Q4A1'];
             Object.assign(question_data, object4a, object4b);
           } else {
             $('.jspsych-survey-multi-choice-question-weight').addClass('survey-error-after');
@@ -640,12 +655,11 @@ jsPsych.plugins['Demographics'] = (function () {
           if (match.attributes['data-name'].value !== '') {
             name = match.attributes['data-name'].value;
           }
+          timestamp_data[name] = trial.time_stamp['Q' + (i+1)];
           obje[name] = val;
           Object.assign(question_data, obje);
         }
 
-
-  
         if ($(".survey-error-after").length < 1) {
           // kill keyboard listeners
           if (typeof keyboardListener !== 'undefined') {
@@ -657,6 +671,7 @@ jsPsych.plugins['Demographics'] = (function () {
           var trial_data = {
             "stage_name": JSON.stringify(plugin.info.stage_name),
             "responses": JSON.stringify(question_data),
+            "timestamp": JSON.stringify(timestamp_data),
             "question_order": JSON.stringify(question_order),
             "events": JSON.stringify(response.trial_events)
           };
