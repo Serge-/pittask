@@ -97,6 +97,7 @@ jsPsych.plugins['LSAS'] = (function () {
       var response = {
         trial_events: []
       };
+      var timestamp_onload = jsPsych.totalTime();
   
       response.trial_events.push({
         "event_type": trial.event_type,
@@ -281,7 +282,7 @@ jsPsych.plugins['LSAS'] = (function () {
 
           if(info.el) {
             if(info.el.dataset.timeStamp) {
-              trial.time_stamp[info.el.dataset.timeStamp] = jsPsych.totalTime();
+              trial.time_stamp[info.el.dataset.timeStamp] = jsPsych.totalTime() - timestamp_onload;
             }
             if(info.el.dataset.questionNumber) {
               response.trial_events.push({

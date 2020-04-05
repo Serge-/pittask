@@ -97,6 +97,7 @@ jsPsych.plugins['PC-PTSD-5'] = (function() {
     var response = {
       trial_events: []
     };
+    var timestamp_onload = jsPsych.totalTime();
 
     response.trial_events.push({
       "event_type": trial.event_type,
@@ -242,7 +243,7 @@ jsPsych.plugins['PC-PTSD-5'] = (function() {
 
         if(info.el) {
           if(info.el.dataset.timeStamp) {
-            trial.time_stamp[info.el.dataset.timeStamp] = jsPsych.totalTime();
+            trial.time_stamp[info.el.dataset.timeStamp] = jsPsych.totalTime() - timestamp_onload;
           }
           if(info.el.dataset.questionNumber) {
             response.trial_events.push({
@@ -325,11 +326,11 @@ jsPsych.plugins['PC-PTSD-5'] = (function() {
           name = match.attributes['data-name'].value;
         }
 
-        val === 'NA' ? timestamp_data[name] = 0 : timestamp_data[name] = trial.time_stamp['Q' + (i+1)];
+        timestamp_data[name] = val === 'NA' ? val : trial.time_stamp['Q' + (i+1)];
         obje[name] = val; 
         Object.assign(question_data, obje);
       }
-      
+
       if ($(".survey-error-after").length < 1) {
         // kill keyboard listeners
         if (typeof keyboardListener !== 'undefined') {

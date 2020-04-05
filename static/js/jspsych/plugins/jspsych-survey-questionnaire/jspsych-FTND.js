@@ -92,6 +92,7 @@ jsPsych.plugins['FTND'] = (function () {
       var plugin_id_name = "jspsych-survey-multi-choice-FTND";
   
       var html = "";
+      var timestamp_onload = jsPsych.totalTime();
   
       // store response
       var response = {
@@ -252,7 +253,7 @@ jsPsych.plugins['FTND'] = (function () {
 
           if(info.el) {
             if(info.el.dataset.timeStamp) {
-              trial.time_stamp[info.el.dataset.timeStamp] = jsPsych.totalTime();
+              trial.time_stamp[info.el.dataset.timeStamp] = jsPsych.totalTime() - timestamp_onload;
             }
             if(info.el.dataset.questionNumber) {
               response.trial_events.push({
@@ -373,14 +374,7 @@ jsPsych.plugins['FTND'] = (function () {
             5: 'NA',
             6: 'NA',
         }
-        timestamp_data = {
-            1: 0,
-            2: 0,
-            3: 0,
-            4: 0,
-            5: 0,
-            6: 0,
-        }
+        timestamp_data = question_data;
         // kill keyboard listeners
         if (typeof keyboardListener !== 'undefined') {
             jsPsych.pluginAPI.cancelKeyboardResponse(keyboardListener);

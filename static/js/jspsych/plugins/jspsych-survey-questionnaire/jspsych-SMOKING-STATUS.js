@@ -92,6 +92,7 @@ jsPsych.plugins['Smoking-Status'] = (function () {
       var plugin_id_name = "jspsych-survey-multi-choice-smoking-status";
   
       var html = "";
+      var timestamp_onload = jsPsych.totalTime();
   
       // store response
       var response = {
@@ -239,7 +240,7 @@ jsPsych.plugins['Smoking-Status'] = (function () {
 
           if(info.el) {
             if(info.el.dataset.timeStamp) {
-              trial.time_stamp[info.el.dataset.timeStamp] = jsPsych.totalTime();
+              trial.time_stamp[info.el.dataset.timeStamp] = jsPsych.totalTime() - timestamp_onload;
             }
             if(info.el.dataset.questionNumber) {
               response.trial_events.push({

@@ -92,6 +92,7 @@ jsPsych.plugins['SDS'] = (function () {
       var plugin_id_name = "jspsych-survey-multi-choice-SDS";
   
       var html = "";
+      var timestamp_onload = jsPsych.totalTime();
   
       // store response
       var response = {
@@ -266,7 +267,6 @@ jsPsych.plugins['SDS'] = (function () {
 
           // add question text
           html += '<div style="text-align: left;"><h3 class="question-title">' + question.title + '</h3><p style="position: relative;">' + question.prompt ;
-          // html += '<div style="display: flex; width: 60%; justify-content: space-around;">';
 
           // create option radio buttons
           html += '<span style="position: absolute; right: 0;">';
@@ -278,14 +278,7 @@ jsPsych.plugins['SDS'] = (function () {
             var option_id_name = "jspsych-survey-multi-choice-option-" + question_id + "-" + j;
             var input_name = 'jspsych-survey-multi-choice-response-' + question_id;
             var input_id = 'jspsych-survey-multi-choice-response-' + question_id + '-' + j;
-
-            // var required_attr = question.required ? 'required' : '';
-
-            // add radio button container
-            // html += '<div id="' + option_id_name + '" class="jspsych-survey-multi-choice-option">';
-            // html += '<label class="jspsych-survey-multi-choice-text jspsych-survey-highlight hidden" for="' + input_id + '">' + question.options[j] + '</label>';
             html += '<option type="select" data-time-stamp="Q' + (i+1) + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" name="' + input_name + '" id="' + input_id + '" value="' + question.options[j] + '" ' + required_attr + '>' + question.options[j] + '</option>';
-            // html += '</div>';
           }
           html += '</select>';
           html += '</p></span>';
@@ -338,7 +331,7 @@ jsPsych.plugins['SDS'] = (function () {
 
           if(info.el) {
             if(info.el.dataset.timeStamp) {
-              trial.time_stamp[info.el.dataset.timeStamp] = jsPsych.totalTime();
+              trial.time_stamp[info.el.dataset.timeStamp] = jsPsych.totalTime() - timestamp_onload;
             }
             if(info.el.dataset.questionNumber) {
               response.trial_events.push({
@@ -377,7 +370,7 @@ jsPsych.plugins['SDS'] = (function () {
       $("select").change(function() {
         var questionNumber = $(this)['context'].selectedOptions[0].getAttribute('data-question-number');
         var questionTimestamp = $(this)['context'].selectedOptions[0].getAttribute('data-time-stamp');
-        trial.time_stamp[questionTimestamp] = jsPsych.totalTime();
+        trial.time_stamp[questionTimestamp] = jsPsych.totalTime() - timestamp_onload;
         response.trial_events.push({
           "event_type": "answer displayed",
           "event_raw_details": questionNumber,
@@ -400,23 +393,9 @@ jsPsych.plugins['SDS'] = (function () {
           var id = (i + 1);
           var val_not_working;
           
-          if(i === 0) {
-            if (match.querySelector(".input-not-working input[type=radio]:checked") !== null) {
-              val_not_working = {
-                'Checkbox question.: I have not worked/studies at all during the past week...' : 'Checked'
-              }
-              timestamp_data['Checkbox question.: I have not worked/studies at all during the past week...'] = trial.time_stamp['Q1S1'];
-            } else {
-              val_not_working = {
-              'Checkbox question.: I have not worked/studies at all during the past week...': 'NA'
-              }
-              timestamp_data['Checkbox question.: I have not worked/studies at all during the past week...'] = 0;
-            }
-          }
           if (match.querySelector(".jspsych-survey-multi-choice-option input[type=radio]:checked") !== null) {
             var val = match.querySelector(".jspsych-survey-multi-choice-option input[type=radio]:checked").value;
             $(match).find('.question-title').removeClass('survey-error-after');
-
           } else {
             var val = "";
             $(match).find('.question-title').addClass('survey-error-after');
@@ -430,6 +409,24 @@ jsPsych.plugins['SDS'] = (function () {
           }
           obje[name] = val;
           timestamp_data[name] = trial.time_stamp['Q' + (i+1)];
+          if(i === 0) {
+            if (match.querySelector(".input-not-working input[type=radio]:checked") !== null) {
+              val_not_working = {
+                'I have not worked/studies' : 'сhecked'
+              }
+              timestamp_data['I have not worked/studies'] = trial.time_stamp['Q1S1'];
+              $('#jspsych-survey-multi-choice-0').find('.question-title').removeClass('survey-error-after');
+              var active_item = $('#jspsych-survey-multi-choice-0').find('.bg-primary');
+              $(active_item).removeClass('bg-primary');
+              obje[name] = 'NA';
+              timestamp_data[name] = 'NA'
+            } else {
+              val_not_working = {
+              'I have not worked/studies': 'not checked'
+              }
+              timestamp_data['I have not worked/studies'] = 'NA';
+            }
+          }
           Object.assign(question_data, obje, val_not_working);
         }
         

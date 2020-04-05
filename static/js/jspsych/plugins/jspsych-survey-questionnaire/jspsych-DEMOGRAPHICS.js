@@ -92,6 +92,7 @@ jsPsych.plugins['Demographics'] = (function () {
       var plugin_id_name = "jspsych-survey-multi-choice";
   
       var html = "";
+      var timestamp_onload = jsPsych.totalTime();
   
       // store response
       var response = {
@@ -443,7 +444,7 @@ jsPsych.plugins['Demographics'] = (function () {
 
           if(info.el) {
             if(info.el.dataset.timeStamp) {
-              trial.time_stamp[info.el.dataset.timeStamp] = jsPsych.totalTime();
+              trial.time_stamp[info.el.dataset.timeStamp] = jsPsych.totalTime() - timestamp_onload;
             }
             if(info.el.dataset.questionNumber) {
               response.trial_events.push({
@@ -522,7 +523,7 @@ jsPsych.plugins['Demographics'] = (function () {
               '2b. Age (months)': $("input[name='2b. Age (months)']").val() ? $("input[name='2b. Age (months)']").val() : 'NA'
             };
             timestamp_data['2a. Age (years)'] = trial.time_stamp['Q2'];
-            timestamp_data['2b. Age (months)'] = trial.time_stamp['Q2'];
+            timestamp_data['2b. Age (months)'] = $("input[name='2b. Age (months)']").val() ? trial.time_stamp['Q2'] : 'NA'
             Object.assign(question_data, object2a, object2b);
           } else {
             $('.jspsych-survey-multi-choice-question-age').addClass('survey-error-after');
@@ -580,9 +581,9 @@ jsPsych.plugins['Demographics'] = (function () {
                   var object3c = {
                     '3c. Height (inches)': $("input[name='3c. Height (inches)']").val() ? $("input[name='3c. Height (inches)']").val() : 'NA'
                   };
-                  timestamp_data['3a. Height (cm)'] =  $("input[name='3a. Height (cm)']").val() ? trial.time_stamp['Q3'] : 0;
-                  timestamp_data['3b. Height (feet)'] = $("input[name='3b. Height (feet)']").val() ? trial.time_stamp['Q3'] : 0;
-                  timestamp_data['3c. Height (inches)'] = $("input[name='3c. Height (inches)']").val() ? trial.time_stamp['Q3'] : 0;
+                  timestamp_data['3a. Height (cm)'] =  $("input[name='3a. Height (cm)']").val() ? trial.time_stamp['Q3'] : 'NA';
+                  timestamp_data['3b. Height (feet)'] = $("input[name='3b. Height (feet)']").val() ? trial.time_stamp['Q3'] : 'NA';
+                  timestamp_data['3c. Height (inches)'] = $("input[name='3c. Height (inches)']").val() ? trial.time_stamp['Q3'] : 'NA';
                   Object.assign(question_data, object3a, object3b, object3c);
                 }
             } else {
@@ -620,13 +621,13 @@ jsPsych.plugins['Demographics'] = (function () {
             $('.moda__weight-incomplete').remove();
             $(label).removeClass('survey-error-after');
             var object4a = {
-              'Weight (unit)': weight_radio_value
+              '4a Weight(kg)': weight_radio_value === 'kg' ? $("input[name='4b. Weight']").val() : 'NA' 
             }
             var object4b = {
-              'Weight': $("input[name='4b. Weight']").val() 
+              '4b Weight (lbs)': weight_radio_value === 'pounds' ? $("input[name='4b. Weight']").val() : 'NA'
             }
-            timestamp_data['Weight (unit)'] = trial.time_stamp['Q4'];
-            timestamp_data['Weight'] = trial.time_stamp['Q4A1'];
+            timestamp_data['4a Weight(kg)'] = weight_radio_value === 'kg' ? trial.time_stamp['Q4'] : 'NA';
+            timestamp_data['4b Weight (lbs)'] =  weight_radio_value === 'pounds' ? trial.time_stamp['Q4'] : 'NA';
             Object.assign(question_data, object4a, object4b);
           } else {
             $('.jspsych-survey-multi-choice-question-weight').addClass('survey-error-after');

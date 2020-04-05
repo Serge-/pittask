@@ -1527,5 +1527,9 @@ var SDS = {
             horizontal: false,
             name: 'DAYS UNPRODUCTIVE**'
         },
-    ]
+    ],
+    button_label: 'submit answers',
+    event_type: 'questions appears',
+    event_raw_details: "SDS, options",
+    event_converted_details: 'SDS questions appears'
 }
