@@ -12,8 +12,8 @@ library(jsonlite)
 library(data.table)
 library(stringr)
 
-input_file <- "/home/serge/Desktop/participants.db" #"~/Desktop/Upwork/Amir/pittask/participants.db"
-output_folder <- "/home/serge/Desktop/Participants" #~/Desktop/Upwork/Amir/pittask/Participants"
+input_file <- "/media/serge/Data/Upwork/Iain/pittask/participants.db" #"~/Desktop/Upwork/Amir/pittask/participants.db"
+output_folder <- "/media/serge/Data/Upwork/Iain/pittask/Participants" #~/Desktop/Upwork/Amir/pittask/Participants"
 
 # Struct ------------------------------------------------------------------
 
@@ -442,6 +442,7 @@ if(isClass(query))
     
     json <- fromJSON(data$datastring[i], T, T)
     dateTime <- formatDateTime(json$data$dateTime)
+    dateTime_ms <- json$data$dateTime
     trialdata <- json$data$trialdata
     
     PIN <- str_pad(toString(i), 5, "left", pad = "0")
@@ -489,10 +490,15 @@ if(isClass(query))
       
       date <- format(as.Date(dateTime[demographics_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[demographics_index]))
-      
+      time_elapsed <- trialdata$time_elapsed[demographics_index]
+      time_ms <- dateTime_ms[demographics_index] - time_elapsed
+
       for(j in 1:length(demographics_responses)){
         Demographics <- rbindlist(list(Demographics, list(
-          PIN, complete, date, time, 
+          PIN, complete, date,
+          ifelse(demographics_timestamps[[j]] == 'NA', 'NA', as.character(as.ITime(formatDateTime(time_ms + as.numeric(
+            if(demographics_timestamps[[j]] != 'NA') demographics_timestamps[[j]]
+          ))))),
           demographics_timestamps[[j]],
           country, commit, version,
           names(demographics_responses)[j],
@@ -511,10 +517,14 @@ if(isClass(query))
       
       date <- format(as.Date(dateTime[ocir_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[ocir_index]))
+
+      time_elapsed <- trialdata$time_elapsed[ocir_index]
+      time_ms <- dateTime_ms[ocir_index] - time_elapsed
       
       for(j in 1:length(ocir_responses)){
         OCI_R <- rbindlist(list(OCI_R, list(
-          PIN, complete, date, time, 
+          PIN, complete, date,
+          as.character(as.ITime(formatDateTime(time_ms + as.numeric(ocir_timestamps[[j]])))),
           ocir_timestamps[[j]],
           country, commit, version,
           names(ocir_responses)[j],
@@ -533,10 +543,14 @@ if(isClass(query))
       
       date <- format(as.Date(dateTime[moves_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[moves_index]))
+
+      time_elapsed <- trialdata$time_elapsed[moves_index]
+      time_ms <- dateTime_ms[moves_index] - time_elapsed
       
       for(j in 1:length(moves_responses)){
         MOVES <- rbindlist(list(MOVES, list(
-          PIN, complete, date, time, 
+          PIN, complete, date,
+          as.character(as.ITime(formatDateTime(time_ms + as.numeric(moves_timestamps[[j]])))),
           moves_timestamps[[j]],
           country, commit, version,
           names(moves_responses)[j],
@@ -555,10 +569,14 @@ if(isClass(query))
       
       date <- format(as.Date(dateTime[dass_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[dass_index]))
+
+      time_elapsed <- trialdata$time_elapsed[dass_index]
+      time_ms <- dateTime_ms[dass_index] - time_elapsed
       
       for(j in 1:length(dass_responses)){
         DASS <- rbindlist(list(DASS, list(
-          PIN, complete, date, time, 
+          PIN, complete, date,
+          as.character(as.ITime(formatDateTime(time_ms + as.numeric(dass_timestamps[[j]])))),
           dass_timestamps[[j]],
           country, commit, version,
           names(dass_responses)[j],
@@ -577,10 +595,14 @@ if(isClass(query))
       
       date <- format(as.Date(dateTime[asrs5_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[asrs5_index]))
+
+      time_elapsed <- trialdata$time_elapsed[asrs5_index]
+      time_ms <- dateTime_ms[asrs5_index] - time_elapsed
       
       for(j in 1:length(asrs5_responses)){
         ASRS5 <- rbindlist(list(ASRS5, list(
-          PIN, complete, date, time, 
+          PIN, complete, date,
+          as.character(as.ITime(formatDateTime(time_ms + as.numeric(asrs5_timestamps[[j]])))),
           asrs5_timestamps[[j]],
           country, commit, version,
           names(asrs5_responses)[j],
@@ -600,9 +622,13 @@ if(isClass(query))
       date <- format(as.Date(dateTime[eat26_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[eat26_index]))
       
+      time_elapsed <- trialdata$time_elapsed[eat26_index]
+      time_ms <- dateTime_ms[eat26_index] - time_elapsed
+
       for(j in 1:length(eat26_responses)){
         EAT_26 <- rbindlist(list(EAT_26, list(
-          PIN, complete, date, time, 
+          PIN, complete, date,
+          as.character(as.ITime(formatDateTime(time_ms + as.numeric(eat26_timestamps[[j]])))),
           eat26_timestamps[[j]],
           country, commit, version,
           names(eat26_responses)[j],
@@ -618,13 +644,17 @@ if(isClass(query))
     if(length(raads14_index) != 0){
       raads14_responses <- fromJSON(trialdata[raads14_index,]$responses)
       raads14_timestamps <- fromJSON(trialdata[raads14_index,]$timestamp)
+
+      time_elapsed <- trialdata$time_elapsed[raads14_index]
+      time_ms <- dateTime_ms[raads14_index] - time_elapsed
       
       date <- format(as.Date(dateTime[raads14_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[raads14_index]))
       
       for(j in 1:length(raads14_responses)){
         RAADS_14 <- rbindlist(list(RAADS_14, list(
-          PIN, complete, date, time, 
+          PIN, complete, date,
+          as.character(as.ITime(formatDateTime(time_ms + as.numeric(raads14_timestamps[[j]])))),
           raads14_timestamps[[j]],
           country, commit, version,
           names(raads14_responses)[j],
@@ -643,10 +673,14 @@ if(isClass(query))
       
       date <- format(as.Date(dateTime[phq9_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[phq9_index]))
+
+      time_elapsed <- trialdata$time_elapsed[phq9_index]
+      time_ms <- dateTime_ms[phq9_index] - time_elapsed
       
       for(j in 1:length(phq9_responses)){
         PHQ_9 <- rbindlist(list(PHQ_9, list(
-          PIN, complete, date, time, 
+          PIN, complete, date,
+          as.character(as.ITime(formatDateTime(time_ms + as.numeric(phq9_timestamps[[j]])))),
           phq9_timestamps[[j]],
           country, commit, version,
           names(phq9_responses)[j],
@@ -665,10 +699,14 @@ if(isClass(query))
       
       date <- format(as.Date(dateTime[gad7_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[gad7_index]))
+
+      time_elapsed <- trialdata$time_elapsed[gad7_index]
+      time_ms <- dateTime_ms[gad7_index] - time_elapsed
       
       for(j in 1:length(gad7_responses)){
         GAD_7 <- rbindlist(list(GAD_7, list(
-          PIN, complete, date, time, 
+          PIN, complete, date, 
+          as.character(as.ITime(formatDateTime(time_ms + as.numeric(gad7_timestamps[[j]])))),
           gad7_timestamps[[j]],
           country, commit, version,
           names(gad7_responses)[j],
@@ -688,9 +726,13 @@ if(isClass(query))
       date <- format(as.Date(dateTime[asrm_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[asrm_index]))
       
+      time_elapsed <- trialdata$time_elapsed[asrm_index]
+      time_ms <- dateTime_ms[asrm_index] - time_elapsed
+
       for(j in 1:length(asrm_responses)){
         ASRM <- rbindlist(list(ASRM, list(
-          PIN, complete, date, time, 
+          PIN, complete, date,
+          as.character(as.ITime(formatDateTime(time_ms + as.numeric(asrm_timestamps[[j]])))),
           asrm_timestamps[[j]],
           country, commit, version,
           names(asrm_responses)[j],
@@ -709,10 +751,16 @@ if(isClass(query))
       
       date <- format(as.Date(dateTime[pc_ptsd_5_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[pc_ptsd_5_index]))
+
+      time_elapsed <- trialdata$time_elapsed[pc_ptsd_5_index]
+      time_ms <- dateTime_ms[pc_ptsd_5_index] - time_elapsed
       
       for(j in 1:length(pc_ptsd_5_responses)){
         PC_PTSD_5 <- rbindlist(list(PC_PTSD_5, list(
-          PIN, complete, date, time, 
+          PIN, complete, date,
+          ifelse(pc_ptsd_5_timestamps[[j]] == 'NA', 'NA', as.character(as.ITime(formatDateTime(time_ms + as.numeric(
+            if(pc_ptsd_5_timestamps[[j]] != 'NA') pc_ptsd_5_timestamps[[j]]
+          ))))), 
           pc_ptsd_5_timestamps[[j]],
           country, commit, version,
           names(pc_ptsd_5_responses)[j],
@@ -732,9 +780,13 @@ if(isClass(query))
       date <- format(as.Date(dateTime[prime_r_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[prime_r_index]))
       
+      time_elapsed <- trialdata$time_elapsed[prime_r_index]
+      time_ms <- dateTime_ms[prime_r_index] - time_elapsed
+
       for(j in 1:length(prime_r_responses)){
         PRIME_R <- rbindlist(list(PRIME_R, list(
-          PIN, complete, date, time, 
+          PIN, complete, date,
+          as.character(as.ITime(formatDateTime(time_ms + as.numeric(prime_r_timestamps[[j]])))),
           prime_r_timestamps[[j]],
           country, commit, version,
           names(prime_r_responses)[j],
@@ -753,10 +805,14 @@ if(isClass(query))
       
       date <- format(as.Date(dateTime[audit_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[audit_index]))
-      
+
+      time_elapsed <- trialdata$time_elapsed[audit_index]
+      time_ms <- dateTime_ms[audit_index] - time_elapsed
+
       for(j in 1:length(audit_responses)){
         AUDIT <- rbindlist(list(AUDIT, list(
-          PIN, complete, date, time, 
+          PIN, complete, date,
+          as.character(as.ITime(formatDateTime(time_ms + as.numeric(audit_index_timestamps[[j]])))),
           audit_index_timestamps[[j]],
           country, commit, version,
           names(audit_responses)[j],
@@ -776,9 +832,13 @@ if(isClass(query))
       date <- format(as.Date(dateTime[pgsi_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[pgsi_index]))
       
+      time_elapsed <- trialdata$time_elapsed[pgsi_index]
+      time_ms <- dateTime_ms[pgsi_index] - time_elapsed
+
       for(j in 1:length(pgsi_responses)){
         PGSI <- rbindlist(list(PGSI, list(
-          PIN, complete, date, time, 
+          PIN, complete, date,
+          as.character(as.ITime(formatDateTime(time_ms + as.numeric(pgsi_timestamps[[j]])))),
           pgsi_timestamps[[j]],
           country, commit, version,
           names(pgsi_responses)[j],
@@ -797,10 +857,14 @@ if(isClass(query))
       
       date <- format(as.Date(dateTime[yiat_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[yiat_index]))
-      
+
+      time_elapsed <- trialdata$time_elapsed[yiat_index]
+      time_ms <- dateTime_ms[yiat_index] - time_elapsed
+
       for(j in 1:length(yiat_responses)){
         YIAT <- rbindlist(list(YIAT, list(
-          PIN, complete, date, time, 
+          PIN, complete, date,
+          as.character(as.ITime(formatDateTime(time_ms + as.numeric(yiat_timestamps[[j]])))),
           yiat_timestamps[[j]],
           country, commit, version,
           names(yiat_responses)[j],
@@ -819,10 +883,14 @@ if(isClass(query))
       
       date <- format(as.Date(dateTime[SmokingStatus_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[SmokingStatus_index]))
-      
+
+      time_elapsed <- trialdata$time_elapsed[SmokingStatus_index]
+      time_ms <- dateTime_ms[SmokingStatus_index] - time_elapsed
+
       for(j in 1:length(SmokingStatus_responses)){
         SmokingStatus <- rbindlist(list(SmokingStatus, list(
-          PIN, complete, date, time, 
+          PIN, complete, date,
+          as.character(as.ITime(formatDateTime(time_ms + as.numeric(SmokingStatus_timestamps[[j]])))),
           SmokingStatus_timestamps[[j]],
           country, commit, version,
           names(SmokingStatus_responses)[j],
@@ -841,10 +909,16 @@ if(isClass(query))
       
       date <- format(as.Date(dateTime[ftnd_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[ftnd_index]))
-      
+
+      time_elapsed <- trialdata$time_elapsed[ftnd_index]
+      time_ms <- dateTime_ms[ftnd_index] - time_elapsed
+
       for(j in 1:length(ftnd_responses)){
         FTND <- rbindlist(list(FTND, list(
-          PIN, complete, date, time, 
+          PIN, complete, date,
+          ifelse(ftnd_timestamps[[j]] == 'NA', 'NA', as.character(as.ITime(formatDateTime(time_ms + as.numeric(
+            if(ftnd_timestamps[[j]] != 'NA') ftnd_timestamps[[j]]
+          ))))), 
           ftnd_timestamps[[j]],
           country, commit, version,
           names(ftnd_responses)[j],
@@ -863,10 +937,14 @@ if(isClass(query))
       
       date <- format(as.Date(dateTime[isi_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[isi_index]))
-      
+
+      time_elapsed <- trialdata$time_elapsed[isi_index]
+      time_ms <- dateTime_ms[isi_index] - time_elapsed
+
       for(j in 1:length(isi_responses)){
         ISI <- rbindlist(list(ISI, list(
-          PIN, complete, date, time, 
+          PIN, complete, date,
+          as.character(as.ITime(formatDateTime(time_ms + as.numeric(isi_timestamps[[j]])))),
           isi_timestamps[[j]],
           country, commit, version,
           names(isi_responses)[j],
@@ -885,10 +963,14 @@ if(isClass(query))
       
       date <- format(as.Date(dateTime[pid5bf_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[pid5bf_index]))
-      
+
+      time_elapsed <- trialdata$time_elapsed[pid5bf_index]
+      time_ms <- dateTime_ms[pid5bf_index] - time_elapsed
+
       for(j in 1:length(pid5bf_responses)){
         PID_5_BF <- rbindlist(list(PID_5_BF, list(
-          PIN, complete, date, time, 
+          PIN, complete, date,
+          as.character(as.ITime(formatDateTime(time_ms + as.numeric(pid5bf_timestamps[[j]])))),
           pid5bf_timestamps[[j]],
           country, commit, version,
           names(pid5bf_responses)[j],
@@ -907,10 +989,14 @@ if(isClass(query))
       
       date <- format(as.Date(dateTime[lsas_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[lsas_index]))
-      
+ 
+      time_elapsed <- trialdata$time_elapsed[lsas_index]
+      time_ms <- dateTime_ms[lsas_index] - time_elapsed
+     
       for(j in 1:length(lsas_responses)){
         LSAS <- rbindlist(list(LSAS, list(
-          PIN, complete, date, time, 
+          PIN, complete, date,
+          as.character(as.ITime(formatDateTime(time_ms + as.numeric(lsas_timestamps[[j]])))),
           lsas_timestamps[[j]],
           country, commit, version,
           names(lsas_responses)[j],
@@ -951,10 +1037,16 @@ if(isClass(query))
       
       date <- format(as.Date(dateTime[sds_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[sds_index]))
-      
+ 
+      time_elapsed <- trialdata$time_elapsed[sds_index]
+      time_ms <- dateTime_ms[sds_index] - time_elapsed
+     
       for(j in 1:length(sds_responses)){
         SDS <- rbindlist(list(SDS, list(
-          PIN, complete, date, time, 
+          PIN, complete, date,
+          ifelse(sds_timestamps[[j]] == 'NA', 'NA', as.character(as.ITime(formatDateTime(time_ms + as.numeric(
+            if(sds_timestamps[[j]] != 'NA') sds_timestamps[[j]]
+          ))))), 
           sds_timestamps[[j]],
           country, commit, version,
           names(sds_responses)[j],
@@ -1059,10 +1151,15 @@ if(isClass(query))
           date <- format(as.Date(dateTime[j]), "%d-%m-%Y")
           time <- as.character(as.ITime(dateTime[j]))
           events <- fromJSON(trialdata$events[j])
-          
+
+          time_elapsed <- trialdata$time_elapsed[j]
+          time_ms <- dateTime_ms[j] - time_elapsed
+
           for(e in 1:nrow(events)){
             CompleteData <- rbindlist(list(CompleteData, list(
-              PIN, complete, date, time, events$timestamp[e], country, timezone,
+              PIN, complete, date, 
+              as.character(as.ITime(formatDateTime(time_ms + events$timestamp[e]))),
+              events$time_elapsed[e], country, timezone,
               gsub('"', "", trialdata$stage[j]), version, commit, events$event_type[e],
               ifelse(is.null(events$event_raw_details[e]), NA, events$event_raw_details[e]),
               events$event_converted_details[e]

@@ -103,7 +103,8 @@ jsPsych.plugins['Smoking-Status'] = (function () {
         "event_type": trial.event_type,
         "event_raw_details": trial.event_raw_details,
         "event_converted_details": trial.event_converted_details,
-        "timestamp": jsPsych.totalTime()
+        "timestamp": jsPsych.totalTime(),
+        "time_elapsed": jsPsych.totalTime() - timestamp_onload
       });
   
       $('body').prepend(
@@ -235,7 +236,8 @@ jsPsych.plugins['Smoking-Status'] = (function () {
             "event_type": "key press",
             "event_raw_details": info.key,
             "event_converted_details": jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(info.key) + ' key pressed',
-            "timestamp": jsPsych.totalTime()
+            "timestamp": jsPsych.totalTime(),
+            "time_elapsed": jsPsych.totalTime() - timestamp_onload
           });
 
           if(info.el) {
@@ -247,7 +249,8 @@ jsPsych.plugins['Smoking-Status'] = (function () {
                 "event_type": "answer displayed",
                 "event_raw_details": info.el.dataset.questionNumber,
                 "event_converted_details": info.el.dataset.questionNumber + ' answer displayed',
-                "timestamp": jsPsych.totalTime()
+                "timestamp": jsPsych.totalTime(),
+                "time_elapsed": jsPsych.totalTime() - timestamp_onload
               });
             }
             if(info.el.type === 'submit') {
@@ -255,7 +258,8 @@ jsPsych.plugins['Smoking-Status'] = (function () {
                 "event_type": "button clicked",
                 "event_raw_details": 'Submit',
                 "event_converted_details": '"Submit" selected',
-                "timestamp": jsPsych.totalTime()
+                "timestamp": jsPsych.totalTime(),
+                "time_elapsed": jsPsych.totalTime() - timestamp_onload
               });
             }
           }
@@ -264,7 +268,8 @@ jsPsych.plugins['Smoking-Status'] = (function () {
             "event_type": "key release",
             "event_raw_details": info.key_release,
             "event_converted_details": jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(info.key_release) + ' key released',
-            "timestamp": jsPsych.totalTime()
+            "timestamp": jsPsych.totalTime(),
+            "time_elapsed": jsPsych.totalTime() - timestamp_onload
           });
         }
       }

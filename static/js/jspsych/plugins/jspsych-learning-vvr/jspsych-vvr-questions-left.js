@@ -114,13 +114,15 @@ jsPsych.plugins['survey-vvr-questions-left'] = (function() {
         var response = {
             trial_events: []
         };
+        var timestamp_onload = jsPsych.totalTime();
 
 
         response.trial_events.push({
             "event_type": trial.details.a.event_type,
             "event_raw_details": trial.details.a.event_raw_details,
             "event_converted_details": trial.details.a.event_converted_details,
-            "timestamp": jsPsych.totalTime()
+            "timestamp": jsPsych.totalTime(),
+            "time_elapsed": jsPsych.totalTime() - timestamp_onload
         });
 
         
@@ -144,7 +146,8 @@ jsPsych.plugins['survey-vvr-questions-left'] = (function() {
                     "event_type": 'VAS answer has been made',
                     "event_raw_details": (ui.value).toFixed(2),
                     "event_converted_details": (ui.value).toFixed(2) + ' answer has been made',
-                    "timestamp": jsPsych.totalTime()
+                    "timestamp": jsPsych.totalTime(),
+                    "time_elapsed": jsPsych.totalTime() - timestamp_onload
                 });
             }
         })
@@ -155,7 +158,8 @@ jsPsych.plugins['survey-vvr-questions-left'] = (function() {
                 "event_type": 'button click',
                 "event_raw_details": '\'submit button\' was clicked',
                 "event_converted_details": '\'submit button\' was clicked',
-                "timestamp": jsPsych.totalTime()
+                "timestamp": jsPsych.totalTime(),
+                "time_elapsed": jsPsych.totalTime() - timestamp_onload
             });
             if(button_trigger) {
                 end_trial();
@@ -179,7 +183,8 @@ jsPsych.plugins['survey-vvr-questions-left'] = (function() {
                 "event_type": trial.details.b.event_type,
                 "event_raw_details": trial.details.b.event_raw_details,
                 "event_converted_details": trial.details.b.event_converted_details,
-                "timestamp": jsPsych.totalTime()
+                "timestamp": jsPsych.totalTime(),
+                "time_elapsed": jsPsych.totalTime() - timestamp_onload
             });
         }
 
@@ -192,14 +197,16 @@ jsPsych.plugins['survey-vvr-questions-left'] = (function() {
                   "event_type": "key press",
                   "event_raw_details": info.key,
                   "event_converted_details": jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(info.key) + ' key pressed',
-                  "timestamp": jsPsych.totalTime()
+                  "timestamp": jsPsych.totalTime(),
+                  "time_elapsed": jsPsych.totalTime() - timestamp_onload
                 });
             } else {
                 response.trial_events.push({
                   "event_type": "key release",
                   "event_raw_details": info.key_release,
                   "event_converted_details": jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(info.key_release) + ' key released',
-                  "timestamp": jsPsych.totalTime()
+                  "timestamp": jsPsych.totalTime(),
+                  "time_elapsed": jsPsych.totalTime() - timestamp_onload
                 });
             }
  

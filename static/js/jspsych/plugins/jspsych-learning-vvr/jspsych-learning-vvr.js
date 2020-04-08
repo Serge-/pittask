@@ -51,6 +51,7 @@ jsPsych.plugins['survey-vvr'] = (function() {
         var response = {
           trial_events: []
         };
+        var timestamp_onload = jsPsych.totalTime();
           
         var new_html = '<div id="jspsych-stimulus"><img class="vending-machine" src='+ VENDING_MACHINE +'/><div class="outcome-container"></div></div>';
 
@@ -60,7 +61,8 @@ jsPsych.plugins['survey-vvr'] = (function() {
           "event_type": 'image appears',
           "event_raw_details": VENDING_MACHINE,
           "event_converted_details": 'white vending machine appears',
-          "timestamp": jsPsych.totalTime()
+          "timestamp": jsPsych.totalTime(),
+          "time_elapsed": jsPsych.totalTime() - timestamp_onload
         });
 
         // outcome presentation logic
@@ -77,6 +79,7 @@ jsPsych.plugins['survey-vvr'] = (function() {
               $('.outcome-container').html('<img class="outcome" src="'+ OUTCOME[counter_balancing[0][outcome_present]] +'"/>');
               response.trial_events.push({
                 "timestamp": jsPsych.totalTime(),
+                "time_elapsed": jsPsych.totalTime() - timestamp_onload,
                 "event_type": 'image appears',
                 "event_raw_details": OUTCOME[counter_balancing[0][outcome_present]],
                 "event_converted_details": counter_balancing[0][outcome_present] + ' image appears'
@@ -123,7 +126,8 @@ jsPsych.plugins['survey-vvr'] = (function() {
                       "event_type": "left tilt",
                       "event_raw_details": shake_left_translateX + "%, " + shake_left_rotate + "deg",
                       "event_converted_details": "vending machine was tilted left " + shake_left_translateX + "%, " + shake_left_rotate + "deg",
-                      "timestamp": jsPsych.totalTime()
+                      "timestamp": jsPsych.totalTime(),
+                      "time_elapsed": jsPsych.totalTime() - timestamp_onload
                     });
                     condition_outcome = 'A1';
 
@@ -142,7 +146,8 @@ jsPsych.plugins['survey-vvr'] = (function() {
                       "event_type": "right tilt",
                       "event_raw_details": shake_right_translateX + "%, " + shake_right_rotate + "deg",
                       "event_converted_details": "vending machine was tilted right " + shake_right_translateX + "%, " + shake_right_rotate + "deg",
-                      "timestamp": jsPsych.totalTime()
+                      "timestamp": jsPsych.totalTime(),
+                      "time_elapsed": jsPsych.totalTime() - timestamp_onload
                     });
 
                     condition_outcome = 'A2';
@@ -158,14 +163,16 @@ jsPsych.plugins['survey-vvr'] = (function() {
                   "event_type": "key press",
                   "event_raw_details": info.key,
                   "event_converted_details": jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(info.key) + ' key pressed',
-                  "timestamp": jsPsych.totalTime()
+                  "timestamp": jsPsych.totalTime(),
+                  "time_elapsed": jsPsych.totalTime() - timestamp_onload
                 });
             } else {
                 response.trial_events.push({
                   "event_type": "key release",
                   "event_raw_details": info.key_release,
                   "event_converted_details": jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(info.key_release) + ' key released',
-                  "timestamp": jsPsych.totalTime()
+                  "timestamp": jsPsych.totalTime(),
+                  "time_elapsed": jsPsych.totalTime() - timestamp_onload
                 });
             }
             

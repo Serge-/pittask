@@ -103,7 +103,8 @@ jsPsych.plugins['SDS'] = (function () {
         "event_type": trial.event_type,
         "event_raw_details": trial.event_raw_details,
         "event_converted_details": trial.event_converted_details,
-        "timestamp": jsPsych.totalTime()
+        "timestamp": jsPsych.totalTime(),
+        "time_elapsed": jsPsych.totalTime() - timestamp_onload
       });
   
       $('body').prepend(
@@ -326,7 +327,8 @@ jsPsych.plugins['SDS'] = (function () {
             "event_type": "key press",
             "event_raw_details": info.key,
             "event_converted_details": jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(info.key) + ' key pressed',
-            "timestamp": jsPsych.totalTime()
+            "timestamp": jsPsych.totalTime(),
+            "time_elapsed": jsPsych.totalTime() - timestamp_onload
           });
 
           if(info.el) {
@@ -338,7 +340,8 @@ jsPsych.plugins['SDS'] = (function () {
                 "event_type": "answer displayed",
                 "event_raw_details": info.el.dataset.questionNumber,
                 "event_converted_details": info.el.dataset.questionNumber + ' answer displayed',
-                "timestamp": jsPsych.totalTime()
+                "timestamp": jsPsych.totalTime(),
+                "time_elapsed": jsPsych.totalTime() - timestamp_onload
               });
             }
             if(info.el.type === 'submit') {
@@ -346,7 +349,8 @@ jsPsych.plugins['SDS'] = (function () {
                 "event_type": "button clicked",
                 "event_raw_details": 'Submit',
                 "event_converted_details": '"Submit" selected',
-                "timestamp": jsPsych.totalTime()
+                "timestamp": jsPsych.totalTime(),
+                "time_elapsed": jsPsych.totalTime() - timestamp_onload
               });
             }
           }
@@ -355,7 +359,8 @@ jsPsych.plugins['SDS'] = (function () {
             "event_type": "key release",
             "event_raw_details": info.key_release,
             "event_converted_details": jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(info.key_release) + ' key released',
-            "timestamp": jsPsych.totalTime()
+            "timestamp": jsPsych.totalTime(),
+            "time_elapsed": jsPsych.totalTime() - timestamp_onload
           });
         }
       }
@@ -375,7 +380,8 @@ jsPsych.plugins['SDS'] = (function () {
           "event_type": "answer displayed",
           "event_raw_details": questionNumber,
           "event_converted_details": questionNumber + ' answer displayed',
-          "timestamp": jsPsych.totalTime()
+          "timestamp": jsPsych.totalTime(),
+          "time_elapsed": jsPsych.totalTime() - timestamp_onload
         });
       });
   
@@ -412,9 +418,9 @@ jsPsych.plugins['SDS'] = (function () {
           if(i === 0) {
             if (match.querySelector(".input-not-working input[type=radio]:checked") !== null) {
               val_not_working = {
-                'I have not worked/studies' : 'сhecked'
+                'Not worked/studies' : 'сhecked'
               }
-              timestamp_data['I have not worked/studies'] = trial.time_stamp['Q1S1'];
+              timestamp_data['Not worked/studies'] = trial.time_stamp['Q1S1'];
               $('#jspsych-survey-multi-choice-0').find('.question-title').removeClass('survey-error-after');
               var active_item = $('#jspsych-survey-multi-choice-0').find('.bg-primary');
               $(active_item).removeClass('bg-primary');
@@ -422,9 +428,9 @@ jsPsych.plugins['SDS'] = (function () {
               timestamp_data[name] = 'NA'
             } else {
               val_not_working = {
-              'I have not worked/studies': 'not checked'
+                'Not worked/studies': 'not checked'
               }
-              timestamp_data['I have not worked/studies'] = 'NA';
+              timestamp_data['Not worked/studies'] = 'NA';
             }
           }
           Object.assign(question_data, obje, val_not_working);

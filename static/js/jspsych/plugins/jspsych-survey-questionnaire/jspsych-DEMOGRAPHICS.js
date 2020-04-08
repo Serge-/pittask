@@ -103,7 +103,8 @@ jsPsych.plugins['Demographics'] = (function () {
         "event_type": trial.event_type,
         "event_raw_details": trial.event_raw_details,
         "event_converted_details": trial.event_converted_details,
-        "timestamp": jsPsych.totalTime()
+        "timestamp": jsPsych.totalTime(),
+        "time_elapsed": jsPsych.totalTime() - timestamp_onload
       });
   
       $('body').prepend(
@@ -243,7 +244,7 @@ jsPsych.plugins['Demographics'] = (function () {
       
               // add radio button container
               html += '<div id="' + option_id_name + '" class="jspsych-survey-multi-choice-option">';
-              html += '<label class="jspsych-survey-multi-choice-text " for="' + input_id + '">' + question.options[j] + '</label>';
+              html += '<label class="jspsych-survey-multi-choice-text" data-time-stamp="Q' + (i+1) + '" for="' + input_id + '">' + question.options[j] + '</label>';
               if(j === 0) {
                   html += '<input type="number" name="2a. Age (years)" data-time-stamp="Q' + (i+1) + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" id="' + input_id + '" class="input-year option-input-age" max="100" ' + required_attr + '></input>';
               } else {
@@ -341,12 +342,12 @@ jsPsych.plugins['Demographics'] = (function () {
 
               html += '<div>';
               html += '<div style="display: flex; justify-content: flex-end; margin: 1rem; width: 120px; padding-right: 1rem; flex-direction: row-reverse;" id="' + option_id_name + '" class="jspsych-survey-multi-choice-option">';
-              html += '<label style="padding-left: 1rem;" class="jspsych-survey-multi-choice-text " for="' + input_id + '">' + question.options[j] + '</label>';
+              html += '<label style="padding-left: 1rem;" class="jspsych-survey-multi-choice-text" data-time-stamp="Q' + (i+1) + '" for="' + input_id + '">' + question.options[j] + '</label>';
               html += '<input type="radio" data-enable="weight" name="weight" value="kg" data-time-stamp="Q' + (i+1) + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" id="' + input_id + '" class="form-radio jspsych-survey-multi-choice-radio-kg" value="' + question.options[j] + '" ' + required_attr + '></input>';
             } else {
               html += '<div>';
               html += '<div style="display: flex; justify-content: flex-end; margin: 1rem; width: 120px; padding-right: 1rem; flex-direction: row-reverse;" id="' + option_id_name + '" class="jspsych-survey-multi-choice-option">';
-              html += '<label style="padding-left: 1rem;" class="jspsych-survey-multi-choice-text " for="' + input_id + '">' + question.options[j] + '</label>';
+              html += '<label style="padding-left: 1rem;" class="jspsych-survey-multi-choice-text" data-time-stamp="Q' + (i+1) + '" for="' + input_id + '">' + question.options[j] + '</label>';
               html += '<input type="radio" data-enable="weight" name="weight" value="pounds" data-time-stamp="Q' + (i+1) + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" id="' + input_id + '" class="form-radio jspsych-survey-multi-choice-radio-pounds" value="' + question.options[j] + '" ' + required_attr + '></input>';
             }
 
@@ -439,7 +440,8 @@ jsPsych.plugins['Demographics'] = (function () {
             "event_type": "key press",
             "event_raw_details": info.key,
             "event_converted_details": jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(info.key) + ' key pressed',
-            "timestamp": jsPsych.totalTime()
+            "timestamp": jsPsych.totalTime(),
+            "time_elapsed": jsPsych.totalTime() - timestamp_onload
           });
 
           if(info.el) {
@@ -451,7 +453,8 @@ jsPsych.plugins['Demographics'] = (function () {
                 "event_type": "answer displayed",
                 "event_raw_details": info.el.dataset.questionNumber,
                 "event_converted_details": info.el.dataset.questionNumber + ' answer displayed',
-                "timestamp": jsPsych.totalTime()
+                "timestamp": jsPsych.totalTime(),
+                "time_elapsed": jsPsych.totalTime() - timestamp_onload
               });
             }
             if(info.el.type === 'submit') {
@@ -459,7 +462,8 @@ jsPsych.plugins['Demographics'] = (function () {
                 "event_type": "button clicked",
                 "event_raw_details": 'Submit',
                 "event_converted_details": '"Submit" selected',
-                "timestamp": jsPsych.totalTime()
+                "timestamp": jsPsych.totalTime(),
+                "time_elapsed": jsPsych.totalTime() - timestamp_onload
               });
             }
           }
@@ -468,7 +472,8 @@ jsPsych.plugins['Demographics'] = (function () {
             "event_type": "key release",
             "event_raw_details": info.key_release,
             "event_converted_details": jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(info.key_release) + ' key released',
-            "timestamp": jsPsych.totalTime()
+            "timestamp": jsPsych.totalTime(),
+            "time_elapsed": jsPsych.totalTime() - timestamp_onload
           });
         }
       }
@@ -626,8 +631,10 @@ jsPsych.plugins['Demographics'] = (function () {
             var object4b = {
               '4b Weight (lbs)': weight_radio_value === 'pounds' ? $("input[name='4b. Weight']").val() : 'NA'
             }
-            timestamp_data['4a Weight(kg)'] = weight_radio_value === 'kg' ? trial.time_stamp['Q4'] : 'NA';
-            timestamp_data['4b Weight (lbs)'] =  weight_radio_value === 'pounds' ? trial.time_stamp['Q4'] : 'NA';
+            Object.assign(timestamp_data, {
+              '4a Weight(kg)': weight_radio_value === 'kg' ? trial.time_stamp['Q4'] : 'NA',
+              '4b Weight (lbs)': weight_radio_value === 'pounds' ? trial.time_stamp['Q4'] : 'NA'
+            });
             Object.assign(question_data, object4a, object4b);
           } else {
             $('.jspsych-survey-multi-choice-question-weight').addClass('survey-error-after');
@@ -735,7 +742,7 @@ jsPsych.plugins['Demographics'] = (function () {
 
 
       var startTime = performance.now();
-  
+      console.log(startTime);
       // start the response listener
       var keyboardListener = jsPsych.pluginAPI.getKeyboardResponse({
         callback_function: after_response,
