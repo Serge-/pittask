@@ -742,7 +742,6 @@ jsPsych.plugins['Demographics'] = (function () {
 
 
       var startTime = performance.now();
-      console.log(startTime);
       // start the response listener
       var keyboardListener = jsPsych.pluginAPI.getKeyboardResponse({
         callback_function: after_response,

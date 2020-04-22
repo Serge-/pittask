@@ -48,5 +48,8 @@
       "window": {},
       "document": {}
     }
+  },
+  "dependencies": {
+    "puppeteer-cluster": "^0.20.0"
   }
 }

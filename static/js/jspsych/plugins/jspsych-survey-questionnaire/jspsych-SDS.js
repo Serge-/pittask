@@ -241,8 +241,8 @@ jsPsych.plugins['SDS'] = (function () {
         html += '</div>';
         if(i === 0) {
           html += '<div style="display: flex; padding: 2rem 0 2rem 2rem;">' +
-          '<div class="input-not-working"><input type="radio" data-time-stamp="Q1S1" data-question-number="Q1S1" name="" class="form-radio" value="Checkbox question.: I have not worked/studies at all during the past week..."></input></div>' +
-          '<div style="text-align: left; padding-left: 2rem;"><p>I have not worked / studies at all during the past week for reasons unrelated to the disorder.</p>' +
+          '<div class="input-not-working"><input type="radio" data-time-stamp="Q1S1" data-question-number="Q1S1" name="" class="form-radio" value="Checkbox question.: I have not worked/studied at all during the past week..."></input></div>' +
+          '<div style="text-align: left; padding-left: 2rem;"><p>I have not worked / studied at all during the past week for reasons unrelated to the disorder.</p>' +
           '<p>* Work includes paid, unpaid volunteer work or training</p></div></div>';
         }
         html += '</div>';
@@ -418,9 +418,9 @@ jsPsych.plugins['SDS'] = (function () {
           if(i === 0) {
             if (match.querySelector(".input-not-working input[type=radio]:checked") !== null) {
               val_not_working = {
-                'Not worked/studies' : 'сhecked'
+                'Not worked/studied':'checked'
               }
-              timestamp_data['Not worked/studies'] = trial.time_stamp['Q1S1'];
+              timestamp_data['Not worked/studied'] = trial.time_stamp['Q1S1'];
               $('#jspsych-survey-multi-choice-0').find('.question-title').removeClass('survey-error-after');
               var active_item = $('#jspsych-survey-multi-choice-0').find('.bg-primary');
               $(active_item).removeClass('bg-primary');
@@ -428,9 +428,9 @@ jsPsych.plugins['SDS'] = (function () {
               timestamp_data[name] = 'NA'
             } else {
               val_not_working = {
-                'Not worked/studies': 'not checked'
+                'Not worked/studied':'not checked'
               }
-              timestamp_data['Not worked/studies'] = 'NA';
+              timestamp_data['Not worked/studied'] = 'NA';
             }
           }
           Object.assign(question_data, obje, val_not_working);

@@ -882,11 +882,12 @@ timeline.push(parameters.parameters_contingency_restoration);
 timeline.push(DEMOGRAPHICS);
 // Intro: We'd like to briefly ask you about some symptoms before the online game.
 timeline.push(CLINICAL_OPEN);
+
 // Randomisation function for Symptom Inventories
 var symptom_inventories_random = jsPsych.randomization.shuffle(survey.symptom_inventory);
-// required for testing
-var symptom_inventories_ordered = survey.symptom_inventory; 
-for(var item of symptom_inventories_random ){
+var symptom_inventories_ordered = survey.symptom_inventory;
+var symptom_inventory = symptom_inventory_randomization ?  symptom_inventories_random : symptom_inventories_ordered;
+for(var item of symptom_inventory ){
     timeline.push(item);
 }
 // SDS

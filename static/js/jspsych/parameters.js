@@ -1,6 +1,6 @@
 // main settings
 var full_screen_mode = false;
-
+var symptom_inventory_randomization = false;
 // vending machine rules configuration
 var left_tilt = 37;
 var right_tilt = 39;

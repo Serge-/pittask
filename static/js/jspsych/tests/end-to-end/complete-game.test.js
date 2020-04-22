@@ -13,6 +13,10 @@ function delay(time) {
   });
 }
 
+function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
+
 describe('Browser run', () => {
     test('browser settings', async () => { 
       browser = await puppeteer.launch({
@@ -87,8 +91,6 @@ describe('Demographics', () => {
 describe('Clinical Intro', () => {
     test('click after delay', async () => {
         await page.waitForSelector('.v-center-txt');
-        // const text = await page.evaluate(() => document.querySelector('.v-center-txt').textContent);
-        // await expect(text).toContain("We'd like to briefly ask you about some symptoms before the online game.  Press any key when you are ready.");
         await delay(1000);
         await page.click(".v-center-txt");
     }, timeout);
@@ -97,9 +99,23 @@ describe('Clinical Intro', () => {
 describe('OCI-R', () => {
   test('check inputs', async () => {
     await page.waitForSelector('#jspsych-survey-multi-choice-OSC-R');
-    for (let index = 0; index < 18; index++) {
-      await page.click("#jspsych-survey-multi-choice-option-" + index + "-0 .jspsych-survey-highlight");
-    }
+    await page.evaluate(() => {
+        for (let index = 0; index < 18; index++) {
+          function getRandomInt(max) {
+            return Math.floor(Math.random() * Math.floor(max));
+          }
+          const itemID = getRandomInt(5);
+
+          setTimeout(function() {
+              document.querySelector("#jspsych-survey-multi-choice-option-" + index +  "-" + itemID + " .jspsych-survey-highlight").click();
+          }, getRandomInt(100)); 
+
+        }
+    });
+    await page.evaluate(() => {
+      document.querySelector("#jspsych-survey-multi-choice-option-1-0 .jspsych-survey-highlight").click();
+      document.querySelector("#jspsych-survey-multi-choice-option-2-3 .jspsych-survey-highlight").click();
+    });
   }, timeout);
 
   test('submit survey', async () => {
@@ -113,8 +129,10 @@ describe('MOVES', () => {
   test('check inputs', async () => {
     await page.waitForSelector('#jspsych-survey-multi-choice-MOVES');
     for (let index = 0; index < 20; index++) {
-      await page.waitForSelector("#jspsych-survey-multi-choice-option-" + index + "-0 .form-radio");
-      await page.click("#jspsych-survey-multi-choice-option-" + index + "-0 .form-radio");
+      const itemID = getRandomInt(4);
+      await page.waitForSelector("#jspsych-survey-multi-choice-option-" + index + "-" + itemID + " .form-radio");
+      await delay(getRandomInt(100));
+      await page.click("#jspsych-survey-multi-choice-option-" + index + "-" + itemID + " .form-radio");
     }
   }, timeout);
 
@@ -129,8 +147,9 @@ describe('DASS', () => {
   test('check inputs', async () => {
     await page.waitForSelector('#jspsych-survey-multi-choice-DASS');
     for (let index = 0; index < 21; index++) {
-      await page.waitForSelector("#jspsych-survey-multi-choice-" + index + " .jspsych-survey-highlight");
-      await page.click("#jspsych-survey-multi-choice-" + index + " .jspsych-survey-highlight");
+      const itemID = getRandomInt(4);
+      await delay(getRandomInt(120));
+      await page.click("#jspsych-survey-multi-choice-option-" + index +  "-" + itemID + " .jspsych-survey-highlight");
     }
   }, timeout);
 
@@ -144,9 +163,11 @@ describe('DASS', () => {
 describe('ASRS-5', () => {
   test('check inputs', async () => {
     await page.waitForSelector('#jspsych-survey-multi-choice-ASRS-5');
+    await delay(100);
     for (let index = 0; index < 6; index++) {
-      await page.waitForSelector("#jspsych-survey-multi-choice-" + index + " .form-radio");
-      await page.click("#jspsych-survey-multi-choice-" + index + " .form-radio");
+      const itemID = getRandomInt(5);
+      await delay(getRandomInt(100));
+      await page.click("#jspsych-survey-multi-choice-option-" + index +  "-" + itemID + " .form-radio");
     }
   }, timeout);
 
@@ -160,10 +181,13 @@ describe('ASRS-5', () => {
 describe('EAT-26', () => {
   test('check inputs', async () => {
     await page.waitForSelector('#jspsych-survey-multi-choice-EAT-26');
-    for (let index = 0; index < 31; index++) {
-      await page.waitForSelector("#jspsych-survey-multi-choice-option-" + index + "-0 .form-radio");
-      await page.click("#jspsych-survey-multi-choice-option-" + index + "-0 .form-radio");
+    await delay(100);
+    for (let index = 0; index < 30; index++) {
+      const itemID = getRandomInt(5);
+      await delay(getRandomInt(90));
+      await page.click("#jspsych-survey-multi-choice-option-" + index + "-" + itemID + " .form-radio");
     }
+    await page.click("#jspsych-survey-multi-choice-option-30-0 .form-radio");
   }, timeout);
 
   test('submit survey', async () => {
@@ -176,9 +200,11 @@ describe('EAT-26', () => {
 describe('RAADS-14', () => {
   test('check inputs', async () => {
     await page.waitForSelector('#jspsych-survey-multi-choice-RAADS-14');
+    await delay(100);
     for (let index = 0; index < 14; index++) {
-      await page.waitForSelector("#jspsych-survey-multi-choice-" + index + " .form-radio");
-      await page.click("#jspsych-survey-multi-choice-" + index + " .form-radio");
+      const itemID = getRandomInt(4);
+      await delay(getRandomInt(120));
+      await page.click("#jspsych-survey-multi-choice-option-" + index + "-" + itemID + " .form-radio");
     }
   }, timeout);
 
@@ -192,9 +218,11 @@ describe('RAADS-14', () => {
 describe('PHQ-9', () => {
   test('check inputs', async () => {
     await page.waitForSelector('#jspsych-survey-multi-choice-PHQ-9');
+    await delay(100);
     for (let index = 0; index < 9; index++) {
-      await page.waitForSelector("#jspsych-survey-multi-choice-" + index + " .jspsych-survey-highlight");
-      await page.click("#jspsych-survey-multi-choice-" + index + " .jspsych-survey-highlight");
+      const itemID = getRandomInt(4);
+      await delay(getRandomInt(150));
+      await page.click("#jspsych-survey-multi-choice-option-" + index + "-" + itemID + " .jspsych-survey-highlight");
     }
   }, timeout);
 
@@ -208,14 +236,18 @@ describe('PHQ-9', () => {
 describe('GAD-7', () => {
   test('check inputs', async () => {
     await page.waitForSelector('#jspsych-survey-multi-choice-GAD-7');
+    await delay(100);
     for (let index = 0; index < 7; index++) {
-      await page.waitForSelector("#jspsych-survey-multi-choice-" + index + " .jspsych-survey-highlight");
-      await page.click("#jspsych-survey-multi-choice-" + index + " .jspsych-survey-highlight");
-      await page.click("#jspsych-survey-multi-choice-response-checkbox-0-0");
+      const itemID = getRandomInt(4);
+      await delay(getRandomInt(150));
+      await page.click("#jspsych-survey-multi-choice-option-" + index + "-" + itemID + " .jspsych-survey-highlight");
     }
+    const itemID = getRandomInt(3);
+    await page.click("#jspsych-survey-multi-choice-response-checkbox-0-" + itemID);
   }, timeout);
 
   test('submit survey', async () => {
+    await delay(getRandomInt(550));
     await page.evaluate(() => {
       document.querySelector('#jspsych-survey-multi-choice-GAD-7-next').click();
     });
@@ -225,9 +257,11 @@ describe('GAD-7', () => {
 describe('ASRM', () => {
   test('check inputs', async () => {
     await page.waitForSelector('#jspsych-survey-multi-choice-ASRM');
+    await delay(100);
     for (let index = 0; index < 5; index++) {
-      await page.waitForSelector("#jspsych-survey-multi-choice-" + index + " .jspsych-survey-highlight");
-      await page.click("#jspsych-survey-multi-choice-" + index + " .jspsych-survey-highlight");
+      const itemID = getRandomInt(5);
+      await delay(getRandomInt(150));
+      await page.click("#jspsych-survey-multi-choice-option-" + index +  "-" + itemID + " .jspsych-survey-highlight");
     }
   }, timeout);
 
@@ -241,9 +275,16 @@ describe('ASRM', () => {
 describe('PC-PTSD-5', () => {
   test('check inputs', async () => {
     await page.waitForSelector('#jspsych-survey-multi-choice-PC-PTSD-5');
-    for (let index = 0; index < 6; index++) {
-      await page.waitForSelector("#jspsych-survey-multi-choice-" + index + " .jspsych-survey-highlight");
-      await page.click("#jspsych-survey-multi-choice-" + index + " .jspsych-survey-highlight");
+    await delay(100);
+    const itemIDMain = getRandomInt(1);
+    if(itemIDMain === 0) {
+      for (let index = 0; index < 6; index++) {
+        const itemID = getRandomInt(2);
+        await delay(getRandomInt(150));
+        await page.click("#jspsych-survey-multi-choice-option-" + index +  "-" + itemID + " .jspsych-survey-highlight");
+      }
+    } else if(itemIDMain === 1) {
+      await page.click("#jspsych-survey-multi-choice-option-0-1 .jspsych-survey-highlight");
     }
   }, timeout);
 
@@ -257,9 +298,11 @@ describe('PC-PTSD-5', () => {
 describe('PRIME Screen', () => {
   test('check inputs', async () => {
     await page.waitForSelector('#jspsych-survey-multi-choice-PRIME');
+    await delay(100);
     for (let index = 0; index < 12; index++) {
-      await page.waitForSelector("#jspsych-survey-multi-choice-" + index + " .jspsych-survey-highlight");
-      await page.click("#jspsych-survey-multi-choice-" + index + " .jspsych-survey-highlight");
+      const itemID = getRandomInt(7);
+      await delay(getRandomInt(150));
+      await page.click("#jspsych-survey-multi-choice-option-" + index +  "-" + itemID + " .jspsych-survey-highlight");
     }
   }, timeout);
 
@@ -273,9 +316,16 @@ describe('PRIME Screen', () => {
 describe('AUDIT', () => {
   test('check inputs', async () => {
     await page.waitForSelector('#jspsych-survey-multi-choice-AUDIT');
-    for (let index = 0; index < 10; index++) {
-      await page.waitForSelector("#jspsych-survey-multi-choice-" + index + " .form-radio");
-      await page.click("#jspsych-survey-multi-choice-" + index + " .form-radio");
+    await delay(100);
+    for (let index = 0; index < 8; index++) {
+      const itemID = getRandomInt(5);
+      await delay(getRandomInt(150));
+      await page.click("#jspsych-survey-multi-choice-option-" + index +  "-" + itemID + " .form-radio");
+    }
+    for (let index = 8; index < 10; index++) {
+      const itemID = getRandomInt(2);
+      await delay(getRandomInt(150));
+      await page.click("#jspsych-survey-multi-choice-option-" + index +  "-" + itemID + " .form-radio");
     }
   }, timeout);
 
@@ -289,9 +339,11 @@ describe('AUDIT', () => {
 describe('PGSI', () => {
   test('check inputs', async () => {
     await page.waitForSelector('#jspsych-survey-multi-choice-PGSI');
+    await delay(90);
     for (let index = 0; index < 9; index++) {
-      await page.waitForSelector("#jspsych-survey-multi-choice-" + index + " .form-radio");
-      await page.click("#jspsych-survey-multi-choice-" + index + " .form-radio");
+      const itemID = getRandomInt(4);
+      await delay(getRandomInt(100));
+      await page.click("#jspsych-survey-multi-choice-option-" + index +  "-" + itemID + " .form-radio");
     }
   }, timeout);
 
@@ -305,9 +357,11 @@ describe('PGSI', () => {
 describe('YIAT', () => {
   test('check inputs', async () => {
     await page.waitForSelector('#jspsych-survey-multi-choice-YIAT');
+    await delay(90);
     for (let index = 0; index < 12; index++) {
-      await page.waitForSelector("#jspsych-survey-multi-choice-" + index + " .form-radio");
-      await page.click("#jspsych-survey-multi-choice-" + index + " .form-radio");
+      const itemID = getRandomInt(5);
+      await delay(getRandomInt(80));
+      await page.click("#jspsych-survey-multi-choice-option-" + index +  "-" + itemID + " .form-radio");
     }
   }, timeout);
 
@@ -319,10 +373,14 @@ describe('YIAT', () => {
 }, timeout);
 
 describe('Smoking Status', () => {
+  const itemIDMain = getRandomInt(2);
+  const itemIDFTND = getRandomInt(3);
   test('check inputs', async () => {
     await page.waitForSelector('#jspsych-survey-multi-choice-smoking-status');
-    await page.click("#jspsych-survey-multi-choice-option-0-0 .form-radio");
-    await page.click("#jspsych-survey-multi-choice-option-1-0 .form-radio");
+    await delay(getRandomInt(150));
+    await page.click("#jspsych-survey-multi-choice-option-0-" + itemIDMain + " .form-radio");
+    await delay(getRandomInt(150));
+    await page.click("#jspsych-survey-multi-choice-option-1-" + itemIDFTND + " .form-radio");
   }, timeout);
 
   test('submit survey', async () => {
@@ -330,31 +388,33 @@ describe('Smoking Status', () => {
       document.querySelector('#jspsych-survey-multi-choice-smoking-status-next').click();
     });
   }, timeout);
-}, timeout);
 
-describe('FTND', () => {
-  test('check inputs', async () => {
-    await page.waitForSelector('#jspsych-survey-multi-choice-FTND');
-    for (let index = 0; index < 6; index++) {
-      await page.click("#jspsych-survey-multi-choice-" + index + " .form-radio");
-    }
-  }, timeout);
+  if(itemIDFTND <= 1) {
+    test('check FTND inputs', async () => {
+      await page.waitForSelector('#jspsych-survey-multi-choice-FTND');
+      for (let index = 0; index < 6; index++) {
+        await delay(getRandomInt(150));
+        await page.click("#jspsych-survey-multi-choice-" + index + " .form-radio");
+      }
+    }, timeout);
 
-  test('submit survey', async () => {
-    await page.evaluate(() => {
-      document.querySelector('#jspsych-survey-multi-choice-FTND-next').click();
-    });
-  }, timeout);
+    test('submit FTND survey', async () => {
+      await page.evaluate(() => {
+        document.querySelector('#jspsych-survey-multi-choice-FTND-next').click();
+      });
+    }, timeout);
+  }
+
 }, timeout);
 
 describe('LSAS', () => {
   test('check inputs', async () => {
     await page.waitForSelector('#jspsych-survey-multi-choice-LSAS');
     for (let index = 0; index < 24; index++) {
-      await page.waitForSelector("#jspsych-survey-multi-choice-" + index + " .f .jspsych-survey-highlight");
-      await page.waitForSelector("#jspsych-survey-multi-choice-" + index + " .a .jspsych-survey-highlight");
-      await page.click("#jspsych-survey-multi-choice-" + index + " .f .jspsych-survey-highlight");
-      await page.click("#jspsych-survey-multi-choice-" + index + " .a .jspsych-survey-highlight");
+      const itemID = getRandomInt(4);
+      await delay(getRandomInt(100));
+      await page.click("#jspsych-survey-multi-choice-option-" + index + "-0-" + itemID + " .jspsych-survey-highlight");
+      await page.click("#jspsych-survey-multi-choice-option-" + index + "-1-" + itemID + " .jspsych-survey-highlight");
     }
   }, timeout);
 
@@ -368,12 +428,16 @@ describe('LSAS', () => {
 describe('ISI', () => {
   test('check inputs', async () => {  
     await page.waitForSelector('#jspsych-survey-multi-choice-ISI');
+    await delay(getRandomInt(50));
     for (let index = 0; index < 3; index++) {
-      await page.click("#jspsych-survey-multi-choice-1-" + index + " .jspsych-survey-highlight");
+      const itemID = getRandomInt(5);
+      await delay(getRandomInt(100));
+      await page.click("#jspsych-survey-multi-choice-option-0-" + index + "-" + itemID + " .jspsych-survey-highlight");
     }
     for (let index = 1; index < 5; index++) {
-      await page.waitForSelector("#jspsych-survey-multi-choice-" + index + " .jspsych-survey-highlight");
-      await page.click("#jspsych-survey-multi-choice-" + index + " .jspsych-survey-highlight");
+      const itemID = getRandomInt(5);
+      await delay(getRandomInt(100));
+      await page.click("#jspsych-survey-multi-choice-option-" + index + "-" + itemID + " .jspsych-survey-highlight");
     }
   }, timeout);
 
@@ -387,9 +451,11 @@ describe('ISI', () => {
 describe('PID-5-BF', () => {
   test('check inputs', async () => {
     await page.waitForSelector('#jspsych-survey-multi-choice-PID-5-BF');
+    await delay(getRandomInt(50));
     for (let index = 0; index < 25; index++) {
-      await page.waitForSelector("#jspsych-survey-multi-choice-" + index + " .jspsych-survey-highlight");
-      await page.click("#jspsych-survey-multi-choice-" + index + " .jspsych-survey-highlight");
+      const itemID = getRandomInt(4);
+      await delay(getRandomInt(100));
+      await page.click("#jspsych-survey-multi-choice-option-" + index + "-" + itemID + " .jspsych-survey-highlight");
     }
   }, timeout);
 
@@ -404,11 +470,15 @@ describe('PID-5-BF', () => {
 describe('SDS', () => {
   test('check inputs', async () => {
     await page.waitForSelector('#jspsych-survey-multi-choice-SDS');
+    await delay(getRandomInt(80));
     for (let index = 0; index < 3; index++) {
-      await page.waitForSelector("#jspsych-survey-multi-choice-" + index + " .jspsych-survey-highlight");
-      await page.click("#jspsych-survey-multi-choice-" + index + " .jspsych-survey-highlight");
+      const itemID = getRandomInt(4);
+      await delay(getRandomInt(100));
+      await page.click("#jspsych-survey-multi-choice-option-" + index +  "-" + itemID + " .jspsych-survey-highlight");
     }
+    await delay(getRandomInt(100));
     await page.select('.select-days-3', '5');
+    await delay(getRandomInt(100));
     await page.select('.select-days-4', '5');
 
   }, timeout);
@@ -443,7 +513,13 @@ describe('VVR instrumental conditioning instructions OPEN INSTRUCTIONS', () => {
 describe('VVR instrumental conditioning', () => {
   test('start', async () => {
     await page.waitForSelector('.vending-machine');
-    await page.keyboard.press('ArrowLeft');
+    const itemID = getRandomInt(4);
+    for (let index = 0; index < itemID; index++) {
+      await delay(100);
+      await page.keyboard.press('ArrowLeft');
+      await delay(100);
+      await page.keyboard.press('ArrowRight');
+    }
     for (let index = 1; index < instrumental_conditioning.interval_num; index++) {
       await delay(instrumental_conditioning.interval_duration + instrumental_conditioning.outcome_duration);
       await page.keyboard.press('ArrowLeft');
@@ -516,7 +592,13 @@ describe('VVR contingency degradation instructions OPEN INSTRUCTIONS', () => {
 describe('VVR contingency degradation', () => {
   test('start', async () => {
     await page.waitForSelector('.vending-machine');
-    await page.keyboard.press('ArrowLeft');
+    const itemID = getRandomInt(7);
+    for (let index = 0; index < itemID; index++) {
+      await delay(100);
+      await page.keyboard.press('ArrowLeft');
+      await delay(100);
+      await page.keyboard.press('ArrowRight');
+    }
     for (let index = 1; index < contingency_degradation.interval_num; index++) {
       await delay(contingency_degradation.interval_duration + contingency_degradation.outcome_duration);
       await page.keyboard.press('ArrowLeft');
@@ -588,7 +670,13 @@ describe('VVR contingency restoration instructions OPEN INSTRUCTIONS', () => {
 describe('VVR contingency restoration ', () => {
   test('start', async () => {
     await page.waitForSelector('.vending-machine');
-    await page.keyboard.press('ArrowLeft');
+    const itemID = getRandomInt(7);
+    for (let index = 0; index < itemID; index++) {
+      await delay(100);
+      await page.keyboard.press('ArrowLeft');
+      await delay(100);
+      await page.keyboard.press('ArrowRight');
+    }
     for (let index = 1; index < contingency_restoration.interval_num; index++) {
       await delay(contingency_restoration.interval_duration + contingency_restoration.outcome_duration);
       await page.keyboard.press('ArrowLeft');
@@ -643,12 +731,14 @@ describe('VVR contingency restoration  CLOSE INSTRUCTIONS', () => {
       await delay(contingency_restoration.close_instruct_latency);
       await page.click("#jspsych-html-keyboard-response-stimulus");
   }, timeout);
+}, timeout);
 
-  
-  test('finishing', async () => {
+
+describe('Finishing testing', () => {
+  test('Experiment complete!', async () => {
     await page.waitForSelector("#container-not-an-ad");
-    const text = await page.evaluate(() => document.body.textContent);
   }, timeout);
+
   afterAll(async () => {
     await browser.close();
   });
