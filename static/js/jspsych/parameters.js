@@ -1,6 +1,8 @@
 // main settings
 var full_screen_mode = false;
-var symptom_inventory_randomization = false;
+// symptom_inventory_randomization = true - random order of symptom inventory is enabled
+// symptom_inventory_randomization = false - random order of symptom inventory is disabled
+var symptom_inventory_randomization = true;
 // vending machine rules configuration
 var left_tilt = 37;
 var right_tilt = 39;

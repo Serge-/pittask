@@ -240,28 +240,27 @@ var vvrIsCorrect = false;
 
 var vvr_ = {
     vvr_a: function() {
-        var { 
-            interval_num,
-            interval_duration,
-            outcome_duration,
-            prob_value,
-            degrad_pattern,
-            min_blocks_num,
-            max_num_correct_consecutive_questions,
-            max_num_correct,
-            max_num_incorrect,
-            correct_text,
-            incorrect_text,
-            feedback_duration,
-            question_text_a1,
-            question_text_a2,
-            question_text_b1,
-            question_text_b2,
-            question_text_b3,
-            question_text_b4,
-            popup_text,
-            max_num_correct_consecutive_questions,
-        } = vvr.instrumental_conditioning;
+        var _vvr$instrumental_con = vvr.instrumental_conditioning,
+            interval_num = _vvr$instrumental_con.interval_num,
+            interval_duration = _vvr$instrumental_con.interval_duration,
+            outcome_duration = _vvr$instrumental_con.outcome_duration,
+            prob_value = _vvr$instrumental_con.prob_value,
+            degrad_pattern = _vvr$instrumental_con.degrad_pattern,
+            min_blocks_num = _vvr$instrumental_con.min_blocks_num,
+            max_num_correct_consecutive_questions = _vvr$instrumental_con.max_num_correct_consecutive_questions,
+            max_num_correct = _vvr$instrumental_con.max_num_correct,
+            max_num_incorrect = _vvr$instrumental_con.max_num_incorrect,
+            correct_text = _vvr$instrumental_con.correct_text,
+            incorrect_text = _vvr$instrumental_con.incorrect_text,
+            feedback_duration = _vvr$instrumental_con.feedback_duration,
+            question_text_a1 = _vvr$instrumental_con.question_text_a1,
+            question_text_a2 = _vvr$instrumental_con.question_text_a2,
+            question_text_b1 = _vvr$instrumental_con.question_text_b1,
+            question_text_b2 = _vvr$instrumental_con.question_text_b2,
+            question_text_b3 = _vvr$instrumental_con.question_text_b3,
+            question_text_b4 = _vvr$instrumental_con.question_text_b4,
+            popup_text = _vvr$instrumental_con.popup_text,
+            max_num_correct_consecutive_questions = _vvr$instrumental_con.max_num_correct_consecutive_questions;
 
         var vvr_a = {
             type: 'survey-vvr',
@@ -293,14 +292,14 @@ var vvr_ = {
                         }
                     },
                     vars: {
-                        question_text_a1,
-                        question_text_a2,
-                        question_text_b1,
-                        question_text_b2,
-                        question_text_b3,
-                        question_text_b4,
-                        popup_text,
-                        max_num_correct_consecutive_questions,
+                        question_text_a1: question_text_a1,
+                        question_text_a2: question_text_a2,
+                        question_text_b1: question_text_b1,
+                        question_text_b2: question_text_b2,
+                        question_text_b3: question_text_b3,
+                        question_text_b4: question_text_b4,
+                        popup_text: popup_text,
+                        max_num_correct_consecutive_questions: max_num_correct_consecutive_questions
                     }
                 },
                 {
@@ -346,14 +345,14 @@ var vvr_ = {
                         }
                     },
                     vars: {
-                        question_text_a1,
-                        question_text_a2,
-                        question_text_b1,
-                        question_text_b2,
-                        question_text_b3,
-                        question_text_b4,
-                        popup_text,
-                        max_num_correct_consecutive_questions,
+                        question_text_a1: question_text_a1,
+                        question_text_a2: question_text_a2,
+                        question_text_b1: question_text_b1,
+                        question_text_b2: question_text_b2,
+                        question_text_b3: question_text_b3,
+                        question_text_b4: question_text_b4,
+                        popup_text: popup_text,
+                        max_num_correct_consecutive_questions: max_num_correct_consecutive_questions
                     }
                 },
                 {
@@ -408,28 +407,27 @@ var vvr_ = {
         return loop_node_VVR;
     },
     vvr_b: function() {
-        var { 
-            interval_num,
-            interval_duration,
-            outcome_duration,
-            prob_value,
-            degrad_pattern,
-            min_blocks_num,
-            max_num_correct_consecutive_questions,
-            max_num_correct,
-            max_num_incorrect,
-            correct_text,
-            incorrect_text,
-            feedback_duration,
-            question_text_a1,
-            question_text_a2,
-            question_text_b1,
-            question_text_b2,
-            question_text_b3,
-            question_text_b4,
-            popup_text,
-            max_num_correct_consecutive_questions,
-        } = vvr.contingency_degradation;
+        var _vvr$contingency_degr = vvr.contingency_degradation,
+        interval_num = _vvr$contingency_degr.interval_num,
+        interval_duration = _vvr$contingency_degr.interval_duration,
+        outcome_duration = _vvr$contingency_degr.outcome_duration,
+        prob_value = _vvr$contingency_degr.prob_value,
+        degrad_pattern = _vvr$contingency_degr.degrad_pattern,
+        min_blocks_num = _vvr$contingency_degr.min_blocks_num,
+        max_num_correct_consecutive_questions = _vvr$contingency_degr.max_num_correct_consecutive_questions,
+        max_num_correct = _vvr$contingency_degr.max_num_correct,
+        max_num_incorrect = _vvr$contingency_degr.max_num_incorrect,
+        correct_text = _vvr$contingency_degr.correct_text,
+        incorrect_text = _vvr$contingency_degr.incorrect_text,
+        feedback_duration = _vvr$contingency_degr.feedback_duration,
+        question_text_a1 = _vvr$contingency_degr.question_text_a1,
+        question_text_a2 = _vvr$contingency_degr.question_text_a2,
+        question_text_b1 = _vvr$contingency_degr.question_text_b1,
+        question_text_b2 = _vvr$contingency_degr.question_text_b2,
+        question_text_b3 = _vvr$contingency_degr.question_text_b3,
+        question_text_b4 = _vvr$contingency_degr.question_text_b4,
+        popup_text = _vvr$contingency_degr.popup_text,
+        max_num_correct_consecutive_questions = _vvr$contingency_degr.max_num_correct_consecutive_questions;
 
         var vvr_a = {
             type: 'survey-vvr',
@@ -461,14 +459,14 @@ var vvr_ = {
                         }
                     },
                     vars: {
-                        question_text_a1,
-                        question_text_a2,
-                        question_text_b1,
-                        question_text_b2,
-                        question_text_b3,
-                        question_text_b4,
-                        popup_text,
-                        max_num_correct_consecutive_questions,
+                        question_text_a1: question_text_a1,
+                        question_text_a2: question_text_a2,
+                        question_text_b1: question_text_b1,
+                        question_text_b2: question_text_b2,
+                        question_text_b3: question_text_b3,
+                        question_text_b4: question_text_b4,
+                        popup_text: popup_text,
+                        max_num_correct_consecutive_questions: max_num_correct_consecutive_questions
                     }
                 },
                 {
@@ -514,14 +512,14 @@ var vvr_ = {
                         }
                     },
                     vars: {
-                        question_text_a1,
-                        question_text_a2,
-                        question_text_b1,
-                        question_text_b2,
-                        question_text_b3,
-                        question_text_b4,
-                        popup_text,
-                        max_num_correct_consecutive_questions,
+                        question_text_a1: question_text_a1,
+                        question_text_a2: question_text_a2,
+                        question_text_b1: question_text_b1,
+                        question_text_b2: question_text_b2,
+                        question_text_b3: question_text_b3,
+                        question_text_b4: question_text_b4,
+                        popup_text: popup_text,
+                        max_num_correct_consecutive_questions: max_num_correct_consecutive_questions
                     }
                 },
                 {
@@ -576,28 +574,28 @@ var vvr_ = {
         return loop_node_VVR;
     },
     vvr_c: function() {
-        var { 
-            interval_num,
-            interval_duration,
-            outcome_duration,
-            prob_value,
-            degrad_pattern,
-            min_blocks_num,
-            max_num_correct_consecutive_questions,
-            max_num_correct,
-            max_num_incorrect,
-            correct_text,
-            incorrect_text,
-            feedback_duration,
-            question_text_a1,
-            question_text_a2,
-            question_text_b1,
-            question_text_b2,
-            question_text_b3,
-            question_text_b4,
-            popup_text,
-            max_num_correct_consecutive_questions,
-        } = vvr.contingency_restoration;
+
+        var _vvr$contingency_rest = vvr.contingency_restoration,
+            interval_num = _vvr$contingency_rest.interval_num,
+            interval_duration = _vvr$contingency_rest.interval_duration,
+            outcome_duration = _vvr$contingency_rest.outcome_duration,
+            prob_value = _vvr$contingency_rest.prob_value,
+            degrad_pattern = _vvr$contingency_rest.degrad_pattern,
+            min_blocks_num = _vvr$contingency_rest.min_blocks_num,
+            max_num_correct_consecutive_questions = _vvr$contingency_rest.max_num_correct_consecutive_questions,
+            max_num_correct = _vvr$contingency_rest.max_num_correct,
+            max_num_incorrect = _vvr$contingency_rest.max_num_incorrect,
+            correct_text = _vvr$contingency_rest.correct_text,
+            incorrect_text = _vvr$contingency_rest.incorrect_text,
+            feedback_duration = _vvr$contingency_rest.feedback_duration,
+            question_text_a1 = _vvr$contingency_rest.question_text_a1,
+            question_text_a2 = _vvr$contingency_rest.question_text_a2,
+            question_text_b1 = _vvr$contingency_rest.question_text_b1,
+            question_text_b2 = _vvr$contingency_rest.question_text_b2,
+            question_text_b3 = _vvr$contingency_rest.question_text_b3,
+            question_text_b4 = _vvr$contingency_rest.question_text_b4,
+            popup_text = _vvr$contingency_rest.popup_text,
+            max_num_correct_consecutive_questions = _vvr$contingency_rest.max_num_correct_consecutive_questions;
 
         var vvr_a = {
             type: 'survey-vvr',
@@ -629,14 +627,14 @@ var vvr_ = {
                         }
                     },
                     vars: {
-                        question_text_a1,
-                        question_text_a2,
-                        question_text_b1,
-                        question_text_b2,
-                        question_text_b3,
-                        question_text_b4,
-                        popup_text,
-                        max_num_correct_consecutive_questions,
+                        question_text_a1: question_text_a1,
+                        question_text_a2: question_text_a2,
+                        question_text_b1: question_text_b1,
+                        question_text_b2: question_text_b2,
+                        question_text_b3: question_text_b3,
+                        question_text_b4: question_text_b4,
+                        popup_text: popup_text,
+                        max_num_correct_consecutive_questions: max_num_correct_consecutive_questions
                     }
                 },
                 {
@@ -682,14 +680,14 @@ var vvr_ = {
                         }
                     },
                     vars: {
-                        question_text_a1,
-                        question_text_a2,
-                        question_text_b1,
-                        question_text_b2,
-                        question_text_b3,
-                        question_text_b4,
-                        popup_text,
-                        max_num_correct_consecutive_questions,
+                        question_text_a1: question_text_a1,
+                        question_text_a2: question_text_a2,
+                        question_text_b1: question_text_b1,
+                        question_text_b2: question_text_b2,
+                        question_text_b3: question_text_b3,
+                        question_text_b4: question_text_b4,
+                        popup_text: popup_text,
+                        max_num_correct_consecutive_questions: max_num_correct_consecutive_questions
                     }
                 },
                 {
