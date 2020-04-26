@@ -108,15 +108,15 @@ jsPsych.plugins['Demographics'] = (function () {
       });
   
       $('body').prepend(
-        `<header>
-          <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container-fluid">
-              <div class="navbar-header">
-              <p class="navbar-text">${plugin.info.name}</p>
-              </div>
-            </div>
-          </nav>
-        </header>`);
+        '<header>' +
+          '<nav class="navbar navbar-inverse navbar-fixed-top">' +
+            '<div class="container-fluid">' +
+              '<div class="navbar-header">' +
+              '<p class="navbar-text">${plugin.info.name}</p>' +
+              '</div>' +
+            '</div>' +
+          '</nav>' +
+        '</header>');
   
       // inject CSS for trial
       html += '<style id="jspsych-survey-multi-choice-css">';

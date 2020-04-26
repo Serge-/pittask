@@ -121,6 +121,8 @@ var survey = {
         PHQ9,
         // GAD-7
         GAD7,
+        // LSAS
+        LSAS,
         // ASRM
         ASRM,
         // The Primary Care PTSD Screen for DSM-5 (PC-PTSD-5)
@@ -135,8 +137,6 @@ var survey = {
         YIAT,
         // Smoking status
         SMOKE_FTND,
-        // LSAS
-        LSAS,
         // Insomnia Severity Index
         ISI,
         // The Personality Inventory for DSM-5—Brief Form (PID-5-BF)— Adult

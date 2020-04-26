@@ -233,9 +233,6 @@ jsPsych.plugins['survey-vvr-questions-left'] = (function() {
                 showNextQuestion();
             }
 
-
-       
-          
         }
 
 

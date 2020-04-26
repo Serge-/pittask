@@ -1,9 +1,9 @@
 var DEMOGRAPHICS = {
     type: 'Demographics',
-    preamble: `
-        <p>We would like to ask you a few questions about your personal information to better understand our study
-        population. All your responses will be confidential.</p>
-    `,
+    preamble:
+        '<p>We would like to ask you a few questions about your personal information to better understand our study' +
+        'population. All your responses will be confidential.</p>'
+    ,
     questions: [
         {
             prompt: 'Gender',
@@ -50,9 +50,9 @@ var DEMOGRAPHICS = {
 var OCIR = {
     type: 'OCI-R',
     preamble:
-        `<p>The following statements refer to experiences that many people have in their everyday lives. Select
-        the number that best describes <b>HOW MUCH</b> that experience has <b>DISTRESSED</b> or <b>BOTHERED</b>
-        you during the <b>PAST MONTH</b>. The numbers refer to the following verbal labels:</p>`,
+        '<p>The following statements refer to experiences that many people have in their everyday lives. Select' +
+        'the number that best describes <b>HOW MUCH</b> that experience has <b>DISTRESSED</b> or <b>BOTHERED</b>' +
+        'you during the <b>PAST MONTH</b>. The numbers refer to the following verbal labels:</p>',
     questions: [
         {
             prompt: "I have saved up so many things that they get in the way.",

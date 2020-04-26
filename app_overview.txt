@@ -1,0 +1,85 @@
+---------------------------------------------------------------------------------------------
+                            Application overview
+---------------------------------------------------------------------------------------------
+| This is a summary of the overarching structure and purpose of the application, along with
+| the software versions supporting its operation. A complete list of stages is included for
+| clarity.
+| This application, named computational psychiatry, has two components — web-based
+| forms and behavioural tasks. The web-based forms are primarily self-report psychiatric
+| symptom inventories but also include demographic, functional (SDS), and general
+| intelligence information (ICAR). The behavioural tasks gamify cross-species tests of volition.
+---------------------------------------------------------------------------------------------
+
+For flawless work of the application, please install Python 3.7.5 and Psiturk 2.3.8.
+Below you can find instruction how to have Psitruk installed on your computer.
+First of all you need to have installed "pip".
+Once pip is installed, type into a terminal:
+----------------------------------
+|    pip install psiturk         |
+----------------------------------
+If this doesn’t work, try:
+----------------------------------
+|    sudo pip install psiturk    |
+----------------------------------
+
+If the install was successful you will have a new command psiturk available on your command line.
+You can check the location of this command by typing:
+----------------------------------
+|          which psiturk         |
+----------------------------------
+
+For further information please refer to: https://psiturk.readthedocs.io/en/latest/install
+
+Then, clone the folder pittask from my repo https://github.com/Serge-/pittask.html
+Open pittask folder in terminal and type following command:
+----------------------------------
+|             psiturk            |
+----------------------------------
+Then:
+----------------------------------
+|             server on          |
+----------------------------------
+After these steps you can open following link in the browser: http://localhost:22362
+
+
+---------------------------------------------------------------------------------------------
+                            Tested Operating Systems
+---------------------------------------------------------------------------------------------
+| On the listed Operating Systems a project runs properly
+|
+| Linux/Ubuntu 18.04 LTS
+| Windows 10 with Windows Subsystem for Linux (WSL) Ubuntu 18.04
+---------------------------------------------------------------------------------------------
+
+
+List of Stages:
+
+• Web-based forms
+    o Demographics
+    o Symptom inventories (randomised order of the inventories below, except smoking status and FTND)
+        ■ OCI-r
+        ■ MOVES
+        ■ DASS
+        ■ ASRS-5
+        ■ EAT-26
+        ■ RAADS-14
+        ■ PHQ-9
+        ■ GAD-7
+        ■ LSAS
+        ■ ASRM
+        ■ PC-PTSD-5
+        ■ PRIME
+        ■ AUDIT
+        ■ PGSI
+        ■ YIAT
+        ■ Smoking status
+        ■ FTND
+        ■ ISI
+        ■ PID-5-BF
+    o SDS
+
+• Behavioural stages
+    o VVR
+        ■ Instrumental conditioning [VVR phase A]
+        ■ Contingency degradation [VVR phase B]
+        ■ Contingency restoration [VVR phase C]

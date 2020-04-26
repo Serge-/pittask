@@ -34,7 +34,13 @@ jsPsych.plugins['survey-vvr'] = (function() {
     }
   
     plugin.trial = function(display_element, trial){
-        var { VVR_INTERVAL_DURATION, VVR_INTERVAL_NUM, VVR_OUTCOME_DURATION, VVR_DEGRAD_PATTERN, VVR_PROB_VALUE } = trial.variables;
+        var _trial$variables = trial.variables,
+            VVR_INTERVAL_DURATION = _trial$variables.VVR_INTERVAL_DURATION,
+            VVR_INTERVAL_NUM = _trial$variables.VVR_INTERVAL_NUM,
+            VVR_OUTCOME_DURATION = _trial$variables.VVR_OUTCOME_DURATION,
+            VVR_DEGRAD_PATTERN = _trial$variables.VVR_DEGRAD_PATTERN,
+            VVR_PROB_VALUE = _trial$variables.VVR_PROB_VALUE;
+
         var VENDING_MACHINE = '/static/images/vending_machine.svg';
         var OUTCOME = {
           MM:'/static/images/MM.png',
@@ -85,7 +91,7 @@ jsPsych.plugins['survey-vvr'] = (function() {
                 "event_converted_details": counter_balancing[0][outcome_present] + ' image appears'
               });
 
-              jsPsych.pluginAPI.setTimeout(() => {
+              jsPsych.pluginAPI.setTimeout(function() {
                 $('.outcome-container').html('');
                 
                 if (++x === VVR_INTERVAL_NUM) {
