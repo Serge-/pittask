@@ -890,6 +890,8 @@ for(var item of symptom_inventory ){
 }
 // SDS
 timeline.push(SDS);
+// ICAR
+timeline.push(ICAR);
 // Close: That's it for the symptom questions. Now we're ready to start the online game
 timeline.push(CLINICAL_CLOSE);
 

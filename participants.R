@@ -289,18 +289,19 @@ LSAS <- data.table(
   Response = numeric()
 )
 
-# ICAR <- data.table(
-#   PIN = character(),
-#   complete = character(),
-#   date = character(),
-#   `calendar time` = character(),
-#   # timestamp = numeric(),
-#   location = character(),
-#   `commit code` = character(),
-#   `version number` = character(),
-#   `Item ID` = character(),
-#   Response = character()
-# )
+ICAR <- data.table(
+  PIN = character(),
+  complete = character(),
+  date = character(),
+  `calendar time` = character(),
+  timestamp = numeric(),
+  location = character(),
+  `commit code` = character(),
+  `version number` = character(),
+  `Item ID` = character(),
+  `Response ID` = character(),
+  `Response content` = character()
+)
 
 SDS <- data.table(
   PIN = character(),
@@ -1007,25 +1008,27 @@ if(isClass(query))
     
     # ICAR --------------------------------------------------------------------
 
-    # icar_index <- which(trialdata$stage_name %in% "\"ICAR\"")
-    # 
-    # if(length(icar_index) != 0){
-    #   icar_responses <- fromJSON(trialdata[icar_index,]$responses)
-    #   icar_timestamps <- fromJSON(trialdata[icar_index,]$timestamp)
+    icar_index <- which(trialdata$stage_name %in% "\"ICAR\"")
     
-    #   date <- format(as.Date(dateTime[icar_index]), "%d-%m-%Y")
-    #   time <- as.character(as.ITime(dateTime[icar_index]))
-    #   
-    #   for(j in 1:length(icar_responses)){
-    #     ICAR <- rbindlist(list(ICAR, list(
-    #       PIN, complete, date, time, 
-    #       # icar_timestamps[[j]],
-    #       country, commit, version,
-    #       names(icar_responses)[j],
-    #       icar_responses[[j]]
-    #     )))
-    #   }
-    # } 
+    if(length(icar_index) != 0){
+      icar_responses <- fromJSON(trialdata[icar_index,]$responses)
+      icar_timestamps <- fromJSON(trialdata[icar_index,]$timestamp)
+      icar_response_id <- fromJSON(trialdata[icar_index,]$responseId)
+    
+      date <- format(as.Date(dateTime[icar_index]), "%d-%m-%Y")
+      time <- as.character(as.ITime(dateTime[icar_index]))
+      
+      for(j in 1:length(icar_responses)){
+        ICAR <- rbindlist(list(ICAR, list(
+          PIN, complete, date, time, 
+          icar_timestamps[[j]],
+          country, commit, version,
+          names(icar_responses)[j],
+          icar_response_id[[j]],
+          icar_responses[[j]]
+        )))
+      }
+    } 
     
     # SDS ---------------------------------------------------------------------
     
@@ -1207,7 +1210,7 @@ if(isClass(query))
     "ISI" = ISI,
     "PID-5-BF" = PID_5_BF,
     "LSAS" = LSAS,
-    # "ICAR" = ICAR,
+    "ICAR" = ICAR,
     "SDS" = SDS,
     # "FoodRatings" = FoodRatings,
     # "HungerRating" = HungerRating,

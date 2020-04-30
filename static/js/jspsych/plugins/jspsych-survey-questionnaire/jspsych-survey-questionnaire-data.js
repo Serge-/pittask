@@ -1533,3 +1533,262 @@ var SDS = {
     event_raw_details: "SDS, options",
     event_converted_details: 'SDS questions appears'
 }
+
+// ICAR
+var three_dimensional_rotate = [];
+for ( i = 1; i <= 66 ; i++ ) {
+    var pathNum = i < 10 ? ("0" + i.toString()) : i.toString()
+    three_dimensional_rotate.push(
+        {
+            prompt: 'All the cubes below have a different image on each side. Select the choice that could represent a rotation of the cube labeled X',
+            img: 'R3D.' + pathNum + '.png',
+            options: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'],
+            horizontal: false,
+            name: 'three_dimensional_rotate',
+            number: 'R3D.' +  pathNum
+        }
+    );
+}
+
+var matrix_reasoning_numbers = [
+    43, 44, 45, 46, 47, 48, 50, 53, 54, 55, 56
+]
+var matrix_reasoning = [];
+for ( i = 0; i < matrix_reasoning_numbers.length ; i++ ) {
+    var pathNum = matrix_reasoning_numbers[i]
+    matrix_reasoning.push(
+        {
+            prompt: '',
+            img: 'MR.' + pathNum + '.jpg',
+            options: ['A', 'B', 'C', 'D', 'E', 'F'],
+            horizontal: false,
+            name: 'matrix_reasoning',
+            number: 'MR.' + pathNum
+        }
+    );
+}
+
+var letter_number_series = [
+    {
+        prompt: 'In the following number series, what number comes next?',
+        sequence: '64, 81, 100, 121, 144, …',
+        options: [154, 156, 162, 169, 178, 196, 'None of these', 'I don’t know'],
+        horizontal: false,
+        name: 'letter_number_series',
+        number: 'LN.01'
+    },
+    {
+        prompt: 'In the following number series, what number comes next?',
+        sequence: '4, 7, 11, 18, 29, …',
+        options: [37, 39, 46, 47, 49, 55, 'None of these', 'I don’t know'],
+        horizontal: false,
+        name: 'letter_number_series',
+        number: 'LN.03'
+    },
+    {
+        prompt: 'In the following alphanumeric series, what letter comes next?',
+        sequence: 'C, F, I, L, O, …',
+        options: ['Q', 'R', 'S', 'T', 'U', 'V', 'None of these', 'I don’t know'],
+        horizontal: false,
+        name: 'letter_number_series',
+        number: 'LN.05'
+    },
+    {
+        prompt: 'In the following alphanumeric series, what letter comes next?',
+        sequence: 'H, J, F, H, D, …',
+        options: ['D', 'E', 'F', 'G', 'H', 'I', 'None of these', 'I don’t know'],
+        horizontal: false,
+        name: 'letter_number_series',
+        number: 'LN.06'
+    },
+    {
+        prompt: 'In the following alphanumeric series, what letter comes next?',
+        sequence: 'K, N, P, S, U, …',
+        options: ['S', 'T', 'U', 'V', 'W', 'X', 'None of these', 'I don’t know'],
+        horizontal: false,
+        name: 'letter_number_series',
+        number: 'LN.07'
+    },
+    {
+        prompt: 'In the following alphanumeric series, what letter comes next?',
+        sequence: 'V, Q, M, J, H, …',
+        options: ['E', 'F', 'G', 'H', 'I', 'J', 'None of these', 'I don’t know'],
+        horizontal: false,
+        name: 'letter_number_series',
+        number: 'LN.33'
+    },
+    {
+        prompt: 'In the following alphanumeric series, what letter comes next?',
+        sequence: 'I, J, L, O, S, …',
+        options: ['T', 'U', 'V', 'X', 'Y', 'Z', 'None of these', 'I don’t know'],
+        horizontal: false,
+        name: 'letter_number_series',
+        number: 'LN.34'
+    },
+    {
+        prompt: 'In the following alphanumeric series, what letter comes next?',
+        sequence: 'Z, W, X, U, V, …',
+        options: ['R', 'S', 'T', 'U', 'V', 'W', 'None of these', 'I don’t know'],
+        horizontal: false,
+        name: 'letter_number_series',
+        number: 'LN.35'
+    },
+    {
+        prompt: 'In the following alphanumeric series, what letter comes next?',
+        sequence: 'Q, S, N, P, L, …',
+        options: ['J', 'H', 'I', 'N', 'M', 'L', 'None of these', 'I don’t know'],
+        horizontal: false,
+        name: 'letter_number_series',
+        number: 'LN.58'
+    },
+]
+
+var verbal_reasoning = [
+    {
+        prompt: 'What number is one fifth of one fourth of one ninth of 900?',
+        options: [2, 3, 4, 5, 6, 7, 'None of these', 'I don’t know'],
+        horizontal: false,
+        name: 'verbal_reasoning',
+        number: 'VR.04'
+    },
+    {
+        prompt: 'Please mark the word that does not match the other words',
+        options: ['Sycamore', 'Buckeye', 'Elm', 'Daffodil', 'Hickory', 'Sequoia', 'They all match', 'I don’t know'],
+        horizontal: false,
+        name: 'verbal_reasoning',
+        number: 'VR.09'
+    },
+    {
+        prompt: 'The opposite of a “stubborn” person is a “________” person',
+        options: ['Flexible', 'Passionate', 'Mediocre', 'Reserved', 'Pigheaded', 'Persistent', 'None of these', 'I don’t know'],
+        horizontal: false,
+        name: 'verbal_reasoning',
+        number: 'VR.11'
+    },
+    {
+        prompt: 'Michelle likes 96 but not 45; she also likes 540 but not 250. Which does she like?',
+        options: ['86', '93', '98', '128', '132', '140', 'None of these', 'I don’t know'],
+        horizontal: false,
+        name: 'verbal_reasoning',
+        number: 'VR.13'
+    },
+    {
+        prompt: 'Adam and Melissa went fly-fishing and caught a total of 32 salmon. Melissa caught three times as many salmon as Adam. How many salmon did Adam catch?',
+        options: ['7', '8', '9', '10', '11', '12', 'None of these', 'I don’t know'],
+        horizontal: false,
+        name: 'verbal_reasoning',
+        number: 'VR.14'
+    },
+    {
+        prompt: 'Zach is taller than Matt & Richard is shorter than Zach. Which of the following statements would be most accurate?',
+        options: ['Richard is taller than Matt', 'Richard is shorter than Matt', 'Richard is as tall as Matt', 'It is impossible to tell', 'Richard is taller than Zach', 'Zach is shorter than Matt', 'None of these', 'I don’t know'],
+        horizontal: false,
+        name: 'verbal_reasoning',
+        number: 'VR.16'
+    },
+    {
+        prompt: 'Joshua is 12 years old and his sister is three times as old as he. When Joshua is 23 years old, how old will his sister be?',
+        options: ['35', '39', '44', '47', '53', '57', 'None of these', 'I don’t know'],
+        horizontal: false,
+        name: 'verbal_reasoning',
+        number: 'VR.17'
+    },
+    {
+        prompt: 'The sixth month of the year is:',
+        options: ['September', 'July', 'May', 'August', 'June', 'April', 'None of these', 'I don’t know'],
+        horizontal: false,
+        name: 'verbal_reasoning',
+        number: 'VR.18'
+    },
+    {
+        prompt: 'If the day after tomorrow is two days before Thursday then what day is today?',
+        options: ['Friday', 'Monday', 'Wednesday', 'Saturday', 'Tuesday', 'Sunday', 'None of these', 'I don’t know'],
+        horizontal: false,
+        name: 'verbal_reasoning',
+        number: 'VR.19'
+    },
+    {
+        prompt: 'Please mark the world that does not match the other words:',
+        options: ['Buenos Aires', 'Melbourne', 'Seattle', 'Cairo', 'Morocco', 'Milan', 'None of these', 'I don’t know'],
+        horizontal: false,
+        name: 'verbal_reasoning',
+        number: 'VR.23'
+    },
+    {
+        prompt: 'The opposite of an “affable” person is a(n) “__________” person.',
+        options: ['Angry', 'Sociable', 'Gracious', 'Frustrated', 'Reserved', 'Ungrateful', 'None of these', 'I don’t know'],
+        horizontal: false,
+        name: 'verbal_reasoning',
+        number: 'VR.26'
+    },
+    {
+        prompt: 'Isaac is shorter than George and Phillip is taller than George. Which of the following statements is most accurate?',
+        options: ['Phillip is taller than Isaac', 'Phillip is shorter than Isaac', 'Phillip is as tall as Isaac', 'It is impossible to tell', 'Isaac is taller than George', 'George is taller than Phillip', 'None of these', 'I don’t know'],
+        horizontal: false,
+        name: 'verbal_reasoning',
+        number: 'VR.31'
+    },
+    {
+        prompt: 'If the day before yesterday is three days after Saturday then what day is today?',
+        options: ['Thursday', 'Saturday', 'Wednesday', 'Friday', 'Sunday', 'Tuesday', 'None of these', 'I don’t know'],
+        horizontal: false,
+        name: 'verbal_reasoning',
+        number: 'VR.32'
+    },
+    {
+        prompt: 'The opposite of an “ambiguous” situation is a(n) “_________” situation.',
+        options: ['Suspicious', 'Vague', 'Unequivocal', 'Intelligent', 'Dubious', 'Genuine', 'None of these', 'I don’t know'],
+        horizontal: false,
+        name: 'verbal_reasoning',
+        number: 'VR.36'
+    },
+    {
+        prompt: 'How many total legs do three cows and four chickens have?',
+        options: ['16', '18', '20', '21', '22', '24', 'None of these', 'I don’t know'],
+        horizontal: false,
+        name: 'verbal_reasoning',
+        number: 'VR.39'
+    },
+    {
+        prompt: 'The 4th planet from the sun is:',
+        options: ['Jupiter', 'Saturn', 'Pluto', 'Earth', 'Mars', 'Venus', 'None of these', 'I don’t know'],
+        horizontal: false,
+        name: 'verbal_reasoning',
+        number: 'VR.42'
+    },
+    {
+        prompt: 'The 4th planet from the sun is:',
+        options: ['Jupiter', 'Saturn', 'Pluto', 'Earth', 'Mars', 'Venus', 'None of these', 'I don’t know'],
+        horizontal: false,
+        name: 'verbal_reasoning',
+        number: 'VR.42'
+    },
+
+]
+
+var ICAR = {
+    type: 'ICAR',
+    questions: [],
+    button_label: 'submit answers',
+    event_type: 'questions appears',
+    event_raw_details: "ICAR, options",
+    event_converted_details: 'ICAR questions appears'
+}
+
+var letter_number_series_new = _.shuffle(letter_number_series).slice(0,4);
+var verbal_reasoning_new = _.shuffle(verbal_reasoning).slice(0,4);
+var three_dimensional_rotate_new = _.shuffle(three_dimensional_rotate).slice(0,4);
+var matrix_reasoning_new = _.shuffle(matrix_reasoning).slice(0,4);
+
+letter_number_series_new.forEach(element => {
+    ICAR.questions.push(element);
+});
+matrix_reasoning_new.forEach(element => {
+    ICAR.questions.push(element);
+});
+verbal_reasoning_new.forEach(element => {
+    ICAR.questions.push(element);
+});
+three_dimensional_rotate_new.forEach(element => {
+    ICAR.questions.push(element);
+});

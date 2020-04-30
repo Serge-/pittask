@@ -77,7 +77,7 @@ List of Stages:
         ■ ISI
         ■ PID-5-BF
     o SDS
-
+    o ICAR
 • Behavioural stages
     o VVR
         ■ Instrumental conditioning [VVR phase A]

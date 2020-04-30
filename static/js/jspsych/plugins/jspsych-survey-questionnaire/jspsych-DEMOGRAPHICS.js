@@ -112,7 +112,7 @@ jsPsych.plugins['Demographics'] = (function () {
           '<nav class="navbar navbar-inverse navbar-fixed-top">' +
             '<div class="container-fluid">' +
               '<div class="navbar-header">' +
-              '<p class="navbar-text">${plugin.info.name}</p>' +
+              '<p class="navbar-text">' + plugin.info.name + '</p>' +
               '</div>' +
             '</div>' +
           '</nav>' +
@@ -204,7 +204,7 @@ jsPsych.plugins['Demographics'] = (function () {
     
             // add radio button container
             html += '<div id="' + option_id_name + '" class="jspsych-survey-multi-choice-option">';
-            html += '<label class="jspsych-survey-multi-choice-text"  for="' + input_id + '">' + question.options[j] + '</label>';
+            html += '<label class="jspsych-survey-multi-choice-text" data-time-stamp="Q' + (i+1) + '" for="' + input_id + '">' + question.options[j] + '</label>';
             html += '<input type="radio" name="' + input_name + '" data-time-stamp="Q' + (i+1) + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" id="' + input_id + '" class="form-radio" value="' + question.options[j] + '" ' + required_attr + '></input>';
             html += '</div>';
             }
@@ -391,7 +391,7 @@ jsPsych.plugins['Demographics'] = (function () {
         
                 // add radio button container
                 html += '<div id="' + option_id_name + '" class="jspsych-survey-multi-choice-option">';
-                html += '<label style="padding-bottom: 2rem;" class="jspsych-survey-multi-choice-text " for="' + input_id + '">' + question.options[j] + '</label>';
+                html += '<label style="padding-bottom: 2rem;" data-time-stamp="Q' + (i+1) + '" class="jspsych-survey-multi-choice-text" for="' + input_id + '">' + question.options[j] + '</label>';
                 html += '<input type="radio" name="' + input_name + '" data-time-stamp="Q' + (i+1) + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" id="' + input_id + '" class="form-radio" value="' + question.options[j] + '" ' + required_attr + '></input>';
                 html += '</div>';
             }
