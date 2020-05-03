@@ -15,6 +15,9 @@ library(stringr)
 input_file <- "/media/serge/Data/Upwork/Iain/pittask/participants.db" #"~/Desktop/Upwork/Amir/pittask/participants.db"
 output_folder <- "/media/serge/Data/Upwork/Iain/pittask/Participants" #~/Desktop/Upwork/Amir/pittask/Participants"
 
+# Options ------------------------------------------------------------------
+options(useFancyQuotes = FALSE)
+
 # Struct ------------------------------------------------------------------
 
 # Parameters <- data.table(
@@ -446,7 +449,7 @@ if(isClass(query))
     dateTime_ms <- json$data$dateTime
     trialdata <- json$data$trialdata
     
-    PIN <- str_pad(toString(i), 5, "left", pad = "0")
+    PIN <- sQuote(str_pad(toString(i), 5, "left", pad = "0"))
     complete <- ifelse(is.na(data$endhit[i]), "n", "y")
     commit <- trialdata$commit[1]
     version <- trialdata$`counter-balancing version`[1]
