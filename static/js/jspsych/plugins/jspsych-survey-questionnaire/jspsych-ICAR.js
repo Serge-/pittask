@@ -125,15 +125,14 @@ jsPsych.plugins['ICAR'] = (function () {
         ".matrix-reasoning-wrap { display: flex; position: relative; }" +
         ".matrix-reasoning-wrap ul { position: absolute; display: flex; justify-content: center; height: 113px; margin-bottom: 3rem; padding-left: 0; bottom: 0; left: 0; right: 0; }" +
         ".matrix-reasoning-wrap ul li { width: 92px; opacity: .4; }" +
+        ".matrix-reasoning-wrap ul label { width: 100%; height: 100%;}" +
         ".matrix-reasoning-wrap ul li.active { background-color: yellow; }" +
-        "img { width: 1000px; }" +
-        ".three-dimensional-rotate-wrap { display: flex; position: relative; }" +
-        ".three-dimensional-rotate-wrap .three-dimensional-rotate-first { position: absolute; display: flex; justify-content: center; height: 215px; padding-left: 0; top: 0; right: 0; }" +
-        ".three-dimensional-rotate-wrap .three-dimensional-rotate-first li { width: 183px; opacity: .4; }" +
-        ".three-dimensional-rotate-wrap .three-dimensional-rotate-first li.active { background-color: yellow; }" +
-        ".three-dimensional-rotate-wrap .three-dimensional-rotate-secondary { position: absolute; display: flex; justify-content: center; height: 200px; padding-left: 0; margin-bottom: 0; bottom: 0; right: 0; }" +
-        ".three-dimensional-rotate-wrap .three-dimensional-rotate-secondary li { width: 183px; opacity: .4; }" +
-        ".three-dimensional-rotate-wrap .three-dimensional-rotate-secondary li.active { background-color: yellow; }" +
+        "img { width: 100%; }" +
+        ".three-dimensional-rotate-wrap { display: flex; position: relative; width: 1000px; }" +
+        ".three-dimensional-rotate-wrap ul { position: absolute; display: flex; flex-wrap: wrap; justify-content: center; height: 100%; width: 73%; padding-left: 0; margin-bottom: 0; bottom: 0; right: 0; }" +
+        ".three-dimensional-rotate-wrap ul label { width: 100%; height: 100%;}" +
+        ".three-dimensional-rotate-wrap ul li { width: 25%; height: 50%; opacity: .4; }" +
+        ".three-dimensional-rotate-wrap ul li.active { background-color: yellow; }" +
 
         ".jspsych-survey-multi-choice-text span.required {color: darkred;}" +
         ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-text {  text-align: center;}" +
@@ -145,7 +144,7 @@ jsPsych.plugins['ICAR'] = (function () {
         "ul {list-style: none}" +
         ".jspsych-btn { margin: 100px 0; }" +
         ".jspsych-content { margin-top: 130px;}" +
-        ".jspsych-survey-container-radio { display: flex; flex-direction: column; padding-left: 3rem; }" +
+        // ".jspsych-survey-container-radio { display: flex; flex-direction: column; padding-left: 3rem; }" +
         ".jspsych-survey-multi-choice-preamble { text-align: left; border-top: 1px solid #fff;}" +
         ".jspsych-survey-multi-choice-information { display: flex; justify-content: space-between }" +
         ".jspsych-survey-multi-choice-information div { width: 40%; text-align: left; padding: 2rem 0; }" +
@@ -246,16 +245,7 @@ jsPsych.plugins['ICAR'] = (function () {
           html += '<p class="jspsych-survey-multi-choice-question survey-multi-choice" style="padding-top: 3px; text-align: left;">' + question.prompt + '</p>';
           // add question image
           html += '<div class="matrix-reasoning-wrap"><img class="matrix-reasoning" src="/static/images/ICAR/matrix_reasoning/' + question.img + '">';
-          html += '<ul>' +
-            '<li class="matrix-reasoning-' + question_id + '-0"></li>' +
-            '<li class="matrix-reasoning-' + question_id + '-1"></li>' +
-            '<li class="matrix-reasoning-' + question_id + '-2"></li>' +
-            '<li class="matrix-reasoning-' + question_id + '-3"></li>' +
-            '<li class="matrix-reasoning-' + question_id + '-4"></li>' +
-            '<li class="matrix-reasoning-' + question_id + '-5"></li>' +
-          '</ul>';
-          html += '</div>';
-          html += '<div class="jspsych-survey-container-radio">';
+          html += '<ul class="jspsych-survey-container-radio">';
     
           // create option radio buttons
           for (var j = 0; j < question.options.length; j++) {
@@ -267,36 +257,23 @@ jsPsych.plugins['ICAR'] = (function () {
             var required_attr = question.required ? 'required' : '';
     
             // add radio button container
-            html += '<div id="' + option_id_name + '" class="jspsych-survey-multi-choice-option">';
-            html += '<label class="jspsych-survey-multi-choice-text jspsych-survey-highlight" data-time-stamp="Q' + (i+1) + '"  for="' + input_id + '">' + question.options[j] + '</label>';
-            html += '<input type="radio" name="' + input_name + '" data-response-id="' + question.options[j] + '" data-matrix-reasoning="matrix-reasoning-'+ question_id + '-' + j + '" data-time-stamp="Q' + (i+1) + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" id="' + input_id + '" class="form-radio" value="NA" ' + required_attr + '></input>';
-            html += '</div>';
+            html += '<li id="' + option_id_name + '">';
+            html += '<label class="jspsych-survey-multi-choice-text jspsych-survey-highlight" data-time-stamp="Q' + (i+1) + '"  for="' + input_id + '"></label>';
+            html += '<input type="radio" class="hidden" name="' + input_name + '" data-response-id="' + question.options[j] + '" data-matrix-reasoning="matrix-reasoning-'+ question_id + '-' + j + '" data-time-stamp="Q' + (i+1) + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" id="' + input_id + '" class="form-radio" value="NA" ' + required_attr + '></input>';
+            html += '</li>';
           }
-    
+          html += '</ul>';
           html += '</div></div>';
         }
 
         // Three Dimensional Rotate
         else if(question.name === 'three_dimensional_rotate') {
-          html += '<div id="jspsych-survey-multi-choice-' + question_id + '" class="' + question_classes.join(' ') + '" style="display: none;"  data-name="' + question.number + '">';
+          html += '<div id="jspsych-survey-multi-choice-' + question_id + '" class="' + question_classes.join(' ') + '"  style="display: none;" data-name="' + question.number + '">';
     
           // add question image
           html += '<p class="jspsych-survey-multi-choice-question survey-multi-choice" style="padding-top: 3px; text-align: left;">' + question.prompt + '</p>';
           html += '<div class="three-dimensional-rotate-wrap"><img class="three-dimensional-rotate" src="/static/images/ICAR/three-dimensional_rotate/' + question.img + '">';
-          html += '<ul class="three-dimensional-rotate-first">' +
-            '<li class="three-dimensional-rotate-' + question_id + '-0"></li>' +
-            '<li class="three-dimensional-rotate-' + question_id + '-1"></li>' +
-            '<li class="three-dimensional-rotate-' + question_id + '-2"></li>' +
-            '<li class="three-dimensional-rotate-' + question_id + '-3"></li>' +
-          '</ul>';
-          html += '<ul class="three-dimensional-rotate-secondary">' +
-            '<li class="three-dimensional-rotate-' + question_id + '-4"></li>' +
-            '<li class="three-dimensional-rotate-' + question_id + '-5"></li>' +
-            '<li class="three-dimensional-rotate-' + question_id + '-6"></li>' +
-            '<li class="three-dimensional-rotate-' + question_id + '-7"></li>' +
-          '</ul>';
-          html += '</div>';
-          html += '<div class="jspsych-survey-container-radio">';
+          html += '<ul class="jspsych-survey-container-radio">';
     
           // create option radio buttons
           for (var j = 0; j < question.options.length; j++) {
@@ -308,12 +285,12 @@ jsPsych.plugins['ICAR'] = (function () {
             var required_attr = question.required ? 'required' : '';
     
             // add radio button container
-            html += '<div id="' + option_id_name + '" class="jspsych-survey-multi-choice-option">';
-            html += '<label class="jspsych-survey-multi-choice-text jspsych-survey-highlight" data-time-stamp="Q' + (i+1) + '"  for="' + input_id + '">' + question.options[j] + '</label>';
-            html += '<input type="radio" name="' + input_name + '" data-response-id="' + question.options[j] + '" data-three-dimensional-rotate="three-dimensional-rotate-'+ question_id + '-' + j + '" data-time-stamp="Q' + (i+1) + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" id="' + input_id + '" class="form-radio" value="NA" ' + required_attr + '></input>';
-            html += '</div>';
+            html += '<li id="' + option_id_name + '">';
+            html += '<label class="jspsych-survey-multi-choice-text jspsych-survey-highlight" data-time-stamp="Q' + (i+1) + '"  for="' + input_id + '"></label>';
+            html += '<input type="radio" class="hidden" name="' + input_name + '" data-response-id="' + question.options[j] + '" data-three-dimensional-rotate="three-dimensional-rotate-'+ question_id + '-' + j + '" data-time-stamp="Q' + (i+1) + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" id="' + input_id + '" class="form-radio" value="NA" ' + required_attr + '></input>';
+            html += '</li>';
           }
-    
+          html += '</ul>';
           html += '</div></div>';
         }
       }
@@ -429,15 +406,11 @@ jsPsych.plugins['ICAR'] = (function () {
 
       $( "input" ).on( "click", function() {
         if($(this)[0].dataset.matrixReasoning) {
-          var matrix_el = $(this)[0].dataset.matrixReasoning;
           $( ".matrix-reasoning-wrap ul li" ).removeClass( "active" )
-          var element = document.getElementsByClassName(matrix_el);
-          $(element).addClass("active");
+          $(this).parent('li').addClass('active');
         } else if($(this)[0].dataset.threeDimensionalRotate) {
-          var matrix_el = $(this)[0].dataset.threeDimensionalRotate;
           $( ".three-dimensional-rotate-wrap ul li" ).removeClass( "active" )
-          var element = document.getElementsByClassName(matrix_el);
-          $(element).addClass("active");
+          $(this).parent('li').addClass('active');
         }
       });
 

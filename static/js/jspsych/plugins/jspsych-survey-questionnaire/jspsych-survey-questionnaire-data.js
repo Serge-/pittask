@@ -1558,7 +1558,7 @@ for ( i = 0; i < matrix_reasoning_numbers.length ; i++ ) {
     var pathNum = matrix_reasoning_numbers[i]
     matrix_reasoning.push(
         {
-            prompt: '',
+            prompt: 'Please indicate which is the best answer to complete the figure below.',
             img: 'MR.' + pathNum + '.jpg',
             options: ['A', 'B', 'C', 'D', 'E', 'F'],
             horizontal: false,
@@ -1780,15 +1780,11 @@ var verbal_reasoning_new = _.shuffle(verbal_reasoning).slice(0,4);
 var three_dimensional_rotate_new = _.shuffle(three_dimensional_rotate).slice(0,4);
 var matrix_reasoning_new = _.shuffle(matrix_reasoning).slice(0,4);
 
-letter_number_series_new.forEach(element => {
-    ICAR.questions.push(element);
-});
-matrix_reasoning_new.forEach(element => {
-    ICAR.questions.push(element);
-});
-verbal_reasoning_new.forEach(element => {
-    ICAR.questions.push(element);
-});
-three_dimensional_rotate_new.forEach(element => {
-    ICAR.questions.push(element);
+var icar_arr = [verbal_reasoning_new, letter_number_series_new, three_dimensional_rotate_new, matrix_reasoning_new];
+var icar_shuffled_arr = jsPsych.randomization.shuffle(icar_arr);
+
+icar_shuffled_arr.forEach(function(arr) {
+    arr.forEach(function(element) {
+        ICAR.questions.push(element);
+    });
 });

@@ -210,7 +210,7 @@ jsPsych.plugins['EAT-26'] = (function () {
   
           // add radio button container
           html += '<div id="' + option_id_name + '" class="jspsych-survey-multi-choice-option">';
-          html += '<label class="jspsych-survey-multi-choice-text jspsych-survey-highlight hidden" for="' + input_id + '">' + question.options[j] + '</label>';
+          html += '<label class="jspsych-survey-multi-choice-text jspsych-survey-highlight hidden" data-time-stamp="Q' + (i+1) + '" for="' + input_id + '">' + question.options[j] + '</label>';
           html += '<input hidden type="radio" name="' + input_name + '" data-time-stamp="Q' + (i+1) + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" id="' + input_id + '" class="form-radio" value="' + question.options[j] + '" ' + required_attr + '></input>';
           html += '</div>';
         }
