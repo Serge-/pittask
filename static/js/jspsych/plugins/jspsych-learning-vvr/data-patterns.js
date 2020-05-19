@@ -43,11 +43,4 @@ function probability(prob, pattern_array) {
     }
 }
 
-
-// probability(vvr.instrumental_conditioning.prob_value, vvr.instrumental_conditioning.degrad_pattern);
-
 var pattern_chars =  ['A', 'B', 'C'];
-
-// for (var index = 0; index < pattern_chars.length; index++) {
-//     probability(window['VVR_' + pattern_chars[index] + '_PROB_VALUE'], window['DEGRAD_PATTERN_VALUE_' + pattern_chars[index]])
-// }
