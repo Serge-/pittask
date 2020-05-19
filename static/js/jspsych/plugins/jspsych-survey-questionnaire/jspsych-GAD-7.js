@@ -239,7 +239,7 @@ jsPsych.plugins['GAD-7'] = (function() {
   
           // add radio button container
           html += '<div id="'+checkbox_id_name+'" class="jspsych-survey-multi-choice-option" style="width: 116px">';
-          html += '<label class="jspsych-survey-multi-choice-text" for="'+input_id+'">' +checkbox.options[j]+'</label>';
+          html += '<label class="jspsych-survey-multi-choice-text" data-time-stamp="Q8" for="'+input_id+'">' +checkbox.options[j]+'</label>';
           html += '<input type="radio" name="'+input_name+'" class="form-radio" data-time-stamp="Q8" data-question-number="Q8A' + (j+1) +'" id="'+input_id+'" value="'+checkbox.options[j]+'" '+required_attr+'></input>';
           html += '</div>';
         }
