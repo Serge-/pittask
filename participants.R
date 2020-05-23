@@ -337,25 +337,25 @@ VVR <- data.table(
   `strength of belief` = character()
 )
 
-# FoodRatings <- data.table(
-#   PIN = character(),
-#   complete = character(),
-#   date = character(),
-#   location = character(),
-#   version = character(),
-#   Food`Item ID` = character(),
-#   `Pre-rating` = character(),
-#   `Post-rating` = character()
-# )
+FoodRatings <- data.table(
+  PIN = character(),
+  complete = character(),
+  date = character(),
+  location = character(),
+  version = character(),
+  `Item ID` = character(),
+  `Pre-rating` = character(),
+  `Post-rating` = character()
+)
 
-# HungerRating <- data.table(
-#   PIN = character(),
-#   complete = character(),
-#   date = character(),
-#   location = character(),
-#   `Hunger pre-rating` = character(),
-#   `Hunger post-rating` = character()
-# )
+HungerRating <- data.table(
+  PIN = character(),
+  complete = character(),
+  date = character(),
+  location = character(),
+  `Hunger pre-rating` = character(),
+  `Hunger post-rating` = character()
+)
 
 # ConsentFeedback <- data.table(
 #   PIN = character(),
@@ -879,7 +879,7 @@ if(isClass(query))
     if(length(yiat_index) != 0){
       yiat_responses <- fromJSON(trialdata[yiat_index,]$responses)
       yiat_timestamps <- fromJSON(trialdata[yiat_index,]$timestamp)
-          
+            
       date <- format(as.Date(dateTime[yiat_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[yiat_index]))
 
@@ -1111,43 +1111,43 @@ if(isClass(query))
     
     # FoodRatings ------------------------------------------------------------
     
-    # food_ratings_indices <- which(
-    #   trialdata$stage_name %in% "\"Food and Hunger Questions\"" &
-    #     trialdata$food_item != "hunger")
-    # 
-    # if(length(food_ratings_indices) != 0){
-    #   food_ratings <- trialdata[food_ratings_indices,]
-    #   
-    #   for(fr in 1:dim(food_ratings)[1]) {
-    #     FoodRatings <- rbindlist(list(FoodRatings, list(
-    #       PIN,  complete,
-    #       format(as.Date(dateTime[food_ratings_indices[fr]]), "%d-%m-%Y"),
-    #       country, version, food_ratings$food_item[fr],
-    #       ifelse(food_ratings$rating_status[fr] == "pre-rating", food_ratings$rating[fr], ""),
-    #       ifelse(food_ratings$rating_status[fr] == "post-rating", food_ratings$rating[fr], "")
-    #     )))
-    #   }
-    # }
+    food_ratings_indices <- which(
+      trialdata$stage_name %in% "\"food-and-hunger-questions\"" &
+        trialdata$food_item != "hunger")
+    
+    if(length(food_ratings_indices) != 0){
+      food_ratings <- trialdata[food_ratings_indices,]
+      
+      for(fr in 1:dim(food_ratings)[1]) {
+        FoodRatings <- rbindlist(list(FoodRatings, list(
+          PIN,  complete,
+          format(as.Date(dateTime[food_ratings_indices[fr]]), "%d-%m-%Y"),
+          country, version, fromJSON(food_ratings$food_item[fr]),
+          ifelse(fromJSON(food_ratings$rating_status[fr]) == "pre-rating", fromJSON(food_ratings$rating[fr]), ""),
+          ifelse(fromJSON(food_ratings$rating_status[fr]) == "post-rating", fromJSON(food_ratings$rating[fr]), "")
+        )))
+      }
+    }
     
     # HungerRatings ---------------------------------------------------------
     
-    # hunger_rating_indices <- which(
-    #   trialdata$stage_name %in% "\"Food and Hunger Questions\"" &
-    #     trialdata$food_item == "hunger")
-    # 
-    # if(length(hunger_rating_indices) != 0){
-    #   hunger_ratings <- trialdata[hunger_rating_indices,]
-    #   
-    #   for(hr in 1:dim(hunger_ratings)[1]) {
-    #     HungerRating <- rbindlist(list(HungerRating, list(
-    #       PIN, complete,
-    #       format(as.Date(dateTime[hunger_rating_indices[hr]]), "%d-%m-%Y"),
-    #       country,
-    #       ifelse(hunger_ratings$rating_status[hr] == "pre-rating", hunger_ratings$rating[hr], ""),
-    #       ifelse(hunger_ratings$rating_status[hr] == "post-rating", hunger_ratings$rating[hr], "")
-    #     )))
-    #   }
-    # }
+    hunger_rating_indices <- which(
+      trialdata$stage_name %in% "\"food-and-hunger-questions\"" &
+        trialdata$food_item == "\"hunger\"")
+    
+    if(length(hunger_rating_indices) != 0){
+      hunger_ratings <- trialdata[hunger_rating_indices,]
+      
+      for(hr in 1:dim(hunger_ratings)[1]) {
+        HungerRating <- rbindlist(list(HungerRating, list(
+          PIN, complete,
+          format(as.Date(dateTime[hunger_rating_indices[hr]]), "%d-%m-%Y"),
+          country,
+          ifelse(fromJSON(hunger_ratings$rating_status[hr]) == "pre-rating", fromJSON(hunger_ratings$rating[hr]), ""),
+          ifelse(fromJSON(hunger_ratings$rating_status[hr]) == "post-rating", fromJSON(hunger_ratings$rating[hr]), "")
+        )))
+      }
+    }
     
     # ConsentFeedback ---------------------------------------------------------
     
@@ -1274,8 +1274,8 @@ if(isClass(query))
     "ICAR" = ICAR,
     "SDS" = SDS,
     "VVR" = VVR,
-    # "FoodRatings" = FoodRatings,
-    # "HungerRating" = HungerRating,
+    "FoodRatings" = FoodRatings,
+    "HungerRating" = HungerRating,
     # "ConsentFeedback" = ConsentFeedback,
     # "PavCondition" = PavCondition,
     "CompleteData" = CompleteData
