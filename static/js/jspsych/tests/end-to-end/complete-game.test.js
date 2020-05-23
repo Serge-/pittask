@@ -1,4 +1,3 @@
-
 const puppeteer = require('puppeteer');
 const timeout = 15000;
 const parameters = require('./parameters');

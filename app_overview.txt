@@ -55,6 +55,7 @@ After these steps you can open following link in the browser: http://localhost:2
 List of Stages:
 
 • Web-based forms
+    o Key-testing
     o Demographics
     o Symptom inventories (randomised order of the inventories below, except smoking status and FTND)
         ■ OCI-r
@@ -79,7 +80,14 @@ List of Stages:
     o SDS
     o ICAR
 • Behavioural stages
+    o Food & Hunger Questions
     o VVR
         ■ Instrumental conditioning [VVR phase A]
         ■ Contingency degradation [VVR phase B]
         ■ Contingency restoration [VVR phase C]
+    o Pavlovian conditioning
+    o Transfer test
+    o Deval video
+    o Deval test
+    o Food & Hunger Questions
+• Thanks

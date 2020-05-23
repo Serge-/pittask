@@ -1,4 +1,4 @@
-packages <- c("httr", "RSQLite", "jsonlite", "data.table", "stringr")
+packages <- c("httr", "RSQLite", "RMySQL", "jsonlite", "data.table", "stringr")
 suppressMessages(library(data.table))
 suppressWarnings(library(RSQLite))
 
@@ -8,6 +8,7 @@ if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
 
 library(httr)
 library(RSQLite)
+library(RMySQL)
 library(jsonlite)
 library(data.table)
 library(stringr)
@@ -319,6 +320,23 @@ SDS <- data.table(
   Response = character()
 )
 
+VVR <- data.table(
+  PIN = character(),
+  complete = character(),
+  date = character(),
+  `calendar time` = character(),
+  timestamp = numeric(),
+  stage = character(),
+  `commit code` = character(),
+  `version number` = character(),
+  location = character(),
+  `block number` = character(),
+  `Item ID` = character(),
+  `Food item` = character(),
+  `correct` = character(),
+  `strength of belief` = character()
+)
+
 # FoodRatings <- data.table(
 #   PIN = character(),
 #   complete = character(),
@@ -357,7 +375,7 @@ SDS <- data.table(
 #   `calendar time` = character(),
 #   `commit code` = character(),
 #   version = character(),
-#   location = character(),
+#   location = character(),   
 #   Q = numeric(),
 #   `response submitted` = character(),
 #   Correct = character()
@@ -374,6 +392,8 @@ CompleteData <- data.table(
   stage = character(),
   `commit code` = character(),
   `version number` = character(),
+  `block number` = character(),
+  `interval number` = character(),
   `event type` = character(),
   `event raw details` = character(),
   `event converted details` = character()
@@ -420,7 +440,7 @@ formatDateTime <- function(dateTime){
 
 # Connection --------------------------------------------------------------
 
-connection = dbConnect(SQLite(), dbname = input_file)
+connection = dbConnect(MySQL(), user = 'root', password='Psiturk_1', dbname = 'pittask', host='127.0.0.1')
 
 query <- tryCatch(
   dbSendQuery(connection, "SELECT * FROM turkdemo"),
@@ -443,7 +463,7 @@ if(isClass(query))
       setTxtProgressBar(progressBar, i)
       next
     }
-    
+  
     json <- fromJSON(data$datastring[i], T, T)
     dateTime <- formatDateTime(json$data$dateTime)
     dateTime_ms <- json$data$dateTime
@@ -710,8 +730,9 @@ if(isClass(query))
       for(j in 1:length(gad7_responses)){
         GAD_7 <- rbindlist(list(GAD_7, list(
           PIN, complete, date, 
-          as.character(as.ITime(formatDateTime(time_ms + as.numeric(gad7_timestamps[[j]])))),
-          gad7_timestamps[[j]],
+          # as.character(as.ITime(formatDateTime(time_ms + as.numeric(gad7_timestamps[[j]])))),
+          # gad7_timestamps[[j]],
+          NA, NA,
           country, commit, version,
           names(gad7_responses)[j],
           gad7_responses[[j]]
@@ -858,7 +879,7 @@ if(isClass(query))
     if(length(yiat_index) != 0){
       yiat_responses <- fromJSON(trialdata[yiat_index,]$responses)
       yiat_timestamps <- fromJSON(trialdata[yiat_index,]$timestamp)
-      
+          
       date <- format(as.Date(dateTime[yiat_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[yiat_index]))
 
@@ -1060,6 +1081,33 @@ if(isClass(query))
         )))
       }
     }
+
+    # VVR ---------------------------------------------------------------------
+    vvr_stages <- trialdata$vvr_stage
+
+    if(!is.null(vvr_stages)){
+      
+      for(j in 1:length(vvr_stages)){
+
+        date <- format(as.Date(dateTime[j]), "%d-%m-%Y")
+        time <- as.character(as.ITime(dateTime[j]))
+
+        if(!is.na(trialdata$vvr_stage[j])) {
+          VVR <- rbindlist(list(VVR, list(
+            PIN, complete, date, time,
+            trialdata$timestamp[j],
+            fromJSON(trialdata$vvr_stage[j]), commit, version,
+            country,
+            trialdata$block_number[j],
+            trialdata$item_id[j],
+            trialdata$food_item[j],
+            trialdata$correct[j],
+            trialdata$strength_of_belief[j]
+          )))
+        }
+        
+      }
+    }
     
     # FoodRatings ------------------------------------------------------------
     
@@ -1167,6 +1215,8 @@ if(isClass(query))
               as.character(as.ITime(formatDateTime(time_ms + events$timestamp[e]))),
               events$time_elapsed[e], country, timezone,
               gsub('"', "", trialdata$stage[j]), version, commit, events$event_type[e],
+              ifelse(!is.na(trialdata$block_number[j]), trialdata$block_number[j], 'NA'),
+              ifelse(!is.na(trialdata$item_id[j]), trialdata$item_id[j], 'NA'),
               ifelse(is.null(events$event_raw_details[e]), NA, events$event_raw_details[e]),
               events$event_converted_details[e]
             )))
@@ -1180,7 +1230,15 @@ if(isClass(query))
   
   close(progressBar)
   dbClearResult(query)
-  dbDisconnect(connection)
+  # dbDisconnect(connection)
+
+  dbDisconnectAll <- function(){
+    ile <- length(dbListConnections(MySQL())  )
+    lapply( dbListConnections(MySQL()), function(x) dbDisconnect(x) )
+    # dbClearResult(dbListResults(conn)[[1]])
+    cat(sprintf("%s connection(s) closed.\n", ile))
+  }
+
   
   # Writing results ---------------------------------------------------------
   
@@ -1215,6 +1273,7 @@ if(isClass(query))
     "LSAS" = LSAS,
     "ICAR" = ICAR,
     "SDS" = SDS,
+    "VVR" = VVR,
     # "FoodRatings" = FoodRatings,
     # "HungerRating" = HungerRating,
     # "ConsentFeedback" = ConsentFeedback,
@@ -1228,6 +1287,8 @@ if(isClass(query))
     }
     setTxtProgressBar(filesProgressBar, i)
   }
+
+    dbDisconnectAll()
 } else {
   print("Invalid database connection or query")
   dbDisconnect(connection)

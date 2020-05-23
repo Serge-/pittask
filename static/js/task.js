@@ -14,84 +14,84 @@ var counter_balancing_input = [
         game_version: 'A',
         left: 'MM',
         right: 'BBQ',
-        video: 0,
+        video: video_MM,
         converted_details: "MM"
     },
     b = {
         game_version: 'B',
         left: 'BBQ',
         right: 'MM',
-        video: 1,
+        video: video_BBQ,
         converted_details: "BBQ"
     },
     c = {
         game_version: 'C',
         left: 'TT',
         right: 'BBQ',
-        video: 2,
+        video: video_TT,
         converted_details: "TT"
     }, 
     d = {
         game_version: 'D',
         left: 'BBQ',
         right: 'TT',
-        video: 1,
+        video: video_BBQ,
         converted_details: "BBQ"
     },
     e = {
         game_version: 'E',
         left: 'MM',
         right: 'TT',
-        video: 0,
+        video: video_MM,
         converted_details: "MM"
     },
     f = {
         game_version: 'F',
         left: 'TT',
         right: 'MM',
-        video: 2,
+        video: video_TT,
         converted_details: "TT"
     },
     g = {
         game_version: 'G',
         left: 'MM',
         right: 'BBQ',
-        video: 1,
+        video: video_BBQ,
         converted_details: "BBQ"
     },
     h = {
         game_version: 'H',
         left: 'BBQ',
         right: 'MM',
-        video: 0,
+        video: video_MM,
         converted_details: "MM"
     },
     i = {
         game_version: 'I',
         left: 'TT',
         right: 'BBQ',
-        video: 1,
+        video: video_BBQ,
         converted_details: "BBQ"
     },
     j = {
         game_version: 'J',
         left: 'BBQ',
         right: 'TT',
-        video: 2,
+        video: video_TT,
         converted_details: "TT"
     },
     k = {
         game_version: 'K',
         left: 'MM',
         right: 'TT',
-        video: 2,
+        video: video_TT,
         converted_details: "TT"
     },
     l = {
         game_version: 'L',
         left: 'TT',
         right: 'MM',
-        video: 0,
+        video: video_MM,
         converted_details: "MM"
     }
 ];
@@ -231,6 +231,160 @@ var parameters = {
     }
 }
 
+var KEY_TESTING_OPEN = {
+    stage_name: 'Key-testing',
+    type: 'html-keyboard-response',
+    stimulus: key_testing_open,
+    trial_latency: key_testing_latency_period,
+    trial_duration: null,
+    response_ends_trial: false,
+    event_type: 'text appears',
+    event_raw_details: 'key_testing_open',
+    event_converted_details: 'Key-testing open text appears'
+}
+
+var KEY_TESTING = {
+    stage_name: 'Key-testing',
+    type: 'key-testing',
+    stimulus: '',
+    trial_duration: null,
+    response_ends_trial: false,
+    event_type: 'image appears',
+    event_raw_details: 'clinical_close_text',
+    event_converted_details: 'white vending machine appears'
+}
+
+var KEY_TESTING_CLOSE = {
+    stage_name: 'Key-testing',
+    type: 'html-keyboard-response',
+    stimulus: key_testing_close,
+    trial_latency: key_testing_latency_period,
+    trial_duration: null,
+    response_ends_trial: false,
+    event_type: 'text appears',
+    event_raw_details: 'key_testing_close',
+    event_converted_details: 'Key-testing close text appears'
+}
+
+var FHQ_PRE_1 = {
+    stage_name: "food-and-hunger-questions",
+    type: 'food-and-hunger-questions',
+    stimulus: '/static/images/TT.png',
+    questions: {
+        top: FHQ_1,
+        bottom: FHQ_1_bottom_text
+    },
+    food_item: "teddy.png",
+    rating_status: 'pre-rating',
+    event_type: 'Food question scale appears',
+    event_raw_details: "FHQ_1, FHQ_1_bottom_text",
+    event_converted_details: 'TT scale'
+}
+
+var FHQ_PRE_2 = {
+    stage_name: "food-and-hunger-questions",
+    type: 'food-and-hunger-questions',
+    stimulus: '/static/images/MM.png',
+    questions: {
+        top: FHQ_2,
+        bottom: FHQ_2_bottom_text
+    },
+    food_item: "teddy.png",
+    rating_status: 'pre-rating',
+    event_type: 'Food question scale appears',
+    event_raw_details: "FHQ_2, FHQ_2_bottom_text",
+    event_converted_details: 'MM scale'
+}
+
+var FHQ_PRE_3 = {
+    stage_name: "food-and-hunger-questions",
+    type: 'food-and-hunger-questions',
+    stimulus: '/static/images/BBQ.png',
+    questions: {
+        top: FHQ_3,
+        bottom: FHQ_3_bottom_text
+    },
+    food_item: "teddy.png",
+    rating_status: 'pre-rating',
+    event_type: 'Food question scale appears',
+    event_raw_details: "FHQ_3, FHQ_3_bottom_text",
+    event_converted_details: 'BBQ scale'
+}
+
+var FHQ_PRE_4 = {
+    stage_name: "food-and-hunger-questions",
+    type: 'food-and-hunger-questions',
+    stimulus: 'hunger',
+    questions: {
+        top: FHQ_4,
+    },
+    food_item: "hunger",
+    rating_status: 'pre-rating',
+    event_type: 'Food question scale appears',
+    event_raw_details: "FHQ_4",
+    event_converted_details: 'Hunger scale'
+}
+
+
+
+var FHQ_POST_1 = {
+    stage_name: "food-and-hunger-questions",
+    type: 'food-and-hunger-questions',
+    stimulus: '/static/images/TT.png',
+    questions: {
+        top: FHQ_1,
+        bottom: FHQ_1_bottom_text
+    },
+    food_item: "teddy.png",
+    rating_status: 'post-rating',
+    event_type: 'Food question scale appears',
+    event_raw_details: "FHQ_1, FHQ_1_bottom_text",
+    event_converted_details: 'TT scale'
+}
+
+var FHQ_POST_2 = {
+    stage_name: "food-and-hunger-questions",
+    type: 'food-and-hunger-questions',
+    stimulus: '/static/images/MM.png',
+    questions: {
+        top: FHQ_2,
+        bottom: FHQ_2_bottom_text
+    },
+    food_item: "teddy.png",
+    rating_status: 'post-rating',
+    event_type: 'Food question scale appears',
+    event_raw_details: "FHQ_2, FHQ_2_bottom_text",
+    event_converted_details: 'MM scale'
+}
+
+var FHQ_POST_3 = {
+    stage_name: "food-and-hunger-questions",
+    type: 'food-and-hunger-questions',
+    stimulus: '/static/images/BBQ.png',
+    questions: {
+        top: FHQ_3,
+        bottom: FHQ_3_bottom_text
+    },
+    food_item: "teddy.png",
+    rating_status: 'post-rating',
+    event_type: 'Food question scale appears',
+    event_raw_details: "FHQ_3, FHQ_3_bottom_text",
+    event_converted_details: 'BBQ scale'
+}
+
+var FHQ_POST_4 = {
+    stage_name: "food-and-hunger-questions",
+    type: 'food-and-hunger-questions',
+    stimulus: 'hunger',
+    questions: {
+        top: FHQ_4,
+    },
+    food_item: "hunger",
+    rating_status: 'post-rating',
+    event_type: 'Food question scale appears',
+    event_raw_details: "FHQ_4",
+    event_converted_details: 'Hunger scale'
+}
 
 var loop_node_counter_vvr = 0;
 var loop_node_counter_vvr_determination = 0;
@@ -278,17 +432,18 @@ var vvr_ = {
             timeline: [
                 {
                     type: 'survey-vvr-questions-left',
-                    stage_name: 'vvr question-left instrumental conditioning',
+                    stage_name: 'VVR_copy_1 question-left instrumental conditioning',
+                    vvr_stage: 'VVR_copy_1',
                     details: {
                         a: {
                             event_type: 'question appears',
                             event_raw_details: 'question 1(a) appears',
-                            event_converted_details: 'vvr question-left instrumental conditioning text appears',
+                            event_converted_details: 'VVR_copy_1 question-left instrumental conditioning text appears',
                         },
                         b: {
                             event_type: 'question appears',
                             event_raw_details: 'question 1(b) appears',
-                            event_converted_details: 'vvr question-left instrumental conditioning text appears',
+                            event_converted_details: 'VVR_copy_1 question-left instrumental conditioning text appears',
                         }
                     },
                     vars: {
@@ -303,7 +458,7 @@ var vvr_ = {
                     }
                 },
                 {
-                    stage_name: 'vvr question-left instrumental conditioning feedback text',
+                    stage_name: 'VVR_copy_1 question-left instrumental conditioning feedback text',
                     type: 'html-keyboard-response',
                     stimulus: function() {
                         if(vvrIsCorrect) { 
@@ -322,7 +477,7 @@ var vvr_ = {
                             return 'incorrect_text';
                         }
                     },
-                    event_converted_details: 'vvr question-left instrumental conditioning feedback text appears'
+                    event_converted_details: 'VVR_copy_1 question-left instrumental conditioning feedback text appears'
                 }
             ]
         }
@@ -331,17 +486,18 @@ var vvr_ = {
             timeline: [
                 {
                     type: 'survey-vvr-questions-right',
-                    stage_name: 'vvr question-right instrumental conditioning',
+                    stage_name: 'VVR_copy_1 question-right instrumental conditioning',
+                    vvr_stage: 'VVR_copy_1',
                     details: {
                         a: {
                             event_type: 'question appears',
                             event_raw_details: 'question 2(a) appears',
-                            event_converted_details: 'vvr question-right instrumental conditioning text appears',
+                            event_converted_details: 'VVR_copy_1 question-right instrumental conditioning text appears',
                         },
                         b: {
                             event_type: 'question appears',
                             event_raw_details: 'question 2(b) appears',
-                            event_converted_details: 'vvr question-right instrumental conditioning text appears',
+                            event_converted_details: 'VVR_copy_1 question-right instrumental conditioning text appears',
                         }
                     },
                     vars: {
@@ -356,7 +512,7 @@ var vvr_ = {
                     }
                 },
                 {
-                    stage_name: 'vvr question-right instrumental conditioning feedback text',
+                    stage_name: 'VVR_copy_1 question-right instrumental conditioning feedback text',
                     type: 'html-keyboard-response',
                     stimulus: function() {
                         if(vvrIsCorrect) { 
@@ -375,7 +531,7 @@ var vvr_ = {
                             return 'incorrect_text';
                         }
                     },
-                    event_converted_details: 'vvr question-right instrumental conditioning feedback text appears'
+                    event_converted_details: 'VVR_copy_1 question-right instrumental conditioning feedback text appears'
                 }
             ]
         }
@@ -445,17 +601,18 @@ var vvr_ = {
             timeline: [
                 {
                     type: 'survey-vvr-questions-left',
-                    stage_name: 'vvr question-left contingency degradation',
+                    vvr_stage: 'VVR_copy_2',
+                    stage_name: 'VVR_copy_2 question-left contingency degradation',
                     details: {
                         a: {
                             event_type: 'question appears',
                             event_raw_details: 'question 1(a) appears',
-                            event_converted_details: 'vvr question-left contingency degradation text appears',
+                            event_converted_details: 'VVR_copy_2 question-left contingency degradation text appears',
                         },
                         b: {
                             event_type: 'question appears',
                             event_raw_details: 'question 1(b) appears',
-                            event_converted_details: 'vvr question-left contingency degradation text appears',
+                            event_converted_details: 'VVR_copy_2 question-left contingency degradation text appears',
                         }
                     },
                     vars: {
@@ -470,7 +627,7 @@ var vvr_ = {
                     }
                 },
                 {
-                    stage_name: 'vvr question-left contingency degradation feedback text',
+                    stage_name: 'VVR_copy_2 question-left contingency degradation feedback text',
                     type: 'html-keyboard-response',
                     stimulus: function() {
                         if(vvrIsCorrect) { 
@@ -489,7 +646,7 @@ var vvr_ = {
                             return 'incorrect_text';
                         }
                     },
-                    event_converted_details: 'vvr question-left contingency degradation feedback text appears'
+                    event_converted_details: 'VVR_copy_2 question-left contingency degradation feedback text appears'
                 }
             ]
         }
@@ -498,17 +655,18 @@ var vvr_ = {
             timeline: [
                 {
                     type: 'survey-vvr-questions-right',
-                    stage_name: 'vvr question-right contingency degradation',
+                    vvr_stage: 'VVR_copy_2',
+                    stage_name: 'VVR_copy_2 question-right contingency degradation',
                     details: {
                         a: {
                             event_type: 'question appears',
                             event_raw_details: 'question 2(a) appears',
-                            event_converted_details: 'vvr question-right contingency degradation text appears',
+                            event_converted_details: 'VVR_copy_2 question-right contingency degradation text appears',
                         },
                         b: {
                             event_type: 'question appears',
                             event_raw_details: 'question 2(b) appears',
-                            event_converted_details: 'vvr question-right contingency degradation text appears',
+                            event_converted_details: 'VVR_copy_2 question-right contingency degradation text appears',
                         }
                     },
                     vars: {
@@ -523,7 +681,7 @@ var vvr_ = {
                     }
                 },
                 {
-                    stage_name: 'vvr question-right contingency degradation feedback text',
+                    stage_name: 'VVR_copy_2 question-right contingency degradation feedback text',
                     type: 'html-keyboard-response',
                     stimulus: function() {
                         if(vvrIsCorrect) { 
@@ -542,7 +700,7 @@ var vvr_ = {
                             return 'incorrect_text';
                         }
                     },
-                    event_converted_details: 'vvr question-right contingency degradation feedback text appears'
+                    event_converted_details: 'VVR_copy_2 question-right contingency degradation feedback text appears'
                 }
             ]
         }
@@ -613,17 +771,18 @@ var vvr_ = {
             timeline: [
                 {
                     type: 'survey-vvr-questions-left',
-                    stage_name: 'vvr question-left contingency restoration',
+                    vvr_stage: 'VVR_copy_3',
+                    stage_name: 'VVR_copy_3 question-left contingency restoration',
                     details: {
                         a: {
                             event_type: 'question appears',
                             event_raw_details: 'question 1(a) appears',
-                            event_converted_details: 'vvr question-left contingency restoration text appears',
+                            event_converted_details: 'VVR_copy_3 question-left contingency restoration text appears',
                         },
                         b: {
                             event_type: 'question appears',
                             event_raw_details: 'question 1(b) appears',
-                            event_converted_details: 'vvr question-left contingency restoration text appears',
+                            event_converted_details: 'VVR_copy_3 question-left contingency restoration text appears',
                         }
                     },
                     vars: {
@@ -638,7 +797,7 @@ var vvr_ = {
                     }
                 },
                 {
-                    stage_name: 'vvr question-left contingency restoration feedback text',
+                    stage_name: 'VVR_copy_3 question-left contingency restoration feedback text',
                     type: 'html-keyboard-response',
                     stimulus: function() {
                         if(vvrIsCorrect) { 
@@ -657,7 +816,7 @@ var vvr_ = {
                             return 'incorrect_text';
                         }
                     },
-                    event_converted_details: 'vvr question-left contingency restoration feedback text appears'
+                    event_converted_details: 'VVR_copy_3 question-left contingency restoration feedback text appears'
                 }
             ]
         }
@@ -666,17 +825,18 @@ var vvr_ = {
             timeline: [
                 {
                     type: 'survey-vvr-questions-right',
-                    stage_name: 'vvr question-right contingency restoration',
+                    vvr_stage: 'VVR_copy_3',
+                    stage_name: 'VVR_copy_3 question-right contingency restoration',
                     details: {
                         a: {
                             event_type: 'question appears',
                             event_raw_details: 'question 2(a) appears',
-                            event_converted_details: 'vvr question-right contingency restoration text appears',
+                            event_converted_details: 'VVR_copy_3 question-right contingency restoration text appears',
                         },
                         b: {
                             event_type: 'question appears',
                             event_raw_details: 'question 2(b) appears',
-                            event_converted_details: 'vvr question-right contingency restoration text appears',
+                            event_converted_details: 'VVR_copy_3 question-right contingency restoration text appears',
                         }
                     },
                     vars: {
@@ -691,7 +851,7 @@ var vvr_ = {
                     }
                 },
                 {
-                    stage_name: 'vvr question-right contingency restoration feedback text',
+                    stage_name: 'VVR_copy_3 question-right contingency restoration feedback text',
                     type: 'html-keyboard-response',
                     stimulus: function() {
                         if(vvrIsCorrect) { 
@@ -710,7 +870,7 @@ var vvr_ = {
                             return 'incorrect_text';
                         }
                     },
-                    event_converted_details: 'vvr question-right contingency restoration feedback text appears'
+                    event_converted_details: 'VVR_copy_3 question-right contingency restoration feedback text appears'
                 }
             ]
         }
@@ -864,6 +1024,175 @@ var CLINICAL_CLOSE = {
     event_converted_details: 'Clinical close text appears'
 };
 
+/************************************************************
+ * Pavlovian Conditioning
+ ************************************************************/
+var pav_correct_holder = 0;
+var pav_incorrect_holder = 0;
+var pav_is_correct = false;
+var pav_multi_choice_counter = 0;
+
+var pav_stimuli = [
+    {
+        stimuli: "/static/images/MM.png",
+        value: 'MM',
+        color: "green",
+        response: 'a'
+    },
+    {
+        stimuli: "/static/images/BBQ.png",
+        value: 'BBQ',
+        color: "blue",
+        response: 'b'
+    },
+    {
+        stimuli: "/static/images/TT.png",
+        value: 'TT',
+        color: "red",
+        response: 'c'
+    },
+    {
+        stimuli: "/static/images/EMPTY.png",
+        value: 'Empty',
+        color: "yellow",
+        response: 'd'
+    }
+];
+
+var pav_multi_choice_array = jsPsych.randomization.shuffle(pav_stimuli);
+
+var PAV_CONDITIONING = {
+    timeline: [
+        {
+            stage_name: 'Pav Conditioning',
+            frame_isi: pav_interval_between_images,
+            frame_time: pav_time_animation,
+            stimuli: [],
+            stimulus: jsPsych.randomization.shuffle(pav_stimuli),
+            type: 'animation'
+        },
+        {
+            stage_name: 'Pav Conditioning',
+            type: 'survey-multi-choice',
+            questions: [
+                { prompt: "Which snack is overstocked?", name: 'response', options: [
+                    {
+                        name: 'M&Ms',
+                        value: 'MM',
+                        response: 'a',
+                    },
+                    {
+                        name: 'BBQ',
+                        value: 'BBQ',
+                        response: 'b',
+                    },
+                    {
+                        name: 'Tiny teddy',
+                        value: 'TT',
+                        response: 'c',
+                    },
+                    {
+                        name: 'Empty',
+                        value: 'Empty',
+                        response: 'd',
+                    }
+                ]
+            }],
+            button_label: 'submit answer',
+        },
+        {
+            stage_name: 'Pav Conditioning',
+            type: 'html-keyboard-response',
+            stimulus: function() {
+                if(pav_is_correct) { 
+                    return '<p style="font-size: 24px;">Correct</p>';
+                } else {
+                    return '<p style="font-size: 24px;">Incorrect</p>';
+                }
+            },
+            trial_duration: 1000,
+            event_type: 'text appears',
+            event_raw_details: function() {
+               if(pav_is_correct){
+                   return 'Correct'
+               } else {
+                   return 'Incorrect'
+               } 
+            },
+            event_converted_details: function() {
+                if(pav_is_correct){
+                    return 'Correct'
+                } else {
+                    return 'Incorrect'
+                } 
+             }
+        }
+    ],
+    loop_function: function(){
+        pav_multi_choice_counter ++;
+        pav_is_correct = false;
+        if(pav_correct_holder >= pav_correct_answers || pav_incorrect_holder >= pav_incorrect_answers) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+}
+
+var TRANSFER_TEST = {
+    stage_name: 'Transfer Test',
+    type: 'transfer-test',
+    stimulus: 'vending machine',
+    transfer_test_color_consistency: transfer_test_color_consistency,
+    transfer_test_color_duration: transfer_test_color_duration,
+    transfer_test_white_duration: transfer_test_white_duration,
+    sequence_reps: transfer_test_reps
+}
+
+var DEVAL_VIDEO = {
+    stage_name: 'Deval Video',
+    type: 'video-keyboard-response',
+    sources: [counter_balancing[0].video + '.mp4', counter_balancing[0].video + '.ogg'],
+    autoplay: true,
+    trial_duration: video_duration * 1000,
+    controls: false,
+    response_ends_trial: false,
+    trial_ends_after_video: true
+}
+
+var DEVAL_TEST = {
+    stage_name: 'Deval Test',
+    type: 'transfer-test',
+    stimulus: 'vending machine',
+    transfer_test_color_consistency: deval_test,
+    transfer_test_white_duration: deval_test_duration,
+    sequence_reps: deval_test_reps
+}
+
+var CLOSE_HIT = {
+    stage_name: 'Close HIT Questions',
+    type: 'close-hit-questions',
+    preamble: 'Thank you for helping us to research OCD. We could not do this without you.',
+    questions: [
+        { prompt: "Would you like to receive information on the outcomes of the research?", horizontal: true, name: 'response', options: ['Yes', 'No'] },
+        { prompt: "Could we contact you about future research projects?", horizontal: true, name: 'response', options: ['Yes', 'No'] },
+        { prompt: "Do you have any suggestions for how we can improve the research?", horizontal: true, name: 'response', options: ['Yes', 'No'] }
+    ],
+    button_label: 'submit answer',
+}
+
+
+var THANKS = {
+    stage_name: 'Thanks',
+    type: 'html-keyboard-response',
+    stimulus: thanks_close,
+    trial_latency: thanks_close_latency_period,
+    trial_duration: null,
+    response_ends_trial: false,
+    event_type: 'text appears',
+    event_raw_details: 'thanks_close',
+    event_converted_details: "'Thank You!' text appears"
+};
 
 var timeline = [];
 // Init parameters main
@@ -876,6 +1205,8 @@ timeline.push(parameters.parameters_instrumental_conditioning);
 timeline.push(parameters.parameters_contingency_degradation);
 timeline.push(parameters.parameters_contingency_restoration);
 
+// Key-testing
+timeline.push(KEY_TESTING_OPEN, KEY_TESTING, KEY_TESTING_CLOSE);
 // Demographics
 timeline.push(DEMOGRAPHICS);
 // Intro: We'd like to briefly ask you about some symptoms before the online game.
@@ -892,6 +1223,8 @@ for(var item of symptom_inventory ){
 timeline.push(SDS);
 // ICAR
 timeline.push(ICAR);
+// Food & Hunger Questions pre-rating
+timeline.push(FHQ_PRE_1, FHQ_PRE_2, FHQ_PRE_3, FHQ_PRE_4);
 // Close: That's it for the symptom questions. Now we're ready to start the online game
 timeline.push(CLINICAL_CLOSE);
 
@@ -904,6 +1237,21 @@ timeline.push(vvr_.instructions_b.instructions_close);
 timeline.push(vvr_.instructions_c.instructions_open);
 timeline.push(vvr_.vvr_c());
 timeline.push(vvr_.instructions_c.instructions_close);
+
+// Pavlovian Condition
+timeline.push(PAV_CONDITIONING);
+// Transfer Test
+timeline.push(TRANSFER_TEST);
+// Deval Video
+timeline.push(DEVAL_VIDEO);
+// Deval Test
+timeline.push(DEVAL_TEST);
+// Food & Hunger Questions post-rating
+timeline.push(FHQ_PRE_1, FHQ_PRE_2, FHQ_PRE_3, FHQ_PRE_4);
+//  Close HIT Questions
+timeline.push(CLOSE_HIT);
+// Thanks
+timeline.push(THANKS)
 
 function startExperiment(){
     jsPsych.init({

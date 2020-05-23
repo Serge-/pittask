@@ -86,6 +86,8 @@ jsPsych.plugins['survey-vvr-questions-left'] = (function() {
         var OUTCOME = outcome_collection[counter_balancing[0].left];
         var button_trigger = false;
         var isMachineTilted = false;
+        var vas_holder = 0;
+
         var new_html = 
             `<div id="jspsych-stimulus" class='vvr-question-container vvr-question-left'>
                 <div class='vvr-question-a'>
@@ -138,14 +140,15 @@ jsPsych.plugins['survey-vvr-questions-left'] = (function() {
             value: 5,
             min: 0,
             max: 10,
-            step: 1,
+            step: 0.01,
             change: function(event, ui) {
                 $("#button").removeClass('disabled');         
                 button_trigger = true;
+                vas_holder = ui.value.toFixed(2);
                 response.trial_events.push({
                     "event_type": 'VAS answer has been made',
-                    "event_raw_details": (ui.value).toFixed(2),
-                    "event_converted_details": (ui.value).toFixed(2) + ' answer has been made',
+                    "event_raw_details": ui.value.toFixed(2),
+                    "event_converted_details": ui.value.toFixed(2) + ' answer has been made',
                     "timestamp": jsPsych.totalTime(),
                     "time_elapsed": jsPsych.totalTime() - timestamp_onload
                 });
@@ -251,7 +254,14 @@ jsPsych.plugins['survey-vvr-questions-left'] = (function() {
             // gather the data to store for the trial
             var trial_data = {
                 "stage_name": JSON.stringify(trial.stage_name),
+                "vvr_stage": JSON.stringify(trial.vvr_stage),
                 "stimulus": trial.stimulus,
+                "timestamp": jsPsych.totalTime(),
+                "block_number": loop_node_counter_vvr,
+                "item_id": 1,
+                "food_item": OUTCOME.slice(15),
+                "correct": vvrIsCorrect ? 'y':'n',
+                "strength_of_belief": vas_holder,
                 "events": JSON.stringify(response.trial_events)
             };
 
