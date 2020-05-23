@@ -191,6 +191,7 @@ jsPsych.plugins.animation = (function () {
             jsPsych.pluginAPI.cancelKeyboardResponse(response_listener);
 
             var trial_data = {
+                "stage_name": JSON.stringify(trial.stage_name),
                 "animation_sequence": JSON.stringify(animation_sequence),
                 "responses": JSON.stringify(responses)
             };

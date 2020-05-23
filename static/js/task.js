@@ -274,7 +274,7 @@ var FHQ_PRE_1 = {
         top: FHQ_1,
         bottom: FHQ_1_bottom_text
     },
-    food_item: "teddy.png",
+    food_item: "TT.png",
     rating_status: 'pre-rating',
     event_type: 'Food question scale appears',
     event_raw_details: "FHQ_1, FHQ_1_bottom_text",
@@ -289,7 +289,7 @@ var FHQ_PRE_2 = {
         top: FHQ_2,
         bottom: FHQ_2_bottom_text
     },
-    food_item: "teddy.png",
+    food_item: "MM.png",
     rating_status: 'pre-rating',
     event_type: 'Food question scale appears',
     event_raw_details: "FHQ_2, FHQ_2_bottom_text",
@@ -304,7 +304,7 @@ var FHQ_PRE_3 = {
         top: FHQ_3,
         bottom: FHQ_3_bottom_text
     },
-    food_item: "teddy.png",
+    food_item: "BBQ.png",
     rating_status: 'pre-rating',
     event_type: 'Food question scale appears',
     event_raw_details: "FHQ_3, FHQ_3_bottom_text",
@@ -335,7 +335,7 @@ var FHQ_POST_1 = {
         top: FHQ_1,
         bottom: FHQ_1_bottom_text
     },
-    food_item: "teddy.png",
+    food_item: "TT.png",
     rating_status: 'post-rating',
     event_type: 'Food question scale appears',
     event_raw_details: "FHQ_1, FHQ_1_bottom_text",
@@ -350,7 +350,7 @@ var FHQ_POST_2 = {
         top: FHQ_2,
         bottom: FHQ_2_bottom_text
     },
-    food_item: "teddy.png",
+    food_item: "MM.png",
     rating_status: 'post-rating',
     event_type: 'Food question scale appears',
     event_raw_details: "FHQ_2, FHQ_2_bottom_text",
@@ -365,7 +365,7 @@ var FHQ_POST_3 = {
         top: FHQ_3,
         bottom: FHQ_3_bottom_text
     },
-    food_item: "teddy.png",
+    food_item: "BBQ.png",
     rating_status: 'post-rating',
     event_type: 'Food question scale appears',
     event_raw_details: "FHQ_3, FHQ_3_bottom_text",
@@ -1247,7 +1247,7 @@ timeline.push(DEVAL_VIDEO);
 // Deval Test
 timeline.push(DEVAL_TEST);
 // Food & Hunger Questions post-rating
-timeline.push(FHQ_PRE_1, FHQ_PRE_2, FHQ_PRE_3, FHQ_PRE_4);
+timeline.push(FHQ_POST_1, FHQ_POST_2, FHQ_POST_3, FHQ_POST_4);
 //  Close HIT Questions
 timeline.push(CLOSE_HIT);
 // Thanks
