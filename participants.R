@@ -368,18 +368,18 @@ HungerRating <- data.table(
 #   `Y/N` = character()
 # )
 
-# PavCondition <- data.table(
-#   PIN = character(),
-#   complete = character(),
-#   date = character(),
-#   `calendar time` = character(),
-#   `commit code` = character(),
-#   version = character(),
-#   location = character(),   
-#   Q = numeric(),
-#   `response submitted` = character(),
-#   Correct = character()
-# )
+PavCondition <- data.table(
+  PIN = character(),
+  complete = character(),
+  date = character(),
+  `calendar time` = character(),
+  `commit code` = character(),
+  version = character(),
+  location = character(),   
+  Q = numeric(),
+  `response submitted` = character(),
+  Correct = character()
+)
 
 CompleteData <- data.table(
   PIN = character(),
@@ -1171,31 +1171,24 @@ if(isClass(query))
 
     # PavCondition ------------------------------------------------------------
 
-    # pav_condition_index <- which(trialdata$stage_name %in% "\"Pav Condition Response\"")
-    # 
-    # commit <- trialdata$commit[1]
-    # version <- trialdata$`Counter-balancing version`[1]
-    # 
-    # if(length(pav_condition_index ) != 0){
-    #   pav_condition_responses <- trialdata[pav_condition_index,]$response
-    #   
-    #   for(j in 1:length(pav_condition_responses)){
-    #     events <- fromJSON(pav_condition_responses[j])
-    #     
-    #     for(e in 1:length(events)){
-    #       response_submitted <- events$response_submitted
-    #       correct <- events$event_raw_details
-    #     }
-    # 
-    #     PavCondition <- rbindlist(list(PavCondition, list(
-    #       PIN, complete, date, time, commit, version, country,
-    #       Q = j,
-    #       response_submitted,
-    #       substring(correct, 1, 1)
-    #     )))
-    # 
-    #   }
-    # }
+    pav_condition_index <- which(trialdata$stage_name %in% "\"Pav Conditioning Response\"")
+    
+    if(length(pav_condition_index) != 0){
+      pav_condition_responses <- trialdata[pav_condition_index,]$responses
+    
+      for(j in 1:length(pav_condition_responses)){
+        events <- trialdata[pav_condition_index,]
+        response_submitted <- fromJSON(events$response_submitted[j])
+        correct <- events$event_raw_details[j]
+    
+        PavCondition <- rbindlist(list(PavCondition, list(
+          PIN, complete, date, time, commit, version, country,
+          Q = j,
+          response_submitted,
+          substring(correct, 1, 1)
+        )))
+      }
+    }
     
     # CompleteData ------------------------------------------------------------
 
@@ -1277,7 +1270,7 @@ if(isClass(query))
     "FoodRatings" = FoodRatings,
     "HungerRating" = HungerRating,
     # "ConsentFeedback" = ConsentFeedback,
-    # "PavCondition" = PavCondition,
+    "PavCondition" = PavCondition,
     "CompleteData" = CompleteData
   )
   

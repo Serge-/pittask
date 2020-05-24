@@ -213,7 +213,8 @@ jsPsych.plugins['survey-multi-choice'] = (function() {
         "response": JSON.stringify(color_value),
         "response_submitted": JSON.stringify(color_response_submitted),
         "responses": JSON.stringify(question_data),
-        "question_order": JSON.stringify(question_order)
+        "question_order": JSON.stringify(question_order),
+        "event_raw_details": pav_is_correct ? 'y' : 'n'
       };
       display_element.innerHTML = '';
 

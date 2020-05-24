@@ -1072,7 +1072,7 @@ var PAV_CONDITIONING = {
             type: 'animation'
         },
         {
-            stage_name: 'Pav Conditioning',
+            stage_name: 'Pav Conditioning Response',
             type: 'survey-multi-choice',
             questions: [
                 { prompt: "Which snack is overstocked?", name: 'response', options: [
