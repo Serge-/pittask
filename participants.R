@@ -730,9 +730,8 @@ if(isClass(query))
       for(j in 1:length(gad7_responses)){
         GAD_7 <- rbindlist(list(GAD_7, list(
           PIN, complete, date, 
-          # as.character(as.ITime(formatDateTime(time_ms + as.numeric(gad7_timestamps[[j]])))),
-          # gad7_timestamps[[j]],
-          NA, NA,
+          as.character(as.ITime(formatDateTime(time_ms + as.numeric(gad7_timestamps[[j]])))),
+          gad7_timestamps[[j]],
           country, commit, version,
           names(gad7_responses)[j],
           gad7_responses[[j]]
