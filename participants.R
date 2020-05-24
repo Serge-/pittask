@@ -357,16 +357,16 @@ HungerRating <- data.table(
   `Hunger post-rating` = character()
 )
 
-# ConsentFeedback <- data.table(
-#   PIN = character(),
-#   complete = character(),
-#   date = character(),
-#   `calendar time` = character(),
-#   location = character(),
-#   `Question number` = numeric(),
-#   `Question Text` = character(),
-#   `Y/N` = character()
-# )
+ConsentFeedback <- data.table(
+  PIN = character(),
+  complete = character(),
+  date = character(),
+  `calendar time` = character(),
+  location = character(),
+  `Question number` = numeric(),
+  `Question Text` = character(),
+  `Y/N` = character()
+)
 
 PavCondition <- data.table(
   PIN = character(),
@@ -1150,23 +1150,23 @@ if(isClass(query))
     
     # ConsentFeedback ---------------------------------------------------------
     
-    # consent_feedback_index <- which(trialdata$stage_name %in% "\"Close HIT & Questions\"")
-    # 
-    # if(length(consent_feedback_index ) != 0){
-    #   consent_feedback_responses <- fromJSON(trialdata[consent_feedback_index,]$responses)
-    #   
-    #   date <- format(as.Date(dateTime[consent_feedback_index]), "%d-%m-%Y")
-    #   time <- as.character(as.ITime(dateTime[consent_feedback_index]))
-    #   
-    #   for(j in 1:length(consent_feedback_responses)){
-    #     ConsentFeedback <- rbindlist(list(ConsentFeedback, list(
-    #       PIN, complete, date, time, country,
-    #       names(consent_feedback_responses)[j] %>% str_extract("^\\d+") %>% as.numeric(),
-    #       names(consent_feedback_responses)[j] %>% str_replace("^\\d+ :", "") %>% str_trim(),
-    #       consent_feedback_responses[[j]]
-    #     )))
-    #   }
-    # }
+    consent_feedback_index <- which(trialdata$stage_name %in% "\"Close HIT Questions\"")
+    
+    if(length(consent_feedback_index ) != 0){
+      consent_feedback_responses <- fromJSON(trialdata[consent_feedback_index,]$responses)
+      
+      date <- format(as.Date(dateTime[consent_feedback_index]), "%d-%m-%Y")
+      time <- as.character(as.ITime(dateTime[consent_feedback_index]))
+      
+      for(j in 1:length(consent_feedback_responses)){
+        ConsentFeedback <- rbindlist(list(ConsentFeedback, list(
+          PIN, complete, date, time, country,
+          ifelse(j == 4, 3, j),
+          names(consent_feedback_responses)[j] %>% str_replace("^\\d+ :", "") %>% str_trim(),
+          consent_feedback_responses[[j]]
+        )))
+      }
+    }
 
     # PavCondition ------------------------------------------------------------
 
@@ -1268,7 +1268,7 @@ if(isClass(query))
     "VVR" = VVR,
     "FoodRatings" = FoodRatings,
     "HungerRating" = HungerRating,
-    # "ConsentFeedback" = ConsentFeedback,
+    "ConsentFeedback" = ConsentFeedback,
     "PavCondition" = PavCondition,
     "CompleteData" = CompleteData
   )

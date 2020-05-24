@@ -75,6 +75,13 @@ jsPsych.plugins['survey-multi-choice'] = (function() {
     }
   }
   plugin.trial = function(display_element, trial) {
+
+    // store response
+    var response = {
+        trial_events: []
+    };
+    var timestamp_onload = jsPsych.totalTime();
+
     var plugin_id_name = "jspsych-survey-multi-choice";
 
     var html = "";
@@ -84,7 +91,7 @@ jsPsych.plugins['survey-multi-choice'] = (function() {
     html += ".jspsych-survey-multi-choice-question { margin-top: 2em; margin-bottom: 2em; text-align: left; }"+
       ".jspsych-survey-multi-choice-text span.required {color: darkred;}"+
       ".jspsych-survey-multi-choice-text {font-size: 3rem;}"+
-      ".vending-machine { margin-bottom: 3.4rem;}"+
+      ".vending-machine { margin-bottom: 1.6rem;}"+
       "label.jspsych-survey-multi-choice-text { font-size: 2rem; padding-left: 2rem;}"+
       ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-text {  text-align: center;}"+
       ".jspsych-survey-multi-choice-option { line-height: 2; }"+
@@ -173,6 +180,14 @@ jsPsych.plugins['survey-multi-choice'] = (function() {
     var color = pav_multi_choice_array[pav_multi_choice_counter].color;
     $('.vending-machine rect').css({ fill: color });
 
+    response.trial_events.push({
+      "event_type": 'vending machine appears',
+      "event_raw_details": color + ' vending machine ',
+      "event_converted_details": color + ' vending machine appears',
+      "timestamp": jsPsych.totalTime(),
+      "time_elapsed": jsPsych.totalTime() - timestamp_onload
+    });
+
     document.querySelector('form').addEventListener('submit', function(event) {
       event.preventDefault();
       // measure response time
@@ -214,7 +229,8 @@ jsPsych.plugins['survey-multi-choice'] = (function() {
         "response_submitted": JSON.stringify(color_response_submitted),
         "responses": JSON.stringify(question_data),
         "question_order": JSON.stringify(question_order),
-        "event_raw_details": pav_is_correct ? 'y' : 'n'
+        "event_raw_details": pav_is_correct ? 'y' : 'n',
+        "events": JSON.stringify(response.trial_events)
       };
       display_element.innerHTML = '';
 

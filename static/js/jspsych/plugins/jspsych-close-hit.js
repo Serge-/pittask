@@ -64,6 +64,21 @@ jsPsych.plugins['close-hit-questions'] = (function() {
       }
     }
     plugin.trial = function(display_element, trial) {
+
+      var response = {
+        trial_events: []
+      };
+
+      response.trial_events.push({
+        "event_type": trial.event_type,
+        "event_raw_details": trial.event_raw_details,
+        "event_converted_details": trial.event_converted_details,
+        "timestamp": jsPsych.totalTime(),
+        "time_elapsed": jsPsych.totalTime() - timestamp_onload
+      });
+
+      var timestamp_onload = jsPsych.totalTime();
+
       var plugin_id_name = "jspsych-survey-multi-choice";
   
       var html = "";
@@ -136,17 +151,62 @@ jsPsych.plugins['close-hit-questions'] = (function() {
           html += '<input type="radio" name="'+input_name+'" id="'+input_id+'" value="'+question.options[j]+'" '+required_attr+'></input>';
           html += '</div>';
         }
-
   
         html += '</div>';
       }
-      html += '<div><textarea rows="6" cols="80" name="comment" placeholder="Please type your suggestions for us here..." form="usrform"></textarea></div>'
+      html += '<div><textarea class="text_box" rows="6" cols="80" name="comment" placeholder="Please type your suggestions for us here..." form="usrform"></textarea></div>'
       // add submit button
       html += '<input type="submit" id="'+plugin_id_name+'-next" class="'+plugin_id_name+' jspsych-btn"' + (trial.button_label ? ' value="'+trial.button_label + '"': '') + '></input>';
       html += '</form>';
   
       // render
       display_element.innerHTML = html;
+
+       // function to handle key press responses
+       var after_response = function (info) {
+  
+        if (info.key_release === undefined) {
+          response.trial_events.push({
+            "event_type": "key press",
+            "event_raw_details": info.key,
+            "event_converted_details": jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(info.key) + ' key pressed',
+            "timestamp": jsPsych.totalTime(),
+            "time_elapsed": jsPsych.totalTime() - timestamp_onload
+          });
+
+          if(info.el) {
+            if(info.el.dataset.timeStamp) {
+              trial.time_stamp[info.el.dataset.timeStamp] = jsPsych.totalTime() - timestamp_onload;
+            }
+            if(info.el.dataset.questionNumber) {
+              response.trial_events.push({
+                "event_type": "answer displayed",
+                "event_raw_details": info.el.dataset.questionNumber,
+                "event_converted_details": info.el.dataset.questionNumber + ' answer displayed',
+                "timestamp": jsPsych.totalTime(),
+                "time_elapsed": jsPsych.totalTime() - timestamp_onload
+              });
+            }
+            if(info.el.type === 'submit') {
+              response.trial_events.push({
+                "event_type": "button clicked",
+                "event_raw_details": 'Submit',
+                "event_converted_details": '"Submit" selected',
+                "timestamp": jsPsych.totalTime(),
+                "time_elapsed": jsPsych.totalTime() - timestamp_onload
+              });
+            }
+          }
+        } else {
+          response.trial_events.push({
+            "event_type": "key release",
+            "event_raw_details": info.key_release,
+            "event_converted_details": jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(info.key_release) + ' key released',
+            "timestamp": jsPsych.totalTime(),
+            "time_elapsed": jsPsych.totalTime() - timestamp_onload
+          });
+        }
+      }
   
       document.querySelector('form').addEventListener('submit', function(event) {
         event.preventDefault();
@@ -158,24 +218,39 @@ jsPsych.plugins['close-hit-questions'] = (function() {
         var question_data = {};
         for(var i=0; i<trial.questions.length; i++){
           var match = display_element.querySelector('#jspsych-survey-multi-choice-'+i);
-          var id = "Q" + i;
+          var id = trial.questions[i].prompt;
+
           if(match.querySelector("input[type=radio]:checked") !== null){
             var val = match.querySelector("input[type=radio]:checked").value;
           } else {
-            var val = "";
+            var val = "NA";
           }
+
           var obje = {};
-          var name = id;
-          if(match.attributes['data-name'].value !== ''){
-            name = match.attributes['data-name'].value;
-          }
-          obje[name] = val;
+          obje[id] = val;
           Object.assign(question_data, obje);
+        }
+
+        var text_box = $('.text_box').val();
+        var obj = {};
+        if(text_box) {
+          obj['Text Response'] = text_box;
+        } else {
+          obj['Text Response'] = 'NA';
+        }
+
+        Object.assign(question_data, obj);
+
+        // kill keyboard listeners
+        if (typeof keyboardListener !== 'undefined') {
+          jsPsych.pluginAPI.cancelKeyboardResponse(keyboardListener);
+          jsPsych.pluginAPI.cancelClickResponse(clickListener);
         }
         // save data
         var trial_data = {
             "stage_name": JSON.stringify(trial.stage_name),
-            "responses": JSON.stringify(question_data)
+            "responses": JSON.stringify(question_data),
+            "events": JSON.stringify(response.trial_events)
         };
         display_element.innerHTML = '';
   
@@ -184,6 +259,22 @@ jsPsych.plugins['close-hit-questions'] = (function() {
       });
   
       var startTime = performance.now();
+
+      // start the response listener
+      var keyboardListener = jsPsych.pluginAPI.getKeyboardResponse({
+        callback_function: after_response,
+        valid_responses: jsPsych.ALL_KEYS,
+        rt_method: 'performance',
+        persist: true,
+        allow_held_key: false
+      });
+      var clickListener = jsPsych.pluginAPI.getMouseResponse({
+        callback_function: after_response,
+        valid_responses: jsPsych.ALL_KEYS,
+        rt_method: 'performance',
+        persist: true,
+        allow_held_key: false
+      });
     };
   
     return plugin;

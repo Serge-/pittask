@@ -186,10 +186,10 @@ var vas_right_hungry = "<p>Extremely</p>";
  * Pavlovian Conditioning
  ************************************************************/
 
-var pav_time_animation = 1500;
-var pav_correct_answers = 6;
-var pav_incorrect_answers = 10;
-var pav_interval_between_images = 1500;
+var pav_time_animation = 500;
+var pav_correct_answers = 2;
+var pav_incorrect_answers = 1;
+var pav_interval_between_images = 500;
 
 
 /************************************************************

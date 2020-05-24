@@ -1179,6 +1179,9 @@ var CLOSE_HIT = {
         { prompt: "Do you have any suggestions for how we can improve the research?", horizontal: true, name: 'response', options: ['Yes', 'No'] }
     ],
     button_label: 'submit answer',
+    event_type: 'questions appears',
+    event_raw_details: 'Close HIT Questions',
+    event_converted_details: "Close HIT Questions text appears"
 }
 
 
