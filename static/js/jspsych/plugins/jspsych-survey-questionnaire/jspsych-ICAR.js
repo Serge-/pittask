@@ -121,7 +121,8 @@ jsPsych.plugins['ICAR'] = (function () {
       // inject CSS for trial
       html += '<style id="jspsych-survey-multi-choice-css">';
       html += 
-        ".jspsych-survey-multi-choice-question {}" +
+        ".jspsych-survey-multi-choice-question {  }" +
+        ".verbal-reasoning, .letter-number-series { width: 600px; }" +
         ".matrix-reasoning-wrap { display: flex; position: relative; }" +
         ".matrix-reasoning-wrap ul { position: absolute; display: flex; justify-content: center; height: 113px; margin-bottom: 3rem; padding-left: 0; bottom: 0; left: 0; right: 0; }" +
         ".matrix-reasoning-wrap ul li { width: 92px; opacity: .4; }" +
@@ -186,7 +187,7 @@ jsPsych.plugins['ICAR'] = (function () {
         }
   
         if(question.name === 'letter_number_series') {
-          html += '<div id="jspsych-survey-multi-choice-' + question_id + '" class="' + question_classes.join(' ') + '" style="display: none;"  data-name="' + question.number + '">';
+          html += '<div class="letter-number-series" id="jspsych-survey-multi-choice-' + question_id + '" class="' + question_classes.join(' ') + '" style="display: none;"  data-name="' + question.number + '">';
     
           // add question text
           html += '<div><p class="jspsych-survey-multi-choice-question survey-multi-choice" style="padding-top: 3px; text-align: left;">' + question.prompt + '</p>';
@@ -214,7 +215,7 @@ jsPsych.plugins['ICAR'] = (function () {
         }
         // Verbal Reasoning
         else if(question.name === 'verbal_reasoning') {
-          html += '<div id="jspsych-survey-multi-choice-' + question_id + '" class="' + question_classes.join(' ') + '" style="display: none;"  data-name="' + question.number + '">';
+          html += '<div class="verbal-reasoning" id="jspsych-survey-multi-choice-' + question_id + '" class="' + question_classes.join(' ') + '" style="display: none;"  data-name="' + question.number + '">';
     
           // add question text
           html += '<div><p class="jspsych-survey-multi-choice-question survey-multi-choice" style="padding-top: 3px; text-align: left;">' + question.prompt + '</p></div>';
