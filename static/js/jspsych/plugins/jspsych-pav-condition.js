@@ -197,21 +197,6 @@ jsPsych.plugins.animation = (function () {
         // hold the jspsych response listener object in memory
         // so that we can turn off the response collection when
         // the trial ends
-        var response_listener = jsPsych.pluginAPI.getKeyboardResponse({
-            callback_function: after_response,
-            valid_responses: trial.choices,
-            rt_method: 'performance',
-            persist: true,
-            allow_held_key: false
-        });
-
-        var clickListener = jsPsych.pluginAPI.getMouseResponse({
-            callback_function: after_response,
-            valid_responses: jsPsych.ALL_KEYS,
-            rt_method: 'performance',
-            persist: true,
-            allow_held_key: false
-        });
 
         function endTrial() {
 
@@ -230,6 +215,22 @@ jsPsych.plugins.animation = (function () {
 
             jsPsych.finishTrial(trial_data);
         }
+
+        var keyboardListener = jsPsych.pluginAPI.getKeyboardResponse({
+            callback_function: after_response,
+            valid_responses: trial.choices,
+            rt_method: 'performance',
+            persist: true,
+            allow_held_key: false
+        });
+
+        var clickListener = jsPsych.pluginAPI.getMouseResponse({
+            callback_function: after_response,
+            valid_responses: jsPsych.ALL_KEYS,
+            rt_method: 'performance',
+            persist: true,
+            allow_held_key: false
+        });
     };
 
     return plugin;

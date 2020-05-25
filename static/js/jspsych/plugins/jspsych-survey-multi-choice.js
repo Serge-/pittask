@@ -188,6 +188,27 @@ jsPsych.plugins['survey-multi-choice'] = (function() {
       "time_elapsed": jsPsych.totalTime() - timestamp_onload
     });
 
+    var after_response = function (info) {
+
+        if(info.key_release === undefined) {
+            response.trial_events.push({
+              "event_type": "key press",
+              "event_raw_details": info.key,
+              "event_converted_details": jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(info.key) + ' key pressed',
+              "timestamp": jsPsych.totalTime(),
+              "time_elapsed": jsPsych.totalTime() - timestamp_onload
+            });
+          } else {
+              response.trial_events.push({
+                "event_type": "key release",
+                "event_raw_details": info.key_release,
+                "event_converted_details": jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(info.key_release) + ' key released',
+                "timestamp": jsPsych.totalTime(),
+                "time_elapsed": jsPsych.totalTime() - timestamp_onload
+              });
+        }
+    }
+
     document.querySelector('form').addEventListener('submit', function(event) {
       event.preventDefault();
       // measure response time
@@ -234,11 +255,33 @@ jsPsych.plugins['survey-multi-choice'] = (function() {
       };
       display_element.innerHTML = '';
 
+      // kill keyboard listeners
+      if (typeof keyboardListener !== 'undefined') {
+        jsPsych.pluginAPI.cancelKeyboardResponse(keyboardListener);
+        jsPsych.pluginAPI.cancelClickResponse(clickListener);
+      }
+
       // next trial
       jsPsych.finishTrial(trial_data);
     });
 
     var startTime = performance.now();
+
+    var keyboardListener = jsPsych.pluginAPI.getKeyboardResponse({
+        callback_function: after_response,
+        valid_responses: trial.choices,
+        rt_method: 'performance',
+        persist: true,
+        allow_held_key: false
+    });
+
+    var clickListener = jsPsych.pluginAPI.getMouseResponse({
+        callback_function: after_response,
+        valid_responses: jsPsych.ALL_KEYS,
+        rt_method: 'performance',
+        persist: true,
+        allow_held_key: false
+    });
   };
 
   return plugin;
