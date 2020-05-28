@@ -123,8 +123,9 @@ jsPsych.plugins["video-keyboard-response"] = (function() {
       });
 
       // setup stimulus
-      var video_html = '<div>'
-      video_html += '<video id="jspsych-video-keyboard-response-stimulus"';
+      var video_html = '<div>';
+      
+      video_html += '<video class="hidden" id="jspsych-video-keyboard-response-stimulus"';
   
       if(trial.width) {
         video_html += ' width="'+trial.width+'"';
@@ -134,6 +135,9 @@ jsPsych.plugins["video-keyboard-response"] = (function() {
       }
       if(trial.autoplay){
         video_html += " autoplay ";
+      }
+      if(!trial.audio){
+        video_html += " muted ";
       }
       if(trial.controls){
         video_html +=" controls ";
@@ -153,6 +157,17 @@ jsPsych.plugins["video-keyboard-response"] = (function() {
         }
       }
       video_html += "</video>";
+
+      if(trial.open_instruct) {
+        video_html += '<p>' + open_instruct_text_video + '</p>';
+        $('video').addClass('hidden');
+        
+        setTimeout(function() {
+          $('video').removeClass('hidden');
+          $('p').addClass('hidden');
+        }, open_instruct_latency);
+      }
+
       video_html += "</div>";
   
       // add prompt if there is one
@@ -266,12 +281,27 @@ jsPsych.plugins["video-keyboard-response"] = (function() {
           allow_held_key: false
         });
       }
-  
+
+      var video_duration_real = trial.trial_duration;
+
+      if(trial.open_instruct) {
+        video_duration_real += open_instruct_latency;
+        var vid = document.getElementById("jspsych-video-keyboard-response-stimulus");
+        vid.pause();
+        setTimeout(function() {
+          vid.play();
+        }, open_instruct_latency);
+      } else {
+        $('video').ready(function() {
+          $('video').removeClass('hidden');
+        });
+      }
+
       // end trial if time limit is set
       if (trial.trial_duration !== null) {
         jsPsych.pluginAPI.setTimeout(function() {
           end_trial();
-        }, trial.trial_duration);
+        }, video_duration_real);
       }
     };
   

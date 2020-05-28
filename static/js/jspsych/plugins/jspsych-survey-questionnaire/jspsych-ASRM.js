@@ -208,7 +208,7 @@ jsPsych.plugins['ASRM'] = (function () {
             </header>
             <main class="modal__content" id="modal-1-content">
               <p>
-              ${survey.modal}
+              ${popup_text_web_forms}
               </p>
             </main>
             <footer class="modal__footer">

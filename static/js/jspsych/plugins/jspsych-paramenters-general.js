@@ -21,7 +21,7 @@ jsPsych.plugins['Parameters'] = (function(){
     }
   
     plugin.trial = function(display_element, trial){
-        var parameters = {
+        var parameters = [{
           "full_screen_mode": full_screen_mode,
           "shake_right_rotate": shake_right_rotate,
           "shake_right_translateX": shake_right_translateX,
@@ -32,13 +32,14 @@ jsPsych.plugins['Parameters'] = (function(){
           "left_tilt": left_tilt,
           "right_tilt": right_tilt,
        
-        // "instruction_before_video": instruction_before_video,
-        // "instruction_before_video_duration": instruction_before_video_duration,
-        // "instruction_after_video_duration": instruction_after_video_duration,
-        // "instructor_videos": instructor_videosContainer,
         // "video_sound": video_sound,
         // "video_duration": video_duration,
-        };
+        },
+        {},
+        {},
+        {},
+        {},
+        ];
 
         var trial_data = {
             "stage_name": "Parameters",

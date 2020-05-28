@@ -82,9 +82,9 @@ List of Stages:
 • Behavioural stages
     o Food & Hunger Questions
     o VVR
-        ■ Instrumental conditioning [VVR phase A]
-        ■ Contingency degradation [VVR phase B]
-        ■ Contingency restoration [VVR phase C]
+        ■ Instrumental conditioning [VVR_1]
+        ■ Contingency degradation [VVR_2]
+        ■ Contingency restoration [VVR_3]
     o Pavlovian conditioning
     o Transfer test
     o Deval video

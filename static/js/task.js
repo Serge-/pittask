@@ -14,84 +14,84 @@ var counter_balancing_input = [
         game_version: 'A',
         left: 'MM',
         right: 'BBQ',
-        video: video_MM,
+        video: '/static/video/MM',
         converted_details: "MM"
     },
     b = {
         game_version: 'B',
         left: 'BBQ',
         right: 'MM',
-        video: video_BBQ,
+        video: '/static/video/BBQ',
         converted_details: "BBQ"
     },
     c = {
         game_version: 'C',
         left: 'TT',
         right: 'BBQ',
-        video: video_TT,
+        video: '/static/video/TT',
         converted_details: "TT"
     }, 
     d = {
         game_version: 'D',
         left: 'BBQ',
         right: 'TT',
-        video: video_BBQ,
+        video: '/static/video/BBQ',
         converted_details: "BBQ"
     },
     e = {
         game_version: 'E',
         left: 'MM',
         right: 'TT',
-        video: video_MM,
+        video: '/static/video/MM',
         converted_details: "MM"
     },
     f = {
         game_version: 'F',
         left: 'TT',
         right: 'MM',
-        video: video_TT,
+        video: '/static/video/TT',
         converted_details: "TT"
     },
     g = {
         game_version: 'G',
         left: 'MM',
         right: 'BBQ',
-        video: video_BBQ,
+        video: '/static/video/BBQ',
         converted_details: "BBQ"
     },
     h = {
         game_version: 'H',
         left: 'BBQ',
         right: 'MM',
-        video: video_MM,
+        video: '/static/video/MM',
         converted_details: "MM"
     },
     i = {
         game_version: 'I',
         left: 'TT',
         right: 'BBQ',
-        video: video_BBQ,
+        video: '/static/video/BBQ',
         converted_details: "BBQ"
     },
     j = {
         game_version: 'J',
         left: 'BBQ',
         right: 'TT',
-        video: video_TT,
+        video: '/static/video/TT',
         converted_details: "TT"
     },
     k = {
         game_version: 'K',
         left: 'MM',
         right: 'TT',
-        video: video_TT,
+        video: '/static/video/TT',
         converted_details: "TT"
     },
     l = {
         game_version: 'L',
         left: 'TT',
         right: 'MM',
-        video: video_MM,
+        video: '/static/video/MM',
         converted_details: "MM"
     }
 ];
@@ -138,95 +138,59 @@ resubmit = function() {
 var parameters = {
     parameters_instrumental_conditioning: {
         type: 'parameters-VVR',
-        stage_name: 'parameters instrumental conditioning',
+        stage_name: 'VVR1 parameters instrumental conditioning',
         variables: {
-            open_instruct: vvr.instrumental_conditioning.open_instruct,
-            open_instruct_text: vvr.instrumental_conditioning.open_instruct_text,
-            open_instruct_latency: vvr.instrumental_conditioning.open_instruct_latency,
-            degrad_pattern: vvr.instrumental_conditioning.degrad_pattern,
-            prob_value: vvr.instrumental_conditioning.prob_value,
-            interval_duration: vvr.instrumental_conditioning.interval_duration,
-            outcome_duration: vvr.instrumental_conditioning.outcome_duration,
-            interval_num: vvr.instrumental_conditioning.interval_num,
-            min_blocks_num: vvr.instrumental_conditioning.min_blocks_num,
-            max_num_correct: vvr.instrumental_conditioning.max_num_correct,
-            max_num_incorrect: vvr.instrumental_conditioning.max_num_incorrect,
-            max_num_correct_consecutive_questions: vvr.instrumental_conditioning.max_num_correct_consecutive_questions,
-            question_text_a1: vvr.instrumental_conditioning.question_text_a1,
-            question_text_a2: vvr.instrumental_conditioning.question_text_a2,
-            question_text_b1: vvr.instrumental_conditioning.question_text_b1,
-            question_text_b2: vvr.instrumental_conditioning.question_text_b2,
-            question_text_b3: vvr.instrumental_conditioning.question_text_b3,
-            question_text_b4: vvr.instrumental_conditioning.question_text_b4,
-            popup_text: vvr.instrumental_conditioning.popup_text,
-            correct_text: vvr.instrumental_conditioning.correct_text,
-            incorrect_text: vvr.instrumental_conditioning.incorrect_text,
-            feedback_duration: vvr.instrumental_conditioning.feedback_duration,
-            close_instruct: vvr.instrumental_conditioning.close_instruct,
-            close_instruct_text: vvr.instrumental_conditioning.close_instruct_text,
-            close_instruct_latency: vvr.instrumental_conditioning.close_instruct_latency,
+            open_instruct: open_instruct_VVR1,
+            open_instruct_text: open_instruct_text_VVR1,
+            degrad_pattern: degrad_pattern_VVR1,
+            prob_value: prob_value_VVR1,
+            interval_duration: interval_duration_VVR1,
+            outcome_duration: outcome_duration_VVR1,
+            interval_num: interval_num_VVR1,
+            min_blocks_num: min_blocks_num_VVR1,
+            max_num_correct: max_num_correct_VVR1,
+            max_num_incorrect: max_num_incorrect_VVR1,
+            max_num_correct_consecutive_questions: max_num_correct_consecutive_questions_VVR1,
+            close_instruct: close_instruct_VVR1,
+            close_instruct_text: close_instruct_text_VVR1,
         }
     },
     parameters_contingency_degradation: {
         type: 'parameters-VVR',
-        stage_name: 'parameters contingency degradation',
+        stage_name: 'VVR2 parameters contingency degradation',
         variables: {
-            open_instruct: vvr.contingency_degradation.open_instruct,
-            open_instruct_text: vvr.contingency_degradation.open_instruct_text,
-            open_instruct_latency: vvr.contingency_degradation.open_instruct_latency,
-            degrad_pattern: vvr.contingency_degradation.degrad_pattern,
-            prob_value: vvr.contingency_degradation.prob_value,
-            interval_duration: vvr.contingency_degradation.interval_duration,
-            outcome_duration: vvr.contingency_degradation.outcome_duration,
-            interval_num: vvr.contingency_degradation.interval_num,
-            min_blocks_num: vvr.contingency_degradation.min_blocks_num,
-            max_num_correct: vvr.contingency_degradation.max_num_correct,
-            max_num_incorrect: vvr.contingency_degradation.max_num_incorrect,
-            max_num_correct_consecutive_questions: vvr.contingency_degradation.max_num_correct_consecutive_questions,
-            question_text_a1: vvr.contingency_degradation.question_text_a1,
-            question_text_a2: vvr.contingency_degradation.question_text_a2,
-            question_text_b1: vvr.contingency_degradation.question_text_b1,
-            question_text_b2: vvr.contingency_degradation.question_text_b2,
-            question_text_b3: vvr.contingency_degradation.question_text_b3,
-            question_text_b4: vvr.contingency_degradation.question_text_b4,
-            popup_text: vvr.contingency_degradation.popup_text,
-            correct_text: vvr.contingency_degradation.correct_text,
-            incorrect_text: vvr.contingency_degradation.incorrect_text,
-            feedback_duration: vvr.contingency_degradation.feedback_duration,
-            close_instruct: vvr.contingency_degradation.close_instruct,
-            close_instruct_text: vvr.contingency_degradation.close_instruct_text,
-            close_instruct_latency: vvr.contingency_degradation.close_instruct_latency,
+            open_instruct: open_instruct_VVR2,
+            open_instruct_text: open_instruct_text_VVR2,
+            degrad_pattern: degrad_pattern_VVR2,
+            prob_value: prob_value_VVR2,
+            interval_duration: interval_duration_VVR2,
+            outcome_duration: outcome_duration_VVR2,
+            interval_num: interval_num_VVR2,
+            min_blocks_num: min_blocks_num_VVR2,
+            max_num_correct: max_num_correct_VVR2,
+            max_num_incorrect: max_num_incorrect_VVR2,
+            max_num_correct_consecutive_questions: max_num_correct_consecutive_questions_VVR2,
+            close_instruct: close_instruct_VVR2,
+            close_instruct_text: close_instruct_text_VVR2,
         }
     },
     parameters_contingency_restoration: {
         type: 'parameters-VVR',
-        stage_name: 'parameters contingency restoration',
+        stage_name: 'VVR3 parameters contingency restoration',
         variables: {
-            open_instruct: vvr.contingency_restoration.open_instruct,
-            open_instruct_text: vvr.contingency_restoration.open_instruct_text,
-            open_instruct_latency: vvr.contingency_restoration.open_instruct_latency,
-            degrad_pattern: vvr.contingency_restoration.degrad_pattern,
-            prob_value: vvr.contingency_restoration.prob_value,
-            interval_duration: vvr.contingency_restoration.interval_duration,
-            outcome_duration: vvr.contingency_restoration.outcome_duration,
-            interval_num: vvr.contingency_restoration.interval_num,
-            min_blocks_num: vvr.contingency_restoration.min_blocks_num,
-            max_num_correct: vvr.contingency_restoration.max_num_correct,
-            max_num_incorrect: vvr.contingency_restoration.max_num_incorrect,
-            max_num_correct_consecutive_questions: vvr.contingency_restoration.max_num_correct_consecutive_questions,
-            question_text_a1: vvr.contingency_restoration.question_text_a1,
-            question_text_a2: vvr.contingency_restoration.question_text_a2,
-            question_text_b1: vvr.contingency_restoration.question_text_b1,
-            question_text_b2: vvr.contingency_restoration.question_text_b2,
-            question_text_b3: vvr.contingency_restoration.question_text_b3,
-            question_text_b4: vvr.contingency_restoration.question_text_b4,
-            popup_text: vvr.contingency_restoration.popup_text,
-            correct_text: vvr.contingency_restoration.correct_text,
-            incorrect_text: vvr.contingency_restoration.incorrect_text,
-            feedback_duration: vvr.contingency_restoration.feedback_duration,
-            close_instruct: vvr.contingency_restoration.close_instruct,
-            close_instruct_text: vvr.contingency_restoration.close_instruct_text,
-            close_instruct_latency: vvr.contingency_restoration.close_instruct_latency,
+            open_instruct: open_instruct_VVR3,
+            open_instruct_text: open_instruct_text_VVR3,
+            degrad_pattern: degrad_pattern_VVR3,
+            prob_value: prob_value_VVR3,
+            interval_duration: interval_duration_VVR3,
+            outcome_duration: outcome_duration_VVR3,
+            interval_num: interval_num_VVR3,
+            min_blocks_num: min_blocks_num_VVR3,
+            max_num_correct: max_num_correct_VVR3,
+            max_num_incorrect: max_num_incorrect_VVR3,
+            max_num_correct_consecutive_questions: max_num_correct_consecutive_questions_VVR3,
+            close_instruct: close_instruct_VVR3,
+            close_instruct_text: close_instruct_text_VVR3,
         }
     }
 }
@@ -234,12 +198,12 @@ var parameters = {
 var KEY_TESTING_OPEN = {
     stage_name: 'Key-testing',
     type: 'html-keyboard-response',
-    stimulus: key_testing_open,
-    trial_latency: key_testing_latency_period,
+    stimulus: open_instruct_text_key_testing,
+    trial_latency: open_instruct_latency,
     trial_duration: null,
     response_ends_trial: false,
     event_type: 'text appears',
-    event_raw_details: 'key_testing_open',
+    event_raw_details: 'open_instruct_text_key_testing',
     event_converted_details: 'Key-testing open text appears'
 }
 
@@ -250,19 +214,19 @@ var KEY_TESTING = {
     trial_duration: null,
     response_ends_trial: false,
     event_type: 'image appears',
-    event_raw_details: 'clinical_close_text',
+    event_raw_details: 'key_testing_close',
     event_converted_details: 'white vending machine appears'
 }
 
 var KEY_TESTING_CLOSE = {
     stage_name: 'Key-testing',
     type: 'html-keyboard-response',
-    stimulus: key_testing_close,
-    trial_latency: key_testing_latency_period,
+    stimulus: close_instruct_text_key_testing,
+    trial_latency: close_instruct_latency,
     trial_duration: null,
     response_ends_trial: false,
     event_type: 'text appears',
-    event_raw_details: 'key_testing_close',
+    event_raw_details: 'close_instruct_text_key_testing',
     event_converted_details: 'Key-testing close text appears'
 }
 
@@ -394,37 +358,20 @@ var vvrIsCorrect = false;
 
 var vvr_ = {
     vvr_a: function() {
-        var _vvr$instrumental_con = vvr.instrumental_conditioning,
-            interval_num = _vvr$instrumental_con.interval_num,
-            interval_duration = _vvr$instrumental_con.interval_duration,
-            outcome_duration = _vvr$instrumental_con.outcome_duration,
-            prob_value = _vvr$instrumental_con.prob_value,
-            degrad_pattern = _vvr$instrumental_con.degrad_pattern,
-            min_blocks_num = _vvr$instrumental_con.min_blocks_num,
-            max_num_correct_consecutive_questions = _vvr$instrumental_con.max_num_correct_consecutive_questions,
-            max_num_correct = _vvr$instrumental_con.max_num_correct,
-            max_num_incorrect = _vvr$instrumental_con.max_num_incorrect,
-            correct_text = _vvr$instrumental_con.correct_text,
-            incorrect_text = _vvr$instrumental_con.incorrect_text,
-            feedback_duration = _vvr$instrumental_con.feedback_duration,
-            question_text_a1 = _vvr$instrumental_con.question_text_a1,
-            question_text_a2 = _vvr$instrumental_con.question_text_a2,
-            question_text_b1 = _vvr$instrumental_con.question_text_b1,
-            question_text_b2 = _vvr$instrumental_con.question_text_b2,
-            question_text_b3 = _vvr$instrumental_con.question_text_b3,
-            question_text_b4 = _vvr$instrumental_con.question_text_b4,
-            popup_text = _vvr$instrumental_con.popup_text,
-            max_num_correct_consecutive_questions = _vvr$instrumental_con.max_num_correct_consecutive_questions;
+        var min_blocks_num = min_blocks_num_VVR1,
+            max_num_correct_consecutive_questions = max_num_correct_consecutive_questions_VVR1,
+            max_num_correct = max_num_correct_VVR1,
+            max_num_incorrect = max_num_incorrect_VVR1;
 
         var vvr_a = {
             type: 'survey-vvr',
             stage_name: 'instrumental conditioning',
             variables: {
-                VVR_INTERVAL_NUM: interval_num,
-                VVR_INTERVAL_DURATION: interval_duration,
-                VVR_OUTCOME_DURATION: outcome_duration,
-                VVR_PROB_VALUE: prob_value,
-                VVR_DEGRAD_PATTERN : degrad_pattern,
+                VVR_INTERVAL_NUM: max_num_incorrect_VVR1,
+                VVR_INTERVAL_DURATION: interval_duration_VVR1,
+                VVR_OUTCOME_DURATION: outcome_duration_VVR1,
+                VVR_PROB_VALUE: prob_value_VVR1,
+                VVR_DEGRAD_PATTERN : degrad_pattern_VVR1,
             }
         }
         
@@ -563,37 +510,20 @@ var vvr_ = {
         return loop_node_VVR;
     },
     vvr_b: function() {
-        var _vvr$contingency_degr = vvr.contingency_degradation,
-        interval_num = _vvr$contingency_degr.interval_num,
-        interval_duration = _vvr$contingency_degr.interval_duration,
-        outcome_duration = _vvr$contingency_degr.outcome_duration,
-        prob_value = _vvr$contingency_degr.prob_value,
-        degrad_pattern = _vvr$contingency_degr.degrad_pattern,
-        min_blocks_num = _vvr$contingency_degr.min_blocks_num,
-        max_num_correct_consecutive_questions = _vvr$contingency_degr.max_num_correct_consecutive_questions,
-        max_num_correct = _vvr$contingency_degr.max_num_correct,
-        max_num_incorrect = _vvr$contingency_degr.max_num_incorrect,
-        correct_text = _vvr$contingency_degr.correct_text,
-        incorrect_text = _vvr$contingency_degr.incorrect_text,
-        feedback_duration = _vvr$contingency_degr.feedback_duration,
-        question_text_a1 = _vvr$contingency_degr.question_text_a1,
-        question_text_a2 = _vvr$contingency_degr.question_text_a2,
-        question_text_b1 = _vvr$contingency_degr.question_text_b1,
-        question_text_b2 = _vvr$contingency_degr.question_text_b2,
-        question_text_b3 = _vvr$contingency_degr.question_text_b3,
-        question_text_b4 = _vvr$contingency_degr.question_text_b4,
-        popup_text = _vvr$contingency_degr.popup_text,
-        max_num_correct_consecutive_questions = _vvr$contingency_degr.max_num_correct_consecutive_questions;
+        var min_blocks_num = min_blocks_num_VVR2,
+        max_num_correct_consecutive_questions = max_num_correct_consecutive_questions_VVR2,
+        max_num_correct = max_num_correct_VVR2,
+        max_num_incorrect = max_num_incorrect_VVR2;
 
         var vvr_a = {
             type: 'survey-vvr',
             stage_name: 'contingency degradation',
             variables: {
-                VVR_INTERVAL_NUM: interval_num,
-                VVR_INTERVAL_DURATION: interval_duration,
-                VVR_OUTCOME_DURATION: outcome_duration,
-                VVR_PROB_VALUE: prob_value,
-                VVR_DEGRAD_PATTERN : degrad_pattern,
+                VVR_INTERVAL_NUM: max_num_incorrect_VVR2,
+                VVR_INTERVAL_DURATION: interval_duration_VVR2,
+                VVR_OUTCOME_DURATION: outcome_duration_VVR2,
+                VVR_PROB_VALUE: prob_value_VVR2,
+                VVR_DEGRAD_PATTERN : degrad_pattern_VVR2
             }
         }
         
@@ -732,38 +662,20 @@ var vvr_ = {
         return loop_node_VVR;
     },
     vvr_c: function() {
-
-        var _vvr$contingency_rest = vvr.contingency_restoration,
-            interval_num = _vvr$contingency_rest.interval_num,
-            interval_duration = _vvr$contingency_rest.interval_duration,
-            outcome_duration = _vvr$contingency_rest.outcome_duration,
-            prob_value = _vvr$contingency_rest.prob_value,
-            degrad_pattern = _vvr$contingency_rest.degrad_pattern,
-            min_blocks_num = _vvr$contingency_rest.min_blocks_num,
-            max_num_correct_consecutive_questions = _vvr$contingency_rest.max_num_correct_consecutive_questions,
-            max_num_correct = _vvr$contingency_rest.max_num_correct,
-            max_num_incorrect = _vvr$contingency_rest.max_num_incorrect,
-            correct_text = _vvr$contingency_rest.correct_text,
-            incorrect_text = _vvr$contingency_rest.incorrect_text,
-            feedback_duration = _vvr$contingency_rest.feedback_duration,
-            question_text_a1 = _vvr$contingency_rest.question_text_a1,
-            question_text_a2 = _vvr$contingency_rest.question_text_a2,
-            question_text_b1 = _vvr$contingency_rest.question_text_b1,
-            question_text_b2 = _vvr$contingency_rest.question_text_b2,
-            question_text_b3 = _vvr$contingency_rest.question_text_b3,
-            question_text_b4 = _vvr$contingency_rest.question_text_b4,
-            popup_text = _vvr$contingency_rest.popup_text,
-            max_num_correct_consecutive_questions = _vvr$contingency_rest.max_num_correct_consecutive_questions;
+        var min_blocks_num = min_blocks_num_VVR3,
+        max_num_correct_consecutive_questions = max_num_correct_consecutive_questions_VVR3,
+        max_num_correct = max_num_correct_VVR3,
+        max_num_incorrect = max_num_incorrect_VVR3;
 
         var vvr_a = {
             type: 'survey-vvr',
             stage_name: 'contingency restoration',
             variables: {
-                VVR_INTERVAL_NUM: interval_num,
-                VVR_INTERVAL_DURATION: interval_duration,
-                VVR_OUTCOME_DURATION: outcome_duration,
-                VVR_PROB_VALUE: prob_value,
-                VVR_DEGRAD_PATTERN : degrad_pattern,
+                VVR_INTERVAL_NUM: max_num_incorrect_VVR3,
+                VVR_INTERVAL_DURATION: interval_duration_VVR3,
+                VVR_OUTCOME_DURATION: outcome_duration_VVR3,
+                VVR_PROB_VALUE: prob_value_VVR3,
+                VVR_DEGRAD_PATTERN : degrad_pattern_VVR3
             }
         }
         
@@ -906,30 +818,30 @@ var vvr_ = {
             timeline: [{ 
                 stage_name: 'instrumental conditioning open instructions page',
                 type: 'html-keyboard-response',
-                stimulus: vvr.instrumental_conditioning.open_instruct_text,
-                trial_latency: vvr.instrumental_conditioning.open_instruct_latency,
+                stimulus: open_instruct_text_VVR1,
+                trial_latency: open_instruct_latency,
                 response_ends_trial: false,
                 event_type: 'text appears',
-                event_raw_details: 'open_instruct_text',
+                event_raw_details: 'open_instruct_text_VVR1',
                 event_converted_details: 'instrumental conditioning open text appears'
             }],
             conditional_function: function(){
-                return  vvr.instrumental_conditioning.open_instruct;
+                return  open_instruct_VVR1;
             }
         },
         instructions_close: {
             timeline: [{
                 stage_name: 'instrumental conditioning close instructions page',
                 type: 'html-keyboard-response',
-                stimulus: vvr.instrumental_conditioning.close_instruct_text,
-                trial_latency: vvr.instrumental_conditioning.close_instruct_latency,
+                stimulus: close_instruct_text_VVR1,
+                trial_latency: close_instruct_latency,
                 response_ends_trial: false,
                 event_type: 'text appears',
-                event_raw_details: 'VVR_A_CLOSE_INSTRUCTIONS_TEXT',
+                event_raw_details: 'close_instruct_text_VVR1',
                 event_converted_details: 'instrumental conditioning close text appears'
             }],
             conditional_function: function(){
-                return vvr.instrumental_conditioning.close_instruct;
+                return close_instruct_VVR1;
             }
         }
     },
@@ -938,30 +850,30 @@ var vvr_ = {
             timeline: [{ 
                 stage_name: 'contingency degradation open instructions page',
                 type: 'html-keyboard-response',
-                stimulus: vvr.contingency_degradation.open_instruct_text,
-                trial_latency: vvr.contingency_degradation.open_instruct_latency,
+                stimulus: open_instruct_text_VVR2,
+                trial_latency: open_instruct_latency,
                 response_ends_trial: false,
                 event_type: 'text appears',
                 event_raw_details: 'open_instruct_text',
                 event_converted_details: 'contingency degradation open text appears'
             }],
             conditional_function: function(){
-                return  vvr.contingency_degradation.open_instruct;
+                return  open_instruct_VVR2;
             }
         },
         instructions_close: {
             timeline: [{
                 stage_name: 'contingency degradation close instructions page',
                 type: 'html-keyboard-response',
-                stimulus: vvr.contingency_degradation.close_instruct_text,
-                trial_latency: vvr.contingency_degradation.close_instruct_latency,
+                stimulus: close_instruct_text_VVR2,
+                trial_latency: close_instruct_latency,
                 response_ends_trial: false,
                 event_type: 'text appears',
                 event_raw_details: 'close_instruct_text',
                 event_converted_details: 'contingency degradation close text appears'
             }],
             conditional_function: function(){
-                return vvr.contingency_degradation.close_instruct;
+                return close_instruct_VVR2;
             }
         }
     },
@@ -970,63 +882,76 @@ var vvr_ = {
             timeline: [{ 
                 stage_name: 'contingency restoration open instructions page',
                 type: 'html-keyboard-response',
-                stimulus: vvr.contingency_restoration.open_instruct_text,
-                trial_latency: vvr.contingency_restoration.open_instruct_latency,
+                stimulus: open_instruct_text_VVR3,
+                trial_latency: open_instruct_latency,
                 response_ends_trial: false,
                 event_type: 'text appears',
                 event_raw_details: 'open_instruct_text',
                 event_converted_details: 'contingency restoration open text appears'
             }],
             conditional_function: function(){
-                return  vvr.contingency_restoration.open_instruct;
+                return  open_instruct_VVR3;
             }
         },
         instructions_close: {
             timeline: [{
                 stage_name: 'contingency restoration close instructions page',
                 type: 'html-keyboard-response',
-                stimulus: vvr.contingency_restoration.close_instruct_text,
-                trial_latency: vvr.contingency_restoration.close_instruct_latency,
+                stimulus: close_instruct_text_VVR3,
+                trial_latency: close_instruct_latency,
                 response_ends_trial: false,
                 event_type: 'text appears',
                 event_raw_details: 'close_instruct_text',
                 event_converted_details: 'contingency restoration close text appears'
             }],
             conditional_function: function(){
-                return vvr.contingency_restoration.close_instruct;
+                return close_instruct_VVR3;
             }
         }
     }
 }
 
-
 var CLINICAL_OPEN = {
     stage_name: 'Clinical open',
     type: 'html-keyboard-response',
-    stimulus: survey.clinical_text.clinical_open_text,
-    trial_latency: survey.clinical_text.clinical_latency_period,
+    stimulus: open_instruct_text_clinical,
+    trial_latency: open_instruct_latency,
     trial_duration: null,
     response_ends_trial: false,
     event_type: 'text appears',
-    event_raw_details: 'clinical_open_text',
+    event_raw_details: 'open_instruct_text_clinical',
     event_converted_details: 'Clinical open text appears'
 }
 
 var CLINICAL_CLOSE = {
     stage_name: 'Clinical close',
     type: 'html-keyboard-response',
-    stimulus: survey.clinical_text.clinical_close_text,
-    trial_latency: survey.clinical_text.clinical_latency_period,
+    stimulus: close_instruct_text_clinical,
+    trial_latency: close_instruct_latency,
     trial_duration: null,
     response_ends_trial: false,
     event_type: 'text appears',
-    event_raw_details: 'clinical_close_text',
+    event_raw_details: 'close_instruct_text_clinical',
     event_converted_details: 'Clinical close text appears'
 };
 
-/************************************************************
- * Pavlovian Conditioning
- ************************************************************/
+var PAV_INSTRUCT_OPEN = {
+    timeline: [{
+        stage_name: 'Pavlovian Conditioning open instructions page',
+        type: 'html-keyboard-response',
+        stimulus: open_instruct_text_pav,
+        trial_latency: open_instruct_latency,
+        trial_duration: null,
+        response_ends_trial: false,
+        event_type: 'text appears',
+        event_raw_details: 'open_instruct_text_pav',
+        event_converted_details: "Pavlovian Conditioning open instructions text appears",
+    }],
+    conditional_function: function() {
+        return open_instruct_pav ? true : false;
+    }
+};
+
 var pav_correct_holder = 0;
 var pav_incorrect_holder = 0;
 var pav_is_correct = false;
@@ -1065,8 +990,8 @@ var PAV_CONDITIONING = {
     timeline: [
         {
             stage_name: 'Pav Conditioning',
-            frame_isi: pav_interval_between_images,
-            frame_time: pav_time_animation,
+            frame_isi: ITI_duration,
+            frame_time: stim_duration,
             stimuli: [],
             stimulus: jsPsych.randomization.shuffle(pav_stimuli),
             type: 'animation'
@@ -1131,7 +1056,7 @@ var PAV_CONDITIONING = {
     loop_function: function(){
         pav_multi_choice_counter ++;
         pav_is_correct = false;
-        if(pav_correct_holder >= pav_correct_answers || pav_incorrect_holder >= pav_incorrect_answers) {
+        if(pav_correct_holder >= max_num_correct_pav || pav_incorrect_holder >= max_num_incorrect_pav) {
             return false;
         } else {
             return true;
@@ -1139,14 +1064,31 @@ var PAV_CONDITIONING = {
     }
 }
 
+var TRANSFER_TEST_INSTRUCT_OPEN = {
+    timeline: [{
+        stage_name: 'Transfer Test open instructions page',
+        type: 'html-keyboard-response',
+        stimulus: open_instruct_text_transfer_test,
+        trial_latency: open_instruct_latency,
+        trial_duration: null,
+        response_ends_trial: false,
+        event_type: 'text appears',
+        event_raw_details: 'open_instruct_text_transfer_test',
+        event_converted_details: "Transfer Test open instructions text appears",
+    }],
+    conditional_function: function() {
+        return open_instruct_transfer_test ? true : false;
+    }
+}
+
 var TRANSFER_TEST = {
     stage_name: 'Transfer Test',
     type: 'transfer-test',
     stimulus: 'vending machine',
-    transfer_test_color_consistency: transfer_test_color_consistency,
-    transfer_test_color_duration: transfer_test_color_duration,
-    transfer_test_white_duration: transfer_test_white_duration,
-    sequence_reps: transfer_test_reps
+    transfer_test_color_consistency: sequence_array_transfer_test,
+    transfer_test_color_duration: stim_duration,
+    transfer_test_white_duration: ITI_duration,
+    sequence_reps: number_reps_transfer_test
 }
 
 var DEVAL_VIDEO = {
@@ -1157,16 +1099,18 @@ var DEVAL_VIDEO = {
     trial_duration: video_duration * 1000,
     controls: false,
     response_ends_trial: false,
-    trial_ends_after_video: true
+    trial_ends_after_video: true,
+    audio: video_sound,
+    open_instruct: open_instruct_video
 }
 
 var DEVAL_TEST = {
     stage_name: 'Deval Test',
     type: 'transfer-test',
     stimulus: 'vending machine',
-    transfer_test_color_consistency: deval_test,
-    transfer_test_white_duration: deval_test_duration,
-    sequence_reps: deval_test_reps
+    transfer_test_color_consistency: sequence_array_deval_test,
+    transfer_test_white_duration: ITI_duration,
+    sequence_reps: number_reps_deval_test
 }
 
 var CLOSE_HIT = {
@@ -1188,12 +1132,12 @@ var CLOSE_HIT = {
 var THANKS = {
     stage_name: 'Thanks',
     type: 'html-keyboard-response',
-    stimulus: thanks_close,
-    trial_latency: thanks_close_latency_period,
+    stimulus: close_instruct_text_thanks,
+    trial_latency: close_instruct_latency,
     trial_duration: null,
     response_ends_trial: false,
     event_type: 'text appears',
-    event_raw_details: 'thanks_close',
+    event_raw_details: 'close_instruct_text_thanks',
     event_converted_details: "'Thank You!' text appears"
 };
 
@@ -1204,9 +1148,9 @@ timeline.push({
     stage_name: 'Parameters',
 });
 
-timeline.push(parameters.parameters_instrumental_conditioning);
-timeline.push(parameters.parameters_contingency_degradation);
-timeline.push(parameters.parameters_contingency_restoration);
+// timeline.push(parameters.parameters_instrumental_conditioning);
+// timeline.push(parameters.parameters_contingency_degradation);
+// timeline.push(parameters.parameters_contingency_restoration);
 
 // Key-testing
 timeline.push(KEY_TESTING_OPEN, KEY_TESTING, KEY_TESTING_CLOSE);
@@ -1216,10 +1160,10 @@ timeline.push(DEMOGRAPHICS);
 timeline.push(CLINICAL_OPEN);
 
 // Randomisation function for Symptom Inventories
-var symptom_inventories_random = jsPsych.randomization.shuffle(survey.symptom_inventory);
-var symptom_inventories_ordered = survey.symptom_inventory;
-var symptom_inventory = symptom_inventory_randomization ?  symptom_inventories_random : symptom_inventories_ordered;
-for(var item of symptom_inventory ){
+var symptom_inventories_random = jsPsych.randomization.shuffle(symptom_inventory);
+var symptom_inventories_ordered = symptom_inventory;
+var symptom_inventory_arr = symptom_inventory_randomization ?  symptom_inventories_random : symptom_inventories_ordered;
+for(var item of symptom_inventory_arr){
     timeline.push(item);
 }
 // SDS
@@ -1240,9 +1184,12 @@ timeline.push(vvr_.instructions_b.instructions_close);
 timeline.push(vvr_.instructions_c.instructions_open);
 timeline.push(vvr_.vvr_c());
 timeline.push(vvr_.instructions_c.instructions_close);
-
+// Pavlovian Condition Instruction Open
+timeline.push(PAV_INSTRUCT_OPEN);
 // Pavlovian Condition
 timeline.push(PAV_CONDITIONING);
+// Transfer Test Instruction Open
+timeline.push(TRANSFER_TEST_INSTRUCT_OPEN);
 // Transfer Test
 timeline.push(TRANSFER_TEST);
 // Deval Video
