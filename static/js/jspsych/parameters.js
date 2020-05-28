@@ -123,7 +123,7 @@ var interval_duration_VVR1 = 500;
 var outcome_duration_VVR1 = 500;
 var interval_num_VVR1 = 2;
 var min_blocks_num_VVR1 = 3;
-var max_num_correct_VVR1 = 4;
+var min_num_correct_VVR1 = 4;
 var max_num_incorrect_VVR1 = 2;
 var max_num_correct_consecutive_questions_VVR1 = 4;
 /************************************************************
@@ -139,7 +139,7 @@ var interval_duration_VVR2 = 500;
 var outcome_duration_VVR2 = 500;
 var interval_num_VVR2 = 2;
 var min_blocks_num_VVR2 = 3;
-var max_num_correct_VVR2 = 4;
+var min_num_correct_VVR2 = 4;
 var max_num_incorrect_VVR2 = 2;
 var max_num_correct_consecutive_questions_VVR2 = 4;
 /************************************************************
@@ -155,7 +155,7 @@ var interval_duration_VVR3 = 500;
 var outcome_duration_VVR3 = 500;
 var interval_num_VVR3 = 2;
 var min_blocks_num_VVR3 = 3;
-var max_num_correct_VVR3 = 4;
+var min_num_correct_VVR3 = 4;
 var max_num_incorrect_VVR3 = 2;
 var max_num_correct_consecutive_questions_VVR3 = 4;
 /************************************************************
@@ -171,7 +171,7 @@ var open_instruct_text_pav = "<p>The vending machine cannot be tipped now. " +
 /************************************************************
  * Pavlovian Conditioning
  ************************************************************/
-var max_num_correct_pav = 2;
+var min_num_correct_pav = 2;
 var max_num_incorrect_pav = 2;
 /************************************************************
  * Open Instruction Transfer Test

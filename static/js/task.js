@@ -148,7 +148,7 @@ var parameters = {
             outcome_duration: outcome_duration_VVR1,
             interval_num: interval_num_VVR1,
             min_blocks_num: min_blocks_num_VVR1,
-            max_num_correct: max_num_correct_VVR1,
+            min_num_correct: min_num_correct_VVR1,
             max_num_incorrect: max_num_incorrect_VVR1,
             max_num_correct_consecutive_questions: max_num_correct_consecutive_questions_VVR1,
             close_instruct: close_instruct_VVR1,
@@ -167,7 +167,7 @@ var parameters = {
             outcome_duration: outcome_duration_VVR2,
             interval_num: interval_num_VVR2,
             min_blocks_num: min_blocks_num_VVR2,
-            max_num_correct: max_num_correct_VVR2,
+            min_num_correct: min_num_correct_VVR2,
             max_num_incorrect: max_num_incorrect_VVR2,
             max_num_correct_consecutive_questions: max_num_correct_consecutive_questions_VVR2,
             close_instruct: close_instruct_VVR2,
@@ -186,7 +186,7 @@ var parameters = {
             outcome_duration: outcome_duration_VVR3,
             interval_num: interval_num_VVR3,
             min_blocks_num: min_blocks_num_VVR3,
-            max_num_correct: max_num_correct_VVR3,
+            min_num_correct: min_num_correct_VVR3,
             max_num_incorrect: max_num_incorrect_VVR3,
             max_num_correct_consecutive_questions: max_num_correct_consecutive_questions_VVR3,
             close_instruct: close_instruct_VVR3,
@@ -360,7 +360,7 @@ var vvr_ = {
     vvr_a: function() {
         var min_blocks_num = min_blocks_num_VVR1,
             max_num_correct_consecutive_questions = max_num_correct_consecutive_questions_VVR1,
-            max_num_correct = max_num_correct_VVR1,
+            min_num_correct = min_num_correct_VVR1,
             max_num_incorrect = max_num_incorrect_VVR1;
 
         var vvr_a = {
@@ -487,7 +487,7 @@ var vvr_ = {
             timeline: jsPsych.randomization.shuffle([questions_a, questions_b])
         }
 
-        var vvr_a_max_num_correct = max_num_correct_consecutive_questions != 0 && max_num_correct_consecutive_questions <= max_num_correct ? max_num_correct_consecutive_questions : max_num_correct;
+        var vvr_a_max_num_correct = max_num_correct_consecutive_questions != 0 && max_num_correct_consecutive_questions <= min_num_correct ? max_num_correct_consecutive_questions : min_num_correct;
 
         var loop_node_VVR = {
             timeline: [vvr_a, vvr_a_questions],
@@ -512,7 +512,7 @@ var vvr_ = {
     vvr_b: function() {
         var min_blocks_num = min_blocks_num_VVR2,
         max_num_correct_consecutive_questions = max_num_correct_consecutive_questions_VVR2,
-        max_num_correct = max_num_correct_VVR2,
+        min_num_correct = min_num_correct_VVR2,
         max_num_incorrect = max_num_incorrect_VVR2;
 
         var vvr_a = {
@@ -639,7 +639,7 @@ var vvr_ = {
             timeline: jsPsych.randomization.shuffle([questions_a, questions_b])
         }
 
-        var vvr_a_max_num_correct = max_num_correct_consecutive_questions != 0 && max_num_correct_consecutive_questions <= max_num_correct ? max_num_correct_consecutive_questions : max_num_correct;
+        var vvr_a_max_num_correct = max_num_correct_consecutive_questions != 0 && max_num_correct_consecutive_questions <= min_num_correct ? max_num_correct_consecutive_questions : min_num_correct;
 
         var loop_node_VVR = {
             timeline: [vvr_a, vvr_a_questions],
@@ -664,7 +664,7 @@ var vvr_ = {
     vvr_c: function() {
         var min_blocks_num = min_blocks_num_VVR3,
         max_num_correct_consecutive_questions = max_num_correct_consecutive_questions_VVR3,
-        max_num_correct = max_num_correct_VVR3,
+        min_num_correct = min_num_correct_VVR3,
         max_num_incorrect = max_num_incorrect_VVR3;
 
         var vvr_a = {
@@ -791,7 +791,7 @@ var vvr_ = {
             timeline: jsPsych.randomization.shuffle([questions_a, questions_b])
         }
 
-        var vvr_a_max_num_correct = max_num_correct_consecutive_questions != 0 && max_num_correct_consecutive_questions <= max_num_correct ? max_num_correct_consecutive_questions : max_num_correct;
+        var vvr_a_max_num_correct = max_num_correct_consecutive_questions != 0 && max_num_correct_consecutive_questions <= min_num_correct ? max_num_correct_consecutive_questions : min_num_correct;
 
         var loop_node_VVR = {
             timeline: [vvr_a, vvr_a_questions],
@@ -1056,7 +1056,7 @@ var PAV_CONDITIONING = {
     loop_function: function(){
         pav_multi_choice_counter ++;
         pav_is_correct = false;
-        if(pav_correct_holder >= max_num_correct_pav || pav_incorrect_holder >= max_num_incorrect_pav) {
+        if(pav_correct_holder >= min_num_correct_pav || pav_incorrect_holder >= max_num_incorrect_pav) {
             return false;
         } else {
             return true;
