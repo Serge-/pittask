@@ -51,7 +51,7 @@ jsPsych.plugins['survey-vvr'] = (function() {
         var degradation_pattern_condition = VVR_DEGRAD_PATTERN[loop_node_counter_vvr]; // Default condition degradation pattern
         var probability_value = VVR_PROB_VALUE[loop_node_counter_vvr];
         var timerId;
-        var condition_outcome = 'A0'
+        var condition_outcome = 'A0';
 
         // store response
         var response = {
@@ -90,6 +90,8 @@ jsPsych.plugins['survey-vvr'] = (function() {
                 "event_raw_details": OUTCOME[counter_balancing[0][outcome_present]],
                 "event_converted_details": counter_balancing[0][outcome_present] + ' image appears'
               });
+              // reset degrad pattern
+              condition_outcome = 'A0';
 
               jsPsych.pluginAPI.setTimeout(function() {
                 $('.outcome-container').html('');
@@ -98,7 +100,7 @@ jsPsych.plugins['survey-vvr'] = (function() {
                   clearTimeout(timerId);
                   end_trial();
                 }
-     
+                
               }, VVR_OUTCOME_DURATION);
               duration = VVR_OUTCOME_DURATION + VVR_INTERVAL_DURATION;
             } else {
