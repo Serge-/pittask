@@ -97,7 +97,13 @@ var counter_balancing_input = [
 ];
 
 var counter_balancing = jsPsych.randomization.sampleWithoutReplacement(counter_balancing_input, 1);
-
+counter_balancing = [{
+    game_version: 'D',
+    left: 'BBQ',
+    right: 'TT',
+    video: '/static/video/BBQ',
+    converted_details: "BBQ"
+}] // Temporary debugging 
 
 // Reconnection to the Database
 var error_message = 
@@ -367,7 +373,7 @@ var vvr_ = {
             type: 'survey-vvr',
             stage_name: 'instrumental conditioning',
             variables: {
-                VVR_INTERVAL_NUM: max_num_incorrect_VVR1,
+                VVR_INTERVAL_NUM: interval_num_VVR1,
                 VVR_INTERVAL_DURATION: interval_duration_VVR1,
                 VVR_OUTCOME_DURATION: outcome_duration_VVR1,
                 VVR_PROB_VALUE: prob_value_VVR1,
@@ -519,7 +525,7 @@ var vvr_ = {
             type: 'survey-vvr',
             stage_name: 'contingency degradation',
             variables: {
-                VVR_INTERVAL_NUM: max_num_incorrect_VVR2,
+                VVR_INTERVAL_NUM: interval_num_VVR1,
                 VVR_INTERVAL_DURATION: interval_duration_VVR2,
                 VVR_OUTCOME_DURATION: outcome_duration_VVR2,
                 VVR_PROB_VALUE: prob_value_VVR2,
@@ -671,7 +677,7 @@ var vvr_ = {
             type: 'survey-vvr',
             stage_name: 'contingency restoration',
             variables: {
-                VVR_INTERVAL_NUM: max_num_incorrect_VVR3,
+                VVR_INTERVAL_NUM: interval_num_VVR1,
                 VVR_INTERVAL_DURATION: interval_duration_VVR3,
                 VVR_OUTCOME_DURATION: outcome_duration_VVR3,
                 VVR_PROB_VALUE: prob_value_VVR3,
