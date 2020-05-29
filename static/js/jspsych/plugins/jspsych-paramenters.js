@@ -21,7 +21,7 @@ jsPsych.plugins['Parameters'] = (function(){
     }
   
     plugin.trial = function(display_element, trial){
-        var parameters = [{
+        var parameters = {
           "full_screen_mode": full_screen_mode,
           "shake_right_rotate": shake_right_rotate,
           "shake_right_translateX": shake_right_translateX,
@@ -34,18 +34,14 @@ jsPsych.plugins['Parameters'] = (function(){
        
         // "video_sound": video_sound,
         // "video_duration": video_duration,
-        },
-        {},
-        {},
-        {},
-        {},
-        ];
+        };
 
         var trial_data = {
             "stage_name": "Parameters",
             "counter-balancing version": counter_balancing[0]["game_version"],
             "commit": git_commit,
-            "parameters": JSON.stringify(parameters)
+            // "parameters": JSON.stringify(parameters)
+            "parameters": parameters
         };
 
         jsPsych.finishTrial(trial_data);

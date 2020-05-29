@@ -9,6 +9,24 @@ var mycounterbalance = counterbalance;  // they tell you which condition you hav
 // reset all previous data in case if page was reloaded
 psiTurk.taskdata.set('data', [])
 
+var DEGRAD_PATTERN = {
+    A0: {
+        d0: false,
+        d1: 'left',
+        d2: 'right',
+    },
+    A1: {
+        d0: 'left',
+        d1: 'left',
+        d2: 'left',
+    },
+    A2: {
+        d0: 'right',
+        d1: 'right',
+        d2: 'right',
+    }
+}
+
 var counter_balancing_input = [
     a = {
         game_version: 'A',
