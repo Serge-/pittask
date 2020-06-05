@@ -9,6 +9,24 @@ var mycounterbalance = counterbalance;  // they tell you which condition you hav
 // reset all previous data in case if page was reloaded
 psiTurk.taskdata.set('data', [])
 
+var DEGRAD_PATTERN = {
+    A0: {
+        d0: false,
+        d1: 'left',
+        d2: 'right',
+    },
+    A1: {
+        d0: 'left',
+        d1: 'left',
+        d2: 'left',
+    },
+    A2: {
+        d0: 'right',
+        d1: 'right',
+        d2: 'right',
+    }
+}
+
 var counter_balancing_input = [
     a = {
         game_version: 'A',
@@ -97,13 +115,6 @@ var counter_balancing_input = [
 ];
 
 var counter_balancing = jsPsych.randomization.sampleWithoutReplacement(counter_balancing_input, 1);
-counter_balancing = [{
-    game_version: 'D',
-    left: 'BBQ',
-    right: 'TT',
-    video: '/static/video/BBQ',
-    converted_details: "BBQ"
-}] // Temporary debugging 
 
 // Reconnection to the Database
 var error_message = 
@@ -138,68 +149,6 @@ resubmit = function() {
         error: prompt_resubmit
     });
 };
-
-
-// Trial for parameters
-var parameters = {
-    parameters_instrumental_conditioning: {
-        type: 'parameters-VVR',
-        stage_name: 'VVR1 parameters instrumental conditioning',
-        variables: {
-            open_instruct: open_instruct_VVR1,
-            open_instruct_text: open_instruct_text_VVR1,
-            degrad_pattern: degrad_pattern_VVR1,
-            prob_value: prob_value_VVR1,
-            interval_duration: interval_duration_VVR1,
-            outcome_duration: outcome_duration_VVR1,
-            interval_num: interval_num_VVR1,
-            min_blocks_num: min_blocks_num_VVR1,
-            min_num_correct: min_num_correct_VVR1,
-            max_num_incorrect: max_num_incorrect_VVR1,
-            max_num_correct_consecutive_questions: max_num_correct_consecutive_questions_VVR1,
-            close_instruct: close_instruct_VVR1,
-            close_instruct_text: close_instruct_text_VVR1,
-        }
-    },
-    parameters_contingency_degradation: {
-        type: 'parameters-VVR',
-        stage_name: 'VVR2 parameters contingency degradation',
-        variables: {
-            open_instruct: open_instruct_VVR2,
-            open_instruct_text: open_instruct_text_VVR2,
-            degrad_pattern: degrad_pattern_VVR2,
-            prob_value: prob_value_VVR2,
-            interval_duration: interval_duration_VVR2,
-            outcome_duration: outcome_duration_VVR2,
-            interval_num: interval_num_VVR2,
-            min_blocks_num: min_blocks_num_VVR2,
-            min_num_correct: min_num_correct_VVR2,
-            max_num_incorrect: max_num_incorrect_VVR2,
-            max_num_correct_consecutive_questions: max_num_correct_consecutive_questions_VVR2,
-            close_instruct: close_instruct_VVR2,
-            close_instruct_text: close_instruct_text_VVR2,
-        }
-    },
-    parameters_contingency_restoration: {
-        type: 'parameters-VVR',
-        stage_name: 'VVR3 parameters contingency restoration',
-        variables: {
-            open_instruct: open_instruct_VVR3,
-            open_instruct_text: open_instruct_text_VVR3,
-            degrad_pattern: degrad_pattern_VVR3,
-            prob_value: prob_value_VVR3,
-            interval_duration: interval_duration_VVR3,
-            outcome_duration: outcome_duration_VVR3,
-            interval_num: interval_num_VVR3,
-            min_blocks_num: min_blocks_num_VVR3,
-            min_num_correct: min_num_correct_VVR3,
-            max_num_incorrect: max_num_incorrect_VVR3,
-            max_num_correct_consecutive_questions: max_num_correct_consecutive_questions_VVR3,
-            close_instruct: close_instruct_VVR3,
-            close_instruct_text: close_instruct_text_VVR3,
-        }
-    }
-}
 
 var KEY_TESTING_OPEN = {
     stage_name: 'Key-testing',
@@ -365,7 +314,6 @@ var vvrIsCorrect = false;
 var vvr_ = {
     vvr_a: function() {
         var min_blocks_num = min_blocks_num_VVR1,
-            max_num_correct_consecutive_questions = max_num_correct_consecutive_questions_VVR1,
             min_num_correct = min_num_correct_VVR1,
             max_num_incorrect = max_num_incorrect_VVR1;
 
@@ -407,7 +355,7 @@ var vvr_ = {
                         question_text_b3: question_text_b3,
                         question_text_b4: question_text_b4,
                         popup_text: popup_text,
-                        max_num_correct_consecutive_questions: max_num_correct_consecutive_questions
+                        max_num_correct_consecutive_questions: min_num_correct_VVR1
                     }
                 },
                 {
@@ -461,7 +409,7 @@ var vvr_ = {
                         question_text_b3: question_text_b3,
                         question_text_b4: question_text_b4,
                         popup_text: popup_text,
-                        max_num_correct_consecutive_questions: max_num_correct_consecutive_questions
+                        max_num_correct_consecutive_questions: min_num_correct_VVR1
                     }
                 },
                 {
@@ -493,15 +441,13 @@ var vvr_ = {
             timeline: jsPsych.randomization.shuffle([questions_a, questions_b])
         }
 
-        var vvr_a_max_num_correct = max_num_correct_consecutive_questions != 0 && max_num_correct_consecutive_questions <= min_num_correct ? max_num_correct_consecutive_questions : min_num_correct;
-
         var loop_node_VVR = {
             timeline: [vvr_a, vvr_a_questions],
             loop_function: function(){
                 if(loop_node_counter_vvr_determination >= min_blocks_num && max_num_incorrect <= loop_node_counter_max_num_incorrect) {
                     loop_node_counter_vvr = 0;
                     return false;            
-                } else if(loop_node_counter_vvr_determination >= min_blocks_num && vvr_a_max_num_correct <= loop_node_counter_max_num_correct) {
+                } else if(loop_node_counter_vvr_determination >= min_blocks_num && min_num_correct <= loop_node_counter_max_num_correct) {
                     loop_node_counter_vvr = 0;
                     return false;
                 } else {
@@ -517,7 +463,6 @@ var vvr_ = {
     },
     vvr_b: function() {
         var min_blocks_num = min_blocks_num_VVR2,
-        max_num_correct_consecutive_questions = max_num_correct_consecutive_questions_VVR2,
         min_num_correct = min_num_correct_VVR2,
         max_num_incorrect = max_num_incorrect_VVR2;
 
@@ -559,7 +504,7 @@ var vvr_ = {
                         question_text_b3: question_text_b3,
                         question_text_b4: question_text_b4,
                         popup_text: popup_text,
-                        max_num_correct_consecutive_questions: max_num_correct_consecutive_questions
+                        max_num_correct_consecutive_questions: min_num_correct_VVR2
                     }
                 },
                 {
@@ -613,7 +558,7 @@ var vvr_ = {
                         question_text_b3: question_text_b3,
                         question_text_b4: question_text_b4,
                         popup_text: popup_text,
-                        max_num_correct_consecutive_questions: max_num_correct_consecutive_questions
+                        max_num_correct_consecutive_questions: min_num_correct_VVR2
                     }
                 },
                 {
@@ -645,15 +590,13 @@ var vvr_ = {
             timeline: jsPsych.randomization.shuffle([questions_a, questions_b])
         }
 
-        var vvr_a_max_num_correct = max_num_correct_consecutive_questions != 0 && max_num_correct_consecutive_questions <= min_num_correct ? max_num_correct_consecutive_questions : min_num_correct;
-
         var loop_node_VVR = {
             timeline: [vvr_a, vvr_a_questions],
             loop_function: function(){
                 if(loop_node_counter_vvr_determination >= min_blocks_num && max_num_incorrect <= loop_node_counter_max_num_incorrect) {
                     loop_node_counter_vvr = 0;
                     return false;            
-                } else if(loop_node_counter_vvr_determination >= min_blocks_num && vvr_a_max_num_correct <= loop_node_counter_max_num_correct) {
+                } else if(loop_node_counter_vvr_determination >= min_blocks_num && min_num_correct <= loop_node_counter_max_num_correct) {
                     loop_node_counter_vvr = 0;
                     return false;
                 } else {
@@ -669,7 +612,6 @@ var vvr_ = {
     },
     vvr_c: function() {
         var min_blocks_num = min_blocks_num_VVR3,
-        max_num_correct_consecutive_questions = max_num_correct_consecutive_questions_VVR3,
         min_num_correct = min_num_correct_VVR3,
         max_num_incorrect = max_num_incorrect_VVR3;
 
@@ -711,7 +653,7 @@ var vvr_ = {
                         question_text_b3: question_text_b3,
                         question_text_b4: question_text_b4,
                         popup_text: popup_text,
-                        max_num_correct_consecutive_questions: max_num_correct_consecutive_questions
+                        max_num_correct_consecutive_questions: min_num_correct_VVR3
                     }
                 },
                 {
@@ -765,7 +707,7 @@ var vvr_ = {
                         question_text_b3: question_text_b3,
                         question_text_b4: question_text_b4,
                         popup_text: popup_text,
-                        max_num_correct_consecutive_questions: max_num_correct_consecutive_questions
+                        max_num_correct_consecutive_questions: min_num_correct_VVR3
                     }
                 },
                 {
@@ -797,15 +739,13 @@ var vvr_ = {
             timeline: jsPsych.randomization.shuffle([questions_a, questions_b])
         }
 
-        var vvr_a_max_num_correct = max_num_correct_consecutive_questions != 0 && max_num_correct_consecutive_questions <= min_num_correct ? max_num_correct_consecutive_questions : min_num_correct;
-
         var loop_node_VVR = {
             timeline: [vvr_a, vvr_a_questions],
             loop_function: function(){
                 if(loop_node_counter_vvr_determination >= min_blocks_num && max_num_incorrect <= loop_node_counter_max_num_incorrect) {
                     loop_node_counter_vvr = 0;
                     return false;            
-                } else if(loop_node_counter_vvr_determination >= min_blocks_num && vvr_a_max_num_correct <= loop_node_counter_max_num_correct) {
+                } else if(loop_node_counter_vvr_determination >= min_blocks_num && min_num_correct <= loop_node_counter_max_num_correct) {
                     loop_node_counter_vvr = 0;
                     return false;
                 } else {
@@ -1153,10 +1093,6 @@ timeline.push({
     type: 'Parameters',
     stage_name: 'Parameters',
 });
-
-// timeline.push(parameters.parameters_instrumental_conditioning);
-// timeline.push(parameters.parameters_contingency_degradation);
-// timeline.push(parameters.parameters_contingency_restoration);
 
 // Key-testing
 timeline.push(KEY_TESTING_OPEN, KEY_TESTING, KEY_TESTING_CLOSE);

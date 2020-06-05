@@ -1,37 +1,37 @@
-packages <- c("httr", "RSQLite", "RMySQL", "jsonlite", "data.table", "stringr")
+packages <- c("httr", "RMySQL", "jsonlite", "data.table", "stringr")
 suppressMessages(library(data.table))
-suppressWarnings(library(RSQLite))
+# suppressWarnings(library(RSQLite))
 
 if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
   install.packages(setdiff(packages, rownames(installed.packages())))
 }
 
 library(httr)
-library(RSQLite)
+# library(RSQLite)
 library(RMySQL)
 library(jsonlite)
 library(data.table)
 library(stringr)
 
-input_file <- "/media/serge/Data/Upwork/Iain/pittask/participants.db" #"~/Desktop/Upwork/Amir/pittask/participants.db"
-output_folder <- "/media/serge/Data/Upwork/Iain/pittask/Participants" #~/Desktop/Upwork/Amir/pittask/Participants"
+# input_file <- "/media/serge/Data/Upwork/Iain/pittask/participants.db"
+# output_folder <- "/media/serge/Data/Upwork/Iain/pittask/Participants"
 
 # Options ------------------------------------------------------------------
 options(useFancyQuotes = FALSE)
 
 # Struct ------------------------------------------------------------------
 
-# Parameters <- data.table(
-#   PIN = character(),
-#   complete = character(),
-#   date = character(), 
-#   `calendar time` = character(),
-#   location = character(),
-#   `commit code` = character(),
-#   version = character(),
-#   `parameter name` = character(), 
-#   `parameter value` = character()
-# )
+Parameters <- data.table(
+  PIN = character(),
+  complete = character(),
+  date = character(), 
+  `calendar time` = character(),
+  location = character(),
+  `commit code` = character(),
+  version = character(),
+  `parameter name` = character(), 
+  `parameter value` = character()
+)
 
 Demographics <- data.table(
   PIN = character(),
@@ -484,25 +484,23 @@ if(isClass(query))
 
     # Parameters --------------------------------------------------------------
     
-    # parameters_index <- which(trialdata$stage_name %in% "\"Parameters\"")
-     
-    # if(length(parameters_index ) != 0){
-    #   parameters_response <- fromJSON(trialdata[parameters_index,]$parameters)
-    #   parameters_timestamps <- fromJSON(trialdata[parameters_index,]$timestamp)
-    #   
-    #   date <- format(as.Date(dateTime[parameters_index]), "%d-%m-%Y")
-    #   time <- as.character(as.ITime(dateTime[parameters_index]))
-    #   
-    #   for(j in 1:length(parameters_response)){
-    #     Parameters <- rbindlist(list(Parameters, list(
-    #       PIN, complete, date, time, 
-    #       # parameters_timestamps[[j]], 
-    #       country, commit, version,
-    #       names(parameters_response)[j],
-    #       parameters_response[[j]]
-    #     )))
-    #   }
-    # }
+    parameters_index <- which(trialdata$stage_name %in% "Parameters")
+    
+    if(length(parameters_index ) != 0){
+      parameters_response <- fromJSON(trialdata[parameters_index,]$parameters)
+      
+      date <- format(as.Date(dateTime[parameters_index]), "%d-%m-%Y")
+      time <- as.character(as.ITime(dateTime[parameters_index]))
+      
+      for(j in 1:length(parameters_response)){
+        Parameters <- rbindlist(list(Parameters, list(
+          PIN, complete, date, time,
+          country, commit, version,
+          names(parameters_response)[j],
+          parameters_response[[j]]
+        )))
+      }
+    }
     
     # Demographics --------------------------------------------------------------------
     
@@ -1222,16 +1220,13 @@ if(isClass(query))
   
   close(progressBar)
   dbClearResult(query)
-  # dbDisconnect(connection)
 
   dbDisconnectAll <- function(){
     ile <- length(dbListConnections(MySQL())  )
     lapply( dbListConnections(MySQL()), function(x) dbDisconnect(x) )
-    # dbClearResult(dbListResults(conn)[[1]])
     cat(sprintf("%s connection(s) closed.\n", ile))
   }
 
-  
   # Writing results ---------------------------------------------------------
   
   cat("\n  Saving results . . .\n")
@@ -1242,7 +1237,7 @@ if(isClass(query))
   filesProgressBar <- txtProgressBar(min = 0, max = 6, style = 3, char = '|')
   
   results <- list(
-    # "Parameters" = Parameters,
+    "Parameters" = Parameters,
     'Demographics' = Demographics,
     "OCI-R" = OCI_R,
     "MOVES" = MOVES,
@@ -1280,7 +1275,7 @@ if(isClass(query))
     setTxtProgressBar(filesProgressBar, i)
   }
 
-    dbDisconnectAll()
+  dbDisconnectAll()
 } else {
   print("Invalid database connection or query")
   dbDisconnect(connection)

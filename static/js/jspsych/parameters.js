@@ -119,13 +119,12 @@ var open_instruct_text_VVR1 = 'You can now interact with the vending machine to 
 var close_instruct_text_VVR1 = 'Some text for close instructions VVR "instrumental conditioning.';
 var degrad_pattern_VVR1 = ['d2', 'd2', 'd2'];
 var prob_value_VVR1 = [1, 1, 1];
-var interval_duration_VVR1 = 1000;
-var outcome_duration_VVR1 = 1000;
-var interval_num_VVR1 = 4;
-var min_blocks_num_VVR1 = 3;
+var interval_duration_VVR1 = 100;
+var outcome_duration_VVR1 = 100;
+var interval_num_VVR1 = 2;
+var min_blocks_num_VVR1 = 2;
 var min_num_correct_VVR1 = 4;
-var max_num_incorrect_VVR1 = 2;
-var max_num_correct_consecutive_questions_VVR1 = 4;
+var max_num_incorrect_VVR1 = 4;
 /************************************************************
  * Contingency degradation [VVR_2]
  ************************************************************/
@@ -141,7 +140,6 @@ var interval_num_VVR2 = 2;
 var min_blocks_num_VVR2 = 3;
 var min_num_correct_VVR2 = 4;
 var max_num_incorrect_VVR2 = 2;
-var max_num_correct_consecutive_questions_VVR2 = 4;
 /************************************************************
  * Contingency restoration [VVR_3]
  ************************************************************/
@@ -157,7 +155,6 @@ var interval_num_VVR3 = 3;
 var min_blocks_num_VVR3 = 3;
 var min_num_correct_VVR3 = 4;
 var max_num_incorrect_VVR3 = 2;
-var max_num_correct_consecutive_questions_VVR3 = 4;
 /************************************************************
  * Open Instruction Pavlovian Conditioning
  ************************************************************/

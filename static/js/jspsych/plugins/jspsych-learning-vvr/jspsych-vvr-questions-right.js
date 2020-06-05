@@ -218,9 +218,7 @@ jsPsych.plugins['survey-vvr-questions-right'] = (function() {
                 vvrIsCorrect = false;
                 isMachineTilted = true;
                 ++loop_node_counter_max_num_incorrect;
-                if(trial.vars.max_num_correct_consecutive_questions !== 0) {
-                    loop_node_counter_max_num_correct = 0;
-                }
+                loop_node_counter_max_num_correct = 0;
                 showNextQuestion();
             } else if (info.key === right_tilt && !isMachineTilted) {
                 $(".vending-machine").css({
