@@ -373,8 +373,8 @@ jsPsych.plugins['SDS'] = (function () {
       })
 
       $("select").change(function() {
-        var questionNumber = $(this)['context'].selectedOptions[0].getAttribute('data-question-number');
-        var questionTimestamp = $(this)['context'].selectedOptions[0].getAttribute('data-time-stamp');
+        var questionNumber = $(this)[0].selectedOptions[0].getAttribute('data-question-number');
+        var questionTimestamp = $(this)[0].selectedOptions[0].getAttribute('data-time-stamp');
         trial.time_stamp[questionTimestamp] = jsPsych.totalTime() - timestamp_onload;
         response.trial_events.push({
           "event_type": "answer displayed",

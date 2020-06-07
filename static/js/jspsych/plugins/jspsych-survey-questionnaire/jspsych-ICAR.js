@@ -206,8 +206,8 @@ jsPsych.plugins['ICAR'] = (function () {
     
             // add radio button container
             html += '<div id="' + option_id_name + '" class="jspsych-survey-multi-choice-option">';
-            html += '<label class="jspsych-survey-multi-choice-text jspsych-survey-highlight" data-time-stamp="Q' + (i+1) + '"  for="' + input_id + '">' + question.options[j] + '</label>';
-            html += '<input type="radio" name="' + input_name + '" data-time-stamp="Q' + (i+1) + '" data-response-id="' + (j+1) + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" id="' + input_id + '" class="form-radio" value="' + question.options[j] + '" ' + required_attr + '></input>';
+            html += '<label class="jspsych-survey-multi-choice-text jspsych-survey-highlight" data-time-stamp="Q' + i + '"  for="' + input_id + '">' + question.options[j] + '</label>';
+            html += '<input type="radio" name="' + input_name + '" data-time-stamp="Q' + i + '" data-response-id="' + (j+1) + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" id="' + input_id + '" class="form-radio" value="' + question.options[j] + '" ' + required_attr + '></input>';
             html += '</div>';
           }
     
@@ -232,8 +232,8 @@ jsPsych.plugins['ICAR'] = (function () {
     
             // add radio button container
             html += '<div id="' + option_id_name + '" class="jspsych-survey-multi-choice-option">';
-            html += '<label class="jspsych-survey-multi-choice-text jspsych-survey-highlight" data-time-stamp="Q' + (i+1) + '"  for="' + input_id + '">' + question.options[j] + '</label>';
-            html += '<input type="radio" name="' + input_name + '" data-time-stamp="Q' + (i+1) + '" data-response-id="' + (j+1) + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" id="' + input_id + '" class="form-radio" value="' + question.options[j] + '" ' + required_attr + '></input>';
+            html += '<label class="jspsych-survey-multi-choice-text jspsych-survey-highlight" data-time-stamp="Q' + i + '"  for="' + input_id + '">' + question.options[j] + '</label>';
+            html += '<input type="radio" name="' + input_name + '" data-time-stamp="Q' + i + '" data-response-id="' + (j+1) + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" id="' + input_id + '" class="form-radio" value="' + question.options[j] + '" ' + required_attr + '></input>';
             html += '</div>';
           }
     
@@ -259,8 +259,8 @@ jsPsych.plugins['ICAR'] = (function () {
     
             // add radio button container
             html += '<li id="' + option_id_name + '">';
-            html += '<label class="jspsych-survey-multi-choice-text jspsych-survey-highlight" data-time-stamp="Q' + (i+1) + '"  for="' + input_id + '"></label>';
-            html += '<input type="radio" class="hidden" name="' + input_name + '" data-response-id="' + question.options[j] + '" data-matrix-reasoning="matrix-reasoning-'+ question_id + '-' + j + '" data-time-stamp="Q' + (i+1) + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" id="' + input_id + '" class="form-radio" value="NA" ' + required_attr + '></input>';
+            html += '<label class="jspsych-survey-multi-choice-text jspsych-survey-highlight" data-time-stamp="Q' + i + '"  for="' + input_id + '"></label>';
+            html += '<input type="radio" class="hidden" name="' + input_name + '" data-response-id="' + question.options[j] + '" data-matrix-reasoning="matrix-reasoning-'+ question_id + '-' + j + '" data-time-stamp="Q' + i + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" id="' + input_id + '" class="form-radio" value="NA" ' + required_attr + '></input>';
             html += '</li>';
           }
           html += '</ul>';
@@ -287,8 +287,8 @@ jsPsych.plugins['ICAR'] = (function () {
     
             // add radio button container
             html += '<li id="' + option_id_name + '">';
-            html += '<label class="jspsych-survey-multi-choice-text jspsych-survey-highlight" data-time-stamp="Q' + (i+1) + '"  for="' + input_id + '"></label>';
-            html += '<input type="radio" class="hidden" name="' + input_name + '" data-response-id="' + question.options[j] + '" data-three-dimensional-rotate="three-dimensional-rotate-'+ question_id + '-' + j + '" data-time-stamp="Q' + (i+1) + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" id="' + input_id + '" class="form-radio" value="NA" ' + required_attr + '></input>';
+            html += '<label class="jspsych-survey-multi-choice-text jspsych-survey-highlight" data-time-stamp="Q' + i + '"  for="' + input_id + '"></label>';
+            html += '<input type="radio" class="hidden" name="' + input_name + '" data-response-id="' + question.options[j] + '" data-three-dimensional-rotate="three-dimensional-rotate-'+ question_id + '-' + j + '" data-time-stamp="Q' + i + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" id="' + input_id + '" class="form-radio" value="NA" ' + required_attr + '></input>';
             html += '</li>';
           }
           html += '</ul>';
@@ -392,8 +392,10 @@ jsPsych.plugins['ICAR'] = (function () {
 
           if(next_counter < 16 && isChecked) {
             $('#jspsych-survey-multi-choice-' + (next_counter - 1)).fadeOut();
+            $('.next-question').prop('disabled', true);
             setTimeout(function() {
               $('#jspsych-survey-multi-choice-' + next_counter++).fadeIn();
+              $('.next-question').prop('disabled', false);
             }, 400);
             if(next_counter === 15) {
               $('.jspsych-survey-multi-choice-ICAR').removeClass('hidden');
@@ -430,7 +432,7 @@ jsPsych.plugins['ICAR'] = (function () {
         for (var i = 0; i < trial.questions.length; i++) {
           var match = display_element.querySelector('#jspsych-survey-multi-choice-' + i);
   
-          var id = i + 1;
+          var id = i;
           if (match.querySelector("input[type=radio]:checked") !== null) {
             var val = match.querySelector("input[type=radio]:checked").value;
             $(match).find('.jspsych-survey-multi-choice-question').removeClass('survey-error');
@@ -447,7 +449,7 @@ jsPsych.plugins['ICAR'] = (function () {
           }
           obje[name] = val;
           obj[name] = val_id;
-          timestamp_data[name] = trial.time_stamp['Q' + (i+1)];
+          timestamp_data[name] = trial.time_stamp['Q' + i];
           Object.assign(question_data, obje);
           Object.assign(response_id, obj);
         }

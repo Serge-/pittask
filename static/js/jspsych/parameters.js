@@ -1,6 +1,8 @@
 /************************************************************
  * ======================= PARAMETERS =======================
  ************************************************************/
+var re_captcha = false;
+var re_captcha_duration = 15
 var full_screen_mode = false;
 var open_instruct_latency = 1000;
 var close_instruct_latency = 1000;
@@ -38,6 +40,7 @@ var close_instruct_text_clinical = "<p class='v-center-txt'>That's it for the sy
 /************************************************************
  * Symptom Inventories
  ***********************************************************/
+var OCIR,MOVES,DASS,ASRS5,EAT26,RAADS,PHQ9,GAD7,LSAS,ASRM,PTSD,PRIME_R,AUDIT,PGSI,YIAT,SMOKE_FTND,ISI,PID;
 var symptom_inventory_randomization = true;
 var symptom_inventory = [
     // OCI-R

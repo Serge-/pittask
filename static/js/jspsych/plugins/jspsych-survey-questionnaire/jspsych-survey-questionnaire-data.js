@@ -136,14 +136,13 @@ var OCIR = {
 
 var ASRM = {
     type: 'ASRM',
-    preamble: `
-        <h2><b>Instructions</b></h1>
-        <div class="preamble-wrapper"><span>1.</span><p> On this questionnaire are groups of five statements; read each group of statements carefully</p></div>
-        <div class="preamble-wrapper"><span>2.</span><p> Choose the one statement in each group that best describes the way you have been feeling for the past week. </p></div>
-        <div class="preamble-wrapper"><span>3.</span><p> Click on the number next to the statement you picked</p></div>
-        <div class="preamble-wrapper"><span>4.</span><p> Please note: The word “occasionally” when used here means once or twice; “often” means several
-        times or more; “frequently” means most of the time.</p></div>
-    `,
+    preamble:
+        '<h2><b>Instructions</b></h1>' +
+        '<div class="preamble-wrapper"><span>1.</span><p> On this questionnaire are groups of five statements; read each group of statements carefully</p></div>' +
+        '<div class="preamble-wrapper"><span>2.</span><p> Choose the one statement in each group that best describes the way you have been feeling for the past week. </p></div>' +
+        '<div class="preamble-wrapper"><span>3.</span><p> Click on the number next to the statement you picked</p></div>' +
+        '<div class="preamble-wrapper"><span>4.</span><p> Please note: The word “occasionally” when used here means once or twice; “often” means several' +
+        'times or more; “frequently” means most of the time.</p></div>',
     questions: [
         {
             prompt: '',
@@ -305,10 +304,9 @@ var ISI = {
 
 var EAT26 = {
     type: 'EAT-26',
-    preamble: `
-        <p>Please fill out the below form as accurately, honestly and completely as possible. There are no right or wrong answers. All of
-        your responses are confidential.</p>
-    `,
+    preamble:
+        '<p>Please fill out the below form as accurately, honestly and completely as possible. There are no right or wrong answers. All of' +
+        'your responses are confidential.</p>',
     questions: [
         {
             prompt: 'Am terrified about being overweight.',
@@ -453,12 +451,11 @@ var EAT26 = {
 
 var PID = {
     type: 'PID-5-BF',
-    preamble: `
-        <p><b>Instructions</b>: This is a list of things different people might say about themselves. We are interested in how
-        you would describe yourself. There are no right or wrong answers. So you can describe yourself as honestly
-        as possible, we will keep your responses confidential. We’d like you to take your time and read each
-        statement carefully, selecting the response that best describes you.</p>
-    `,
+    preamble:
+        '<p><b>Instructions</b>: This is a list of things different people might say about themselves. We are interested in how' +
+        'you would describe yourself. There are no right or wrong answers. So you can describe yourself as honestly' +
+        'as possible, we will keep your responses confidential. We’d like you to take your time and read each' +
+        'statement carefully, selecting the response that best describes you.</p>',
     questions: [
         {
             prompt: 'People would describe me as reckless.',
@@ -571,8 +568,8 @@ var PID = {
 var PHQ9 = {
     type: 'PHQ-9',
     preamble:
-        `<p><b>Instructions</b>: Over the <b>last 7 days</b>, how often have you been bothered by any of the following problems? (Click
-        on the numbers to indicate your answer)</p>`,
+        '<p><b>Instructions</b>: Over the <b>last 7 days</b>, how often have you been bothered by any of the following problems? (Click' +
+        'on the numbers to indicate your answer)</p>',
     questions: [
         {
             prompt: 'Little interest or pleasure in doing things',
@@ -622,17 +619,16 @@ var PTSD = {
     type: 'PC-PTSD-5',
     questions: [
         {
-            prompt: `
-                Sometimes things happen to people that are unusually or especially frightening, horrible, or traumatic. For example:
-                <ul>
-                    <li>a serious accident or fire</li>
-                    <li>a physical or sexual assault or abuse</li>
-                    <li>an earthquake or flood</li>
-                    <li>a war</li>
-                    <li>seeing someone be killed or seriously injured</li>
-                    <li>having a loved one die through homicide or suicide</li>
-                </ul>
-            `,
+            prompt:
+                'Sometimes things happen to people that are unusually or especially frightening, horrible, or traumatic. For example:' +
+                '<ul>' +
+                    '<li>a serious accident or fire</li>' +
+                    '<li>a physical or sexual assault or abuse</li>' +
+                    '<li>an earthquake or flood</li>' +
+                    '<li>a war</li>' +
+                    '<li>seeing someone be killed or seriously injured</li>' +
+                    '<li>having a loved one die through homicide or suicide</li>' +
+                '</ul>',
             options: ['YES', 'NO'],
             horizontal: true
         }, {
@@ -665,15 +661,14 @@ var PTSD = {
 
 var RAADS = {
     type: 'RAADS-14',
-    preamble: `
-        <p>Please choose one of the following alternatives:</p>
-        <p>This is true or describes me now and when I was young.</p>
-        <p>This was true or describes me only now (refers to skills acquired).</p>
-        <p>This was true only when I was young (16 years or younger).</p>
-        <p>This was never true and never described me.</p>
-        <p>Please answer the questions according to what is true for you.
-        Check only one column per statement!</p>
-    `,
+    preamble:
+        '<p>Please choose one of the following alternatives:</p>' +
+        '<p>This is true or describes me now and when I was young.</p>' +
+        '<p>This was true or describes me only now (refers to skills acquired).</p>' +
+        '<p>This was true only when I was young (16 years or younger).</p>' +
+        '<p>This was never true and never described me.</p>' +
+        '<p>Please answer the questions according to what is true for you.' +
+        'Check only one column per statement!</p>',
     questions: [
         {
             prompt: 'It is difficult for me to understand how other people are feeling when we are talking',
@@ -811,14 +806,13 @@ var PRIME_R = {
 
 var LSAS = {
     type: 'LSAS',
-    preamble: `
-        <ul>
-            <li>This measure assesses the way that social phobia plays a role in your life across a variety of situations.</li>
-            <li>Read each situation carefully and answer two questions about that situation. The first question asks how anxious or fearful you feel in the situation. The second question asks how often you avoid the situation.</li>
-            <li>If you come across a situation that you ordinarily do not experience, we ask that you imagine ‘what if you were faced with that situation’, and then rate the degree to which you would fear this hypothetical situation and how often you would tend to avoid it.</li>
-            <li>Please base your ratings on the way that the situations have affected you in the last week.</li>
-        </ul>
-    `,
+    preamble:
+        '<ul>' +
+            '<li>This measure assesses the way that social phobia plays a role in your life across a variety of situations.</li>' +
+            '<li>Read each situation carefully and answer two questions about that situation. The first question asks how anxious or fearful you feel in the situation. The second question asks how often you avoid the situation.</li>' +
+            '<li>If you come across a situation that you ordinarily do not experience, we ask that you imagine ‘what if you were faced with that situation’, and then rate the degree to which you would fear this hypothetical situation and how often you would tend to avoid it.</li>' +
+            '<li>Please base your ratings on the way that the situations have affected you in the last week.</li>' +
+        '</ul>',
     questions: [
         {
             prompt: '<b>Telephoning in public</b> – speaking on the phone in a public place',
@@ -1208,18 +1202,13 @@ var YIAT = {
 var DASS = {
     type: 'DASS',
     preamble:
-        `
-        <p>Please read each statement and select a number (0, 1, 2 or 3) which indicates how much the statement applied to you
-        <u>over the past week</u>. There are no right or wrong answers. Do not spend too much time on any statement.</p>
-
-        <p style="font-style: italic; padding: 2rem 0; ">The rating scale is as follows:</p>
-
-        <p>0 Did not apply to me at all – NEVER</p>
-        <p>1 Applied to me to some degree, or some of the time – SOMETIMES</p>
-        <p>2 Applied to me to a considerable degree, or a good part of time – OFTEN</p>
-        <p>3 Applied to me very much, or most of the time - ALMOST ALWAYS</p>
-        
-        `,
+        '<p>Please read each statement and select a number (0, 1, 2 or 3) which indicates how much the statement applied to you' +
+        '<u>over the past week</u>. There are no right or wrong answers. Do not spend too much time on any statement.</p>' +
+        '<p style="font-style: italic; padding: 2rem 0; ">The rating scale is as follows:</p>' +
+        '<p>0 Did not apply to me at all – NEVER</p>' +
+        '<p>1 Applied to me to some degree, or some of the time – SOMETIMES</p>' +
+        '<p>2 Applied to me to a considerable degree, or a good part of time – OFTEN</p>' +
+        '<p>3 Applied to me very much, or most of the time - ALMOST ALWAYS</p>',
     questions: [
         {
             prompt: 'I found it hard to wind down',
@@ -1316,16 +1305,15 @@ var DASS = {
 
 var AUDIT = {
     type: 'AUDIT',
-    preamble: `
-        <p>Because alcohol use can affect health and interfere with certain medications and treatments, it is important that we ask you some questions about your use of alcohol. Your answers will remain confidential, so please be as accurate as possible. Try to answer the questions in terms of ‘standard drinks’. Please tick the response that best fits your drinking.</p>
-        <div class="audit-img-container">
-            <img src="../static/images/audit_image.jpg">
-            <div>
-                <p>This guide contains examples of <strong>one standard drink.</strong></p>
-                <p>A full strength can or stubbie contains <strong>one and a half standard drinks.</strong></p>
-            </div>
-        </div>
-    `,
+    preamble:
+        '<p>Because alcohol use can affect health and interfere with certain medications and treatments, it is important that we ask you some questions about your use of alcohol. Your answers will remain confidential, so please be as accurate as possible. Try to answer the questions in terms of ‘standard drinks’. Please tick the response that best fits your drinking.</p>' +
+        '<div class="audit-img-container">' +
+            '<img src="../static/images/audit_image.jpg">' +
+            '<div>' +
+                '<p>This guide contains examples of <strong>one standard drink.</strong></p>' +
+                '<p>A full strength can or stubbie contains <strong>one and a half standard drinks.</strong></p>' +
+            '</div>' +
+        '</div>',
     questions: [
         {
             prompt: 'How often do you have a drink containing alcohol?',
@@ -1485,32 +1473,28 @@ var PGSI = {
 
 var SDS = {
     type: 'SDS',
-    preamble: `
-    <p><b>A brief, patient rated, measure of disability and impairment.</b></p>
-    <p>Please mark ONE circle for each scale.</p>
-    `,
+    preamble:
+    '<p><b>A brief, patient rated, measure of disability and impairment.</b></p>' +
+    '<p>Please mark ONE circle for each scale.</p>',
     questions: [
         {
-            prompt: `
-                <h2 class="question-title question-title-heading">work* / school</h3>
-                <h3>The symptoms have disrupted your work / school work:</h3>
-            `,
+            prompt:
+                '<h2 class="question-title question-title-heading">work* / school</h3>' +
+                '<h3>The symptoms have disrupted your work / school work:</h3>',
             options: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
             horizontal: false,
             name: 'WORK*'
         },{
-            prompt: `
-                <h2 class="question-title question-title-heading">Social life</h3>
-                <h3>The symptoms have disrupted your social life / leisure activities:</h3>
-            `,
+            prompt:
+                '<h2 class="question-title question-title-heading">Social life</h3>' +
+                '<h3>The symptoms have disrupted your social life / leisure activities:</h3>',
             options: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
             horizontal: false,
             name: 'SOCIAL*'
         },{
-            prompt: `
-                <h2 class="question-title question-title-heading">Family life / Home Responsibilities</h2>
-                <h3>The symptoms have disrupted your family life / home responsibilities</h3>
-            `,
+            prompt:
+                '<h2 class="question-title question-title-heading">Family life / Home Responsibilities</h2>' +
+                '<h3>The symptoms have disrupted your family life / home responsibilities</h3>',
             options: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
             horizontal: false,
             name: 'FAMILY*'

@@ -1157,11 +1157,11 @@ function startExperiment(){
                     error: prompt_resubmit
                 });
             }, 
-            on_data_update: function(data) {
-                psiTurk.recordTrialData(data),``
-                psiTurk.recordUnstructuredData(),
-                psiTurk.saveData();
-			}
+            // on_data_update: function(data) {
+            //     psiTurk.recordTrialData(data),``
+            //     psiTurk.recordUnstructuredData(),
+            //     psiTurk.saveData();
+			// }
         }
     );
 

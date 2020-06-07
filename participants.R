@@ -1,20 +1,17 @@
 packages <- c("httr", "RMySQL", "jsonlite", "data.table", "stringr")
 suppressMessages(library(data.table))
-# suppressWarnings(library(RSQLite))
 
 if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
   install.packages(setdiff(packages, rownames(installed.packages())))
 }
 
 library(httr)
-# library(RSQLite)
 library(RMySQL)
 library(jsonlite)
 library(data.table)
 library(stringr)
 
-# input_file <- "/media/serge/Data/Upwork/Iain/pittask/participants.db"
-# output_folder <- "/media/serge/Data/Upwork/Iain/pittask/Participants"
+output_folder <- "/media/serge/Data/Upwork/Iain/pittask/Participants"
 
 # Options ------------------------------------------------------------------
 options(useFancyQuotes = FALSE)
@@ -516,12 +513,15 @@ if(isClass(query))
       time_ms <- dateTime_ms[demographics_index] - time_elapsed
 
       for(j in 1:length(demographics_responses)){
+        timestamp <- ifelse(is.na(names(demographics_timestamps)[j]), 'NA', demographics_timestamps[[j]])
+        if(is.na(names(demographics_timestamps)[j])) timestamp <- names(demographics_timestamps)[j]
+
         Demographics <- rbindlist(list(Demographics, list(
           PIN, complete, date,
-          ifelse(demographics_timestamps[[j]] == 'NA', 'NA', as.character(as.ITime(formatDateTime(time_ms + as.numeric(
-            if(demographics_timestamps[[j]] != 'NA') demographics_timestamps[[j]]
+          ifelse(timestamp == 'NA', 'NA', as.character(as.ITime(formatDateTime(time_ms + as.numeric(
+            if(timestamp != 'NA') timestamp
           ))))),
-          demographics_timestamps[[j]],
+          timestamp,
           country, commit, version,
           names(demographics_responses)[j],
           demographics_responses[[j]]
@@ -570,10 +570,13 @@ if(isClass(query))
       time_ms <- dateTime_ms[moves_index] - time_elapsed
       
       for(j in 1:length(moves_responses)){
+        timestamp <- ifelse(is.na(names(moves_timestamps)[j]), 'NA', moves_timestamps[[j]])
+        if(is.na(names(moves_timestamps)[j])) timestamp <- names(moves_timestamps)[j]
+        
         MOVES <- rbindlist(list(MOVES, list(
           PIN, complete, date,
-          as.character(as.ITime(formatDateTime(time_ms + as.numeric(moves_timestamps[[j]])))),
-          moves_timestamps[[j]],
+          as.character(as.ITime(formatDateTime(time_ms + as.numeric(timestamp)))),
+          timestamp,
           country, commit, version,
           names(moves_responses)[j],
           moves_responses[[j]]
@@ -1066,12 +1069,15 @@ if(isClass(query))
       time_ms <- dateTime_ms[sds_index] - time_elapsed
      
       for(j in 1:length(sds_responses)){
+        timestamp <- ifelse(is.na(names(sds_timestamps)[j]), 'NA', sds_timestamps[[j]])
+        if(is.na(names(sds_timestamps)[j])) timestamp <- names(sds_timestamps)[j]
+
         SDS <- rbindlist(list(SDS, list(
           PIN, complete, date,
-          ifelse(sds_timestamps[[j]] == 'NA', 'NA', as.character(as.ITime(formatDateTime(time_ms + as.numeric(
-            if(sds_timestamps[[j]] != 'NA') sds_timestamps[[j]]
-          ))))), 
-          sds_timestamps[[j]],
+          ifelse(timestamp == 'NA', 'NA', as.character(as.ITime(formatDateTime(time_ms + as.numeric(
+            if(timestamp != 'NA') timestamp
+          ))))),
+          timestamp,
           country, commit, version,
           names(sds_responses)[j],
           sds_responses[[j]]

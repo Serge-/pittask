@@ -8,7 +8,9 @@
   },
   "scripts": {
     "test": "jest",
-    "tst": "jest-pippeteer"
+    "tst": "jest-puppeteer",
+    "build": "webpack --progress --colors",
+    "start": "webpack-dev-server --progress --colors"
   },
   "repository": {
     "type": "git",
@@ -21,9 +23,13 @@
   },
   "homepage": "https://github.com/jodeleeuw/jsPsych#readme",
   "devDependencies": {
-    "jest": "^24.9.0",
+    "jest": "^26.0.1",
     "jest-puppeteer": "^4.3.0",
-    "puppeteer": "^2.0.0"
+    "puppeteer": "^2.0.0",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-middleware": "^3.7.2",
+    "webpack-hot-middleware": "^2.25.0"
   },
   "jest": {
     "resetModules": true,
@@ -50,6 +56,8 @@
     }
   },
   "dependencies": {
+    "lodash": "^4.17.15",
+    "micromodal": "^0.4.6",
     "puppeteer-cluster": "^0.20.0"
   }
 }
