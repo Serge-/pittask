@@ -90,11 +90,13 @@ jsPsych.plugins['survey-multi-choice'] = (function() {
     html += '<style id="jspsych-survey-multi-choice-css">';
     html += ".jspsych-survey-multi-choice-question { margin-top: 2em; margin-bottom: 2em; text-align: left; }"+
       ".jspsych-survey-multi-choice-text span.required {color: darkred;}"+
-      ".jspsych-survey-multi-choice-text {font-size: 3rem;}"+
+      ".jspsych-survey-multi-choice-text {font-size: 2rem;}"+
       ".vending-machine { margin-bottom: 1.6rem;}"+
-      "label.jspsych-survey-multi-choice-text { font-size: 2rem; padding-left: 2rem;}"+
+      "input[type=radio] { margin: 0;}"+ 
+      "label.jspsych-survey-multi-choice-text { font-size: 18px; font-weight: 100; padding-left: 2rem; margin-bottom: 0; }"+
+      ".jspsych-survey-multi-choice-option { display: flex; margin-top: 1.5rem; line-height: 2; }"+
+      "#jspsych-survey-multi-choice-form { margin-left: 45px; width: 270px; }"+
       ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-text {  text-align: center;}"+
-      ".jspsych-survey-multi-choice-option { line-height: 2; }"+
       ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-option {  display: inline-block;  margin-left: 1em;  margin-right: 1em;  vertical-align: top;}"+
       "label.jspsych-survey-multi-choice-text input[type='radio'] {margin-right: 1em;}";
     html += '</style>';
@@ -162,7 +164,7 @@ jsPsych.plugins['survey-multi-choice'] = (function() {
 
         // add radio button container
         html += '<div id="'+option_id_name+'" class="jspsych-survey-multi-choice-option">';
-        html += '<input type="radio" name="'+input_name+'" id="'+input_id+'" value="'+question.options[j].value+'" '+required_attr+'></input>';
+        html += '<input type="radio" name="'+input_name+'" id="'+input_id+'" class="form-radio" value="'+question.options[j].value+'" '+required_attr+'></input>';
         html += '<label class="jspsych-survey-multi-choice-text" for="'+input_id+'">'+question.options[j].name+'</label>';
         html += '</div>';
       }

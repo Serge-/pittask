@@ -185,6 +185,7 @@ jsPsych.plugins["key-testing"] = (function() {
             });
 
             if(isLeftTilted) {
+              jsPsych.pluginAPI.cancelKeyboardResponse(keyboardListener);
               setTimeout( function() {
                 end_trial();
               }, 700);
