@@ -1112,11 +1112,11 @@ for(var item of symptom_inventory_arr){
 timeline.push(SDS);
 // ICAR
 timeline.push(ICAR);
-// Food & Hunger Questions pre-rating
-timeline.push(FHQ_PRE_1, FHQ_PRE_2, FHQ_PRE_3, FHQ_PRE_4);
 // Close: That's it for the symptom questions. Now we're ready to start the online game
 timeline.push(CLINICAL_CLOSE);
-
+// Food & Hunger Questions pre-rating
+timeline.push(FHQ_PRE_1, FHQ_PRE_2, FHQ_PRE_3, FHQ_PRE_4);
+// VVR_1, VVR_2, VVR_3
 timeline.push(vvr_.instructions_a.instructions_open);
 timeline.push(vvr_.vvr_a());
 timeline.push(vvr_.instructions_a.instructions_close);
@@ -1157,11 +1157,11 @@ function startExperiment(){
                     error: prompt_resubmit
                 });
             }, 
-            // on_data_update: function(data) {
-            //     psiTurk.recordTrialData(data),``
-            //     psiTurk.recordUnstructuredData(),
-            //     psiTurk.saveData();
-			// }
+            on_data_update: function(data) {
+                psiTurk.recordTrialData(data),
+                psiTurk.recordUnstructuredData(),
+                psiTurk.saveData();
+			}
         }
     );
 

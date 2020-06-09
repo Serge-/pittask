@@ -128,7 +128,7 @@ jsPsych.plugins['ICAR'] = (function () {
         ".matrix-reasoning-wrap ul li { width: 92px; opacity: .4; }" +
         ".matrix-reasoning-wrap ul label { width: 100%; height: 100%;}" +
         ".matrix-reasoning-wrap ul li.active { background-color: yellow; }" +
-        "img { width: 100%; }" +
+        "img { width: 100%; height: 475px; }" +
         ".three-dimensional-rotate-wrap { display: flex; position: relative; width: 1000px; }" +
         ".three-dimensional-rotate-wrap ul { position: absolute; display: flex; flex-wrap: wrap; justify-content: center; height: 100%; width: 73%; padding-left: 0; margin-bottom: 0; bottom: 0; right: 0; }" +
         ".three-dimensional-rotate-wrap ul label { width: 100%; height: 100%;}" +
@@ -145,7 +145,6 @@ jsPsych.plugins['ICAR'] = (function () {
         "ul {list-style: none}" +
         ".jspsych-btn { margin: 100px 0; }" +
         ".jspsych-content { margin-top: 130px;}" +
-        // ".jspsych-survey-container-radio { display: flex; flex-direction: column; padding-left: 3rem; }" +
         ".jspsych-survey-multi-choice-preamble { text-align: left; border-top: 1px solid #fff;}" +
         ".jspsych-survey-multi-choice-information { display: flex; justify-content: space-between }" +
         ".jspsych-survey-multi-choice-information div { width: 40%; text-align: left; padding: 2rem 0; }" +
