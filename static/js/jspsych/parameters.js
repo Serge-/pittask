@@ -187,13 +187,12 @@ var open_instruct_text_transfer_test =  "<p>You have found a new vending machine
 /************************************************************
  * Transfer Test
  ************************************************************/
-var sequence_array_transfer_test = [ 'white', 'green', 'white', 'green', 'white', 'yellow', 'white', 'blue', 'white', 'red' ];
-var number_reps_transfer_test = 2;
+var block_num_transfer_test  = 1; // default 4
 /************************************************************
  * Deval Test
  ************************************************************/
-var sequence_array_deval_test = [ 'white' ];
-var number_reps_deval_test = 8;
+var deval_test_duration = 12000; // default 12000
+var number_reps_deval_test = 1;
 /************************************************************
  * Thanks
  ************************************************************/

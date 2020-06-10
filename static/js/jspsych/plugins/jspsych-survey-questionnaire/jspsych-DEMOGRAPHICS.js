@@ -477,6 +477,15 @@ jsPsych.plugins['Demographics'] = (function () {
           });
         }
       }
+
+      $("input[type=radio], label").on("click",function(){
+        var time_stamp_key = $(this).data('time-stamp');
+        trial.time_stamp[time_stamp_key] = jsPsych.totalTime() - timestamp_onload;
+        labelID = $(this).attr('for');
+        if('labelID') {
+          $('#'+labelID).trigger('click');
+        }
+      });
   
       document.querySelector('form').addEventListener('submit', function (event) {
         event.preventDefault();
@@ -509,34 +518,32 @@ jsPsych.plugins['Demographics'] = (function () {
           Object.assign(question_data, obje);
         }
 
-
-
         // input age check
         (function() {
-          var year_input_value = $('.input-year').val();
-          var label = $("#jspsych-survey-multi-choice-response-1-0").prop("labels")
-          if(year_input_value === '') {
-            $('.jspsych-survey-multi-choice-question-age').addClass('survey-error-after');
-          } else if (year_input_value >= 18) {
-            $('.jspsych-survey-multi-choice-question-age').removeClass('survey-error-after');
-            $('.moda__age-incomplete').remove();
-            $(label).removeClass('survey-error-after');
-            var object2a = {
-              '2a. Age (years)': $("input[name='2a. Age (years)']").val()
-            };
-            var object2b = {
-              '2b. Age (months)': $("input[name='2b. Age (months)']").val() ? $("input[name='2b. Age (months)']").val() : 'NA'
-            };
-            timestamp_data['2a. Age (years)'] = trial.time_stamp['Q2'];
-            timestamp_data['2b. Age (months)'] = $("input[name='2b. Age (months)']").val() ? trial.time_stamp['Q2'] : 'NA'
-            Object.assign(question_data, object2a, object2b);
-          } else {
-            $('.jspsych-survey-multi-choice-question-age').addClass('survey-error-after');
-            $(label).addClass('survey-error-after');
-            if (!$(".moda__age-incomplete").length ) {
-              $('.modal__content').append('<p class="moda__age-incomplete">You have entered an age that falls outside the expected range. <br/> Please enter your age.</p>')
+            var year_input_value = $('.input-year').val();
+            var label = $("#jspsych-survey-multi-choice-response-1-0").prop("labels")
+            if(year_input_value === '') {
+              $('.jspsych-survey-multi-choice-question-age').addClass('survey-error-after');
+            } else if (year_input_value >= 18) {
+              $('.jspsych-survey-multi-choice-question-age').removeClass('survey-error-after');
+              $('.moda__age-incomplete').remove();
+              $(label).removeClass('survey-error-after');
+              var object2a = {
+                '2a. Age (years)': $("input[name='2a. Age (years)']").val()
+              };
+              var object2b = {
+                '2b. Age (months)': $("input[name='2b. Age (months)']").val() ? $("input[name='2b. Age (months)']").val() : 'NA'
+              };
+              timestamp_data['2a. Age (years)'] = trial.time_stamp['Q2'];
+              timestamp_data['2b. Age (months)'] = $("input[name='2b. Age (months)']").val() ? trial.time_stamp['Q2'] : 'NA'
+              Object.assign(question_data, object2a, object2b);
+            } else {
+              $('.jspsych-survey-multi-choice-question-age').addClass('survey-error-after');
+              $(label).addClass('survey-error-after');
+              if (!$(".moda__age-incomplete").length ) {
+                $('.modal__content').append('<p class="moda__age-incomplete">You have entered an age that falls outside the expected range. <br/> Please enter your age.</p>')
+              }
             }
-          }
 
         })();
 
