@@ -10,27 +10,31 @@
 | intelligence information (ICAR). The behavioural tasks gamify cross-species tests of volition.
 ---------------------------------------------------------------------------------------------
 
-For flawless work of the application, please install Python 3.7.5 and Psiturk 2.3.8.
-Below you can find instruction how to have Psitruk installed on your computer.
-First of all you need to have installed "pip".
+Please install Python 3.7.5 and Psiturk 2.3.8 for optimal performance of the application.
+
+Instructions for how to have intall Psiturk on your computer are provided below.
+
+Prior to installing psiturk you need to have installed "pip".
+
 Once pip is installed, type into a terminal:
 ----------------------------------
 |    pip install psiturk         |
 ----------------------------------
-If this doesn’t work, try:
+If the commond above doesn’t work, then try:
 ----------------------------------
 |    sudo pip install psiturk    |
 ----------------------------------
 
-If the install was successful you will have a new command psiturk available on your command line.
+If the install was successful then you will have a new command psiturk available on your command line.
 You can check the location of this command by typing:
 ----------------------------------
 |          which psiturk         |
 ----------------------------------
 
-For further information please refer to: https://psiturk.readthedocs.io/en/latest/install
+Further information is available at https://psiturk.readthedocs.io/en/latest/install
 
-Then, clone the folder pittask from my repo https://github.com/Serge-/pittask.html
+Then, clone the folder pittask from the following Github repo https://github.com/Serge-/pittask.html
+
 Open pittask folder in terminal and type following command:
 ----------------------------------
 |             psiturk            |
@@ -40,7 +44,6 @@ Then:
 |             server on          |
 ----------------------------------
 After these steps you can open following link in the browser: http://localhost:22362
-
 
 ---------------------------------------------------------------------------------------------
                             Tested Operating Systems
@@ -79,15 +82,16 @@ List of Stages:
         ■ PID-5-BF
     o SDS
     o ICAR
-• Behavioural stages
-    o Food & Hunger Questions
-    o VVR
-        ■ Instrumental conditioning [VVR_1]
-        ■ Contingency degradation [VVR_2]
-        ■ Contingency restoration [VVR_3]
+• Behavioural stages (after clinical_close)
+    o food and hunger questions
     o Pavlovian conditioning
-    o Transfer test
-    o Deval video
-    o Deval test
-    o Food & Hunger Questions
+    o instrumental conditioning (VVR_copy_1)
+    o transfer test 
+    o instrumental degradation (VVR_copy_2)
+    o transfer test
+    o instrumental restoration (VVR_copy_3)
+    o outcome revaluation (with declarative questions)
+    o food and hunger questions
+    o transfer test
+    o instrumental reinstatement (VVR_copy_4)
 • Thanks
