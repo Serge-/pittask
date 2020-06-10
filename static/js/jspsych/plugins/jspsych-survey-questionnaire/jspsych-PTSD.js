@@ -282,7 +282,16 @@ jsPsych.plugins['PC-PTSD-5'] = (function() {
         $(this).parent().parent().find('.jspsych-survey-highlight').removeClass('bg-primary');
         $(this).addClass('bg-primary');
         $(this).closest('input').click();
-    })
+    });
+
+    $("input[type=radio], label").on("click",function(){
+      var time_stamp_key = $(this).data('time-stamp');
+      trial.time_stamp[time_stamp_key] = jsPsych.totalTime() - timestamp_onload;
+      labelID = $(this).attr('for');
+      if('labelID') {
+        $('#'+labelID).trigger('click');
+      }
+    });
 
     $('#jspsych-survey-multi-choice-option-0-0').click(function() {
       isHidden = true;

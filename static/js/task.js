@@ -1031,10 +1031,9 @@ var TRANSFER_TEST = {
     stage_name: 'Transfer Test',
     type: 'transfer-test',
     stimulus: 'vending machine',
-    transfer_test_color_consistency: sequence_array_transfer_test,
     transfer_test_color_duration: stim_duration,
     transfer_test_white_duration: ITI_duration,
-    sequence_reps: number_reps_transfer_test
+    sequence_reps: block_num_transfer_test
 }
 
 var DEVAL_VIDEO = {
@@ -1054,8 +1053,7 @@ var DEVAL_TEST = {
     stage_name: 'Deval Test',
     type: 'transfer-test',
     stimulus: 'vending machine',
-    transfer_test_color_consistency: sequence_array_deval_test,
-    transfer_test_white_duration: ITI_duration,
+    transfer_test_white_duration: deval_test_duration,
     sequence_reps: number_reps_deval_test
 }
 
@@ -1158,7 +1156,7 @@ function startExperiment(){
                 });
             }, 
             on_data_update: function(data) {
-                psiTurk.recordTrialData(data),
+                psiTurk.recordTrialData(data),``
                 psiTurk.recordUnstructuredData(),
                 psiTurk.saveData();
 			}

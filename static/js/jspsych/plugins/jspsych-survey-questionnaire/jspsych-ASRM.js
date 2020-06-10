@@ -235,7 +235,7 @@ jsPsych.plugins['ASRM'] = (function () {
         
         if(info.el) {
           if(info.el.dataset.timeStamp) {
-            trial.time_stamp[info.el.dataset.timeStamp] = jsPsych.totalTime() - timestamp_onload;
+            // trial.time_stamp[info.el.dataset.timeStamp] = jsPsych.totalTime() - timestamp_onload;
           }
           if(info.el.dataset.questionNumber) {
             response.trial_events.push({
@@ -274,6 +274,15 @@ jsPsych.plugins['ASRM'] = (function () {
       $(this).closest('input').click();
     })
 
+    $("input[type=radio], label").on("click",function(){
+      var time_stamp_key = $(this).data('time-stamp');
+      trial.time_stamp[time_stamp_key] = jsPsych.totalTime() - timestamp_onload;
+      labelID = $(this).attr('for');
+      if('labelID') {
+        $('#'+labelID).trigger('click');
+      }
+    });
+
     document.querySelector('form').addEventListener('submit', function (event) {
       event.preventDefault();
       // measure response time
@@ -300,7 +309,7 @@ jsPsych.plugins['ASRM'] = (function () {
           name = match.attributes['data-name'].value;
         }
         obje[name] = val;
-        timestamp_data[name] = trial.time_stamp['Q' + (i+1)];
+        timestamp_data[name] = trial.time_stamp['Q' + id];
         Object.assign(question_data, obje);
       }
       
