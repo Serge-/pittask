@@ -4,11 +4,11 @@
 var re_captcha = false;
 var re_captcha_duration = 15
 var full_screen_mode = false;
-var open_instruct_latency = 1000;
-var close_instruct_latency = 1000;
+var open_instruct_latency = 1500;
+var close_instruct_latency = 1500;
 var outcome_duration = 1000;
-var stim_duration = 500;
-var ITI_duration = 500;
+var stim_duration = 3000;
+var ITI_duration = 1500;
 var correct_text = 'Correct!';
 var incorrect_text = 'Incorrect!';
 var feedback_duration = 1000;
@@ -30,8 +30,8 @@ var shake_transition = 0.05;
  ************************************************************
  * Key-Testing
  ***********************************************************/
-var open_instruct_text_key_testing = "First we just need to check that your keyboard can control the game. Press any key when you are ready.";
-var close_instruct_text_key_testing = "Okay. That all seems to be working fine. Press any key when you are ready to start the games";
+var open_instruct_text_key_testing = "<p>This is a key-testing stage.</p> <p>We need to check whether key presses on your keyboard can be registered.</p> <p>Press any key when you are ready.</p>";
+var close_instruct_text_key_testing = "<p>Thank you for your patience.</p> <p>Press any key when you are ready to start the experiement.</p>";
 /************************************************************
  * Clinical Open/Close Instruction Text
  ***********************************************************/
@@ -83,7 +83,7 @@ var symptom_inventory = [
 /************************************************************
  * Deval Video
  ***********************************************************/
-var video_duration = 5;
+var video_duration = 15;
 var video_sound = true;
 var open_instruct_video = true;
 var open_instruct_text_video = 'One of the snacks has been infested.'
@@ -100,64 +100,64 @@ var FHQ_1_bottom_text = "Rate the pleasantness of Tiny Teddies";
 var FHQ_2_bottom_text = "Rate the pleasantness of M&Ms";
 var FHQ_3_bottom_text = "Rate the pleasantness of BBQ shapes";
 var vas_left = "Very Unpleasant";
-var vas_center = "Neutral";
+var vas_center = "";
 var vas_right = "Very Pleasant";
-var vas_left_hungry = "<p>Not at All</p>";
-var vas_right_hungry = "<p>Extremely</p>";
+var vas_left_hungry = "Not at All";
+var vas_right_hungry = "Extremely";
 /************************************************************
  * VVR
  ************************************************************/
-var question_text_a1 = 'Which directions did you get tilt to get';
+var question_text_a1 = 'Which directions did you tilt to get';
 var question_text_a2 = 'Press Left or Right button';
 var question_text_b1 = 'How strongly do you believe in your answer?';
 var question_text_b2 = 'Very little';
-var question_text_b3 = 'Very much!';
-var question_text_b4 = '<li><span>Select answer using your mouse.</span></li><li><span>Click \'submit answer\' when ready</span></li>';
+var question_text_b3 = 'Very much';
+var question_text_b4 = '<li><span>Please select your answer on the scale.</span></li><li><span>Click \'submit answer\' when ready</span></li>';
 /************************************************************
  * Instrumental conditioning [VVR_1]
  ************************************************************/
 var open_instruct_VVR1 = true;
 var close_instruct_VVR1 = true;
-var open_instruct_text_VVR1 = 'You can now interact with the vending machine to earn snacks.';
-var close_instruct_text_VVR1 = 'Some text for close instructions VVR "instrumental conditioning.';
-var degrad_pattern_VVR1 = ['d2', 'd2', 'd2'];
-var prob_value_VVR1 = [1, 1, 1];
-var interval_duration_VVR1 = 100;
-var outcome_duration_VVR1 = 100;
-var interval_num_VVR1 = 2;
-var min_blocks_num_VVR1 = 2;
-var min_num_correct_VVR1 = 4;
+var open_instruct_text_VVR1 = 'You may now interact with the vending machine to earn snacks.';
+var close_instruct_text_VVR1 = 'Thank you for your input. Proceeding to the next stage.';
+var degrad_pattern_VVR1 = ['d0', 'd0', 'd0', 'd0', 'd0', 'd0'];
+var prob_value_VVR1 = [0.6,0.6,0.6,0.6,0.6,0.6];
+var interval_duration_VVR1 = 500;
+var outcome_duration_VVR1 = 1000;
+var interval_num_VVR1 = 60;
+var min_blocks_num_VVR1 = 4;
+var min_num_correct_VVR1 = 6;
 var max_num_incorrect_VVR1 = 4;
 /************************************************************
  * Contingency degradation [VVR_2]
  ************************************************************/
 var open_instruct_VVR2 = true;
 var close_instruct_VVR2 = true;
-var open_instruct_text_VVR2 = 'You can now interact with the vending machine to earn snacks.';
-var close_instruct_text_VVR2 = 'Some text for close instructions VVR "instrumental conditioning.';
-var degrad_pattern_VVR2 = ['d2', 'd2', 'd2'];
-var prob_value_VVR2 = [1, 1, 1];
-var interval_duration_VVR2 = 1000;
-var outcome_duration_VVR2 = 1000;
-var interval_num_VVR2 = 2;
-var min_blocks_num_VVR2 = 3;
-var min_num_correct_VVR2 = 4;
-var max_num_incorrect_VVR2 = 2;
+var open_instruct_text_VVR2 = 'You may now interact with the vending machine to earn snacks.';
+var close_instruct_text_VVR2 = 'Thank you for your input. Proceeding to the next stage.';
+var degrad_pattern_VVR2 = ['d1', 'd2', 'd2', 'd1', 'd1', 'd2'];
+var prob_value_VVR2 = [0.6, 0.6, 0.6, 0.6, 0.6, 0.6];
+var interval_duration_VVR2 = 500;
+var outcome_duration_VVR2 = 500;
+var interval_num_VVR2 = 60;
+var min_blocks_num_VVR2 = 4;
+var min_num_correct_VVR2 = 6;
+var max_num_incorrect_VVR2 = 4;
 /************************************************************
  * Contingency restoration [VVR_3]
  ************************************************************/
 var open_instruct_VVR3 = true;
 var close_instruct_VVR3 = true;
-var open_instruct_text_VVR3 = 'You can now interact with the vending machine to earn snacks.';
-var close_instruct_text_VVR3 = 'Some text for close instructions VVR "instrumental conditioning.';
-var degrad_pattern_VVR3 = ['d2', 'd2', 'd2'];
-var prob_value_VVR3 = [1, 1, 1];
+var open_instruct_text_VVR3 = 'You may now interact with the vending machine to earn snacks.';
+var close_instruct_text_VVR3 = 'Thank you for your input. Proceeding to the next stage.';
+var degrad_pattern_VVR3 = ['d0', 'd0', 'd0', 'd0', 'd0', 'd0'];
+var prob_value_VVR3 = [0.6,0.6,0.6,0.6,0.6,0.6];
 var interval_duration_VVR3 = 500;
-var outcome_duration_VVR3 = 500;
-var interval_num_VVR3 = 3;
-var min_blocks_num_VVR3 = 3;
-var min_num_correct_VVR3 = 4;
-var max_num_incorrect_VVR3 = 2;
+var outcome_duration_VVR3 = 1000;
+var interval_num_VVR3 = 60;
+var min_blocks_num_VVR3 = 4;
+var min_num_correct_VVR3 = 6;
+var max_num_incorrect_VVR3 = 4;
 /************************************************************
  * Open Instruction Pavlovian Conditioning
  ************************************************************/
@@ -166,21 +166,21 @@ var open_instruct_text_pav = "<p>The vending machine cannot be tipped now. " +
 "However, when the machine is overstocked a free snack will fall out.</p><br/>" +
 "<p>Coloured lights will appear on the front of the machine when it is overstocked. "+
 "Watch the lights and learn which snack will fall out.</p><br/>" +
-"<p>Questionnaires will test what you learn.</p>" +
+"<p>Questionnaires will test what you have learnt.</p>" +
 "<br/><p>Press any key to begin </p>";
 /************************************************************
  * Pavlovian Conditioning
  ************************************************************/
-var min_num_correct_pav = 2;
-var max_num_incorrect_pav = 2;
+var min_num_correct_pav = 6;
+var max_num_incorrect_pav = 4;
 /************************************************************
  * Open Instruction Transfer Test
  ************************************************************/
 var open_instruct_transfer_test = true;
 var open_instruct_text_transfer_test =  "<p>You have found a new vending machine. " +
-"It will sometimes be overstocked with a different snack.</p><br/> " +
+"It will sometimes be overstocked with different snacks.</p><br/> " +
 "<p>You will be able to earn snacks by tipping the machine. However, no snacks will appear on the screen.</p></br> " +
-"<p>Remember what you learned. " +
+"<p>Remember what you have learned. " +
 "Try to get as many snacks as you want. " +
 "The amount earned will be recorded.</p>" +
 "<br/><p>Press any key to begin </p>";
@@ -188,13 +188,13 @@ var open_instruct_text_transfer_test =  "<p>You have found a new vending machine
  * Transfer Test
  ************************************************************/
 var sequence_array_transfer_test = [ 'white', 'green', 'white', 'green', 'white', 'yellow', 'white', 'blue', 'white', 'red' ];
-var number_reps_transfer_test = 1;
+var number_reps_transfer_test = 2;
 /************************************************************
  * Deval Test
  ************************************************************/
 var sequence_array_deval_test = [ 'white' ];
-var number_reps_deval_test = 1;
+var number_reps_deval_test = 8;
 /************************************************************
  * Thanks
  ************************************************************/
-var close_instruct_text_thanks = 'Thank you for the participation!';
+var close_instruct_text_thanks = '<p>Thank you!</p><p>Press any key to return to the Amazon Mechanical Turk page.</p><p>This window will close automatically after any keypress on the keyboard.</p><p>Please do NOT close the window by clicking on the ‘X’ at the top right corner of this window</p>';
