@@ -38,6 +38,28 @@ var close_instruct_text_key_testing = "Okay. That all seems to be working fine. 
 var open_instruct_text_clinical = "<p class='v-center-txt'>We'd like to briefly ask you about some symptoms before the online game. <br> Press any key when you are ready. </p>"
 var close_instruct_text_clinical = "<p class='v-center-txt'>That's it for the symptom questions. Now we're ready to start the online game. <br> Press any key when you are ready. </p>"
 /************************************************************
+ * Web-based forms
+ ***********************************************************/
+var open_instruct_demographics = false;
+var close_instruct_demographics = false;
+var open_instruct_text_demographics = 'Demographics open';
+var close_instruct_text_demographics = 'Demographics close';
+
+var open_instruct_symptom_inventories = true;
+var close_instruct_symptom_inventories = true;
+var open_instruct_text_symptom_inventories = 'Symptom inventories open';
+var close_instruct_text_symptom_inventories = 'Symptom inventories close';
+
+var open_instruct_SDS = true;
+var close_instruct_SDS = true;
+var open_instruct_text_SDS = 'SDS open';
+var close_instruct_text_SDS = 'SDS close';
+
+var open_instruct_ICAR = true;
+var close_instruct_ICAR = true;
+var open_instruct_text_ICAR = 'ICAR open';
+var close_instruct_text_ICAR = 'ICAR close';
+/************************************************************
  * Symptom Inventories
  ***********************************************************/
 var OCIR,MOVES,DASS,ASRS5,EAT26,RAADS,PHQ9,GAD7,LSAS,ASRM,PTSD,PRIME_R,AUDIT,PGSI,YIAT,SMOKE_FTND,ISI,PID;
@@ -86,12 +108,24 @@ var symptom_inventory = [
 var video_duration = 5;
 var video_sound = true;
 var open_instruct_video = true;
-var open_instruct_text_video = 'One of the snacks has been infested.'
+var open_instruct_text_video = 'One of the snacks has been infested.';
+var close_instruct_video = true;
+var close_instruct_text_video = 'Thank you!'
 /************************************************************
  * =================== BEHAVIOURAL STAGES ===================
  ************************************************************
  * Food and Hunger Questions
  ***********************************************************/
+var open_instruct_FHQ_pre_rating = true;
+var close_instruct_FHQ_pre_rating = true;
+var open_instruct_text_FHQ_pre_rating =  'Open Instruction Food and Hunger Questions';
+var close_instruct_text_FHQ_pre_rating = 'Close Instruction Food and Hunger Questions';
+
+var open_instruct_FHQ_post_rating = true;
+var close_instruct_FHQ_post_rating = true;
+var open_instruct_text_FHQ_post_rating =  'Open Instruction Food and Hunger Questions';
+var close_instruct_text_FHQ_post_rating = 'Close Instruction Food and Hunger Questions';
+
 var FHQ_1 = "How much do you like Tiny Teddies?";
 var FHQ_2 = "How much do you like M&Ms?";
 var FHQ_3 = "How much do you like BBQ shapes?";
@@ -159,24 +193,39 @@ var min_blocks_num_VVR3 = 3;
 var min_num_correct_VVR3 = 4;
 var max_num_incorrect_VVR3 = 2;
 /************************************************************
- * Open Instruction Pavlovian Conditioning
+ * Instrumental reinstatement [VVR_4]
+ ************************************************************/
+var open_instruct_VVR4 = true;
+var close_instruct_VVR4 = true;
+var open_instruct_text_VVR4 = 'You can now interact with the vending machine to earn snacks.';
+var close_instruct_text_VVR4 = 'Some text for close instructions VVR "instrumental conditioning.';
+var degrad_pattern_VVR4 = ['d2', 'd2', 'd2'];
+var prob_value_VVR4 = [1, 1, 1];
+var interval_duration_VVR4 = 500;
+var outcome_duration_VVR4 = 500;
+var interval_num_VVR4 = 3;
+var min_blocks_num_VVR4 = 3;
+var min_num_correct_VVR4 = 4;
+var max_num_incorrect_VVR4 = 2;
+/************************************************************
+ * Pavlovian Conditioning
  ************************************************************/
 var open_instruct_pav = true;
+var close_instruct_pav = true;
 var open_instruct_text_pav = "<p>The vending machine cannot be tipped now. " +
 "However, when the machine is overstocked a free snack will fall out.</p><br/>" +
 "<p>Coloured lights will appear on the front of the machine when it is overstocked. "+
 "Watch the lights and learn which snack will fall out.</p><br/>" +
 "<p>Questionnaires will test what you learn.</p>" +
 "<br/><p>Press any key to begin </p>";
-/************************************************************
- * Pavlovian Conditioning
- ************************************************************/
+var close_instruct_text_pav = "Close Instruction Pavlovian Conditioning";
 var min_num_correct_pav = 2;
 var max_num_incorrect_pav = 2;
 /************************************************************
- * Open Instruction Transfer Test
+ * Transfer Test
  ************************************************************/
 var open_instruct_transfer_test = true;
+var close_instruct_transfer_test = true;
 var open_instruct_text_transfer_test =  "<p>You have found a new vending machine. " +
 "It will sometimes be overstocked with a different snack.</p><br/> " +
 "<p>You will be able to earn snacks by tipping the machine. However, no snacks will appear on the screen.</p></br> " +
@@ -184,15 +233,16 @@ var open_instruct_text_transfer_test =  "<p>You have found a new vending machine
 "Try to get as many snacks as you want. " +
 "The amount earned will be recorded.</p>" +
 "<br/><p>Press any key to begin </p>";
-/************************************************************
- * Transfer Test
- ************************************************************/
+var close_instruct_text_transfer_test = 'Close Instruction Transfer Test'
 var block_num_transfer_test  = 1; // default 4
 /************************************************************
  * Deval Test
  ************************************************************/
-var deval_test_duration = 12000; // default 12000
-var number_reps_deval_test = 1;
+var open_instruct_deval_test = true;
+var close_instruct_deval_test = true;
+var open_instruct_text_deval_test =  'Open Instruction Deval Test';
+var close_instruct_text_deval_test = 'Close Instruction Deval Test'
+var deval_test_duration = 1200; // default 12000
 /************************************************************
  * Thanks
  ************************************************************/

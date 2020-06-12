@@ -90,7 +90,8 @@ List of Stages:
     o instrumental degradation (VVR_copy_2)
     o transfer test
     o instrumental restoration (VVR_copy_3)
-    o outcome revaluation (with declarative questions)
+    o deval video
+    o deval test
     o food and hunger questions
     o transfer test
     o instrumental reinstatement (VVR_copy_4)

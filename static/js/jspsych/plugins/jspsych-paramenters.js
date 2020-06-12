@@ -122,7 +122,6 @@ jsPsych.plugins['Parameters'] = (function(){
             "open_instruct_transfer_test": open_instruct_transfer_test,
             "open_instruct_text_transfer_test": open_instruct_text_transfer_test,
             "block_num_transfer_test": block_num_transfer_test,
-            "number_reps_deval_test": number_reps_deval_test,
             "close_instruct_text_thanks": close_instruct_text_thanks
         };
 
