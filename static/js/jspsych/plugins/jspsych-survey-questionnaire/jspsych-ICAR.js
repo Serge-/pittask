@@ -259,7 +259,7 @@ jsPsych.plugins['ICAR'] = (function () {
             // add radio button container
             html += '<li id="' + option_id_name + '">';
             html += '<label class="jspsych-survey-multi-choice-text jspsych-survey-highlight" data-time-stamp="Q' + i + '"  for="' + input_id + '"></label>';
-            html += '<input type="radio" class="hidden" name="' + input_name + '" data-response-id="' + question.options[j] + '" data-matrix-reasoning="matrix-reasoning-'+ question_id + '-' + j + '" data-time-stamp="Q' + i + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" id="' + input_id + '" class="form-radio" value="NA" ' + required_attr + '></input>';
+            html += '<input type="radio" class="hidden" name="' + input_name + '" data-time-stamp="Q' + i + '" data-response-id="' + question.options[j] + '" data-matrix-reasoning="matrix-reasoning-'+ question_id + '-' + j + '" data-time-stamp="Q' + i + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" id="' + input_id + '" class="form-radio" value="NA" ' + required_attr + '></input>';
             html += '</li>';
           }
           html += '</ul>';
@@ -287,7 +287,7 @@ jsPsych.plugins['ICAR'] = (function () {
             // add radio button container
             html += '<li id="' + option_id_name + '">';
             html += '<label class="jspsych-survey-multi-choice-text jspsych-survey-highlight" data-time-stamp="Q' + i + '"  for="' + input_id + '"></label>';
-            html += '<input type="radio" class="hidden" name="' + input_name + '" data-response-id="' + question.options[j] + '" data-three-dimensional-rotate="three-dimensional-rotate-'+ question_id + '-' + j + '" data-time-stamp="Q' + i + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" id="' + input_id + '" class="form-radio" value="NA" ' + required_attr + '></input>';
+            html += '<input type="radio" class="hidden" name="' + input_name + '" data-time-stamp="Q' + i + '" data-response-id="' + question.options[j] + '" data-three-dimensional-rotate="three-dimensional-rotate-'+ question_id + '-' + j + '" data-time-stamp="Q' + i + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" id="' + input_id + '" class="form-radio" value="NA" ' + required_attr + '></input>';
             html += '</li>';
           }
           html += '</ul>';
@@ -392,6 +392,7 @@ jsPsych.plugins['ICAR'] = (function () {
           if(next_counter < 16 && isChecked) {
             $('#jspsych-survey-multi-choice-' + (next_counter - 1)).fadeOut();
             $('.next-question').prop('disabled', true);
+            $('.jspsych-survey-multi-choice-question').removeClass('survey-error');
             setTimeout(function() {
               $('#jspsych-survey-multi-choice-' + next_counter++).fadeIn();
               $('.next-question').prop('disabled', false);
@@ -401,6 +402,7 @@ jsPsych.plugins['ICAR'] = (function () {
               $('.next-question').hide();
             }
           } else {
+            $('.jspsych-survey-multi-choice-question').addClass('survey-error');
             MicroModal.show('modal-1');
           };
       });
@@ -416,13 +418,18 @@ jsPsych.plugins['ICAR'] = (function () {
         }
       });
 
-      $("input[type=radio], label").on("click",function(){
-        var time_stamp_key = $(this).data('time-stamp');
-        trial.time_stamp[time_stamp_key] = jsPsych.totalTime() - timestamp_onload;
-        labelID = $(this).attr('for');
+      $("label").on("click",function(){
+        var labelID = $(this).attr('for');
         if('labelID') {
-          $('#'+labelID).trigger('click');
-        }
+          $("#" + labelID).prop('checked', true).trigger('click').trigger('change');
+        };
+      });
+  
+      $("input[type=radio]").on("click change touchstart",function(){
+        var time_stamp_key = $(this).data('time-stamp'); 
+        if(time_stamp_key) {
+          trial.time_stamp[time_stamp_key] = jsPsych.totalTime() - timestamp_onload;
+        };
       });
   
       document.querySelector('form').addEventListener('submit', function (event) {
@@ -473,6 +480,7 @@ jsPsych.plugins['ICAR'] = (function () {
             "responses": JSON.stringify(question_data),
             "responseId": JSON.stringify(response_id),
             "timestamp": JSON.stringify(timestamp_data),
+            "time_stamp": JSON.stringify(trial.time_stamp),
             "question_order": JSON.stringify(question_order),
             "events": JSON.stringify(response.trial_events)
           };

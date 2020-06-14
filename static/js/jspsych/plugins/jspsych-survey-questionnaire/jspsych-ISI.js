@@ -216,8 +216,8 @@ jsPsych.plugins['ISI'] = (function () {
 
           // add radio button container
           html += '<div id="' + option_id_name + '" class="jspsych-survey-multi-choice-option jspsych-survey-question">';
-          html += '<label class="jspsych-survey-multi-choice-text jspsych-survey-highlight" data-time-stamp="Q' + (i+1) + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" for="' + input_id + '">' + question.options[j] + '</label>';
-          html += '<input hidden type="radio" name="' + input_name + '" id="' + input_id + '" value="' + question.options[j] + '"></input>';
+          html += '<label class="jspsych-survey-multi-choice-text jspsych-survey-highlight" data-time-stamp="Q' + i + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" for="' + input_id + '">' + question.options[j] + '</label>';
+          html += '<input hidden type="radio" name="' + input_name + '" id="' + input_id + '" data-time-stamp="Q' + i + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" value="' + question.options[j] + '"></input>';
           html += '</div>';
         }
 
@@ -235,7 +235,7 @@ jsPsych.plugins['ISI'] = (function () {
 
             html += '<div id="' + option_id_name + '" class="jspsych-survey-multi-choice-option">';
             html += '<label class="jspsych-survey-multi-choice-text jspsych-survey-highlight" data-time-stamp="Q' + (i+1) + 'S' + (j+1) + '" data-question-number="Q' + (i+1) + 'S' + (j+1) + 'A' + (k+1) +'" for="' + input_id + '">' + question.options[j].options[k] + '</label>';
-            html += '<input hidden type="radio" name="' + input_name + '" id="' + input_id + '" value="' + question.options[j].options[k] + '"></input></div>';
+            html += '<input hidden type="radio" name="' + input_name + '" id="' + input_id + '" data-time-stamp="Q' + i + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" value="' + question.options[j].options[k] + '"></input></div>';
           }
           html += '</div>'
           html += '</div>'
@@ -327,17 +327,20 @@ jsPsych.plugins['ISI'] = (function () {
     $('.jspsych-survey-highlight').click(function () {
       $(this).parent().parent().find('.jspsych-survey-highlight').removeClass('bg-primary');
       $(this).addClass('bg-primary');
-      $(this).next('input').prop("checked", true);
-      $(this).closest('input').click();
-    })
+    });
 
-    $("input[type=radio], label").on("click",function(){
-      var time_stamp_key = $(this).data('time-stamp');
-      trial.time_stamp[time_stamp_key] = jsPsych.totalTime() - timestamp_onload;
-      labelID = $(this).attr('for');
+    $("label").on("click",function(){
+      var labelID = $(this).attr('for');
       if('labelID') {
-        $('#'+labelID).trigger('click');
-      }
+        $("#" + labelID).prop('checked', true).trigger('click').trigger('change');
+      };
+    });
+
+    $("input[type=radio]").on("click change touchstart",function(){
+      var time_stamp_key = $(this).data('time-stamp'); 
+      if(time_stamp_key) {
+        trial.time_stamp[time_stamp_key] = jsPsych.totalTime() - timestamp_onload;
+      };
     });
 
     document.querySelector('form').addEventListener('submit', function (event) {
@@ -351,7 +354,7 @@ jsPsych.plugins['ISI'] = (function () {
       var timestamp_data = {};
       for (var i = 1; i < trial.questions.length; i++) {
         var match = display_element.querySelector('#jspsych-survey-multi-choice-' + i);
-        var id = i + 1;
+        var id = i;
         if (match.querySelector("input[type=radio]:checked") !== null) {
           var val = match.querySelector("input[type=radio]:checked").value;
           $(match).find('.jspsych-survey-multi-choice-question').removeClass('survey-error');
@@ -400,6 +403,7 @@ jsPsych.plugins['ISI'] = (function () {
           "stage_name": JSON.stringify(plugin.info.stage_name),
           "responses": JSON.stringify(question_data),
           "timestamp": JSON.stringify(timestamp_data),
+          "time_stamp": JSON.stringify(trial.time_stamp),
           "question_order": JSON.stringify(question_order),
           "events": JSON.stringify(response.trial_events)
         };

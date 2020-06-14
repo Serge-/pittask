@@ -231,7 +231,7 @@ jsPsych.plugins['LSAS'] = (function () {
             // add radio button container
             html += '<div id="' + option_id_name + '" class="jspsych-survey-multi-choice-option">';
             html += '<label class="jspsych-survey-multi-choice-text jspsych-survey-highlight" data-time-stamp="' + timestamp_char[j] + (i+1) + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" for="' + input_id + '">' + question.options[j][k] + '</label>';
-            html += '<input hidden type="radio" name="' + input_name + '" id="' + input_id + '" value="' + question.options[j][k] + '" ' + required_attr + '></input>';
+            html += '<input hidden type="radio" name="' + input_name + '" id="' + input_id + '" data-time-stamp="' + timestamp_char[j] + (i+1) + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" value="' + question.options[j][k] + '" ' + required_attr + '></input>';
             html += '</div>';
           }
           html += '</div>';
@@ -317,19 +317,22 @@ jsPsych.plugins['LSAS'] = (function () {
       }
   
       $('.jspsych-survey-highlight').click(function () {
-        $(this).next('input').prop("checked", true);
         $(this).parent().parent().find('.jspsych-survey-highlight').removeClass('bg-primary');
         $(this).addClass('bg-primary');
-        $(this).closest('input').click();
+      });
+      
+      $("label").on("click",function(){
+        var labelID = $(this).attr('for');
+        if('labelID') {
+          $("#" + labelID).prop('checked', true).trigger('click').trigger('change');
+        };
       });
 
-      $("input[type=radio], label").on("click",function(){
-        var time_stamp_key = $(this).data('time-stamp');
-        trial.time_stamp[time_stamp_key] = jsPsych.totalTime() - timestamp_onload;
-        labelID = $(this).attr('for');
-        if('labelID') {
-          $('#'+labelID).trigger('click');
-        }
+      $("input[type=radio]").on("click change touchstart",function(){
+        var time_stamp_key = $(this).data('time-stamp'); 
+        if(time_stamp_key) {
+          trial.time_stamp[time_stamp_key] = jsPsych.totalTime() - timestamp_onload;
+        };
       });
   
       document.querySelector('form').addEventListener('submit', function (event) {
@@ -378,6 +381,7 @@ jsPsych.plugins['LSAS'] = (function () {
             "stage_name": JSON.stringify(plugin.info.stage_name),
             "responses": JSON.stringify(question_data),
             "timestamp": JSON.stringify(timestamp_data),
+            "time_stamp": JSON.stringify(trial.time_stamp),
             "question_order": JSON.stringify(question_order),
             "events": JSON.stringify(response.trial_events)
           };

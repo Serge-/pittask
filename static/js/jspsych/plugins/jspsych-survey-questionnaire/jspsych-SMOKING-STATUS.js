@@ -196,7 +196,6 @@ jsPsych.plugins['Smoking-Status'] = (function () {
         html += '</div></div>';
       }
 
-
   
       // add submit button
       html += '<p><input type="submit" id="' + plugin_id_name + '-next" class="' + plugin_id_name + ' jspsych-btn"' + (trial.button_label ? ' value="' + trial.button_label + '"' : '') + '></input></p>';
@@ -275,19 +274,22 @@ jsPsych.plugins['Smoking-Status'] = (function () {
       }
   
       $('.jspsych-survey-highlight').click(function () {
-        $(this).parent().parent().find('.jspsych-survey-highlight').removeClass('bg-primary');
         $(this).addClass('bg-primary');
         $(this).next('input').prop("checked", true);
-        $(this).closest('input').click();
       });
-
-      $("input[type=radio], label").on("click",function(){
-        var time_stamp_key = $(this).data('time-stamp');
-        trial.time_stamp[time_stamp_key] = jsPsych.totalTime() - timestamp_onload;
-        labelID = $(this).attr('for');
+      
+      $("label").on("click",function(){
+        var labelID = $(this).attr('for');
         if('labelID') {
-          $('#'+labelID).trigger('click');
-        }
+          $("#" + labelID).prop('checked', true).trigger('click').trigger('change');
+        };
+      });
+  
+      $("input[type=radio]").on("click change touchstart",function(){
+        var time_stamp_key = $(this).data('time-stamp'); 
+        if(time_stamp_key) {
+          trial.time_stamp[time_stamp_key] = jsPsych.totalTime() - timestamp_onload;
+        };
       });
   
       document.querySelector('form').addEventListener('submit', function (event) {
@@ -342,6 +344,7 @@ jsPsych.plugins['Smoking-Status'] = (function () {
             "stage_name": JSON.stringify(plugin.info.stage_name),
             "responses": JSON.stringify(question_data),
             "timestamp": JSON.stringify(timestamp_data),
+            "time_stamp": JSON.stringify(trial.time_stamp),
             "question_order": JSON.stringify(question_order),
             "events": JSON.stringify(response.trial_events)
           };

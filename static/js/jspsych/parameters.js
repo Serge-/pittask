@@ -50,13 +50,13 @@ var close_instruct_symptom_inventories = true;
 var open_instruct_text_symptom_inventories = 'Symptom inventories open';
 var close_instruct_text_symptom_inventories = 'Symptom inventories close';
 
-var open_instruct_SDS = true;
-var close_instruct_SDS = true;
+var open_instruct_SDS = false;
+var close_instruct_SDS = false;
 var open_instruct_text_SDS = 'SDS open';
 var close_instruct_text_SDS = 'SDS close';
 
-var open_instruct_ICAR = true;
-var close_instruct_ICAR = true;
+var open_instruct_ICAR = false;
+var close_instruct_ICAR = false;
 var open_instruct_text_ICAR = 'ICAR open';
 var close_instruct_text_ICAR = 'ICAR close';
 /************************************************************
