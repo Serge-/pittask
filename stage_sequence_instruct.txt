@@ -1,0 +1,50 @@
+---------------------------------------------------------------------------------------------
+                            Stages sequence configuration
+---------------------------------------------------------------------------------------------
+The current version of the application permit to change, re-configure, duplicate behavioural stages.
+Open taks.js file in a text editor, the file can be found: /static/js/task.js
+At the bottom of the page you can find a list of the stages:
+...
+// Food & Hunger Questions pre-rating
+timeline.push(FHQ_PRE_INSTRUCT_OPEN, FHQ_PRE_1, FHQ_PRE_2, FHQ_PRE_3, FHQ_PRE_4, FHQ_PRE_INSTRUCT_CLOSE);
+// Pavlovian Condition
+timeline.push(PAV_CONDITIONING);
+//  Instrumental Conditioning (VVR_copy_1)
+timeline.push(VVR_1);
+// Transfer Test
+timeline.push(TRANSFER_TEST);
+...
+
+-----------------------------
+ DEFINITION
+-----------------------------
+timeline - sequence of stages.
+timeline.push() - method adds stage to the timeline.
+As you can see the order of stages defines a sequence.
+You can change the order, for example:
+
+-----------------------------
+Change stages order example:
+-----------------------------
+...
+// Pavlovian Condition
+timeline.push(PAV_CONDITIONING);
+// Food & Hunger Questions pre-rating
+timeline.push(FHQ_PRE_INSTRUCT_OPEN, FHQ_PRE_1, FHQ_PRE_2, FHQ_PRE_3, FHQ_PRE_4, FHQ_PRE_INSTRUCT_CLOSE);
+...
+
+Stage sequence will be: Pavlovian Condition, Food & Hunger Questions.
+
+-----------------------------
+Stage duplication example:
+-----------------------------
+...
+// Pavlovian Condition
+timeline.push(PAV_CONDITIONING);
+timeline.push(PAV_CONDITIONING);
+timeline.push(PAV_CONDITIONING);
+// Food & Hunger Questions pre-rating
+timeline.push(FHQ_PRE_INSTRUCT_OPEN, FHQ_PRE_1, FHQ_PRE_2, FHQ_PRE_3, FHQ_PRE_4, FHQ_PRE_INSTRUCT_CLOSE);
+...
+
+Stage sequence will be: Pavlovian Condition, Pavlovian Condition, Pavlovian Condition, Food & Hunger Questions.
