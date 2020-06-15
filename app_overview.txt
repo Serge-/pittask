@@ -12,7 +12,7 @@
 
 Please install Python 3.7.5 and Psiturk 2.3.8 for optimal performance of the application.
 
-Instructions for how to have intall Psiturk on your computer are provided below.
+Instructions for how to have install Psiturk on your computer are provided below.
 
 Prior to installing psiturk you need to have installed "pip".
 
@@ -20,7 +20,7 @@ Once pip is installed, type into a terminal:
 ----------------------------------
 |    pip install psiturk         |
 ----------------------------------
-If the commond above doesn’t work, then try:
+If the command above doesn’t work, then try:
 ----------------------------------
 |    sudo pip install psiturk    |
 ----------------------------------
