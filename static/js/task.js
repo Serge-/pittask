@@ -1605,6 +1605,13 @@ var THANKS = {
 };
 
 var timeline = [];
+var symptom_inventories_random = jsPsych.randomization.shuffle(symptom_inventory);
+var symptom_inventories_ordered = symptom_inventory;
+var symptom_inventory_arr = symptom_inventory_randomization ?  symptom_inventories_random : symptom_inventories_ordered;
+
+/************************************************************
+ * Stages sequence configuration
+ ***********************************************************/
 // Init parameters
 timeline.push({
     type: 'Parameters',
@@ -1618,10 +1625,7 @@ timeline.push(DEMOGRAPHICS);
 // Intro: We'd like to briefly ask you about some symptoms before the online game.
 timeline.push(CLINICAL_OPEN);
 timeline.push(SYMPTOM_INVENTORY_INSTRUCT_OPEN);
-// Randomisation function for Symptom Inventories
-var symptom_inventories_random = jsPsych.randomization.shuffle(symptom_inventory);
-var symptom_inventories_ordered = symptom_inventory;
-var symptom_inventory_arr = symptom_inventory_randomization ?  symptom_inventories_random : symptom_inventories_ordered;
+// Symptom Inventories
 for(var item of symptom_inventory_arr){
     timeline.push(item);
 }
@@ -1674,7 +1678,7 @@ function startExperiment(){
                 });
             }, 
             on_data_update: function(data) {
-                psiTurk.recordTrialData(data),``
+                psiTurk.recordTrialData(data),
                 psiTurk.recordUnstructuredData(),
                 psiTurk.saveData();
 			}

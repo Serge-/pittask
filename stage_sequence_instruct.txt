@@ -48,3 +48,32 @@ timeline.push(FHQ_PRE_INSTRUCT_OPEN, FHQ_PRE_1, FHQ_PRE_2, FHQ_PRE_3, FHQ_PRE_4,
 ...
 
 Stage sequence will be: Pavlovian Condition, Pavlovian Condition, Pavlovian Condition, Food & Hunger Questions.
+
+================================================================================================================
+
+The file parameters.js located at: /static/js/jspsych/parameters.js has a variables
+symptom_inventory and symptom_inventory_randomization:
+var symptom_inventory_randomization = true;
+var symptom_inventory = [
+    OCIR,
+    MOVES,
+    DASS,
+    ASRS5,
+    EAT26,
+    RAADS,
+    PHQ9,
+    GAD7,
+    LSAS,
+    ASRM,
+    PTSD,
+    PRIME_R,
+    AUDIT,
+    PGSI,
+    YIAT,
+    SMOKE_FTND,
+    ISI,
+    PID
+]
+By default, all symptom inventory stages presented in a random sequence, but in the case,
+if you want to have symptom inventory stages in the ordered sequence. You can disable randomization by changing parameter
+symptom_inventory_randomization = false;. Now you able to re-configure stages order, duplicate stages.
