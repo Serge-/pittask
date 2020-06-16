@@ -494,6 +494,7 @@ var loop_node_counter_vvr_determination = 0;
 var loop_node_counter_max_num_correct = 0;
 var loop_node_counter_max_num_incorrect = 0;
 var vvrIsCorrect = false;
+var item_id = 0;
 
 var vvr_ = {
     vvr_a: function() {

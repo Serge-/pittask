@@ -43,6 +43,7 @@ jsPsych.plugins['survey-vvr'] = (function() {
 
         var VENDING_MACHINE = '/static/images/vending_machine.svg';
         var interval_number_holder = 1;
+        item_id = 0;
         var OUTCOME = {
           MM:'/static/images/MM.png',
           TT:'/static/images/TT.png',
@@ -102,7 +103,6 @@ jsPsych.plugins['survey-vvr'] = (function() {
               }
               jsPsych.pluginAPI.setTimeout(function() {
                 $('.outcome-container').html('');
-                
                 if (++x === VVR_INTERVAL_NUM) {
                   clearTimeout(timerId);
                   end_trial();
@@ -194,7 +194,6 @@ jsPsych.plugins['survey-vvr'] = (function() {
                   "time_elapsed": jsPsych.totalTime() - timestamp_onload
                 });
             }
-            
         }
         
       

@@ -264,7 +264,7 @@ jsPsych.plugins['survey-vvr-questions-left'] = (function() {
                 "stimulus": trial.stimulus,
                 "timestamp": jsPsych.totalTime(),
                 "block_number": loop_node_counter_vvr,
-                "item_id": 1,
+                "item_id": ++item_id,
                 "food_item": OUTCOME.slice(15),
                 "correct": vvrIsCorrect ? 'y':'n',
                 "strength_of_belief": vas_holder,
