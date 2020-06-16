@@ -154,11 +154,11 @@ var open_instruct_VVR1 = true;
 var close_instruct_VVR1 = true;
 var open_instruct_text_VVR1 = 'You can now interact with the vending machine to earn snacks.';
 var close_instruct_text_VVR1 = 'Some text for close instructions VVR "instrumental conditioning.';
-var degrad_pattern_VVR1 = ['d2', 'd2', 'd2'];
-var prob_value_VVR1 = [1, 1, 1];
-var interval_duration_VVR1 = 100;
-var outcome_duration_VVR1 = 100;
-var interval_num_VVR1 = 2;
+var degrad_pattern_VVR1 = ['d2', 'd2'];
+var prob_value_VVR1 = [1, 1];
+var interval_duration_VVR1 = 1000;
+var outcome_duration_VVR1 = 1000;
+var interval_num_VVR1 = 4;
 var min_blocks_num_VVR1 = 2;
 var min_num_correct_VVR1 = 4;
 var max_num_incorrect_VVR1 = 4;
@@ -224,8 +224,8 @@ var max_num_incorrect_pav = 2;
 /************************************************************
  * Transfer Test
  ************************************************************/
-var open_instruct_transfer_test = true;
-var close_instruct_transfer_test = true;
+var open_instruct_transfer_test = false;
+var close_instruct_transfer_test = false;
 var open_instruct_text_transfer_test =  "<p>You have found a new vending machine. " +
 "It will sometimes be overstocked with a different snack.</p><br/> " +
 "<p>You will be able to earn snacks by tipping the machine. However, no snacks will appear on the screen.</p></br> " +
@@ -234,7 +234,7 @@ var open_instruct_text_transfer_test =  "<p>You have found a new vending machine
 "The amount earned will be recorded.</p>" +
 "<br/><p>Press any key to begin </p>";
 var close_instruct_text_transfer_test = 'Close Instruction Transfer Test'
-var block_num_transfer_test  = 1; // default 4
+var block_num_transfer_test  = 4; // default 4
 /************************************************************
  * Deval Test
  ************************************************************/

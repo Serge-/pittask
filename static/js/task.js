@@ -503,7 +503,7 @@ var vvr_ = {
 
         var vvr_a = {
             type: 'survey-vvr',
-            stage_name: 'instrumental conditioning',
+            stage_name: 'VVR_copy_1 instrumental conditioning',
             variables: {
                 VVR_INTERVAL_NUM: interval_num_VVR1,
                 VVR_INTERVAL_DURATION: interval_duration_VVR1,
@@ -652,7 +652,7 @@ var vvr_ = {
 
         var vvr_a = {
             type: 'survey-vvr',
-            stage_name: 'contingency degradation',
+            stage_name: 'VVR_copy_2 contingency degradation',
             variables: {
                 VVR_INTERVAL_NUM: interval_num_VVR2,
                 VVR_INTERVAL_DURATION: interval_duration_VVR2,
@@ -801,7 +801,7 @@ var vvr_ = {
 
         var vvr_a = {
             type: 'survey-vvr',
-            stage_name: 'contingency restoration',
+            stage_name: 'VVR_copy_3 contingency restoration',
             variables: {
                 VVR_INTERVAL_NUM: interval_num_VVR3,
                 VVR_INTERVAL_DURATION: interval_duration_VVR3,
@@ -950,7 +950,7 @@ var vvr_ = {
 
         var vvr_a = {
             type: 'survey-vvr',
-            stage_name: 'instrumental reinstatement ',
+            stage_name: 'VVR_copy_4 instrumental reinstatement ',
             variables: {
                 VVR_INTERVAL_NUM: interval_num_VVR4,
                 VVR_INTERVAL_DURATION: interval_duration_VVR4,
@@ -1095,7 +1095,7 @@ var vvr_ = {
     instructions_a: {
         instructions_open: {
             timeline: [{ 
-                stage_name: 'instrumental conditioning open instructions page',
+                stage_name: 'VVR_copy_1 instrumental conditioning open instructions page',
                 type: 'html-keyboard-response',
                 stimulus: open_instruct_text_VVR1,
                 trial_latency: open_instruct_latency,
@@ -1110,7 +1110,7 @@ var vvr_ = {
         },
         instructions_close: {
             timeline: [{
-                stage_name: 'instrumental conditioning close instructions page',
+                stage_name: 'VVR_copy_1 instrumental conditioning close instructions page',
                 type: 'html-keyboard-response',
                 stimulus: close_instruct_text_VVR1,
                 trial_latency: close_instruct_latency,
@@ -1127,7 +1127,7 @@ var vvr_ = {
     instructions_b: {
         instructions_open: {
             timeline: [{ 
-                stage_name: 'contingency degradation open instructions page',
+                stage_name: 'VVR_copy_2 contingency degradation open instructions page',
                 type: 'html-keyboard-response',
                 stimulus: open_instruct_text_VVR2,
                 trial_latency: open_instruct_latency,
@@ -1142,7 +1142,7 @@ var vvr_ = {
         },
         instructions_close: {
             timeline: [{
-                stage_name: 'contingency degradation close instructions page',
+                stage_name: 'VVR_copy_2 contingency degradation close instructions page',
                 type: 'html-keyboard-response',
                 stimulus: close_instruct_text_VVR2,
                 trial_latency: close_instruct_latency,
@@ -1159,7 +1159,7 @@ var vvr_ = {
     instructions_c: {
         instructions_open: {
             timeline: [{ 
-                stage_name: 'contingency restoration open instructions page',
+                stage_name: 'VVR_copy_3 contingency restoration open instructions page',
                 type: 'html-keyboard-response',
                 stimulus: open_instruct_text_VVR3,
                 trial_latency: open_instruct_latency,
@@ -1174,7 +1174,7 @@ var vvr_ = {
         },
         instructions_close: {
             timeline: [{
-                stage_name: 'contingency restoration close instructions page',
+                stage_name: 'VVR_copy_3 contingency restoration close instructions page',
                 type: 'html-keyboard-response',
                 stimulus: close_instruct_text_VVR3,
                 trial_latency: close_instruct_latency,
@@ -1191,14 +1191,14 @@ var vvr_ = {
     instructions_d: {
         instructions_open: {
             timeline: [{ 
-                stage_name: 'instrumental reinstatement  open instructions page',
+                stage_name: 'VVR_copy_4 instrumental reinstatement open instructions page',
                 type: 'html-keyboard-response',
                 stimulus: open_instruct_text_VVR4,
                 trial_latency: open_instruct_latency,
                 response_ends_trial: false,
                 event_type: 'text appears',
                 event_raw_details: 'open_instruct_text',
-                event_converted_details: 'instrumental reinstatement  open text appears'
+                event_converted_details: 'instrumental reinstatement open text appears'
             }],
             conditional_function: function(){
                 return  open_instruct_VVR4;
@@ -1206,14 +1206,14 @@ var vvr_ = {
         },
         instructions_close: {
             timeline: [{
-                stage_name: 'instrumental reinstatement  close instructions page',
+                stage_name: 'VVR_copy_4 instrumental reinstatement close instructions page',
                 type: 'html-keyboard-response',
                 stimulus: close_instruct_text_VVR4,
                 trial_latency: close_instruct_latency,
                 response_ends_trial: false,
                 event_type: 'text appears',
                 event_raw_details: 'close_instruct_text',
-                event_converted_details: 'instrumental reinstatement  close text appears'
+                event_converted_details: 'instrumental reinstatement close text appears'
             }],
             conditional_function: function(){
                 return close_instruct_VVR4;

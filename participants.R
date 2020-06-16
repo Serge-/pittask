@@ -1183,12 +1183,13 @@ if(isClass(query))
         events <- trialdata[pav_condition_index,]
         response_submitted <- fromJSON(events$response_submitted[j])
         correct <- events$event_raw_details[j]
+        
+        date <- format(as.Date(dateTime[j]), "%d-%m-%Y")
+        time <- as.character(as.ITime(dateTime[j]))
     
         PavCondition <- rbindlist(list(PavCondition, list(
           PIN, complete, date, time, commit, version, country,
-          Q = j,
-          response_submitted,
-          substring(correct, 1, 1)
+          j, response_submitted, substring(correct, 1, 1)
         )))
       }
     }
@@ -1209,10 +1210,12 @@ if(isClass(query))
             CompleteData <- rbindlist(list(CompleteData, list(
               PIN, complete, date, 
               as.character(as.ITime(formatDateTime(time_ms + events$timestamp[e]))),
-              events$time_elapsed[e], country, timezone,
-              gsub('"', "", trialdata$stage[j]), version, commit, events$event_type[e],
+              ifelse(is.null(events$time_elapsed[e]), NA, events$time_elapsed[e]), 
+              country, timezone,
+              gsub('"', "", trialdata$stage[j]), version, commit,
               ifelse(!is.na(trialdata$block_number[j]), trialdata$block_number[j], 'NA'),
-              ifelse(!is.na(trialdata$item_id[j]), trialdata$item_id[j], 'NA'),
+              ifelse(!is.null(events$interval_number[e]), events$interval_number[e], 'NA'),
+              events$event_type[e],
               ifelse(is.null(events$event_raw_details[e]), NA, events$event_raw_details[e]),
               events$event_converted_details[e]
             )))
@@ -1226,12 +1229,7 @@ if(isClass(query))
   
   close(progressBar)
   dbClearResult(query)
-
-  dbDisconnectAll <- function(){
-    ile <- length(dbListConnections(MySQL())  )
-    lapply( dbListConnections(MySQL()), function(x) dbDisconnect(x) )
-    cat(sprintf("%s connection(s) closed.\n", ile))
-  }
+  dbDisconnect(connection)
 
   # Writing results ---------------------------------------------------------
   
@@ -1278,10 +1276,9 @@ if(isClass(query))
     if(nrow(results[[i]]) != 0){
       fwrite(results[[i]], str_c(output_folder, "//", names(results)[i], ".csv"), quote = "auto")
     }
+    
     setTxtProgressBar(filesProgressBar, i)
   }
-
-  dbDisconnectAll()
 } else {
   print("Invalid database connection or query")
   dbDisconnect(connection)

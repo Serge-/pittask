@@ -42,6 +42,7 @@ jsPsych.plugins['survey-vvr'] = (function() {
             VVR_PROB_VALUE = _trial$variables.VVR_PROB_VALUE;
 
         var VENDING_MACHINE = '/static/images/vending_machine.svg';
+        var interval_number_holder = 1;
         var OUTCOME = {
           MM:'/static/images/MM.png',
           TT:'/static/images/TT.png',
@@ -66,16 +67,18 @@ jsPsych.plugins['survey-vvr'] = (function() {
         response.trial_events.push({
           "event_type": 'image appears',
           "event_raw_details": VENDING_MACHINE,
-          "event_converted_details": 'white vending machine appears',
+          "event_converted_details": 'blank vending machine appears',
           "timestamp": jsPsych.totalTime(),
+          "interval_number": 1,
           "time_elapsed": jsPsych.totalTime() - timestamp_onload
         });
+
 
         // outcome presentation logic
         (function () {
           
-          let x = 0;
-          let duration = VVR_INTERVAL_DURATION;
+          var x = 0;
+          var duration = VVR_INTERVAL_DURATION;
           timerId = jsPsych.pluginAPI.setTimeout(function request() {
             
             var random_boolean = Math.random() < probability_value;
@@ -83,16 +86,20 @@ jsPsych.plugins['survey-vvr'] = (function() {
 
             if (random_boolean && outcome_present) {
               $('.outcome-container').html('<img class="outcome" src="'+ OUTCOME[counter_balancing[0][outcome_present]] +'"/>');
+              
               response.trial_events.push({
                 "timestamp": jsPsych.totalTime(),
                 "time_elapsed": jsPsych.totalTime() - timestamp_onload,
                 "event_type": 'image appears',
+                "interval_number": interval_number_holder,
                 "event_raw_details": OUTCOME[counter_balancing[0][outcome_present]],
                 "event_converted_details": counter_balancing[0][outcome_present] + ' image appears'
               });
               // reset degrad pattern
               condition_outcome = 'A0';
-
+              if(interval_number_holder < VVR_INTERVAL_NUM) {
+                interval_number_holder += 1;
+              }
               jsPsych.pluginAPI.setTimeout(function() {
                 $('.outcome-container').html('');
                 
@@ -134,6 +141,7 @@ jsPsych.plugins['survey-vvr'] = (function() {
                       "event_type": "left tilt",
                       "event_raw_details": shake_left_translateX + "%, " + shake_left_rotate + "deg",
                       "event_converted_details": "vending machine was tilted left " + shake_left_translateX + "%, " + shake_left_rotate + "deg",
+                      "interval_number": interval_number_holder,
                       "timestamp": jsPsych.totalTime(),
                       "time_elapsed": jsPsych.totalTime() - timestamp_onload
                     });
@@ -154,6 +162,7 @@ jsPsych.plugins['survey-vvr'] = (function() {
                       "event_type": "right tilt",
                       "event_raw_details": shake_right_translateX + "%, " + shake_right_rotate + "deg",
                       "event_converted_details": "vending machine was tilted right " + shake_right_translateX + "%, " + shake_right_rotate + "deg",
+                      "interval_number": interval_number_holder,
                       "timestamp": jsPsych.totalTime(),
                       "time_elapsed": jsPsych.totalTime() - timestamp_onload
                     });
@@ -172,6 +181,7 @@ jsPsych.plugins['survey-vvr'] = (function() {
                   "event_raw_details": info.key,
                   "event_converted_details": jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(info.key) + ' key pressed',
                   "timestamp": jsPsych.totalTime(),
+                  "interval_number": interval_number_holder,
                   "time_elapsed": jsPsych.totalTime() - timestamp_onload
                 });
             } else {
@@ -180,6 +190,7 @@ jsPsych.plugins['survey-vvr'] = (function() {
                   "event_raw_details": info.key_release,
                   "event_converted_details": jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(info.key_release) + ' key released',
                   "timestamp": jsPsych.totalTime(),
+                  "interval_number": interval_number_holder,
                   "time_elapsed": jsPsych.totalTime() - timestamp_onload
                 });
             }
@@ -213,6 +224,7 @@ jsPsych.plugins['survey-vvr'] = (function() {
             var trial_data = {
                 "stage_name": trial.stage_name,
                 "stimulus": trial.stimulus,
+                "block_number": loop_node_counter_vvr,
                 "events": JSON.stringify(response.trial_events)
             };
 
