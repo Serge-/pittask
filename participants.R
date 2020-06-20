@@ -1212,7 +1212,7 @@ if(isClass(query))
               as.character(as.ITime(formatDateTime(time_ms + events$timestamp[e]))),
               ifelse(is.null(events$time_elapsed[e]), NA, events$time_elapsed[e]), 
               country, timezone,
-              gsub('"', "", trialdata$stage[j]), version, commit,
+              gsub('"', "", trialdata$stage[j]), commit, version,
               ifelse(!is.na(trialdata$block_number[j]), trialdata$block_number[j], 'NA'),
               ifelse(!is.null(events$interval_number[e]), events$interval_number[e], 'NA'),
               events$event_type[e],
