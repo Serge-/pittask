@@ -31,7 +31,7 @@ var shake_transition = 0.05;
  * Key-Testing
  ***********************************************************/
 var open_instruct_text_key_testing = "<p>This is a key-testing stage.</p> <p>We need to check whether key presses on your keyboard can be registered.</p> <p>Press any key when you are ready.</p>";
-var close_instruct_text_key_testing = "<p>Thank you for your patience.</p> <p>Press any key when you are ready to start the experiement.</p>";
+var close_instruct_text_key_testing = "<p>Thank you for your patience.</p> <p>Press any key when you are ready to start the experiment.</p>";
 /************************************************************
  * Clinical Open/Close Instruction Text
  ***********************************************************/
