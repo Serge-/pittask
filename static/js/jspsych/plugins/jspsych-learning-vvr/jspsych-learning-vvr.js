@@ -80,10 +80,11 @@ jsPsych.plugins['survey-vvr'] = (function() {
           
           var x = 0;
           var duration = VVR_INTERVAL_DURATION;
+          var random_boolean = Math.random() < probability_value;
+          var outcome_present = DEGRAD_PATTERN[condition_outcome][degradation_pattern_condition];
+
+
           timerId = jsPsych.pluginAPI.setTimeout(function request() {
-            
-            var random_boolean = Math.random() < probability_value;
-            var outcome_present = DEGRAD_PATTERN[condition_outcome][degradation_pattern_condition];
 
             if (random_boolean && outcome_present) {
               $('.outcome-container').html('<img class="outcome" src="'+ OUTCOME[counter_balancing[0][outcome_present]] +'"/>');
@@ -98,9 +99,7 @@ jsPsych.plugins['survey-vvr'] = (function() {
               });
               // reset degrad pattern
               condition_outcome = 'A0';
-              if(interval_number_holder < VVR_INTERVAL_NUM) {
-                interval_number_holder += 1;
-              }
+              interval_number_holder < VVR_INTERVAL_NUM ? interval_number_holder++ : interval_number_holder;
               jsPsych.pluginAPI.setTimeout(function() {
                 $('.outcome-container').html('');
                 if (++x === VVR_INTERVAL_NUM) {
@@ -109,15 +108,37 @@ jsPsych.plugins['survey-vvr'] = (function() {
                 }
                 
               }, VVR_OUTCOME_DURATION);
-              duration = VVR_OUTCOME_DURATION + VVR_INTERVAL_DURATION;
+              // duration = VVR_OUTCOME_DURATION + VVR_INTERVAL_DURATION;
             } else {
+              response.trial_events.push({
+                "timestamp": jsPsych.totalTime(),
+                "time_elapsed": jsPsych.totalTime() - timestamp_onload,
+                "event_type": 'outcome',
+                "interval_number": interval_number_holder++,
+                "event_raw_details": 'No outcome',
+                "event_converted_details": 'no outcome appears during interval'
+              });
+
               if (++x === VVR_INTERVAL_NUM) {
                 clearTimeout(timerId);
                 end_trial();
               }
+            };
+
+
+            random_boolean = Math.random() < probability_value;
+            outcome_present = DEGRAD_PATTERN[condition_outcome][degradation_pattern_condition];
+            if(outcome_present && random_boolean) {
+              duration = VVR_OUTCOME_DURATION + VVR_INTERVAL_DURATION;
+            } else {
+              duration = VVR_INTERVAL_DURATION;
             }
-            
+
             timerId = jsPsych.pluginAPI.setTimeout(request, duration);
+
+            if (x === VVR_INTERVAL_NUM) {
+              jsPsych.pluginAPI.clearAllTimeouts();
+            }
           }, duration);          
         }());
 

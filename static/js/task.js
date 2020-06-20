@@ -507,8 +507,8 @@ var vvr_ = {
             stage_name: 'VVR_copy_1 instrumental conditioning',
             variables: {
                 VVR_INTERVAL_NUM: interval_num_VVR1,
-                VVR_INTERVAL_DURATION: interval_duration_VVR1,
-                VVR_OUTCOME_DURATION: outcome_duration_VVR1,
+                VVR_INTERVAL_DURATION: interval_duration,
+                VVR_OUTCOME_DURATION: outcome_duration,
                 VVR_PROB_VALUE: prob_value_VVR1,
                 VVR_DEGRAD_PATTERN : degrad_pattern_VVR1,
             }
@@ -656,8 +656,8 @@ var vvr_ = {
             stage_name: 'VVR_copy_2 contingency degradation',
             variables: {
                 VVR_INTERVAL_NUM: interval_num_VVR2,
-                VVR_INTERVAL_DURATION: interval_duration_VVR2,
-                VVR_OUTCOME_DURATION: outcome_duration_VVR2,
+                VVR_INTERVAL_DURATION: interval_duration,
+                VVR_OUTCOME_DURATION: outcome_duration,
                 VVR_PROB_VALUE: prob_value_VVR2,
                 VVR_DEGRAD_PATTERN : degrad_pattern_VVR2
             }
@@ -805,8 +805,8 @@ var vvr_ = {
             stage_name: 'VVR_copy_3 contingency restoration',
             variables: {
                 VVR_INTERVAL_NUM: interval_num_VVR3,
-                VVR_INTERVAL_DURATION: interval_duration_VVR3,
-                VVR_OUTCOME_DURATION: outcome_duration_VVR3,
+                VVR_INTERVAL_DURATION: interval_duration,
+                VVR_OUTCOME_DURATION: outcome_duration,
                 VVR_PROB_VALUE: prob_value_VVR3,
                 VVR_DEGRAD_PATTERN : degrad_pattern_VVR3
             }
@@ -954,8 +954,8 @@ var vvr_ = {
             stage_name: 'VVR_copy_4 instrumental reinstatement ',
             variables: {
                 VVR_INTERVAL_NUM: interval_num_VVR4,
-                VVR_INTERVAL_DURATION: interval_duration_VVR4,
-                VVR_OUTCOME_DURATION: outcome_duration_VVR4,
+                VVR_INTERVAL_DURATION: interval_duration,
+                VVR_OUTCOME_DURATION: outcome_duration,
                 VVR_PROB_VALUE: prob_value_VVR4,
                 VVR_DEGRAD_PATTERN : degrad_pattern_VVR4
             }
