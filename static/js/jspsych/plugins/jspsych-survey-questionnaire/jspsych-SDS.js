@@ -384,15 +384,6 @@ jsPsych.plugins['SDS'] = (function () {
           "time_elapsed": jsPsych.totalTime() - timestamp_onload
         });
       });
-
-      $("input[type=radio], label").on("click",function(){
-        var time_stamp_key = $(this).data('time-stamp');
-        trial.time_stamp[time_stamp_key] = jsPsych.totalTime() - timestamp_onload;
-        labelID = $(this).attr('for');
-        if('labelID') {
-          $('#'+labelID).trigger('click');
-        }
-      });
   
       document.querySelector('form').addEventListener('submit', function (event) {
         event.preventDefault();
@@ -405,7 +396,7 @@ jsPsych.plugins['SDS'] = (function () {
         var timestamp_data = {};
         for (var i = 0; i < 3; i++) {
           var match = display_element.querySelector('#jspsych-survey-multi-choice-' + i);
-          var id = i + 1;
+          var id = (i + 1);
           var val_not_working;
           
           if (match.querySelector(".jspsych-survey-multi-choice-option input[type=radio]:checked") !== null) {
@@ -423,7 +414,7 @@ jsPsych.plugins['SDS'] = (function () {
             name = match.attributes['data-name'].value;
           }
           obje[name] = val;
-          timestamp_data[name] = trial.time_stamp['Q' + id];
+          timestamp_data[name] = trial.time_stamp['Q' + (i+1)];
           if(i === 0) {
             if (match.querySelector(".input-not-working input[type=radio]:checked") !== null) {
               val_not_working = {
@@ -447,7 +438,7 @@ jsPsych.plugins['SDS'] = (function () {
         
         for (var i = 3; i < trial.questions.length; i++) {
           var match = display_element.querySelector('#jspsych-survey-multi-choice-' + i);
-          var id = i + 1;
+          var id = (i + 1);
           if (match.querySelector("option:checked").value !== 'None') {
             var val = match.querySelector("option:checked").value;
             $(match).find('.question-title').removeClass('survey-error-after');
@@ -464,7 +455,7 @@ jsPsych.plugins['SDS'] = (function () {
             name = match.attributes['data-name'].value;
           }
           obje[name] = val;
-          timestamp_data[name] = trial.time_stamp['Q' + id];
+          timestamp_data[name] = trial.time_stamp['Q' + (i+1)];
           Object.assign(question_data, obje);
         }
 

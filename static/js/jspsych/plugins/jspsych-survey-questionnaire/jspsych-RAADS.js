@@ -294,16 +294,7 @@ jsPsych.plugins['RAADS-14'] = (function () {
     $('.jspsych-survey-highlight').click(function () {
       $(this).parent().parent().find('.jspsych-survey-highlight').removeClass('bg-primary');
       $(this).addClass('bg-primary');
-    });
-
-    $("input[type=radio], label").on("click",function(){
-      var time_stamp_key = $(this).data('time-stamp');
-      trial.time_stamp[time_stamp_key] = jsPsych.totalTime() - timestamp_onload;
-      labelID = $(this).attr('for');
-      if('labelID') {
-        $('#'+labelID).trigger('click');
-      }
-    });
+    })
 
     document.querySelector('form').addEventListener('submit', function (event) {
       event.preventDefault();
@@ -324,6 +315,7 @@ jsPsych.plugins['RAADS-14'] = (function () {
         } else {
           $(match).find('.jspsych-survey-multi-choice-question').addClass('survey-error');
           var val = "";
+
         }
         var obje = {};
         var name = id;
@@ -331,7 +323,7 @@ jsPsych.plugins['RAADS-14'] = (function () {
           name = match.attributes['data-name'].value;
         }
         obje[name] = val;
-        timestamp_data[name] = trial.time_stamp['Q' + id];
+        timestamp_data[name] = trial.time_stamp['Q' + (i+1)];
         Object.assign(question_data, obje);
       }
 

@@ -299,15 +299,6 @@ jsPsych.plugins['DASS'] = (function() {
           $(this).addClass('bg-primary');
           $(this).closest('input').click();
       })
-
-      $("input[type=radio], label").on("click",function(){
-        var time_stamp_key = $(this).data('time-stamp');
-        trial.time_stamp[time_stamp_key] = jsPsych.totalTime() - timestamp_onload;
-        labelID = $(this).attr('for');
-        if('labelID') {
-          $('#'+labelID).trigger('click');
-        }
-      });
   
       document.querySelector('form').addEventListener('submit', function(event) {
         event.preventDefault();
@@ -336,7 +327,7 @@ jsPsych.plugins['DASS'] = (function() {
             name = match.attributes['data-name'].value;
           }
           obje[name] = val;
-          timestamp_data[name] = trial.time_stamp['Q' + id];
+          timestamp_data[name] = trial.time_stamp['Q' + (i+1)];
           Object.assign(question_data, obje);
         }
         
