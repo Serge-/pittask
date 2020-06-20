@@ -108,8 +108,6 @@ jsPsych.plugins["transfer-test"] = (function() {
     // draw
     display_element.innerHTML = html;
 
-    // const sequence_color = jsPsych.randomization.shuffle(['blue', 'red', 'yellow', 'green']);
-
     function change_colors (notes) {
       notes = [];
       if(trial.stage_name !== 'Deval Test') {
@@ -120,7 +118,9 @@ jsPsych.plugins["transfer-test"] = (function() {
         });  
       }
 
-      notes.push('white');
+      if(reps_counter === trial.sequence_reps - 1) {
+        notes.push('white');
+      }
 
       var i = 0;
       update_color();
@@ -135,7 +135,8 @@ jsPsych.plugins["transfer-test"] = (function() {
                   "event_type": "image appears",
                   "event_raw_details": "blank vending machine",
                   "event_converted_details": "blank vending machine appears",
-                  "timestamp": jsPsych.totalTime()
+                  "timestamp": jsPsych.totalTime(),
+                  "time_elapsed": jsPsych.totalTime() - timestamp_onload
                 });
               } else {
                 $('.vending-machine rect').css({ fill: color });
@@ -144,7 +145,8 @@ jsPsych.plugins["transfer-test"] = (function() {
                   "event_type": "image appears",
                   "event_raw_details": color + " vending machine",
                   "event_converted_details": color + " vending machine appears",
-                  "timestamp": jsPsych.totalTime()
+                  "timestamp": jsPsych.totalTime(),
+                  "time_elapsed": jsPsych.totalTime() - timestamp_onload
                 });
               }
               i++;

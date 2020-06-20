@@ -2,7 +2,7 @@ jsPsych.plugins['PHQ-9'] = (function() {
     var plugin = {};
   
     plugin.info = {
-      name: 'Severity Measure for Depression-Adult',
+      name: 'PHQ-9',
       stage_name: 'PHQ-9',
       description: '',
       parameters: {
@@ -113,8 +113,7 @@ jsPsych.plugins['PHQ-9'] = (function() {
           <div class="container-fluid">
             <div class="navbar-header">
             <p class="navbar-text">
-                <b>${plugin.info.name}</b> <br>
-                Adapted from the Patient Health Questionnaire–9 (PHQ-9)
+                <b>${plugin.info.name}</b>
             </p>
             </div>
           </div>
@@ -275,15 +274,6 @@ jsPsych.plugins['PHQ-9'] = (function() {
                 "time_elapsed": jsPsych.totalTime() - timestamp_onload
               });
             }
-            if(info.el.type === 'submit') {
-              response.trial_events.push({
-                "event_type": "button clicked",
-                "event_raw_details": 'Submit',
-                "event_converted_details": '"Submit" selected',
-                "timestamp": jsPsych.totalTime(),
-                "time_elapsed": jsPsych.totalTime() - timestamp_onload
-              });
-            }
           }
         } else {
           response.trial_events.push({
@@ -314,12 +304,31 @@ jsPsych.plugins['PHQ-9'] = (function() {
           trial.time_stamp[time_stamp_key] = jsPsych.totalTime() - timestamp_onload;
         };
       });
+
+      $(".modal__btn, .modal__close").on("click touchstart",function(){
+        response.trial_events.push({
+          "event_type": "popup closed",
+          "event_raw_details": 'Close',
+          "event_converted_details": trial.event_converted_details,
+          "timestamp": jsPsych.totalTime(),
+          "time_elapsed": jsPsych.totalTime() - timestamp_onload
+        });
+      });
   
       document.querySelector('form').addEventListener('submit', function(event) {
         event.preventDefault();
         // measure response time
         var endTime = performance.now();
         var response_time = endTime - startTime;
+
+        response.trial_events.push({
+          "event_type": "button clicked",
+          "event_raw_details": 'Submit',
+          "event_converted_details": '"Submit" selected',
+          "timestamp": jsPsych.totalTime(),
+          "time_elapsed": jsPsych.totalTime() - timestamp_onload
+        });
+
         // create object to hold responses
         var question_data = {};
         var timestamp_data = {};
@@ -369,6 +378,13 @@ jsPsych.plugins['PHQ-9'] = (function() {
           jsPsych.finishTrial(trial_data);
         } else {
           MicroModal.show('modal-1');
+          response.trial_events.push({
+            "event_type": "error message",
+            "event_raw_details": 'Error message',
+            "event_converted_details": popup_text_web_forms,
+            "timestamp": jsPsych.totalTime(),
+            "time_elapsed": jsPsych.totalTime() - timestamp_onload
+          });
         }
 
       });

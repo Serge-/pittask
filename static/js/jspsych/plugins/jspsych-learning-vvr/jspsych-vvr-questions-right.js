@@ -182,6 +182,13 @@ jsPsych.plugins['survey-vvr-questions-right'] = (function() {
                 button_trigger = false;
             } else {
                 MicroModal.show('modal-1');
+                response.trial_events.push({
+                    "event_type": "error message",
+                    "event_raw_details": 'Error message',
+                    "event_converted_details": popup_text_web_forms,
+                    "timestamp": jsPsych.totalTime(),
+                    "time_elapsed": jsPsych.totalTime() - timestamp_onload
+                });
             }
         });
 
@@ -194,7 +201,17 @@ jsPsych.plugins['survey-vvr-questions-right'] = (function() {
                 "timestamp": jsPsych.totalTime(),
                 "time_elapsed": jsPsych.totalTime() - timestamp_onload
             });
-        }
+        };
+
+        $(".modal__btn, .modal__close").on("click touchstart",function(){
+            response.trial_events.push({
+              "event_type": "popup closed",
+              "event_raw_details": 'Close',
+              "event_converted_details": trial.event_converted_details,
+              "timestamp": jsPsych.totalTime(),
+              "time_elapsed": jsPsych.totalTime() - timestamp_onload
+            });
+        });
 
 
         // function to handle responses by the subject

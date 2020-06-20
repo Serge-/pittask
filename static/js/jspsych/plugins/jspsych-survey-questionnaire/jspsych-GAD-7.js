@@ -243,7 +243,8 @@ jsPsych.plugins['GAD-7'] = (function() {
           html += '<input type="radio" name="'+input_name+'" class="form-radio" data-time-stamp="Q8" data-question-number="Q8A' + (j+1) +'" id="'+input_id+'" value="'+checkbox.options[j]+'" '+required_attr+'></input>';
           html += '</div>';
         }
-        html += '</div>'
+        html += '</div>';
+        html += '</div>';
       }
  
       // add submit button
@@ -253,26 +254,26 @@ jsPsych.plugins['GAD-7'] = (function() {
       html += '</form>';
 
       html +=
-      `<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
-          <div class="modal__overlay" tabindex="-1" data-micromodal-close>
-            <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
-              <header class="modal__header">
-                <h2 class="modal__title" id="modal-1-title">
-                  Warning!
-                </h2>
-                <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
-              </header>
-              <main class="modal__content" id="modal-1-content">
-                <p>
-                ${popup_text_web_forms}
-                </p>
-              </main>
-              <footer class="modal__footer">
-                <button class="modal__btn" data-micromodal-close aria-label="Close this dialog window">Close</button>
-              </footer>
-            </div>
-          </div>
-      </div>`;
+        `<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+              <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+                <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+                  <header class="modal__header">
+                    <h2 class="modal__title" id="modal-1-title">
+                      Warning!
+                    </h2>
+                    <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+                  </header>
+                  <main class="modal__content" id="modal-1-content">
+                    <p>
+                    ${popup_text_web_forms}
+                    </p>
+                  </main>
+                  <footer class="modal__footer">
+                    <button class="modal__btn" data-micromodal-close aria-label="Close this dialog window">Close</button>
+                  </footer>
+                </div>
+              </div>
+          </div>`;
 
   
       // render
@@ -299,15 +300,6 @@ jsPsych.plugins['GAD-7'] = (function() {
                 "event_type": "answer displayed",
                 "event_raw_details": info.el.dataset.questionNumber,
                 "event_converted_details": info.el.dataset.questionNumber + ' answer displayed',
-                "timestamp": jsPsych.totalTime(),
-                "time_elapsed": jsPsych.totalTime() - timestamp_onload
-              });
-            }
-            if(info.el.type === 'submit') {
-              response.trial_events.push({
-                "event_type": "button clicked",
-                "event_raw_details": 'Submit',
-                "event_converted_details": '"Submit" selected',
                 "timestamp": jsPsych.totalTime(),
                 "time_elapsed": jsPsych.totalTime() - timestamp_onload
               });
@@ -342,12 +334,30 @@ jsPsych.plugins['GAD-7'] = (function() {
           trial.time_stamp[time_stamp_key] = jsPsych.totalTime() - timestamp_onload;
         };
       });
+
+      $(".modal__btn, .modal__close").on("click touchstart",function(){
+        response.trial_events.push({
+          "event_type": "popup closed",
+          "event_raw_details": 'Close',
+          "event_converted_details": trial.event_converted_details,
+          "timestamp": jsPsych.totalTime(),
+          "time_elapsed": jsPsych.totalTime() - timestamp_onload
+        });
+      });
   
       document.querySelector('form').addEventListener('submit', function(event) {
         event.preventDefault();
         // measure response time
         var endTime = performance.now();
         var response_time = endTime - startTime;
+
+        response.trial_events.push({
+          "event_type": "button clicked",
+          "event_raw_details": 'Submit',
+          "event_converted_details": '"Submit" selected',
+          "timestamp": jsPsych.totalTime(),
+          "time_elapsed": jsPsych.totalTime() - timestamp_onload
+        });
   
         // create object to hold responses
         var question_data = {};
@@ -417,6 +427,13 @@ jsPsych.plugins['GAD-7'] = (function() {
           jsPsych.finishTrial(trial_data);
         } else {
           MicroModal.show('modal-1');
+          response.trial_events.push({
+            "event_type": "error message",
+            "event_raw_details": 'Error message',
+            "event_converted_details": popup_text_web_forms,
+            "timestamp": jsPsych.totalTime(),
+            "time_elapsed": jsPsych.totalTime() - timestamp_onload
+          });
         }
       });
   

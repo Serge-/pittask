@@ -85,7 +85,7 @@ h1 {
      display: inline-block;
      position: relative;
      background-color: #f1f1f1;
-     color: #5bc0de;
+     color: #006a4e;
      top: 10px;
      height: 20px;
      width: 20px;
@@ -97,9 +97,9 @@ h1 {
 }
 .form-radio:checked::before {
      position: absolute;
-     font: 40px/1 'Open Sans', sans-serif;
-     left: 1px;
-     top: -18px;
+     font: 35px/1 'Open Sans', sans-serif;
+     left: 6px;
+     top: -12px;
      content: '\02143';
      transform: rotate(40deg);
 }

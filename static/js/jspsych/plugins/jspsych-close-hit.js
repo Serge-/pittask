@@ -68,6 +68,7 @@ jsPsych.plugins['close-hit-questions'] = (function() {
       var response = {
         trial_events: []
       };
+      var timestamp_onload = jsPsych.totalTime();
 
       response.trial_events.push({
         "event_type": trial.event_type,
@@ -77,7 +78,6 @@ jsPsych.plugins['close-hit-questions'] = (function() {
         "time_elapsed": jsPsych.totalTime() - timestamp_onload
       });
 
-      var timestamp_onload = jsPsych.totalTime();
 
       var plugin_id_name = "jspsych-survey-multi-choice";
   

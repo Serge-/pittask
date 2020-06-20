@@ -2,7 +2,7 @@ jsPsych.plugins['ASRS-5'] = (function () {
     var plugin = {};
   
     plugin.info = {
-      name: 'Adult Attention-Deficit/Hyperactivity Disorder Self-Report Screening Scale for DSM-5',
+      name: 'ASRS-5',
       stage_name: 'ASRS-5',
       description: '',
       parameters: {
@@ -274,15 +274,6 @@ jsPsych.plugins['ASRS-5'] = (function () {
                 "time_elapsed": jsPsych.totalTime() - timestamp_onload
               });
             }
-            if(info.el.type === 'submit') {
-              response.trial_events.push({
-                "event_type": "button clicked",
-                "event_raw_details": 'Submit',
-                "event_converted_details": '"Submit" selected',
-                "timestamp": jsPsych.totalTime(),
-                "time_elapsed": jsPsych.totalTime() - timestamp_onload
-              });
-            }
           }
         } else {
           response.trial_events.push({
@@ -301,12 +292,31 @@ jsPsych.plugins['ASRS-5'] = (function () {
           trial.time_stamp[time_stamp_key] = jsPsych.totalTime() - timestamp_onload;
         };
       });
+
+      $(".modal__btn, .modal__close").on("click touchstart",function(){
+        response.trial_events.push({
+          "event_type": "popup closed",
+          "event_raw_details": 'Close',
+          "event_converted_details": trial.event_converted_details,
+          "timestamp": jsPsych.totalTime(),
+          "time_elapsed": jsPsych.totalTime() - timestamp_onload
+        });
+      });
   
       document.querySelector('form').addEventListener('submit', function (event) {
         event.preventDefault();
         // measure response time
         var endTime = performance.now();
         var response_time = endTime - startTime;
+
+        response.trial_events.push({
+          "event_type": "button clicked",
+          "event_raw_details": 'Submit',
+          "event_converted_details": '"Submit" selected',
+          "timestamp": jsPsych.totalTime(),
+          "time_elapsed": jsPsych.totalTime() - timestamp_onload
+        });
+
         // create object to hold responses
         var question_data = {};
         var timestamp_data = {};
@@ -356,6 +366,13 @@ jsPsych.plugins['ASRS-5'] = (function () {
           jsPsych.finishTrial(trial_data);
         } else {
           MicroModal.show('modal-1');
+          response.trial_events.push({
+            "event_type": "error message",
+            "event_raw_details": 'Error message',
+            "event_converted_details": popup_text_web_forms,
+            "timestamp": jsPsych.totalTime(),
+            "time_elapsed": jsPsych.totalTime() - timestamp_onload
+          });
         }
   
       });

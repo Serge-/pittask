@@ -1381,8 +1381,8 @@ var SMOKE_FTND = {
             ],
             button_label: 'submit answers',
             event_type: 'questions appears',
-            event_raw_details: "FTND, options",
-            event_converted_details: 'FTND questions appears'
+            event_raw_details: "SS, options",
+            event_converted_details: 'SS questions appears'
         },
         {
             type: 'FTND',
