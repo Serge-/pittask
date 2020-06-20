@@ -1,4 +1,4 @@
-var DEMOGRAPHICS = {
+var DEMOGRAPHICS_STAGE = {
     type: 'Demographics',
     preamble:
         '<p>We would like to ask you a few questions about your personal information to better understand our study' +
@@ -45,7 +45,6 @@ var DEMOGRAPHICS = {
     event_raw_details: "Demographics, options",
     event_converted_details: 'Demographics questions appears'
 }
-
 
 var OCIR = {
     type: 'OCI-R',
@@ -1382,8 +1381,8 @@ var SMOKE_FTND = {
             ],
             button_label: 'submit answers',
             event_type: 'questions appears',
-            event_raw_details: "FTND, options",
-            event_converted_details: 'FTND questions appears'
+            event_raw_details: "SS, options",
+            event_converted_details: 'SS questions appears'
         },
         {
             type: 'FTND',
@@ -1471,7 +1470,7 @@ var PGSI = {
 }
 
 
-var SDS = {
+var SDS_STAGE = {
     type: 'SDS',
     preamble:
     '<p><b>A brief, patient rated, measure of disability and impairment.</b></p>' +
@@ -1750,7 +1749,7 @@ var verbal_reasoning = [
 
 ]
 
-var ICAR = {
+var ICAR_STAGE = {
     type: 'ICAR',
     questions: [],
     button_label: 'submit answers',
@@ -1769,6 +1768,6 @@ var icar_shuffled_arr = jsPsych.randomization.shuffle(icar_arr);
 
 icar_shuffled_arr.forEach(function(arr) {
     arr.forEach(function(element) {
-        ICAR.questions.push(element);
+        ICAR_STAGE.questions.push(element);
     });
 });

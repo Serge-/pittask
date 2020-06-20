@@ -259,7 +259,7 @@ jsPsych.plugins['ICAR'] = (function () {
             // add radio button container
             html += '<li id="' + option_id_name + '">';
             html += '<label class="jspsych-survey-multi-choice-text jspsych-survey-highlight" data-time-stamp="Q' + i + '"  for="' + input_id + '"></label>';
-            html += '<input type="radio" class="hidden" name="' + input_name + '" data-response-id="' + question.options[j] + '" data-matrix-reasoning="matrix-reasoning-'+ question_id + '-' + j + '" data-time-stamp="Q' + i + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" id="' + input_id + '" class="form-radio" value="NA" ' + required_attr + '></input>';
+            html += '<input type="radio" class="hidden" name="' + input_name + '" data-time-stamp="Q' + i + '" data-response-id="' + question.options[j] + '" data-matrix-reasoning="matrix-reasoning-'+ question_id + '-' + j + '" data-time-stamp="Q' + i + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" id="' + input_id + '" class="form-radio" value="NA" ' + required_attr + '></input>';
             html += '</li>';
           }
           html += '</ul>';
@@ -287,7 +287,7 @@ jsPsych.plugins['ICAR'] = (function () {
             // add radio button container
             html += '<li id="' + option_id_name + '">';
             html += '<label class="jspsych-survey-multi-choice-text jspsych-survey-highlight" data-time-stamp="Q' + i + '"  for="' + input_id + '"></label>';
-            html += '<input type="radio" class="hidden" name="' + input_name + '" data-response-id="' + question.options[j] + '" data-three-dimensional-rotate="three-dimensional-rotate-'+ question_id + '-' + j + '" data-time-stamp="Q' + i + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" id="' + input_id + '" class="form-radio" value="NA" ' + required_attr + '></input>';
+            html += '<input type="radio" class="hidden" name="' + input_name + '" data-time-stamp="Q' + i + '" data-response-id="' + question.options[j] + '" data-three-dimensional-rotate="three-dimensional-rotate-'+ question_id + '-' + j + '" data-time-stamp="Q' + i + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" id="' + input_id + '" class="form-radio" value="NA" ' + required_attr + '></input>';
             html += '</li>';
           }
           html += '</ul>';
@@ -353,15 +353,6 @@ jsPsych.plugins['ICAR'] = (function () {
                 "time_elapsed": jsPsych.totalTime() - timestamp_onload
               });
             }
-            if(info.el.type === 'submit') {
-              response.trial_events.push({
-                "event_type": "button clicked",
-                "event_raw_details": 'Submit',
-                "event_converted_details": '"Submit" selected',
-                "timestamp": jsPsych.totalTime(),
-                "time_elapsed": jsPsych.totalTime() - timestamp_onload
-              });
-            }
           }
         } else {
           response.trial_events.push({
@@ -392,6 +383,7 @@ jsPsych.plugins['ICAR'] = (function () {
           if(next_counter < 16 && isChecked) {
             $('#jspsych-survey-multi-choice-' + (next_counter - 1)).fadeOut();
             $('.next-question').prop('disabled', true);
+            $('.jspsych-survey-multi-choice-question').removeClass('survey-error');
             setTimeout(function() {
               $('#jspsych-survey-multi-choice-' + next_counter++).fadeIn();
               $('.next-question').prop('disabled', false);
@@ -399,9 +391,24 @@ jsPsych.plugins['ICAR'] = (function () {
             if(next_counter === 15) {
               $('.jspsych-survey-multi-choice-ICAR').removeClass('hidden');
               $('.next-question').hide();
-            }
+            };
+            response.trial_events.push({
+              "event_type": "button clicked",
+              "event_raw_details": 'Submit',
+              "event_converted_details": '"Submit" selected',
+              "timestamp": jsPsych.totalTime(),
+              "time_elapsed": jsPsych.totalTime() - timestamp_onload
+            });
           } else {
+            $('.jspsych-survey-multi-choice-question').addClass('survey-error');
             MicroModal.show('modal-1');
+            response.trial_events.push({
+              "event_type": "error message",
+              "event_raw_details": 'Error message',
+              "event_converted_details": popup_text_web_forms,
+              "timestamp": jsPsych.totalTime(),
+              "time_elapsed": jsPsych.totalTime() - timestamp_onload
+            });
           };
       });
       
@@ -416,13 +423,43 @@ jsPsych.plugins['ICAR'] = (function () {
         }
       });
 
- 
+      $("label").on("click",function(){
+        var labelID = $(this).attr('for');
+        if('labelID') {
+          $("#" + labelID).prop('checked', true).trigger('click').trigger('change');
+        };
+      });
+  
+      $("input[type=radio]").on("click change touchstart",function(){
+        var time_stamp_key = $(this).data('time-stamp'); 
+        if(time_stamp_key) {
+          trial.time_stamp[time_stamp_key] = jsPsych.totalTime() - timestamp_onload;
+        };
+      });
+
+      $(".modal__btn, .modal__close").on("click touchstart",function(){
+        response.trial_events.push({
+          "event_type": "popup closed",
+          "event_raw_details": 'Close',
+          "event_converted_details": trial.event_converted_details,
+          "timestamp": jsPsych.totalTime(),
+          "time_elapsed": jsPsych.totalTime() - timestamp_onload
+        });
+      });
   
       document.querySelector('form').addEventListener('submit', function (event) {
         event.preventDefault();
         // measure response time
         var endTime = performance.now();
         var response_time = endTime - startTime;
+
+        response.trial_events.push({
+          "event_type": "button clicked",
+          "event_raw_details": 'Submit',
+          "event_converted_details": '"Submit" selected',
+          "timestamp": jsPsych.totalTime(),
+          "time_elapsed": jsPsych.totalTime() - timestamp_onload
+        });
 
         // create object to hold responses
         var question_data = {};
@@ -466,6 +503,7 @@ jsPsych.plugins['ICAR'] = (function () {
             "responses": JSON.stringify(question_data),
             "responseId": JSON.stringify(response_id),
             "timestamp": JSON.stringify(timestamp_data),
+            "time_stamp": JSON.stringify(trial.time_stamp),
             "question_order": JSON.stringify(question_order),
             "events": JSON.stringify(response.trial_events)
           };
@@ -477,6 +515,13 @@ jsPsych.plugins['ICAR'] = (function () {
           jsPsych.finishTrial(trial_data);
         } else {
           MicroModal.show('modal-1');
+          response.trial_events.push({
+            "event_type": "error message",
+            "event_raw_details": 'Error message',
+            "event_converted_details": popup_text_web_forms,
+            "timestamp": jsPsych.totalTime(),
+            "time_elapsed": jsPsych.totalTime() - timestamp_onload
+          });
         }
   
       });

@@ -457,15 +457,6 @@ jsPsych.plugins['Demographics'] = (function () {
                 "time_elapsed": jsPsych.totalTime() - timestamp_onload
               });
             }
-            if(info.el.type === 'submit') {
-              response.trial_events.push({
-                "event_type": "button clicked",
-                "event_raw_details": 'Submit',
-                "event_converted_details": '"Submit" selected',
-                "timestamp": jsPsych.totalTime(),
-                "time_elapsed": jsPsych.totalTime() - timestamp_onload
-              });
-            }
           }
         } else {
           response.trial_events.push({
@@ -477,12 +468,44 @@ jsPsych.plugins['Demographics'] = (function () {
           });
         }
       }
+
+      $("label").on("click",function(){
+        var labelID = $(this).attr('for');
+        if('labelID') {
+          $("#" + labelID).prop('checked', true).trigger('click').trigger('change');
+        };
+      });
+  
+      $("input[type=radio]").on("click change touchstart",function(){
+        var time_stamp_key = $(this).data('time-stamp'); 
+        if(time_stamp_key) {
+          trial.time_stamp[time_stamp_key] = jsPsych.totalTime() - timestamp_onload;
+        };
+      });
+
+      $(".modal__btn, .modal__close").on("click touchstart",function(){
+        response.trial_events.push({
+          "event_type": "popup closed",
+          "event_raw_details": 'Close',
+          "event_converted_details": trial.event_converted_details,
+          "timestamp": jsPsych.totalTime(),
+          "time_elapsed": jsPsych.totalTime() - timestamp_onload
+        });
+      });
   
       document.querySelector('form').addEventListener('submit', function (event) {
         event.preventDefault();
         // measure response time
         var endTime = performance.now();
         var response_time = endTime - startTime;
+
+        response.trial_events.push({
+          "event_type": "button clicked",
+          "event_raw_details": 'Submit',
+          "event_converted_details": '"Submit" selected',
+          "timestamp": jsPsych.totalTime(),
+          "time_elapsed": jsPsych.totalTime() - timestamp_onload
+        });
   
         // create object to hold responses
         var question_data = {};
@@ -509,34 +532,32 @@ jsPsych.plugins['Demographics'] = (function () {
           Object.assign(question_data, obje);
         }
 
-
-
         // input age check
         (function() {
-          var year_input_value = $('.input-year').val();
-          var label = $("#jspsych-survey-multi-choice-response-1-0").prop("labels")
-          if(year_input_value === '') {
-            $('.jspsych-survey-multi-choice-question-age').addClass('survey-error-after');
-          } else if (year_input_value >= 18) {
-            $('.jspsych-survey-multi-choice-question-age').removeClass('survey-error-after');
-            $('.moda__age-incomplete').remove();
-            $(label).removeClass('survey-error-after');
-            var object2a = {
-              '2a. Age (years)': $("input[name='2a. Age (years)']").val()
-            };
-            var object2b = {
-              '2b. Age (months)': $("input[name='2b. Age (months)']").val() ? $("input[name='2b. Age (months)']").val() : 'NA'
-            };
-            timestamp_data['2a. Age (years)'] = trial.time_stamp['Q2'];
-            timestamp_data['2b. Age (months)'] = $("input[name='2b. Age (months)']").val() ? trial.time_stamp['Q2'] : 'NA'
-            Object.assign(question_data, object2a, object2b);
-          } else {
-            $('.jspsych-survey-multi-choice-question-age').addClass('survey-error-after');
-            $(label).addClass('survey-error-after');
-            if (!$(".moda__age-incomplete").length ) {
-              $('.modal__content').append('<p class="moda__age-incomplete">You have entered an age that falls outside the expected range. <br/> Please enter your age.</p>')
+            var year_input_value = $('.input-year').val();
+            var label = $("#jspsych-survey-multi-choice-response-1-0").prop("labels")
+            if(year_input_value === '') {
+              $('.jspsych-survey-multi-choice-question-age').addClass('survey-error-after');
+            } else if (year_input_value >= 18) {
+              $('.jspsych-survey-multi-choice-question-age').removeClass('survey-error-after');
+              $('.moda__age-incomplete').remove();
+              $(label).removeClass('survey-error-after');
+              var object2a = {
+                '2a. Age (years)': $("input[name='2a. Age (years)']").val()
+              };
+              var object2b = {
+                '2b. Age (months)': $("input[name='2b. Age (months)']").val() ? $("input[name='2b. Age (months)']").val() : 'NA'
+              };
+              timestamp_data['2a. Age (years)'] = trial.time_stamp['Q2'];
+              timestamp_data['2b. Age (months)'] = $("input[name='2b. Age (months)']").val() ? trial.time_stamp['Q2'] : 'NA'
+              Object.assign(question_data, object2a, object2b);
+            } else {
+              $('.jspsych-survey-multi-choice-question-age').addClass('survey-error-after');
+              $(label).addClass('survey-error-after');
+              if (!$(".moda__age-incomplete").length ) {
+                $('.modal__content').append('<p class="moda__age-incomplete">You have entered an age that falls outside the expected range. <br/> Please enter your age.</p>')
+              }
             }
-          }
 
         })();
 
@@ -680,6 +701,7 @@ jsPsych.plugins['Demographics'] = (function () {
             "stage_name": JSON.stringify(plugin.info.stage_name),
             "responses": JSON.stringify(question_data),
             "timestamp": JSON.stringify(timestamp_data),
+            "time_stamp": JSON.stringify(trial.time_stamp),
             "question_order": JSON.stringify(question_order),
             "events": JSON.stringify(response.trial_events)
           };
@@ -691,6 +713,13 @@ jsPsych.plugins['Demographics'] = (function () {
           jsPsych.finishTrial(trial_data);
         } else {
           MicroModal.show('modal-1');
+          response.trial_events.push({
+            "event_type": "error message",
+            "event_raw_details": 'Error message',
+            "event_converted_details": popup_text_web_forms,
+            "timestamp": jsPsych.totalTime(),
+            "time_elapsed": jsPsych.totalTime() - timestamp_onload
+          });
         }
         
       });

@@ -109,6 +109,19 @@ jsPsych.plugins["transfer-test"] = (function() {
     display_element.innerHTML = html;
 
     function change_colors (notes) {
+      notes = [];
+      if(trial.stage_name !== 'Deval Test') {
+        sequence = jsPsych.randomization.shuffle(['blue', 'red', 'yellow', 'green']);
+        sequence.forEach(element => {
+          notes.push('white');
+          notes.push(element);
+        });  
+      }
+
+      if(reps_counter === trial.sequence_reps - 1) {
+        notes.push('white');
+      }
+
       var i = 0;
       update_color();
       function update_color() {
@@ -120,9 +133,10 @@ jsPsych.plugins["transfer-test"] = (function() {
                 duration = trial.transfer_test_white_duration;
                 response.trial_events.push({
                   "event_type": "image appears",
-                  "event_raw_details": color + " vending machine",
-                  "event_converted_details": color + " vending machine appears",
-                  "timestamp": jsPsych.totalTime()
+                  "event_raw_details": "blank vending machine",
+                  "event_converted_details": "blank vending machine appears",
+                  "timestamp": jsPsych.totalTime(),
+                  "time_elapsed": jsPsych.totalTime() - timestamp_onload
                 });
               } else {
                 $('.vending-machine rect').css({ fill: color });
@@ -131,7 +145,8 @@ jsPsych.plugins["transfer-test"] = (function() {
                   "event_type": "image appears",
                   "event_raw_details": color + " vending machine",
                   "event_converted_details": color + " vending machine appears",
-                  "timestamp": jsPsych.totalTime()
+                  "timestamp": jsPsych.totalTime(),
+                  "time_elapsed": jsPsych.totalTime() - timestamp_onload
                 });
               }
               i++;
@@ -139,7 +154,7 @@ jsPsych.plugins["transfer-test"] = (function() {
           } else {
             reps_counter++;
             if(trial.sequence_reps !== reps_counter) {
-              change_colors(trial.transfer_test_color_consistency);
+              change_colors();
             } else {
               end_trial();
             }
@@ -148,7 +163,7 @@ jsPsych.plugins["transfer-test"] = (function() {
       }
     }
 
-    change_colors(trial.transfer_test_color_consistency);
+    change_colors();
 
     // function to end trial when it is time
     var end_trial = function() {
@@ -218,7 +233,6 @@ jsPsych.plugins["transfer-test"] = (function() {
         }
     }
   
-
 
       if(info.key_release === undefined) {
         machine_tilt();

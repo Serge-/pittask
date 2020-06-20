@@ -2,7 +2,7 @@ jsPsych.plugins['RAADS-14'] = (function () {
   var plugin = {};
 
   plugin.info = {
-    name: 'The RAADS-14 Screen',
+    name: 'RAADS-14',
     stage_name: 'RAADS-14',
     description: '',
     parameters: {
@@ -270,15 +270,6 @@ jsPsych.plugins['RAADS-14'] = (function () {
               "time_elapsed": jsPsych.totalTime() - timestamp_onload
             });
           }
-          if(info.el.type === 'submit') {
-            response.trial_events.push({
-              "event_type": "button clicked",
-              "event_raw_details": 'Submit',
-              "event_converted_details": '"Submit" selected',
-              "timestamp": jsPsych.totalTime(),
-              "time_elapsed": jsPsych.totalTime() - timestamp_onload
-            });
-          }
         }
       } else {
         response.trial_events.push({
@@ -291,16 +282,36 @@ jsPsych.plugins['RAADS-14'] = (function () {
       }
     }
 
-    $('.jspsych-survey-highlight').click(function () {
-      $(this).parent().parent().find('.jspsych-survey-highlight').removeClass('bg-primary');
-      $(this).addClass('bg-primary');
-    })
+    $("input[type=radio]").on("click change touchstart",function(){
+      var time_stamp_key = $(this).data('time-stamp'); 
+      if(time_stamp_key) {
+        trial.time_stamp[time_stamp_key] = jsPsych.totalTime() - timestamp_onload;
+      };
+    });
+
+    $(".modal__btn, .modal__close").on("click touchstart",function(){
+      response.trial_events.push({
+        "event_type": "popup closed",
+        "event_raw_details": 'Close',
+        "event_converted_details": trial.event_converted_details,
+        "timestamp": jsPsych.totalTime(),
+        "time_elapsed": jsPsych.totalTime() - timestamp_onload
+      });
+    });
 
     document.querySelector('form').addEventListener('submit', function (event) {
       event.preventDefault();
       // measure response time
       var endTime = performance.now();
       var response_time = endTime - startTime;
+
+      response.trial_events.push({
+        "event_type": "button clicked",
+        "event_raw_details": 'Submit',
+        "event_converted_details": '"Submit" selected',
+        "timestamp": jsPsych.totalTime(),
+        "time_elapsed": jsPsych.totalTime() - timestamp_onload
+      });
 
       // create object to hold responses
       var question_data = {};
@@ -315,7 +326,6 @@ jsPsych.plugins['RAADS-14'] = (function () {
         } else {
           $(match).find('.jspsych-survey-multi-choice-question').addClass('survey-error');
           var val = "";
-
         }
         var obje = {};
         var name = id;
@@ -323,7 +333,7 @@ jsPsych.plugins['RAADS-14'] = (function () {
           name = match.attributes['data-name'].value;
         }
         obje[name] = val;
-        timestamp_data[name] = trial.time_stamp['Q' + (i+1)];
+        timestamp_data[name] = trial.time_stamp['Q' + id];
         Object.assign(question_data, obje);
       }
 
@@ -339,6 +349,7 @@ jsPsych.plugins['RAADS-14'] = (function () {
           "stage_name": JSON.stringify(plugin.info.stage_name),
           "responses": JSON.stringify(question_data),
           "timestamp": JSON.stringify(timestamp_data),
+          "time_stamp": JSON.stringify(trial.time_stamp),
           "question_order": JSON.stringify(question_order),
           "events": JSON.stringify(response.trial_events)
         };
@@ -350,6 +361,13 @@ jsPsych.plugins['RAADS-14'] = (function () {
         jsPsych.finishTrial(trial_data);
       } else {
         MicroModal.show('modal-1');
+        response.trial_events.push({
+          "event_type": "error message",
+          "event_raw_details": 'Error message',
+          "event_converted_details": popup_text_web_forms,
+          "timestamp": jsPsych.totalTime(),
+          "time_elapsed": jsPsych.totalTime() - timestamp_onload
+        });
       }
 
     });

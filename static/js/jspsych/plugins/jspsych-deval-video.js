@@ -205,8 +205,8 @@ jsPsych.plugins["video-keyboard-response"] = (function() {
       var promise = document.getElementById('jspsych-video-keyboard-response-stimulus').play();
       
       if (promise !== undefined) {
-        promise.then(_ => {
-          
+        promise.then(() => {
+        
         }).catch(error => {
           console.log(error);
         });
@@ -300,7 +300,16 @@ jsPsych.plugins["video-keyboard-response"] = (function() {
       // end trial if time limit is set
       if (trial.trial_duration !== null) {
         jsPsych.pluginAPI.setTimeout(function() {
-          end_trial();
+          if(trial.close_instruct) {
+            $('p').removeClass('hidden');
+            $('video').addClass('hidden');
+            display_element.innerHTML = '<p>' + close_instruct_text_video + '</p>';
+            setTimeout(function() {
+              end_trial();
+            }, close_instruct_latency);
+          } else {
+            end_trial();
+          }
         }, video_duration_real);
       }
     };

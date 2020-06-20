@@ -150,6 +150,124 @@ resubmit = function() {
     });
 };
 
+var DEMOGRAPHICS_INSTRUCT_OPEN = {
+    timeline: [{
+        stage_name: 'Demographics open instructions page',
+        type: 'html-keyboard-response',
+        stimulus: open_instruct_text_demographics,
+        trial_latency: open_instruct_latency,
+        trial_duration: null,
+        response_ends_trial: false,
+        event_type: 'text appears',
+        event_raw_details: 'open_instruct_text_demographics',
+        event_converted_details: "Demographics open instructions text appears",
+    }],
+    conditional_function: function() {
+        return open_instruct_demographics ? true : false;
+    }
+}
+var DEMOGRAPHICS_INSTRUCT_CLOSE = {
+    timeline: [{
+        stage_name: 'Demographics close instructions page',
+        type: 'html-keyboard-response',
+        stimulus: close_instruct_text_demographics,
+        trial_latency: close_instruct_latency,
+        trial_duration: null,
+        response_ends_trial: false,
+        event_type: 'text appears',
+        event_raw_details: 'close_instruct_text_demographics',
+        event_converted_details: "Demographics close instructions text appears",
+    }],
+    conditional_function: function() {
+        return close_instruct_demographics ? true : false;
+    }
+}
+
+var DEMOGRAPHICS = {
+    timeline: [
+        DEMOGRAPHICS_INSTRUCT_OPEN, DEMOGRAPHICS_STAGE, DEMOGRAPHICS_INSTRUCT_CLOSE
+    ]
+};
+
+var SDS_INSTRUCT_OPEN = {
+    timeline: [{
+        stage_name: 'SDS open instructions page',
+        type: 'html-keyboard-response',
+        stimulus: open_instruct_text_SDS,
+        trial_latency: open_instruct_latency,
+        trial_duration: null,
+        response_ends_trial: false,
+        event_type: 'text appears',
+        event_raw_details: 'open_instruct_text_SDS',
+        event_converted_details: "SDS open instructions text appears",
+    }],
+    conditional_function: function() {
+        return open_instruct_SDS ? true : false;
+    }
+}
+var SDS_INSTRUCT_CLOSE = {
+    timeline: [{
+        stage_name: 'SDS close instructions page',
+        type: 'html-keyboard-response',
+        stimulus: close_instruct_text_SDS,
+        trial_latency: close_instruct_latency,
+        trial_duration: null,
+        response_ends_trial: false,
+        event_type: 'text appears',
+        event_raw_details: 'close_instruct_text_SDS',
+        event_converted_details: "SDS close instructions text appears",
+    }],
+    conditional_function: function() {
+        return close_instruct_SDS ? true : false;
+    }
+};
+
+var SDS = {
+    timeline: [
+       SDS_INSTRUCT_OPEN, SDS_STAGE, SDS_INSTRUCT_CLOSE
+    ]
+};
+
+var ICAR_INSTRUCT_OPEN = {
+    timeline: [{
+        stage_name: 'ICAR open instructions page',
+        type: 'html-keyboard-response',
+        stimulus: open_instruct_text_ICAR,
+        trial_latency: open_instruct_latency,
+        trial_duration: null,
+        response_ends_trial: false,
+        event_type: 'text appears',
+        event_raw_details: 'open_instruct_text_ICAR',
+        event_converted_details: "ICAR open instructions text appears",
+    }],
+    conditional_function: function() {
+        return open_instruct_ICAR ? true : false;
+    }
+};
+
+var ICAR_INSTRUCT_CLOSE = {
+    timeline: [{
+        stage_name: 'ICAR close instructions page',
+        type: 'html-keyboard-response',
+        stimulus: close_instruct_text_ICAR,
+        trial_latency: close_instruct_latency,
+        trial_duration: null,
+        response_ends_trial: false,
+        event_type: 'text appears',
+        event_raw_details: 'close_instruct_text_ICAR',
+        event_converted_details: "ICAR close instructions text appears",
+    }],
+    conditional_function: function() {
+        return close_instruct_ICAR ? true : false;
+    }
+};
+
+var ICAR = {
+    timeline: [
+        ICAR_INSTRUCT_OPEN, ICAR_STAGE, ICAR_INSTRUCT_CLOSE
+    ]
+};
+
 var KEY_TESTING_OPEN = {
     stage_name: 'Key-testing',
     type: 'html-keyboard-response',
@@ -244,7 +362,39 @@ var FHQ_PRE_4 = {
     event_converted_details: 'Hunger scale'
 }
 
+var FHQ_PRE_INSTRUCT_OPEN = {
+    timeline: [{
+        stage_name: 'Food and Hunger Questions pre-rating open instructions page',
+        type: 'html-keyboard-response',
+        stimulus: open_instruct_text_FHQ_pre_rating,
+        trial_latency: open_instruct_latency,
+        trial_duration: null,
+        response_ends_trial: false,
+        event_type: 'text appears',
+        event_raw_details: 'open_instruct_text_FHQ_pre_rating',
+        event_converted_details: "Food and Hunger Questions pre-rating open instructions text appears",
+    }],
+    conditional_function: function() {
+        return open_instruct_FHQ_pre_rating ? true : false;
+    }
+};
 
+var FHQ_PRE_INSTRUCT_CLOSE = {
+    timeline: [{
+        stage_name: 'Food and Hunger Questions pre-rating close instructions page',
+        type: 'html-keyboard-response',
+        stimulus: close_instruct_text_FHQ_pre_rating,
+        trial_latency: close_instruct_latency,
+        trial_duration: null,
+        response_ends_trial: false,
+        event_type: 'text appears',
+        event_raw_details: 'close_instruct_text_FHQ_pre_rating',
+        event_converted_details: "Food and Hunger Questions pre-rating close instructions text appears",
+    }],
+    conditional_function: function() {
+        return close_instruct_FHQ_pre_rating ? true : false;
+    }
+};
 
 var FHQ_POST_1 = {
     stage_name: "food-and-hunger-questions",
@@ -303,13 +453,48 @@ var FHQ_POST_4 = {
     event_type: 'Food question scale appears',
     event_raw_details: "FHQ_4",
     event_converted_details: 'Hunger scale'
-}
+};
+
+var FHQ_POST_INSTRUCT_OPEN = {
+    timeline: [{
+        stage_name: 'Food and Hunger Questions post-rating open instructions page',
+        type: 'html-keyboard-response',
+        stimulus: open_instruct_text_FHQ_post_rating,
+        trial_latency: open_instruct_latency,
+        trial_duration: null,
+        response_ends_trial: false,
+        event_type: 'text appears',
+        event_raw_details: 'open_instruct_text_FHQ_post_rating',
+        event_converted_details: "Food and Hunger Questions post-rating open instructions text appears",
+    }],
+    conditional_function: function() {
+        return open_instruct_FHQ_post_rating ? true : false;
+    }
+};
+
+var FHQ_POST_INSTRUCT_CLOSE = {
+    timeline: [{
+        stage_name: 'Food and Hunger Questions post-rating close instructions page',
+        type: 'html-keyboard-response',
+        stimulus: close_instruct_text_FHQ_post_rating,
+        trial_latency: close_instruct_latency,
+        trial_duration: null,
+        response_ends_trial: false,
+        event_type: 'text appears',
+        event_raw_details: 'close_instruct_text_FHQ_post_rating',
+        event_converted_details: "Food and Hunger Questions post-rating close instructions text appears",
+    }],
+    conditional_function: function() {
+        return close_instruct_FHQ_post_rating ? true : false;
+    }
+};
 
 var loop_node_counter_vvr = 0;
 var loop_node_counter_vvr_determination = 0;
 var loop_node_counter_max_num_correct = 0;
 var loop_node_counter_max_num_incorrect = 0;
 var vvrIsCorrect = false;
+var item_id = 0;
 
 var vvr_ = {
     vvr_a: function() {
@@ -319,7 +504,7 @@ var vvr_ = {
 
         var vvr_a = {
             type: 'survey-vvr',
-            stage_name: 'instrumental conditioning',
+            stage_name: 'VVR_copy_1 instrumental conditioning',
             variables: {
                 VVR_INTERVAL_NUM: interval_num_VVR1,
                 VVR_INTERVAL_DURATION: interval_duration_VVR1,
@@ -468,9 +653,9 @@ var vvr_ = {
 
         var vvr_a = {
             type: 'survey-vvr',
-            stage_name: 'contingency degradation',
+            stage_name: 'VVR_copy_2 contingency degradation',
             variables: {
-                VVR_INTERVAL_NUM: interval_num_VVR1,
+                VVR_INTERVAL_NUM: interval_num_VVR2,
                 VVR_INTERVAL_DURATION: interval_duration_VVR2,
                 VVR_OUTCOME_DURATION: outcome_duration_VVR2,
                 VVR_PROB_VALUE: prob_value_VVR2,
@@ -617,9 +802,9 @@ var vvr_ = {
 
         var vvr_a = {
             type: 'survey-vvr',
-            stage_name: 'contingency restoration',
+            stage_name: 'VVR_copy_3 contingency restoration',
             variables: {
-                VVR_INTERVAL_NUM: interval_num_VVR1,
+                VVR_INTERVAL_NUM: interval_num_VVR3,
                 VVR_INTERVAL_DURATION: interval_duration_VVR3,
                 VVR_OUTCOME_DURATION: outcome_duration_VVR3,
                 VVR_PROB_VALUE: prob_value_VVR3,
@@ -759,10 +944,159 @@ var vvr_ = {
 
         return loop_node_VVR;
     },
+    vvr_d: function() {
+        var min_blocks_num = min_blocks_num_VVR4,
+        min_num_correct = min_num_correct_VVR4,
+        max_num_incorrect = max_num_incorrect_VVR4;
+
+        var vvr_a = {
+            type: 'survey-vvr',
+            stage_name: 'VVR_copy_4 instrumental reinstatement ',
+            variables: {
+                VVR_INTERVAL_NUM: interval_num_VVR4,
+                VVR_INTERVAL_DURATION: interval_duration_VVR4,
+                VVR_OUTCOME_DURATION: outcome_duration_VVR4,
+                VVR_PROB_VALUE: prob_value_VVR4,
+                VVR_DEGRAD_PATTERN : degrad_pattern_VVR4
+            }
+        }
+        
+        var questions_a = {
+            timeline: [
+                {
+                    type: 'survey-vvr-questions-left',
+                    vvr_stage: 'VVR_copy_4',
+                    stage_name: 'VVR_copy_4 question-left instrumental reinstatement ',
+                    details: {
+                        a: {
+                            event_type: 'question appears',
+                            event_raw_details: 'question 1(a) appears',
+                            event_converted_details: 'VVR_copy_4 question-left instrumental reinstatement  text appears',
+                        },
+                        b: {
+                            event_type: 'question appears',
+                            event_raw_details: 'question 1(b) appears',
+                            event_converted_details: 'VVR_copy_4 question-left instrumental reinstatement  text appears',
+                        }
+                    },
+                    vars: {
+                        question_text_a1: question_text_a1,
+                        question_text_a2: question_text_a2,
+                        question_text_b1: question_text_b1,
+                        question_text_b2: question_text_b2,
+                        question_text_b3: question_text_b3,
+                        question_text_b4: question_text_b4,
+                        popup_text: popup_text,
+                        max_num_correct_consecutive_questions: min_num_correct_VVR4
+                    }
+                },
+                {
+                    stage_name: 'VVR_copy_4 question-left instrumental reinstatement  feedback text',
+                    type: 'html-keyboard-response',
+                    stimulus: function() {
+                        if(vvrIsCorrect) { 
+                            return '<p style="font-size: 24px;">' + correct_text + '</p>';
+                        } else {
+                            return '<p style="font-size: 24px;">' + incorrect_text + '</p>';
+                        }
+                    },
+                    choices: jsPsych.NO_KEYS,
+                    trial_duration: feedback_duration,
+                    event_type: 'text appears',
+                    event_raw_details: function() {
+                        if(vvrIsCorrect) { 
+                            return 'correct_text';
+                        } else {
+                            return 'incorrect_text';
+                        }
+                    },
+                    event_converted_details: 'VVR_copy_4 question-left instrumental reinstatement  feedback text appears'
+                }
+            ]
+        }
+
+        var questions_b = {
+            timeline: [
+                {
+                    type: 'survey-vvr-questions-right',
+                    vvr_stage: 'VVR_copy_4',
+                    stage_name: 'VVR_copy_4 question-right instrumental reinstatement ',
+                    details: {
+                        a: {
+                            event_type: 'question appears',
+                            event_raw_details: 'question 2(a) appears',
+                            event_converted_details: 'VVR_copy_4 question-right instrumental reinstatement  text appears',
+                        },
+                        b: {
+                            event_type: 'question appears',
+                            event_raw_details: 'question 2(b) appears',
+                            event_converted_details: 'VVR_copy_4 question-right instrumental reinstatement  text appears',
+                        }
+                    },
+                    vars: {
+                        question_text_a1: question_text_a1,
+                        question_text_a2: question_text_a2,
+                        question_text_b1: question_text_b1,
+                        question_text_b2: question_text_b2,
+                        question_text_b3: question_text_b3,
+                        question_text_b4: question_text_b4,
+                        popup_text: popup_text,
+                        max_num_correct_consecutive_questions: min_num_correct_VVR4
+                    }
+                },
+                {
+                    stage_name: 'VVR_copy_4 question-right instrumental reinstatement  feedback text',
+                    type: 'html-keyboard-response',
+                    stimulus: function() {
+                        if(vvrIsCorrect) { 
+                            return '<p style="font-size: 24px;">' + correct_text + '</p>';
+                        } else {
+                            return '<p style="font-size: 24px;">' + incorrect_text + '</p>';
+                        }
+                    },
+                    choices: jsPsych.NO_KEYS,
+                    trial_duration: feedback_duration,
+                    event_type: 'text appears',
+                    event_raw_details: function() {
+                        if(vvrIsCorrect) { 
+                            return 'correct_text';
+                        } else {
+                            return 'incorrect_text';
+                        }
+                    },
+                    event_converted_details: 'VVR_copy_4 question-right instrumental reinstatement  feedback text appears'
+                }
+            ]
+        }
+
+        var vvr_a_questions = {
+            timeline: jsPsych.randomization.shuffle([questions_a, questions_b])
+        }
+
+        var loop_node_VVR = {
+            timeline: [vvr_a, vvr_a_questions],
+            loop_function: function(){
+                if(loop_node_counter_vvr_determination >= min_blocks_num && max_num_incorrect <= loop_node_counter_max_num_incorrect) {
+                    loop_node_counter_vvr = 0;
+                    return false;            
+                } else if(loop_node_counter_vvr_determination >= min_blocks_num && min_num_correct <= loop_node_counter_max_num_correct) {
+                    loop_node_counter_vvr = 0;
+                    return false;
+                } else {
+                    if(loop_node_counter_vvr >= min_blocks_num) {
+                        loop_node_counter_vvr = 0;
+                    }
+                    return true;
+                }
+            }
+        }
+
+        return loop_node_VVR;
+    },
     instructions_a: {
         instructions_open: {
             timeline: [{ 
-                stage_name: 'instrumental conditioning open instructions page',
+                stage_name: 'VVR_copy_1 instrumental conditioning open instructions page',
                 type: 'html-keyboard-response',
                 stimulus: open_instruct_text_VVR1,
                 trial_latency: open_instruct_latency,
@@ -777,7 +1111,7 @@ var vvr_ = {
         },
         instructions_close: {
             timeline: [{
-                stage_name: 'instrumental conditioning close instructions page',
+                stage_name: 'VVR_copy_1 instrumental conditioning close instructions page',
                 type: 'html-keyboard-response',
                 stimulus: close_instruct_text_VVR1,
                 trial_latency: close_instruct_latency,
@@ -794,7 +1128,7 @@ var vvr_ = {
     instructions_b: {
         instructions_open: {
             timeline: [{ 
-                stage_name: 'contingency degradation open instructions page',
+                stage_name: 'VVR_copy_2 contingency degradation open instructions page',
                 type: 'html-keyboard-response',
                 stimulus: open_instruct_text_VVR2,
                 trial_latency: open_instruct_latency,
@@ -809,7 +1143,7 @@ var vvr_ = {
         },
         instructions_close: {
             timeline: [{
-                stage_name: 'contingency degradation close instructions page',
+                stage_name: 'VVR_copy_2 contingency degradation close instructions page',
                 type: 'html-keyboard-response',
                 stimulus: close_instruct_text_VVR2,
                 trial_latency: close_instruct_latency,
@@ -826,7 +1160,7 @@ var vvr_ = {
     instructions_c: {
         instructions_open: {
             timeline: [{ 
-                stage_name: 'contingency restoration open instructions page',
+                stage_name: 'VVR_copy_3 contingency restoration open instructions page',
                 type: 'html-keyboard-response',
                 stimulus: open_instruct_text_VVR3,
                 trial_latency: open_instruct_latency,
@@ -841,7 +1175,7 @@ var vvr_ = {
         },
         instructions_close: {
             timeline: [{
-                stage_name: 'contingency restoration close instructions page',
+                stage_name: 'VVR_copy_3 contingency restoration close instructions page',
                 type: 'html-keyboard-response',
                 stimulus: close_instruct_text_VVR3,
                 trial_latency: close_instruct_latency,
@@ -854,8 +1188,73 @@ var vvr_ = {
                 return close_instruct_VVR3;
             }
         }
+    },
+    instructions_d: {
+        instructions_open: {
+            timeline: [{ 
+                stage_name: 'VVR_copy_4 instrumental reinstatement open instructions page',
+                type: 'html-keyboard-response',
+                stimulus: open_instruct_text_VVR4,
+                trial_latency: open_instruct_latency,
+                response_ends_trial: false,
+                event_type: 'text appears',
+                event_raw_details: 'open_instruct_text',
+                event_converted_details: 'instrumental reinstatement open text appears'
+            }],
+            conditional_function: function(){
+                return  open_instruct_VVR4;
+            }
+        },
+        instructions_close: {
+            timeline: [{
+                stage_name: 'VVR_copy_4 instrumental reinstatement close instructions page',
+                type: 'html-keyboard-response',
+                stimulus: close_instruct_text_VVR4,
+                trial_latency: close_instruct_latency,
+                response_ends_trial: false,
+                event_type: 'text appears',
+                event_raw_details: 'close_instruct_text',
+                event_converted_details: 'instrumental reinstatement close text appears'
+            }],
+            conditional_function: function(){
+                return close_instruct_VVR4;
+            }
+        }
     }
-}
+};
+
+var VVR_1 = {
+    timeline: [
+        vvr_.instructions_a.instructions_open,
+        vvr_.vvr_a(),
+        vvr_.instructions_a.instructions_close
+    ]
+};
+
+var VVR_2 = {
+    timeline: [
+        vvr_.instructions_b.instructions_open,
+        vvr_.vvr_b(),
+        vvr_.instructions_b.instructions_close
+    ]
+};
+
+var VVR_3 = {
+    timeline: [
+        vvr_.instructions_c.instructions_open,
+        vvr_.vvr_c(),
+        vvr_.instructions_c.instructions_close
+    ]
+};
+
+var VVR_4 = {
+    timeline: [
+        vvr_.instructions_d.instructions_open,
+        vvr_.vvr_d(),
+        vvr_.instructions_d.instructions_close
+    ]
+};
+
 
 var CLINICAL_OPEN = {
     stage_name: 'Clinical open',
@@ -867,7 +1266,7 @@ var CLINICAL_OPEN = {
     event_type: 'text appears',
     event_raw_details: 'open_instruct_text_clinical',
     event_converted_details: 'Clinical open text appears'
-}
+};
 
 var CLINICAL_CLOSE = {
     stage_name: 'Clinical close',
@@ -881,20 +1280,37 @@ var CLINICAL_CLOSE = {
     event_converted_details: 'Clinical close text appears'
 };
 
-var PAV_INSTRUCT_OPEN = {
+var SYMPTOM_INVENTORY_INSTRUCT_OPEN = {
     timeline: [{
-        stage_name: 'Pavlovian Conditioning open instructions page',
+        stage_name: 'Symptom Inventories open instructions page',
         type: 'html-keyboard-response',
-        stimulus: open_instruct_text_pav,
+        stimulus: open_instruct_text_symptom_inventories,
         trial_latency: open_instruct_latency,
         trial_duration: null,
         response_ends_trial: false,
         event_type: 'text appears',
-        event_raw_details: 'open_instruct_text_pav',
-        event_converted_details: "Pavlovian Conditioning open instructions text appears",
+        event_raw_details: 'open_instruct_text_symptom_inventories',
+        event_converted_details: "Symptom Inventories open instructions text appears",
     }],
     conditional_function: function() {
-        return open_instruct_pav ? true : false;
+        return open_instruct_symptom_inventories ? true : false;
+    }
+};
+
+var SYMPTOM_INVENTORY_INSTRUCT_CLOSE = {
+    timeline: [{
+        stage_name: 'Symptom Inventories close instructions page',
+        type: 'html-keyboard-response',
+        stimulus: close_instruct_text_symptom_inventories,
+        trial_latency: close_instruct_latency,
+        trial_duration: null,
+        response_ends_trial: false,
+        event_type: 'text appears',
+        event_raw_details: 'close_instruct_text_symptom_inventories',
+        event_converted_details: "Symptom Inventories close instructions text appears",
+    }],
+    conditional_function: function() {
+        return close_instruct_symptom_inventories ? true : false;
     }
 };
 
@@ -932,7 +1348,7 @@ var pav_stimuli = [
 
 var pav_multi_choice_array = jsPsych.randomization.shuffle(pav_stimuli);
 
-var PAV_CONDITIONING = {
+var PAV_CONDITIONING_MAIN = {
     timeline: [
         {
             stage_name: 'Pav Conditioning',
@@ -1008,7 +1424,56 @@ var PAV_CONDITIONING = {
             return true;
         }
     }
-}
+};
+
+var PAV_TEST_INSTRUCT_OPEN = {
+    timeline: [{
+        stage_name: 'Pav Conditioning open instructions page',
+        type: 'html-keyboard-response',
+        stimulus: open_instruct_text_pav,
+        trial_latency: open_instruct_latency,
+        trial_duration: null,
+        response_ends_trial: false,
+        event_type: 'text appears',
+        event_raw_details: 'open_instruct_text_pav',
+        event_converted_details: "Pav Conditioning open instructions text appears",
+    }],
+    conditional_function: function() {
+        return open_instruct_pav ? true : false;
+    }
+};
+
+var PAV_TEST_INSTRUCT_CLOSE = {
+    timeline: [{
+        stage_name: 'Pav Conditioning close instructions page',
+        type: 'html-keyboard-response',
+        stimulus: close_instruct_text_pav,
+        trial_latency: close_instruct_latency,
+        trial_duration: null,
+        response_ends_trial: false,
+        event_type: 'text appears',
+        event_raw_details: 'close_instruct_text_pav',
+        event_converted_details: "Pav Conditioning close instructions text appears",
+    }],
+    conditional_function: function() {
+        return close_instruct_pav ? true : false;
+    }
+};
+
+var PAV_CONDITIONING = {
+    timeline: [
+        PAV_TEST_INSTRUCT_OPEN, PAV_CONDITIONING_MAIN, PAV_TEST_INSTRUCT_CLOSE
+    ]
+};
+
+var TRANSFER_TEST_MAIN = {
+    stage_name: 'Transfer Test',
+    type: 'transfer-test',
+    stimulus: 'vending machine',
+    transfer_test_color_duration: stim_duration,
+    transfer_test_white_duration: ITI_duration,
+    sequence_reps: block_num_transfer_test
+};
 
 var TRANSFER_TEST_INSTRUCT_OPEN = {
     timeline: [{
@@ -1025,17 +1490,30 @@ var TRANSFER_TEST_INSTRUCT_OPEN = {
     conditional_function: function() {
         return open_instruct_transfer_test ? true : false;
     }
-}
+};
+
+var TRANSFER_TEST_INSTRUCT_CLOSE = {
+    timeline: [{
+        stage_name: 'Transfer Test close instructions page',
+        type: 'html-keyboard-response',
+        stimulus: close_instruct_text_transfer_test,
+        trial_latency: close_instruct_latency,
+        trial_duration: null,
+        response_ends_trial: false,
+        event_type: 'text appears',
+        event_raw_details: 'close_instruct_text_transfer_test',
+        event_converted_details: "Transfer Test close instructions text appears",
+    }],
+    conditional_function: function() {
+        return close_instruct_transfer_test ? true : false;
+    }
+};
 
 var TRANSFER_TEST = {
-    stage_name: 'Transfer Test',
-    type: 'transfer-test',
-    stimulus: 'vending machine',
-    transfer_test_color_consistency: sequence_array_transfer_test,
-    transfer_test_color_duration: stim_duration,
-    transfer_test_white_duration: ITI_duration,
-    sequence_reps: number_reps_transfer_test
-}
+    timeline: [
+        TRANSFER_TEST_INSTRUCT_OPEN, TRANSFER_TEST_MAIN, TRANSFER_TEST_INSTRUCT_CLOSE
+    ]
+};
 
 var DEVAL_VIDEO = {
     stage_name: 'Deval Video',
@@ -1047,17 +1525,57 @@ var DEVAL_VIDEO = {
     response_ends_trial: false,
     trial_ends_after_video: true,
     audio: video_sound,
-    open_instruct: open_instruct_video
-}
+    open_instruct: open_instruct_video,
+    close_instruct: close_instruct_video
+};
 
-var DEVAL_TEST = {
+var DEVAL_TEST_MAIN = {
     stage_name: 'Deval Test',
     type: 'transfer-test',
     stimulus: 'vending machine',
-    transfer_test_color_consistency: sequence_array_deval_test,
-    transfer_test_white_duration: ITI_duration,
-    sequence_reps: number_reps_deval_test
-}
+    transfer_test_white_duration: deval_test_duration,
+    sequence_reps: 1
+};
+
+var DEVAL_TEST_INSTRUCT_OPEN = {
+    timeline: [{
+        stage_name: 'Deval Test open instructions page',
+        type: 'html-keyboard-response',
+        stimulus: open_instruct_text_deval_test,
+        trial_latency: open_instruct_latency,
+        trial_duration: null,
+        response_ends_trial: false,
+        event_type: 'text appears',
+        event_raw_details: 'open_instruct_text_deval_test',
+        event_converted_details: "Deval Test open instructions text appears",
+    }],
+    conditional_function: function() {
+        return open_instruct_deval_test ? true : false;
+    }
+};
+
+var DEVAL_TEST_INSTRUCT_CLOSE = {
+    timeline: [{
+        stage_name: 'Deval Test close instructions page',
+        type: 'html-keyboard-response',
+        stimulus: close_instruct_text_deval_test,
+        trial_latency: close_instruct_latency,
+        trial_duration: null,
+        response_ends_trial: false,
+        event_type: 'text appears',
+        event_raw_details: 'close_instruct_text_deval_test',
+        event_converted_details: "Deval Test close instructions text appears",
+    }],
+    conditional_function: function() {
+        return close_instruct_deval_test ? true : false;
+    }
+};
+
+var DEVAL_TEST = {
+    timeline: [
+        DEVAL_TEST_INSTRUCT_OPEN, DEVAL_TEST_MAIN, DEVAL_TEST_INSTRUCT_CLOSE
+    ]
+};
 
 var CLOSE_HIT = {
     stage_name: 'Close HIT Questions',
@@ -1072,7 +1590,7 @@ var CLOSE_HIT = {
     event_type: 'questions appears',
     event_raw_details: 'Close HIT Questions',
     event_converted_details: "Close HIT Questions text appears"
-}
+};
 
 
 var THANKS = {
@@ -1088,7 +1606,14 @@ var THANKS = {
 };
 
 var timeline = [];
-// Init parameters main
+var symptom_inventories_random = jsPsych.randomization.shuffle(symptom_inventory);
+var symptom_inventories_ordered = symptom_inventory;
+var symptom_inventory_arr = symptom_inventory_randomization ?  symptom_inventories_random : symptom_inventories_ordered;
+
+/************************************************************
+ * Stages sequence configuration
+ ***********************************************************/
+// Init parameters
 timeline.push({
     type: 'Parameters',
     stage_name: 'Parameters',
@@ -1100,14 +1625,12 @@ timeline.push(KEY_TESTING_OPEN, KEY_TESTING, KEY_TESTING_CLOSE);
 timeline.push(DEMOGRAPHICS);
 // Intro: We'd like to briefly ask you about some symptoms before the online game.
 timeline.push(CLINICAL_OPEN);
-
-// Randomisation function for Symptom Inventories
-var symptom_inventories_random = jsPsych.randomization.shuffle(symptom_inventory);
-var symptom_inventories_ordered = symptom_inventory;
-var symptom_inventory_arr = symptom_inventory_randomization ?  symptom_inventories_random : symptom_inventories_ordered;
+timeline.push(SYMPTOM_INVENTORY_INSTRUCT_OPEN);
+// Symptom Inventories
 for(var item of symptom_inventory_arr){
     timeline.push(item);
 }
+timeline.push(SYMPTOM_INVENTORY_INSTRUCT_CLOSE);
 // SDS
 timeline.push(SDS);
 // ICAR
@@ -1115,31 +1638,29 @@ timeline.push(ICAR);
 // Close: That's it for the symptom questions. Now we're ready to start the online game
 timeline.push(CLINICAL_CLOSE);
 // Food & Hunger Questions pre-rating
-timeline.push(FHQ_PRE_1, FHQ_PRE_2, FHQ_PRE_3, FHQ_PRE_4);
-// VVR_1, VVR_2, VVR_3
-timeline.push(vvr_.instructions_a.instructions_open);
-timeline.push(vvr_.vvr_a());
-timeline.push(vvr_.instructions_a.instructions_close);
-timeline.push(vvr_.instructions_b.instructions_open);
-timeline.push(vvr_.vvr_b());
-timeline.push(vvr_.instructions_b.instructions_close);
-timeline.push(vvr_.instructions_c.instructions_open);
-timeline.push(vvr_.vvr_c());
-timeline.push(vvr_.instructions_c.instructions_close);
-// Pavlovian Condition Instruction Open
-timeline.push(PAV_INSTRUCT_OPEN);
+timeline.push(FHQ_PRE_INSTRUCT_OPEN, FHQ_PRE_1, FHQ_PRE_2, FHQ_PRE_3, FHQ_PRE_4, FHQ_PRE_INSTRUCT_CLOSE);
 // Pavlovian Condition
 timeline.push(PAV_CONDITIONING);
-// Transfer Test Instruction Open
-timeline.push(TRANSFER_TEST_INSTRUCT_OPEN);
+//  Instrumental Conditioning (VVR_copy_1)
+timeline.push(VVR_1);
 // Transfer Test
 timeline.push(TRANSFER_TEST);
+// Instrumental Degradation (VVR_copy_2)
+timeline.push(VVR_2);
+// Transfer Test
+timeline.push(TRANSFER_TEST);
+// Instrumental Restoration (VVR_copy_3)
+timeline.push(VVR_3);
 // Deval Video
 timeline.push(DEVAL_VIDEO);
 // Deval Test
 timeline.push(DEVAL_TEST);
 // Food & Hunger Questions post-rating
-timeline.push(FHQ_POST_1, FHQ_POST_2, FHQ_POST_3, FHQ_POST_4);
+timeline.push(FHQ_POST_INSTRUCT_OPEN, FHQ_POST_1, FHQ_POST_2, FHQ_POST_3, FHQ_POST_4, FHQ_POST_INSTRUCT_CLOSE);
+// Transfer Test
+timeline.push(TRANSFER_TEST);
+// Instrumental Reinstatement (VVR_copy_4)
+timeline.push(VVR_4);
 //  Close HIT Questions
 timeline.push(CLOSE_HIT);
 // Thanks
