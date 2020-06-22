@@ -80,8 +80,6 @@ jsPsych.plugins['Parameters'] = (function(){
             "close_instruct_text_VVR1": close_instruct_text_VVR1,
             "degrad_pattern_VVR1": "",
             "prob_value_VVR1": "",
-            "interval_duration_VVR1": interval_duration_VVR1,
-            "outcome_duration_VVR1": outcome_duration_VVR1,
             "interval_num_VVR1": interval_num_VVR1,
             "min_blocks_num_VVR1": min_blocks_num_VVR1,
             "min_num_correct_VVR1": min_num_correct_VVR1,
@@ -93,8 +91,6 @@ jsPsych.plugins['Parameters'] = (function(){
             "close_instruct_text_VVR2": close_instruct_text_VVR2,
             "degrad_pattern_VVR2": "",
             "prob_value_VVR2": "",
-            "interval_duration_VVR2": interval_duration_VVR2,
-            "outcome_duration_VVR2": outcome_duration_VVR2,
             "interval_num_VVR2": interval_num_VVR2,
             "min_blocks_num_VVR2": min_blocks_num_VVR2,
             "min_num_correct_VVR2": min_num_correct_VVR2,
@@ -106,12 +102,21 @@ jsPsych.plugins['Parameters'] = (function(){
             "close_instruct_text_VVR3": close_instruct_text_VVR3,
             "degrad_pattern_VVR3": "",
             "prob_value_VVR3": "",
-            "interval_duration_VVR3": interval_duration_VVR3,
-            "outcome_duration_VVR3": outcome_duration_VVR3,
             "interval_num_VVR3": interval_num_VVR3,
             "min_blocks_num_VVR3": min_blocks_num_VVR3,
             "min_num_correct_VVR3": min_num_correct_VVR3,
             "max_num_incorrect_VVR3": max_num_incorrect_VVR3,
+
+            "open_instruct_VVR4": open_instruct_VVR4,
+            "close_instruct_VVR4": close_instruct_VVR4,
+            "open_instruct_text_VVR4": open_instruct_text_VVR4,
+            "close_instruct_text_VVR4": close_instruct_text_VVR4,
+            "degrad_pattern_VVR4": "",
+            "prob_value_VVR4": "",
+            "interval_num_VVR4": interval_num_VVR4,
+            "min_blocks_num_VVR4": min_blocks_num_VVR4,
+            "min_num_correct_VVR4": min_num_correct_VVR4,
+            "max_num_incorrect_VVR4": max_num_incorrect_VVR4,
 
             "open_instruct_pav": open_instruct_pav,
             "open_instruct_text_pav": open_instruct_text_pav,
@@ -142,10 +147,12 @@ jsPsych.plugins['Parameters'] = (function(){
         array_extraction(degrad_pattern_VVR1, 'degrad_pattern_VVR1');
         array_extraction(degrad_pattern_VVR2, 'degrad_pattern_VVR2');
         array_extraction(degrad_pattern_VVR3, 'degrad_pattern_VVR3');
+        array_extraction(degrad_pattern_VVR4, 'degrad_pattern_VVR4');
 
         array_extraction(prob_value_VVR1, 'prob_value_VVR1');
         array_extraction(prob_value_VVR2, 'prob_value_VVR2');
         array_extraction(prob_value_VVR3, 'prob_value_VVR3');
+        array_extraction(prob_value_VVR4, 'prob_value_VVR4');
 
         var trial_data = {
             "stage_name": "Parameters",
