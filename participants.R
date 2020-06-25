@@ -1210,7 +1210,7 @@ if(isClass(query))
             CompleteData <- rbindlist(list(CompleteData, list(
               PIN, complete, date, 
               as.character(as.ITime(formatDateTime(time_ms + events$timestamp[e]))),
-              ifelse(is.null(events$time_elapsed[e]), NA, events$time_elapsed[e]), 
+              ifelse(is.na(events$time_elapsed[e]), 'NA', events$time_elapsed[e]), 
               country, timezone,
               gsub('"', "", trialdata$stage[j]), commit, version,
               ifelse(!is.na(trialdata$block_number[j]), trialdata$block_number[j], 'NA'),

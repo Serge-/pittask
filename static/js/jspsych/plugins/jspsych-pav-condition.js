@@ -121,7 +121,7 @@ jsPsych.plugins.animation = (function () {
             '<path fill-rule="evenodd" clip-rule="evenodd" d="M253 0V440.506H209.527V459H44.6212V440.506H0V0H253ZM222 279H32V363H222V279ZM59.957 282.531L133.253 309.209L118.546 349.616L45.2501 322.938L59.957 282.531ZM86 210H32V256H86V210ZM154 210H100V256H154V210ZM222 210H168V256H222V210ZM86 148H32V194H86V148ZM154 148H100V194H154V148ZM222 148H168V194H222V148ZM86 86H32V132H86V86ZM154 86H100V132H154V86ZM222 86H168V132H222V86ZM86 24H32V70H86V24ZM154 24H100V70H154V24ZM222 24H168V70H222V24Z" fill="white"/>' +
             '</svg>' +
             '</div>' +
-            '<div style="height: 340px"><img src="' + trial.stimuli[animate_frame] + '" id="jspsych-animation-image" style="margin-top: 4rem; "></div>';
+            '<div style="height: 340px"><img class="outcome" src="' + trial.stimuli[animate_frame] + '" id="jspsych-animation-image" style="margin-top: 4rem; "></div>';
 
             current_stim = trial.stimuli[animate_frame];
 

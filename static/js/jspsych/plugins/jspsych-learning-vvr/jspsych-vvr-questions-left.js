@@ -93,7 +93,7 @@ jsPsych.plugins['survey-vvr-questions-left'] = (function() {
                 <div class='vvr-question-a'>
                     <p>${trial.vars.question_text_a1}</p>
                     <div class="outcome-container-learning"><img src='${OUTCOME}'/></div>
-                    <p style='padding:2rem 0'>${trial.vars.question_text_a2}</p>
+                    <p class="answer_latency" style='padding:2rem 0'>${trial.vars.question_text_a2}</p>
                     <img class="vending-machine" src='${VENDING_MACHINE}'/>
                 </div>
                 <div class='vvr-question-b' style='display: none'>
@@ -170,7 +170,23 @@ jsPsych.plugins['survey-vvr-questions-left'] = (function() {
             }
         })
 
-        
+
+        if(item_id === 0) {
+            var counter = answer_latency / 1000;
+            $('.answer_latency').text('You can answer after ' + counter + ' sec');
+            var interval = setInterval(function() {
+                counter--;
+                $('.answer_latency').fadeOut();
+                $('.answer_latency').text('You can answer after ' + counter + ' sec');
+                $('.answer_latency').fadeIn();
+                if (counter == 0) {
+                    // Display a login box
+                    $('.answer_latency').text(trial.vars.question_text_a2);
+                    clearInterval(interval);
+                }
+            }, 1000);
+        };
+
          $("#button").click(function() {
             response.trial_events.push({
                 "event_type": 'button click',
@@ -297,13 +313,27 @@ jsPsych.plugins['survey-vvr-questions-left'] = (function() {
 
         // start the response listener
         if (trial.choices != jsPsych.NO_KEYS) {
-            var keyboardListener = jsPsych.pluginAPI.getKeyboardResponse({
-                callback_function: after_response,
-                valid_responses: trial.choices,
-                rt_method: 'performance',
-                persist: true,
-                allow_held_key: false
-            });
+            var keyboardListener;
+            if(item_id === 0) {
+                setTimeout( function() {
+                    keyboardListener = jsPsych.pluginAPI.getKeyboardResponse({
+                        callback_function: after_response,
+                        valid_responses: trial.choices,
+                        rt_method: 'performance',
+                        persist: true,
+                        allow_held_key: false
+                    });
+                }, answer_latency);
+            } else {
+                keyboardListener = jsPsych.pluginAPI.getKeyboardResponse({
+                    callback_function: after_response,
+                    valid_responses: trial.choices,
+                    rt_method: 'performance',
+                    persist: true,
+                    allow_held_key: false
+                });
+            }
+
             var clickListener = jsPsych.pluginAPI.getMouseResponse({
                 callback_function: after_response,
                 valid_responses: trial.choices,

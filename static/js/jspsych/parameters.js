@@ -6,10 +6,12 @@ var re_captcha_duration = 15
 var full_screen_mode = false;
 var open_instruct_latency = 1500;
 var close_instruct_latency = 1500;
-var outcome_duration = 1000;
-var stim_duration = 3000;
-var ITI_duration = 1500;
-var interval_duration = 1000;
+var outcome_duration = 100;
+var stim_duration = 500;
+var ITI_duration = 500;
+var interval_duration = 100;
+var interval_num = 10;
+var answer_latency = 1000;
 var correct_text = 'Correct!';
 var incorrect_text = 'Incorrect!';
 var feedback_duration = 1000;
@@ -63,7 +65,6 @@ var close_instruct_text_ICAR = 'ICAR close';
 /************************************************************
  * Symptom Inventories
  ***********************************************************/
-var OCIR,MOVES,DASS,ASRS5,EAT26,RAADS,PHQ9,GAD7,LSAS,ASRM,PTSD,PRIME_R,AUDIT,PGSI,YIAT,SMOKE_FTND,ISI,PID;
 var symptom_inventory_randomization = true;
 var symptom_inventory = [
     // OCI-R
@@ -157,7 +158,6 @@ var open_instruct_text_VVR1 = 'You may now interact with the vending machine to 
 var close_instruct_text_VVR1 = 'Thank you for your input. Proceeding to the next stage.';
 var degrad_pattern_VVR1 = ['d0', 'd0', 'd0', 'd0', 'd0', 'd0'];
 var prob_value_VVR1 = [0.6,0.6,0.6,0.6,0.6,0.6];
-var interval_num_VVR1 = 60;
 var min_blocks_num_VVR1 = 4;
 var min_num_correct_VVR1 = 6;
 var max_num_incorrect_VVR1 = 4;
@@ -170,7 +170,6 @@ var open_instruct_text_VVR2 = 'You may now interact with the vending machine to 
 var close_instruct_text_VVR2 = 'Thank you for your input. Proceeding to the next stage.';
 var degrad_pattern_VVR2 = ['d1', 'd2', 'd2', 'd1', 'd1', 'd2'];
 var prob_value_VVR2 = [0.6, 0.6, 0.6, 0.6, 0.6, 0.6];
-var interval_num_VVR2 = 60;
 var min_blocks_num_VVR2 = 4;
 var min_num_correct_VVR2 = 6;
 var max_num_incorrect_VVR2 = 4;
@@ -183,7 +182,6 @@ var open_instruct_text_VVR3 = 'You may now interact with the vending machine to 
 var close_instruct_text_VVR3 = 'Thank you for your input. Proceeding to the next stage.';
 var degrad_pattern_VVR3 = ['d0', 'd0', 'd0', 'd0', 'd0', 'd0'];
 var prob_value_VVR3 = [0.6,0.6,0.6,0.6,0.6,0.6];
-var interval_num_VVR3 = 60;
 var min_blocks_num_VVR3 = 4;
 var min_num_correct_VVR3 = 6;
 var max_num_incorrect_VVR3 = 4;
@@ -196,7 +194,6 @@ var open_instruct_text_VVR4 = 'You can now interact with the vending machine to 
 var close_instruct_text_VVR4 = 'Some text for close instructions VVR "instrumental conditioning.';
 var degrad_pattern_VVR4 = ['d2', 'd2', 'd2'];
 var prob_value_VVR4 = [1, 1, 1];
-var interval_num_VVR4 = 3;
 var min_blocks_num_VVR4 = 3;
 var min_num_correct_VVR4 = 4;
 var max_num_incorrect_VVR4 = 2;

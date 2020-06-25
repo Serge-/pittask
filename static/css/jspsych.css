@@ -258,3 +258,29 @@ li span {
 .outcome-container-learning img {
   height: 220px;
 }
+
+@media (max-width: 1200px) { 
+  .vending-machine {
+    height: 250px;
+    width: 250px; 
+  }
+  .outcome {
+    height: 180px;
+    width: auto;
+  }
+  .pavlovian-conditioning-form .jspsych-survey-multi-choice-option {
+    margin-top: 0;
+  }
+  .pavlovian-conditioning-form .jspsych-survey-multi-choice-question {
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .pavlovian-conditioning-form .jspsych-survey-multi-choice-text {
+    font-size: 1.7rem;
+  }
+  #jspsych-survey-multi-choice-form.pavlovian-conditioning-form {
+    margin-left: 0;
+    width: 250px;
+  }
+
+}

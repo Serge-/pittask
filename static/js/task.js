@@ -493,6 +493,8 @@ var loop_node_counter_vvr = 0;
 var loop_node_counter_vvr_determination = 0;
 var loop_node_counter_max_num_correct = 0;
 var loop_node_counter_max_num_incorrect = 0;
+var degrad_pattern_loop_counter = 0;
+var prob_value_loop_counter = 0;
 var vvrIsCorrect = false;
 var item_id = 0;
 
@@ -506,13 +508,13 @@ var vvr_ = {
             type: 'survey-vvr',
             stage_name: 'VVR_copy_1 instrumental conditioning',
             variables: {
-                VVR_INTERVAL_NUM: interval_num_VVR1,
+                VVR_INTERVAL_NUM: interval_num,
                 VVR_INTERVAL_DURATION: interval_duration,
                 VVR_OUTCOME_DURATION: outcome_duration,
                 VVR_PROB_VALUE: prob_value_VVR1,
-                VVR_DEGRAD_PATTERN : degrad_pattern_VVR1,
+                VVR_DEGRAD_PATTERN : degrad_pattern_VVR1
             }
-        }
+        };
         
         var questions_a = {
             timeline: [
@@ -566,7 +568,7 @@ var vvr_ = {
                     event_converted_details: 'VVR_copy_1 question-left instrumental conditioning feedback text appears'
                 }
             ]
-        }
+        };
 
         var questions_b = {
             timeline: [
@@ -620,29 +622,68 @@ var vvr_ = {
                     event_converted_details: 'VVR_copy_1 question-right instrumental conditioning feedback text appears'
                 }
             ]
-        }
+        };
 
-        var vvr_a_questions = {
-            timeline: jsPsych.randomization.shuffle([questions_a, questions_b])
-        }
+        var vvr_a_cond = false;
+        var vvr_b_cond = false;
+        var vvr_c_cond = false;
+
+        function vvr_shuffle_questions() {
+            var rand = jsPsych.randomization.sampleWithoutReplacement(['right', 'left'], 1);
+            if(rand[0] === 'right') {
+                vvr_a_cond = false;
+                vvr_b_cond = true;
+                vvr_c_cond = true;
+            } else if(rand[0] === 'left') {
+                vvr_a_cond = true;
+                vvr_b_cond = true;
+                vvr_c_cond = false;
+            };
+        };
+        
+        vvr_shuffle_questions();
 
         var loop_node_VVR = {
-            timeline: [vvr_a, vvr_a_questions],
+            timeline: [ vvr_a, 
+                    {
+                        timeline: [questions_a],
+                        conditional_function: function() {
+                            return vvr_a_cond ? true : false;
+                        }
+                    },
+                    {
+                        timeline: [questions_b],
+                        conditional_function: function() {
+                            return vvr_b_cond ? true : false;
+                        }
+                    },
+                    {
+                        timeline: [questions_a],
+                        conditional_function: function() {
+                            return vvr_c_cond ? true : false;
+                        }
+                    }
+            ],
             loop_function: function(){
-                if(loop_node_counter_vvr_determination >= min_blocks_num && max_num_incorrect <= loop_node_counter_max_num_incorrect) {
+                function reset_vars() {
+                    degrad_pattern_loop_counter = 0;
+                    prob_value_loop_counter = 0;
                     loop_node_counter_vvr = 0;
+                    loop_node_counter_vvr_determination = 0;
+                };
+
+                if(loop_node_counter_vvr_determination >= min_blocks_num && max_num_incorrect <= loop_node_counter_max_num_incorrect) {
+                    reset_vars();
                     return false;            
                 } else if(loop_node_counter_vvr_determination >= min_blocks_num && min_num_correct <= loop_node_counter_max_num_correct) {
-                    loop_node_counter_vvr = 0;
+                    reset_vars();
                     return false;
                 } else {
-                    if(loop_node_counter_vvr >= min_blocks_num) {
-                        loop_node_counter_vvr = 0;
-                    }
+                    vvr_shuffle_questions();
                     return true;
                 }
             }
-        }
+        };
 
         return loop_node_VVR;
     },
@@ -655,7 +696,7 @@ var vvr_ = {
             type: 'survey-vvr',
             stage_name: 'VVR_copy_2 contingency degradation',
             variables: {
-                VVR_INTERVAL_NUM: interval_num_VVR2,
+                VVR_INTERVAL_NUM: interval_num,
                 VVR_INTERVAL_DURATION: interval_duration,
                 VVR_OUTCOME_DURATION: outcome_duration,
                 VVR_PROB_VALUE: prob_value_VVR2,
@@ -715,7 +756,7 @@ var vvr_ = {
                     event_converted_details: 'VVR_copy_2 question-left contingency degradation feedback text appears'
                 }
             ]
-        }
+        };
 
         var questions_b = {
             timeline: [
@@ -769,25 +810,63 @@ var vvr_ = {
                     event_converted_details: 'VVR_copy_2 question-right contingency degradation feedback text appears'
                 }
             ]
-        }
+        };
 
-        var vvr_a_questions = {
-            timeline: jsPsych.randomization.shuffle([questions_a, questions_b])
-        }
+        var vvr_a_cond = false;
+        var vvr_b_cond = false;
+        var vvr_c_cond = false;
+
+        function vvr_shuffle_questions() {
+            var rand = jsPsych.randomization.sampleWithoutReplacement(['right', 'left'], 1);
+            if(rand[0] === 'right') {
+                vvr_a_cond = false;
+                vvr_b_cond = true;
+                vvr_c_cond = true;
+            } else if(rand[0] === 'left') {
+                vvr_a_cond = true;
+                vvr_b_cond = true;
+                vvr_c_cond = false;
+            };
+        };
+        
+        vvr_shuffle_questions();
 
         var loop_node_VVR = {
-            timeline: [vvr_a, vvr_a_questions],
+            timeline: [vvr_a,
+                {
+                    timeline: [questions_a],
+                    conditional_function: function() {
+                        return vvr_a_cond ? true : false;
+                    }
+                },
+                {
+                    timeline: [questions_b],
+                    conditional_function: function() {
+                        return vvr_b_cond ? true : false;
+                    }
+                },
+                {
+                    timeline: [questions_a],
+                    conditional_function: function() {
+                        return vvr_c_cond ? true : false;
+                    }
+                }
+            ],
             loop_function: function(){
-                if(loop_node_counter_vvr_determination >= min_blocks_num && max_num_incorrect <= loop_node_counter_max_num_incorrect) {
+                function reset_vars() {
+                    degrad_pattern_loop_counter = 0;
+                    prob_value_loop_counter = 0;
                     loop_node_counter_vvr = 0;
+                    loop_node_counter_vvr_determination = 0;
+                }
+                if(loop_node_counter_vvr_determination >= min_blocks_num && max_num_incorrect <= loop_node_counter_max_num_incorrect) {
+                    reset_vars()
                     return false;            
                 } else if(loop_node_counter_vvr_determination >= min_blocks_num && min_num_correct <= loop_node_counter_max_num_correct) {
-                    loop_node_counter_vvr = 0;
+                    reset_vars()
                     return false;
                 } else {
-                    if(loop_node_counter_vvr >= min_blocks_num) {
-                        loop_node_counter_vvr = 0;
-                    }
+                    vvr_shuffle_questions();
                     return true;
                 }
             }
@@ -804,13 +883,13 @@ var vvr_ = {
             type: 'survey-vvr',
             stage_name: 'VVR_copy_3 contingency restoration',
             variables: {
-                VVR_INTERVAL_NUM: interval_num_VVR3,
+                VVR_INTERVAL_NUM: interval_num,
                 VVR_INTERVAL_DURATION: interval_duration,
                 VVR_OUTCOME_DURATION: outcome_duration,
                 VVR_PROB_VALUE: prob_value_VVR3,
                 VVR_DEGRAD_PATTERN : degrad_pattern_VVR3
             }
-        }
+        };
         
         var questions_a = {
             timeline: [
@@ -864,7 +943,7 @@ var vvr_ = {
                     event_converted_details: 'VVR_copy_3 question-left contingency restoration feedback text appears'
                 }
             ]
-        }
+        };
 
         var questions_b = {
             timeline: [
@@ -918,25 +997,63 @@ var vvr_ = {
                     event_converted_details: 'VVR_copy_3 question-right contingency restoration feedback text appears'
                 }
             ]
-        }
+        };
 
-        var vvr_a_questions = {
-            timeline: jsPsych.randomization.shuffle([questions_a, questions_b])
-        }
+        var vvr_a_cond = false;
+        var vvr_b_cond = false;
+        var vvr_c_cond = false;
+
+        function vvr_shuffle_questions() {
+            var rand = jsPsych.randomization.sampleWithoutReplacement(['right', 'left'], 1);
+            if(rand[0] === 'right') {
+                vvr_a_cond = false;
+                vvr_b_cond = true;
+                vvr_c_cond = true;
+            } else if(rand[0] === 'left') {
+                vvr_a_cond = true;
+                vvr_b_cond = true;
+                vvr_c_cond = false;
+            };
+        };
+        
+        vvr_shuffle_questions();
 
         var loop_node_VVR = {
-            timeline: [vvr_a, vvr_a_questions],
+            timeline: [vvr_a,
+                {
+                    timeline: [questions_a],
+                    conditional_function: function() {
+                        return vvr_a_cond ? true : false;
+                    }
+                },
+                {
+                    timeline: [questions_b],
+                    conditional_function: function() {
+                        return vvr_b_cond ? true : false;
+                    }
+                },
+                {
+                    timeline: [questions_a],
+                    conditional_function: function() {
+                        return vvr_c_cond ? true : false;
+                    }
+                }
+            ],
             loop_function: function(){
-                if(loop_node_counter_vvr_determination >= min_blocks_num && max_num_incorrect <= loop_node_counter_max_num_incorrect) {
+                function reset_vars() {
+                    degrad_pattern_loop_counter = 0;
+                    prob_value_loop_counter = 0;
                     loop_node_counter_vvr = 0;
+                    loop_node_counter_vvr_determination = 0;
+                }
+                if(loop_node_counter_vvr_determination >= min_blocks_num && max_num_incorrect <= loop_node_counter_max_num_incorrect) {
+                    reset_vars();
                     return false;            
                 } else if(loop_node_counter_vvr_determination >= min_blocks_num && min_num_correct <= loop_node_counter_max_num_correct) {
-                    loop_node_counter_vvr = 0;
+                    reset_vars();
                     return false;
                 } else {
-                    if(loop_node_counter_vvr >= min_blocks_num) {
-                        loop_node_counter_vvr = 0;
-                    }
+                    vvr_shuffle_questions();
                     return true;
                 }
             }
@@ -953,13 +1070,13 @@ var vvr_ = {
             type: 'survey-vvr',
             stage_name: 'VVR_copy_4 instrumental reinstatement ',
             variables: {
-                VVR_INTERVAL_NUM: interval_num_VVR4,
+                VVR_INTERVAL_NUM: interval_num,
                 VVR_INTERVAL_DURATION: interval_duration,
                 VVR_OUTCOME_DURATION: outcome_duration,
                 VVR_PROB_VALUE: prob_value_VVR4,
                 VVR_DEGRAD_PATTERN : degrad_pattern_VVR4
             }
-        }
+        };
         
         var questions_a = {
             timeline: [
@@ -1013,7 +1130,7 @@ var vvr_ = {
                     event_converted_details: 'VVR_copy_4 question-left instrumental reinstatement  feedback text appears'
                 }
             ]
-        }
+        };
 
         var questions_b = {
             timeline: [
@@ -1067,25 +1184,63 @@ var vvr_ = {
                     event_converted_details: 'VVR_copy_4 question-right instrumental reinstatement  feedback text appears'
                 }
             ]
-        }
+        };
 
-        var vvr_a_questions = {
-            timeline: jsPsych.randomization.shuffle([questions_a, questions_b])
-        }
+        var vvr_a_cond = false;
+        var vvr_b_cond = false;
+        var vvr_c_cond = false;
+
+        function vvr_shuffle_questions() {
+            var rand = jsPsych.randomization.sampleWithoutReplacement(['right', 'left'], 1);
+            if(rand[0] === 'right') {
+                vvr_a_cond = false;
+                vvr_b_cond = true;
+                vvr_c_cond = true;
+            } else if(rand[0] === 'left') {
+                vvr_a_cond = true;
+                vvr_b_cond = true;
+                vvr_c_cond = false;
+            };
+        };
+        
+        vvr_shuffle_questions();
 
         var loop_node_VVR = {
-            timeline: [vvr_a, vvr_a_questions],
+            timeline: [vvr_a, 
+                {
+                    timeline: [questions_a],
+                    conditional_function: function() {
+                        return vvr_a_cond ? true : false;
+                    }
+                },
+                {
+                    timeline: [questions_b],
+                    conditional_function: function() {
+                        return vvr_b_cond ? true : false;
+                    }
+                },
+                {
+                    timeline: [questions_a],
+                    conditional_function: function() {
+                        return vvr_c_cond ? true : false;
+                    }
+                }
+            ],
             loop_function: function(){
-                if(loop_node_counter_vvr_determination >= min_blocks_num && max_num_incorrect <= loop_node_counter_max_num_incorrect) {
+                function reset_vars() {
+                    degrad_pattern_loop_counter = 0;
+                    prob_value_loop_counter = 0;
                     loop_node_counter_vvr = 0;
+                    loop_node_counter_vvr_determination = 0;
+                }
+                if(loop_node_counter_vvr_determination >= min_blocks_num && max_num_incorrect <= loop_node_counter_max_num_incorrect) {
+                    reset_vars();
                     return false;            
                 } else if(loop_node_counter_vvr_determination >= min_blocks_num && min_num_correct <= loop_node_counter_max_num_correct) {
-                    loop_node_counter_vvr = 0;
+                    reset_vars();
                     return false;
                 } else {
-                    if(loop_node_counter_vvr >= min_blocks_num) {
-                        loop_node_counter_vvr = 0;
-                    }
+                    vvr_shuffle_questions();
                     return true;
                 }
             }

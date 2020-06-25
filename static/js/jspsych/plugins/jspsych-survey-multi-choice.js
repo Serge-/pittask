@@ -119,7 +119,7 @@ jsPsych.plugins['survey-multi-choice'] = (function() {
     '</div>';
 
     // form element
-    html += '<form id="jspsych-survey-multi-choice-form">';
+    html += '<form id="jspsych-survey-multi-choice-form" class="pavlovian-conditioning-form">';
     
     // generate question order. this is randomized here as opposed to randomizing the order of trial.questions
     // so that the data are always associated with the same question regardless of order

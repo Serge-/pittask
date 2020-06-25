@@ -121,18 +121,19 @@ jsPsych.plugins["food-and-hunger-questions"] = (function() {
         }
 
         html += '<div class="votes-container">' +
-            '<div id="slider">' +
-                '<div class="description">' +
-                    '<div class="description--left">' + vas_left + '</div>';
+                '<div id="slider">' +
+                '<div class="description">';
+        if(trial.stimulus === 'hunger') {  html +=  '<div class="description--left">' + vas_left_hungry + '</div>';}
         if(trial.stimulus !== 'hunger') {
-          html +=  '<div class="description--center">' + vas_center + '</div>';
+          html += '<div class="description--left">' + vas_left + '</div>' + 
+                  '<div class="description--center">' + vas_center + '</div>' +
+                  '<div class="description--right">' + vas_right + '</div>';
         }
-                    
-        html += '<div class="description--right">' + vas_right + '</div>' +
+        if(trial.stimulus === 'hunger') {  html +=  '<div class="description--right">' + vas_right_hungry + '</div>';}          
+        html += '</div>' +
                 '</div>' +
-            '</div>' +
-            '<button id="button" class="confirm-button btn">Submit answer</button>' +
-            "<ul><li>Select answer using your mouse.</li><li>Click 'submit answer' when ready.</li></ul>" +
+                '<button id="button" class="confirm-button btn">Submit answer</button>' +
+                "<ul><li>Select answer using your mouse.</li><li>Click 'submit answer' when ready.</li></ul>" +
         '</div>'
         html += '</div>';
 
