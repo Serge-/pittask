@@ -22,12 +22,17 @@ jsPsych.plugins['Parameters'] = (function(){
   
     plugin.trial = function(display_element, trial){
         var parameters = {
+            "re_captcha": re_captcha,
+            "re_captcha_duration": re_captcha_duration,
             "full_screen_mode": full_screen_mode,
             "open_instruct_latency": open_instruct_latency,
             "close_instruct_latency": close_instruct_latency,
             "outcome_duration": outcome_duration,
             "stim_duration": stim_duration,
             "ITI_duration": ITI_duration,
+            "interval_duration": interval_duration,
+            "interval_num": interval_num,
+            "answer_latency": answer_latency,
             "correct_text": correct_text,
             "incorrect_text": incorrect_text,
             "feedback_duration": feedback_duration,
@@ -45,15 +50,47 @@ jsPsych.plugins['Parameters'] = (function(){
 
             "open_instruct_text_key_testing": open_instruct_text_key_testing,
             "close_instruct_text_key_testing": close_instruct_text_key_testing,
+
             "open_instruct_text_clinical": open_instruct_text_clinical,
             "close_instruct_text_clinical": close_instruct_text_clinical,
+
+            "open_instruct_demographics": open_instruct_demographics,
+            "close_instruct_demographics": close_instruct_demographics,
+            "open_instruct_text_demographics": open_instruct_text_demographics,
+            "close_instruct_text_demographics": close_instruct_text_demographics,
+            "open_instruct_symptom_inventories": open_instruct_symptom_inventories,
+            "close_instruct_symptom_inventories": close_instruct_symptom_inventories,
+            "open_instruct_text_symptom_inventories": open_instruct_text_symptom_inventories,
+            "close_instruct_text_symptom_inventories": close_instruct_text_symptom_inventories,
+
+            "open_instruct_SDS": open_instruct_SDS, 
+            "close_instruct_SDS": close_instruct_SDS, 
+            "open_instruct_text_SDS": open_instruct_text_SDS, 
+            "close_instruct_text_SDS": close_instruct_text_SDS,
+
+            "open_instruct_ICAR": open_instruct_ICAR,
+            "close_instruct_ICAR": close_instruct_ICAR,
+            "open_instruct_text_ICAR": open_instruct_text_ICAR, 
+            "close_instruct_text_ICAR": close_instruct_text_ICAR, 
+
             "symptom_inventory_randomization": symptom_inventory_randomization,
             "symptom_inventory": "",
             "video_duration": video_duration,
             "video_sound": video_sound,
             "open_instruct_video": open_instruct_video,
             "open_instruct_text_video": open_instruct_text_video,
-       
+            "close_instruct_video": close_instruct_video,
+            "close_instruct_text_video": close_instruct_text_video,
+
+            "open_instruct_FHQ_pre_rating": open_instruct_FHQ_pre_rating,
+            "close_instruct_FHQ_pre_rating": close_instruct_FHQ_pre_rating,
+            "open_instruct_text_FHQ_pre_rating": open_instruct_text_FHQ_pre_rating,
+            "close_instruct_text_FHQ_pre_rating": close_instruct_text_FHQ_pre_rating,
+            "open_instruct_FHQ_post_rating": open_instruct_FHQ_post_rating,
+            "close_instruct_FHQ_post_rating": close_instruct_FHQ_post_rating,
+            "open_instruct_text_FHQ_post_rating": open_instruct_text_FHQ_post_rating,
+            "close_instruct_text_FHQ_post_rating": close_instruct_text_FHQ_post_rating,
+
             "FHQ_1": FHQ_1,
             "FHQ_2": FHQ_2,
             "FHQ_3": FHQ_3,
@@ -115,15 +152,25 @@ jsPsych.plugins['Parameters'] = (function(){
             "max_num_incorrect_VVR4": max_num_incorrect_VVR4,
 
             "open_instruct_pav": open_instruct_pav,
+            "close_instruct_pav": close_instruct_pav,
             "open_instruct_text_pav": open_instruct_text_pav,
 
             "min_num_correct_pav": min_num_correct_pav,
             "max_num_incorrect_pav": max_num_incorrect_pav,
+            "close_instruct_text_pav": close_instruct_text_pav,
 
             "open_instruct_transfer_test": open_instruct_transfer_test,
+            "close_instruct_transfer_test": close_instruct_transfer_test,
             "open_instruct_text_transfer_test": open_instruct_text_transfer_test,
+            "close_instruct_text_transfer_test": close_instruct_text_transfer_test,
             "block_num_transfer_test": block_num_transfer_test,
-            "close_instruct_text_thanks": close_instruct_text_thanks
+            "close_instruct_text_thanks": close_instruct_text_thanks,
+
+            "open_instruct_deval_test": open_instruct_deval_test,
+            "close_instruct_deval_test": close_instruct_deval_test,
+            "open_instruct_text_deval_test": open_instruct_text_deval_test,
+            "close_instruct_text_deval_test": close_instruct_text_deval_test, 
+            "deval_test_duration": deval_test_duration
         };
 
         symptom_inventory.forEach(function(element, index) {
