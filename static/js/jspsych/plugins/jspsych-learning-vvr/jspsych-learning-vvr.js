@@ -61,7 +61,7 @@ jsPsych.plugins['survey-vvr'] = (function() {
         };
         var timestamp_onload = jsPsych.totalTime();
           
-        var new_html = '<div id="jspsych-stimulus"><img class="vending-machine" src='+ VENDING_MACHINE +'/><div class="outcome-container"></div></div>';
+        var new_html = '<div id="jspsych-stimulus" class="vvr_stage"><img class="vending-machine" src='+ VENDING_MACHINE +'/><div class="outcome-container"></div></div>';
 
         display_element.innerHTML = new_html;
 
@@ -94,7 +94,7 @@ jsPsych.plugins['survey-vvr'] = (function() {
                 "timestamp": jsPsych.totalTime(),
                 "time_elapsed": 'NA',
                 "event_type": 'no action',
-                "interval_number": x + 1,
+                "interval_number": interval_number_holder,
                 "event_raw_details": 'no action',
                 "event_converted_details": 'no action'
               });
@@ -107,14 +107,12 @@ jsPsych.plugins['survey-vvr'] = (function() {
                 "timestamp": jsPsych.totalTime(),
                 "time_elapsed": jsPsych.totalTime() - timestamp_onload,
                 "event_type": 'image appears',
-                "interval_number": x + 1,
+                "interval_number": interval_number_holder,
                 "event_raw_details": OUTCOME[counter_balancing[0][outcome_present]],
                 "event_converted_details": counter_balancing[0][outcome_present] + ' image appears'
               });
              
-              if(interval_number_holder < VVR_INTERVAL_NUM) {
-                interval_number_holder += 1;
-              }
+     
               jsPsych.pluginAPI.setTimeout(function() {
                 $('.outcome-container').html('');
                 if (++x === VVR_INTERVAL_NUM) {
@@ -129,7 +127,7 @@ jsPsych.plugins['survey-vvr'] = (function() {
                 "timestamp": jsPsych.totalTime(),
                 "time_elapsed": 'NA',
                 "event_type": 'no outcome',
-                "interval_number": x + 1,
+                "interval_number": interval_number_holder,
                 "event_raw_details": 'no outcome',
                 "event_converted_details": 'no outcome'
               });
@@ -144,7 +142,12 @@ jsPsych.plugins['survey-vvr'] = (function() {
 
             if (x === VVR_INTERVAL_NUM) {
               jsPsych.pluginAPI.clearAllTimeouts();
-            }
+            };
+
+            if(interval_number_holder < VVR_INTERVAL_NUM) {
+              interval_number_holder += 1;
+            };
+
              // reset degrad pattern   
              condition_outcome = 'A0';
           }, VVR_INTERVAL_DURATION);          
@@ -204,15 +207,15 @@ jsPsych.plugins['survey-vvr'] = (function() {
             }
           
             if(info.key_release === undefined) {
-                machine_tilt();
-                response.trial_events.push({
-                  "event_type": "key press",
-                  "event_raw_details": info.key,
-                  "event_converted_details": jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(info.key) + ' key pressed',
-                  "timestamp": jsPsych.totalTime(),
-                  "interval_number": interval_number_holder,
-                  "time_elapsed": jsPsych.totalTime() - timestamp_onload
-                });
+              response.trial_events.push({
+                "event_type": "key press",
+                "event_raw_details": info.key,
+                "event_converted_details": jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(info.key) + ' key pressed',
+                "timestamp": jsPsych.totalTime(),
+                "interval_number": interval_number_holder,
+                "time_elapsed": jsPsych.totalTime() - timestamp_onload
+              });
+              machine_tilt();
             } else {
                 response.trial_events.push({
                   "event_type": "key release",
