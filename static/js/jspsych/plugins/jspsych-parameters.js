@@ -204,6 +204,8 @@ jsPsych.plugins['Parameters'] = (function(){
             "parameters": JSON.stringify(parameters)
         };
 
+        plugin.trial.variables = parameters;
+
         jsPsych.finishTrial(trial_data);
     }
   
