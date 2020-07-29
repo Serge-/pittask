@@ -1,4 +1,4 @@
-jsPsych.plugins['Parameters'] = (function(){
+jsPsych.plugins['parameters'] = (function(){
 
     var plugin = {};
   
@@ -32,12 +32,14 @@ jsPsych.plugins['Parameters'] = (function(){
             "ITI_duration": ITI_duration,
             "interval_duration": interval_duration,
             "interval_num": interval_num,
+            "answer_latency_countdown": answer_latency_countdown,
             "answer_latency": answer_latency,
+            "answer_latency_text": answer_latency_text,
             "correct_text": correct_text,
             "incorrect_text": incorrect_text,
             "feedback_duration": feedback_duration,
-            "popup_text": popup_text,
-            "popup_text_web_forms": popup_text_web_forms,
+            "popup_text_behav": popup_text_behav,
+            "popup_text_WBF": popup_text_WBF,
 
             "shake_right_rotate": shake_right_rotate,
             "shake_right_translateX": shake_right_translateX,
@@ -51,17 +53,19 @@ jsPsych.plugins['Parameters'] = (function(){
             "open_instruct_text_key_testing": open_instruct_text_key_testing,
             "close_instruct_text_key_testing": close_instruct_text_key_testing,
 
-            "open_instruct_text_clinical": open_instruct_text_clinical,
-            "close_instruct_text_clinical": close_instruct_text_clinical,
+            "open_instruct_WBF": open_instruct_WBF,
+            "close_instruct_WBF": close_instruct_WBF,
+            "open_instruct_text_WBF": open_instruct_text_WBF,
+            "close_instruct_text_WBF": close_instruct_text_WBF,
 
             "open_instruct_demographics": open_instruct_demographics,
             "close_instruct_demographics": close_instruct_demographics,
             "open_instruct_text_demographics": open_instruct_text_demographics,
             "close_instruct_text_demographics": close_instruct_text_demographics,
-            "open_instruct_symptom_inventories": open_instruct_symptom_inventories,
-            "close_instruct_symptom_inventories": close_instruct_symptom_inventories,
-            "open_instruct_text_symptom_inventories": open_instruct_text_symptom_inventories,
-            "close_instruct_text_symptom_inventories": close_instruct_text_symptom_inventories,
+            "open_instruct_inventory": open_instruct_inventory,
+            "close_instruct_inventory": close_instruct_inventory,
+            "open_instruct_text_inventory": open_instruct_text_inventory,
+            "close_instruct_text_inventory": close_instruct_text_inventory,
 
             "open_instruct_SDS": open_instruct_SDS, 
             "close_instruct_SDS": close_instruct_SDS, 
@@ -73,7 +77,7 @@ jsPsych.plugins['Parameters'] = (function(){
             "open_instruct_text_ICAR": open_instruct_text_ICAR, 
             "close_instruct_text_ICAR": close_instruct_text_ICAR, 
 
-            "symptom_inventory_randomization": symptom_inventory_randomization,
+            "inventory_rand": inventory_rand,
             "symptom_inventory": "",
             "video_duration": video_duration,
             "video_sound": video_sound,
@@ -98,18 +102,18 @@ jsPsych.plugins['Parameters'] = (function(){
             "FHQ_1_bottom_text": FHQ_1_bottom_text,
             "FHQ_2_bottom_text": FHQ_2_bottom_text,
             "FHQ_3_bottom_text": FHQ_3_bottom_text,
-            "vas_left": vas_left,
-            "vas_center": vas_center,
-            "vas_right": vas_right,
-            "vas_left_hungry": vas_left_hungry,
-            "vas_right_hungry": vas_right_hungry,
+            "FHQ_VAS_left": FHQ_VAS_left,
+            "FHQ_VAS_center": FHQ_VAS_center,
+            "FHQ_VAS_right": FHQ_VAS_right,
+            "FHQ_VAS_left_hungry": FHQ_VAS_left_hungry,
+            "FHQ_VAS_right_hungry": FHQ_VAS_right_hungry,
 
-            "question_text_a1": question_text_a1,
-            "question_text_a2": question_text_a2,
-            "question_text_b1": question_text_b1,
-            "question_text_b2": question_text_b2,
-            "question_text_b3": question_text_b3,
-            "question_text_b4": question_text_b4,
+            "VVR_q_text_a1": VVR_q_text_a1,
+            "VVR_q_text_a2": VVR_q_text_a2,
+            "VVR_q_text_b1": VVR_q_text_b1,
+            "VVR_q_text_b2": VVR_q_text_b2,
+            "VVR_q_text_b3": VVR_q_text_b3,
+            "VVR_q_text_b4": VVR_q_text_b4,
 
             "open_instruct_VVR1": open_instruct_VVR1,
             "close_instruct_VVR1": close_instruct_VVR1,

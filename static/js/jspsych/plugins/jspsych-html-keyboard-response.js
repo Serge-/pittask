@@ -85,7 +85,20 @@ jsPsych.plugins["html-keyboard-response"] = (function() {
     };
     var timestamp_onload = jsPsych.totalTime();
 
-    var new_html = '<div id="jspsych-html-keyboard-response-stimulus">'+trial.stimulus+'</div>';
+    if(trial.pav_con_timer) {
+      timestamp_onload = pav_con_timer;
+    };
+    
+    if(trial.vvr_timer) {
+      timestamp_onload = vvr_timer;
+    };
+
+    var new_html = '<div id="jspsych-html-keyboard-response-stimulus" class="jspsych-html-keyboard-response-stimulus">'+trial.stimulus+'</div>';
+
+    if(trial.id) {
+      new_html = '<div id="jspsych-html-keyboard-response-stimulus" class="' + trial.id  +'">'+trial.stimulus+'</div>';
+    }
+
 
     response.trial_events.push({
       "event_type": trial.event_type,
@@ -111,7 +124,6 @@ jsPsych.plugins["html-keyboard-response"] = (function() {
       }
 
       // gather the data to store for the trial
-      // JSON.stringify(
       var trial_data = {
         "stage_name": JSON.stringify(trial.stage_name),
         "events": JSON.stringify(response.trial_events)

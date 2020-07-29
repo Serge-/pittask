@@ -152,7 +152,7 @@ resubmit = function() {
 
 var DEMOGRAPHICS_INSTRUCT_OPEN = {
     timeline: [{
-        stage_name: 'Demographics open instructions page',
+        stage_name: 'demographics_open',
         type: 'html-keyboard-response',
         stimulus: open_instruct_text_demographics,
         trial_latency: open_instruct_latency,
@@ -160,7 +160,7 @@ var DEMOGRAPHICS_INSTRUCT_OPEN = {
         response_ends_trial: false,
         event_type: 'text appears',
         event_raw_details: 'open_instruct_text_demographics',
-        event_converted_details: "Demographics open instructions text appears",
+        event_converted_details: "demographics_open text appears",
     }],
     conditional_function: function() {
         return open_instruct_demographics ? true : false;
@@ -168,7 +168,7 @@ var DEMOGRAPHICS_INSTRUCT_OPEN = {
 }
 var DEMOGRAPHICS_INSTRUCT_CLOSE = {
     timeline: [{
-        stage_name: 'Demographics close instructions page',
+        stage_name: 'demographics_close',
         type: 'html-keyboard-response',
         stimulus: close_instruct_text_demographics,
         trial_latency: close_instruct_latency,
@@ -176,7 +176,7 @@ var DEMOGRAPHICS_INSTRUCT_CLOSE = {
         response_ends_trial: false,
         event_type: 'text appears',
         event_raw_details: 'close_instruct_text_demographics',
-        event_converted_details: "Demographics close instructions text appears",
+        event_converted_details: "demographics_close text appears",
     }],
     conditional_function: function() {
         return close_instruct_demographics ? true : false;
@@ -269,7 +269,7 @@ var ICAR = {
 };
 
 var KEY_TESTING_OPEN = {
-    stage_name: 'Key-testing',
+    stage_name: 'key_testing_open',
     type: 'html-keyboard-response',
     stimulus: open_instruct_text_key_testing,
     trial_latency: open_instruct_latency,
@@ -277,22 +277,22 @@ var KEY_TESTING_OPEN = {
     response_ends_trial: false,
     event_type: 'text appears',
     event_raw_details: 'open_instruct_text_key_testing',
-    event_converted_details: 'Key-testing open text appears'
+    event_converted_details: 'key_testing_open text appears'
 }
 
 var KEY_TESTING = {
-    stage_name: 'Key-testing',
+    stage_name: 'key_testing',
     type: 'key-testing',
     stimulus: '',
     trial_duration: null,
     response_ends_trial: false,
     event_type: 'image appears',
     event_raw_details: 'key_testing_close',
-    event_converted_details: 'white vending machine appears'
+    event_converted_details: 'blank vending machine appears'
 }
 
 var KEY_TESTING_CLOSE = {
-    stage_name: 'Key-testing',
+    stage_name: 'key_testing_close',
     type: 'html-keyboard-response',
     stimulus: close_instruct_text_key_testing,
     trial_latency: close_instruct_latency,
@@ -300,11 +300,12 @@ var KEY_TESTING_CLOSE = {
     response_ends_trial: false,
     event_type: 'text appears',
     event_raw_details: 'close_instruct_text_key_testing',
-    event_converted_details: 'Key-testing close text appears'
+    event_converted_details: 'key_testing_close text appears'
 }
 
+var FHR_timestamp = 0;
 var FHQ_PRE_1 = {
-    stage_name: "food-and-hunger-questions",
+    stage_name: "FHQ1",
     type: 'food-and-hunger-questions',
     stimulus: '/static/images/TT.png',
     questions: {
@@ -313,13 +314,13 @@ var FHQ_PRE_1 = {
     },
     food_item: "TT.png",
     rating_status: 'pre-rating',
-    event_type: 'Food question scale appears',
+    event_type: 'FHQ1 scale appears',
     event_raw_details: "FHQ_1, FHQ_1_bottom_text",
     event_converted_details: 'TT scale'
 }
 
 var FHQ_PRE_2 = {
-    stage_name: "food-and-hunger-questions",
+    stage_name: "FHQ1",
     type: 'food-and-hunger-questions',
     stimulus: '/static/images/MM.png',
     questions: {
@@ -328,13 +329,13 @@ var FHQ_PRE_2 = {
     },
     food_item: "MM.png",
     rating_status: 'pre-rating',
-    event_type: 'Food question scale appears',
+    event_type: 'FHQ1 scale appears',
     event_raw_details: "FHQ_2, FHQ_2_bottom_text",
     event_converted_details: 'MM scale'
 }
 
 var FHQ_PRE_3 = {
-    stage_name: "food-and-hunger-questions",
+    stage_name: "FHQ1",
     type: 'food-and-hunger-questions',
     stimulus: '/static/images/BBQ.png',
     questions: {
@@ -343,13 +344,13 @@ var FHQ_PRE_3 = {
     },
     food_item: "BBQ.png",
     rating_status: 'pre-rating',
-    event_type: 'Food question scale appears',
+    event_type: 'FHQ1 scale appears',
     event_raw_details: "FHQ_3, FHQ_3_bottom_text",
     event_converted_details: 'BBQ scale'
 }
 
 var FHQ_PRE_4 = {
-    stage_name: "food-and-hunger-questions",
+    stage_name: "FHQ1",
     type: 'food-and-hunger-questions',
     stimulus: 'hunger',
     questions: {
@@ -357,14 +358,14 @@ var FHQ_PRE_4 = {
     },
     food_item: "hunger",
     rating_status: 'pre-rating',
-    event_type: 'Food question scale appears',
+    event_type: 'FHQ1 scale appears',
     event_raw_details: "FHQ_4",
     event_converted_details: 'Hunger scale'
 }
 
 var FHQ_PRE_INSTRUCT_OPEN = {
     timeline: [{
-        stage_name: 'Food and Hunger Questions pre-rating open instructions page',
+        stage_name: 'FHQ1_open',
         type: 'html-keyboard-response',
         stimulus: open_instruct_text_FHQ_pre_rating,
         trial_latency: open_instruct_latency,
@@ -372,7 +373,7 @@ var FHQ_PRE_INSTRUCT_OPEN = {
         response_ends_trial: false,
         event_type: 'text appears',
         event_raw_details: 'open_instruct_text_FHQ_pre_rating',
-        event_converted_details: "Food and Hunger Questions pre-rating open instructions text appears",
+        event_converted_details: "FHQ1_open text appears",
     }],
     conditional_function: function() {
         return open_instruct_FHQ_pre_rating ? true : false;
@@ -381,7 +382,7 @@ var FHQ_PRE_INSTRUCT_OPEN = {
 
 var FHQ_PRE_INSTRUCT_CLOSE = {
     timeline: [{
-        stage_name: 'Food and Hunger Questions pre-rating close instructions page',
+        stage_name: 'FHQ1_close',
         type: 'html-keyboard-response',
         stimulus: close_instruct_text_FHQ_pre_rating,
         trial_latency: close_instruct_latency,
@@ -389,7 +390,7 @@ var FHQ_PRE_INSTRUCT_CLOSE = {
         response_ends_trial: false,
         event_type: 'text appears',
         event_raw_details: 'close_instruct_text_FHQ_pre_rating',
-        event_converted_details: "Food and Hunger Questions pre-rating close instructions text appears",
+        event_converted_details: "FHQ1_close text appears",
     }],
     conditional_function: function() {
         return close_instruct_FHQ_pre_rating ? true : false;
@@ -397,7 +398,7 @@ var FHQ_PRE_INSTRUCT_CLOSE = {
 };
 
 var FHQ_POST_1 = {
-    stage_name: "food-and-hunger-questions",
+    stage_name: "FHQ2",
     type: 'food-and-hunger-questions',
     stimulus: '/static/images/TT.png',
     questions: {
@@ -406,13 +407,13 @@ var FHQ_POST_1 = {
     },
     food_item: "TT.png",
     rating_status: 'post-rating',
-    event_type: 'Food question scale appears',
+    event_type: 'FHQ2 scale appears',
     event_raw_details: "FHQ_1, FHQ_1_bottom_text",
     event_converted_details: 'TT scale'
 }
 
 var FHQ_POST_2 = {
-    stage_name: "food-and-hunger-questions",
+    stage_name: "FHQ2",
     type: 'food-and-hunger-questions',
     stimulus: '/static/images/MM.png',
     questions: {
@@ -421,13 +422,13 @@ var FHQ_POST_2 = {
     },
     food_item: "MM.png",
     rating_status: 'post-rating',
-    event_type: 'Food question scale appears',
+    event_type: 'FHQ2 scale appears',
     event_raw_details: "FHQ_2, FHQ_2_bottom_text",
     event_converted_details: 'MM scale'
 }
 
 var FHQ_POST_3 = {
-    stage_name: "food-and-hunger-questions",
+    stage_name: "FHQ2",
     type: 'food-and-hunger-questions',
     stimulus: '/static/images/BBQ.png',
     questions: {
@@ -436,13 +437,13 @@ var FHQ_POST_3 = {
     },
     food_item: "BBQ.png",
     rating_status: 'post-rating',
-    event_type: 'Food question scale appears',
+    event_type: 'FHQ2 scale appears',
     event_raw_details: "FHQ_3, FHQ_3_bottom_text",
     event_converted_details: 'BBQ scale'
 }
 
 var FHQ_POST_4 = {
-    stage_name: "food-and-hunger-questions",
+    stage_name: "FHQ2",
     type: 'food-and-hunger-questions',
     stimulus: 'hunger',
     questions: {
@@ -450,14 +451,14 @@ var FHQ_POST_4 = {
     },
     food_item: "hunger",
     rating_status: 'post-rating',
-    event_type: 'Food question scale appears',
+    event_type: 'FHQ2 scale appears',
     event_raw_details: "FHQ_4",
     event_converted_details: 'Hunger scale'
 };
 
 var FHQ_POST_INSTRUCT_OPEN = {
     timeline: [{
-        stage_name: 'Food and Hunger Questions post-rating open instructions page',
+        stage_name: 'FHQ2_open',
         type: 'html-keyboard-response',
         stimulus: open_instruct_text_FHQ_post_rating,
         trial_latency: open_instruct_latency,
@@ -465,7 +466,7 @@ var FHQ_POST_INSTRUCT_OPEN = {
         response_ends_trial: false,
         event_type: 'text appears',
         event_raw_details: 'open_instruct_text_FHQ_post_rating',
-        event_converted_details: "Food and Hunger Questions post-rating open instructions text appears",
+        event_converted_details: "FHQ2_open text appears",
     }],
     conditional_function: function() {
         return open_instruct_FHQ_post_rating ? true : false;
@@ -474,7 +475,7 @@ var FHQ_POST_INSTRUCT_OPEN = {
 
 var FHQ_POST_INSTRUCT_CLOSE = {
     timeline: [{
-        stage_name: 'Food and Hunger Questions post-rating close instructions page',
+        stage_name: 'FHQ2_close',
         type: 'html-keyboard-response',
         stimulus: close_instruct_text_FHQ_post_rating,
         trial_latency: close_instruct_latency,
@@ -482,7 +483,7 @@ var FHQ_POST_INSTRUCT_CLOSE = {
         response_ends_trial: false,
         event_type: 'text appears',
         event_raw_details: 'close_instruct_text_FHQ_post_rating',
-        event_converted_details: "Food and Hunger Questions post-rating close instructions text appears",
+        event_converted_details: "FHQ2_close text appears",
     }],
     conditional_function: function() {
         return close_instruct_FHQ_post_rating ? true : false;
@@ -497,975 +498,439 @@ var degrad_pattern_loop_counter = 0;
 var prob_value_loop_counter = 0;
 var vvrIsCorrect = false;
 var item_id = 0;
+var vvr_timer = 0;
 
-var vvr_ = {
-    vvr_a: function() {
-        var min_blocks_num = min_blocks_num_VVR1,
-            min_num_correct = min_num_correct_VVR1,
-            max_num_incorrect = max_num_incorrect_VVR1;
+var vvr_1_vars = {
+    stage_name: 'VVR_1',
+    min_blocks_num: min_blocks_num_VVR1,
+    min_num_correct: min_num_correct_VVR1,
+    max_num_incorrect: max_num_incorrect_VVR1,
+    prob_value: prob_value_VVR1,
+    degrad_pattern: degrad_pattern_VVR1
+};
 
-        var vvr_a = {
-            type: 'survey-vvr',
-            stage_name: 'VVR_copy_1 instrumental conditioning',
-            variables: {
-                VVR_INTERVAL_NUM: interval_num,
-                VVR_INTERVAL_DURATION: interval_duration,
-                VVR_OUTCOME_DURATION: outcome_duration,
-                VVR_PROB_VALUE: prob_value_VVR1,
-                VVR_DEGRAD_PATTERN : degrad_pattern_VVR1
-            }
-        };
-        
-        var questions_a = {
-            timeline: [
-                {
-                    type: 'survey-vvr-questions-left',
-                    stage_name: 'VVR_copy_1 question-left instrumental conditioning',
-                    vvr_stage: 'VVR_copy_1',
-                    details: {
-                        a: {
-                            event_type: 'question appears',
-                            event_raw_details: 'question 1(a) appears',
-                            event_converted_details: 'VVR_copy_1 question-left instrumental conditioning text appears',
-                        },
-                        b: {
-                            event_type: 'question appears',
-                            event_raw_details: 'question 1(b) appears',
-                            event_converted_details: 'VVR_copy_1 question-left instrumental conditioning text appears',
-                        }
-                    },
-                    vars: {
-                        question_text_a1: question_text_a1,
-                        question_text_a2: question_text_a2,
-                        question_text_b1: question_text_b1,
-                        question_text_b2: question_text_b2,
-                        question_text_b3: question_text_b3,
-                        question_text_b4: question_text_b4,
-                        popup_text: popup_text,
-                        max_num_correct_consecutive_questions: min_num_correct_VVR1
-                    }
-                },
-                {
-                    stage_name: 'VVR_copy_1 question-left instrumental conditioning feedback text',
-                    type: 'html-keyboard-response',
-                    stimulus: function() {
-                        if(vvrIsCorrect) { 
-                            return '<p style="font-size: 24px;">' + correct_text + '</p>';
-                        } else {
-                            return '<p style="font-size: 24px;">' + incorrect_text + '</p>';
-                        }
-                    },
-                    choices: jsPsych.NO_KEYS,
-                    trial_duration: feedback_duration,
-                    event_type: 'text appears',
-                    event_raw_details: function() {
-                        if(vvrIsCorrect) { 
-                            return 'correct_text';
-                        } else {
-                            return 'incorrect_text';
-                        }
-                    },
-                    event_converted_details: 'VVR_copy_1 question-left instrumental conditioning feedback text appears'
-                }
-            ]
-        };
+var vvr_2_vars = {
+    stage_name: 'VVR_2',
+    min_blocks_num: min_blocks_num_VVR2,
+    min_num_correct: min_num_correct_VVR2,
+    max_num_incorrect: max_num_incorrect_VVR2,
+    prob_value: prob_value_VVR2,
+    degrad_pattern: degrad_pattern_VVR2
+};
 
-        var questions_b = {
-            timeline: [
-                {
-                    type: 'survey-vvr-questions-right',
-                    stage_name: 'VVR_copy_1 question-right instrumental conditioning',
-                    vvr_stage: 'VVR_copy_1',
-                    details: {
-                        a: {
-                            event_type: 'question appears',
-                            event_raw_details: 'question 2(a) appears',
-                            event_converted_details: 'VVR_copy_1 question-right instrumental conditioning text appears',
-                        },
-                        b: {
-                            event_type: 'question appears',
-                            event_raw_details: 'question 2(b) appears',
-                            event_converted_details: 'VVR_copy_1 question-right instrumental conditioning text appears',
-                        }
-                    },
-                    vars: {
-                        question_text_a1: question_text_a1,
-                        question_text_a2: question_text_a2,
-                        question_text_b1: question_text_b1,
-                        question_text_b2: question_text_b2,
-                        question_text_b3: question_text_b3,
-                        question_text_b4: question_text_b4,
-                        popup_text: popup_text,
-                        max_num_correct_consecutive_questions: min_num_correct_VVR1
-                    }
-                },
-                {
-                    stage_name: 'VVR_copy_1 question-right instrumental conditioning feedback text',
-                    type: 'html-keyboard-response',
-                    stimulus: function() {
-                        if(vvrIsCorrect) { 
-                            return '<p style="font-size: 24px;">' + correct_text + '</p>';
-                        } else {
-                            return '<p style="font-size: 24px;">' + incorrect_text + '</p>';
-                        }
-                    },
-                    choices: jsPsych.NO_KEYS,
-                    trial_duration: feedback_duration,
-                    event_type: 'text appears',
-                    event_raw_details: function() {
-                        if(vvrIsCorrect) { 
-                            return 'correct_text';
-                        } else {
-                            return 'incorrect_text';
-                        }
-                    },
-                    event_converted_details: 'VVR_copy_1 question-right instrumental conditioning feedback text appears'
-                }
-            ]
-        };
+var vvr_3_vars = {
+    stage_name: 'VVR_3',
+    min_blocks_num: min_blocks_num_VVR3,
+    min_num_correct: min_num_correct_VVR3,
+    max_num_incorrect: max_num_incorrect_VVR3,
+    prob_value: prob_value_VVR3,
+    degrad_pattern: degrad_pattern_VVR3
+};
 
-        var vvr_a_cond = false;
-        var vvr_b_cond = false;
-        var vvr_c_cond = false;
+var vvr_4_vars = {
+    stage_name: 'VVR_4',
+    min_blocks_num: min_blocks_num_VVR4,
+    min_num_correct: min_num_correct_VVR4,
+    max_num_incorrect: max_num_incorrect_VVR4,
+    prob_value: prob_value_VVR4,
+    degrad_pattern: degrad_pattern_VVR4
+};
 
-        function vvr_shuffle_questions() {
-            var rand = jsPsych.randomization.sampleWithoutReplacement(['right', 'left'], 1);
-            if(rand[0] === 'right') {
-                vvr_a_cond = false;
-                vvr_b_cond = true;
-                vvr_c_cond = true;
-            } else if(rand[0] === 'left') {
-                vvr_a_cond = true;
-                vvr_b_cond = true;
-                vvr_c_cond = false;
-            };
-        };
-        
-        vvr_shuffle_questions();
+var VVR = function(data) {
+    var min_blocks_num = data.min_blocks_num;
+    var min_num_correct = data.min_num_correct;
+    var max_num_incorrect = data.max_num_incorrect;
+    var stage_name = data.stage_name;
 
-        var loop_node_VVR = {
-            timeline: [ vvr_a, 
-                    {
-                        timeline: [questions_a],
-                        conditional_function: function() {
-                            return vvr_a_cond ? true : false;
-                        }
-                    },
-                    {
-                        timeline: [questions_b],
-                        conditional_function: function() {
-                            return vvr_b_cond ? true : false;
-                        }
-                    },
-                    {
-                        timeline: [questions_a],
-                        conditional_function: function() {
-                            return vvr_c_cond ? true : false;
-                        }
-                    }
-            ],
-            loop_function: function(){
-                function reset_vars() {
-                    degrad_pattern_loop_counter = 0;
-                    prob_value_loop_counter = 0;
-                    loop_node_counter_vvr = 0;
-                    loop_node_counter_vvr_determination = 0;
-                };
-
-                if(loop_node_counter_vvr_determination >= min_blocks_num && max_num_incorrect <= loop_node_counter_max_num_incorrect) {
-                    reset_vars();
-                    return false;            
-                } else if(loop_node_counter_vvr_determination >= min_blocks_num && min_num_correct <= loop_node_counter_max_num_correct) {
-                    reset_vars();
-                    return false;
-                } else {
-                    vvr_shuffle_questions();
-                    return true;
-                }
-            }
-        };
-
-        return loop_node_VVR;
-    },
-    vvr_b: function() {
-        var min_blocks_num = min_blocks_num_VVR2,
-        min_num_correct = min_num_correct_VVR2,
-        max_num_incorrect = max_num_incorrect_VVR2;
-
-        var vvr_a = {
-            type: 'survey-vvr',
-            stage_name: 'VVR_copy_2 contingency degradation',
-            variables: {
-                VVR_INTERVAL_NUM: interval_num,
-                VVR_INTERVAL_DURATION: interval_duration,
-                VVR_OUTCOME_DURATION: outcome_duration,
-                VVR_PROB_VALUE: prob_value_VVR2,
-                VVR_DEGRAD_PATTERN : degrad_pattern_VVR2
-            }
+    var vvr_a = {
+        type: 'survey-vvr',
+        stage_name: stage_name,
+        variables: {
+            VVR_INTERVAL_NUM: interval_num,
+            VVR_INTERVAL_DURATION: interval_duration,
+            VVR_OUTCOME_DURATION: outcome_duration,
+            VVR_PROB_VALUE: data.prob_value,
+            VVR_DEGRAD_PATTERN : data.degrad_pattern,
         }
-        
-        var questions_a = {
-            timeline: [
-                {
-                    type: 'survey-vvr-questions-left',
-                    vvr_stage: 'VVR_copy_2',
-                    stage_name: 'VVR_copy_2 question-left contingency degradation',
-                    details: {
-                        a: {
-                            event_type: 'question appears',
-                            event_raw_details: 'question 1(a) appears',
-                            event_converted_details: 'VVR_copy_2 question-left contingency degradation text appears',
-                        },
-                        b: {
-                            event_type: 'question appears',
-                            event_raw_details: 'question 1(b) appears',
-                            event_converted_details: 'VVR_copy_2 question-left contingency degradation text appears',
-                        }
+    };
+
+    var questions_a = {
+        timeline: [
+            {
+                type: 'survey-vvr-questions-left',
+                stage_name: stage_name,
+                vvr_stage: stage_name,
+                details: {
+                    a: {
+                        event_type: 'question appears',
+                        event_raw_details: 'question 1(a) appears',
+                        event_converted_details: stage_name + ' text appears',
                     },
-                    vars: {
-                        question_text_a1: question_text_a1,
-                        question_text_a2: question_text_a2,
-                        question_text_b1: question_text_b1,
-                        question_text_b2: question_text_b2,
-                        question_text_b3: question_text_b3,
-                        question_text_b4: question_text_b4,
-                        popup_text: popup_text,
-                        max_num_correct_consecutive_questions: min_num_correct_VVR2
+                    b: {
+                        event_type: 'question appears',
+                        event_raw_details: 'question 1(b) appears',
+                        event_converted_details: stage_name + ' text appears',
                     }
                 },
-                {
-                    stage_name: 'VVR_copy_2 question-left contingency degradation feedback text',
-                    type: 'html-keyboard-response',
-                    stimulus: function() {
-                        if(vvrIsCorrect) { 
-                            return '<p style="font-size: 24px;">' + correct_text + '</p>';
-                        } else {
-                            return '<p style="font-size: 24px;">' + incorrect_text + '</p>';
-                        }
-                    },
-                    choices: jsPsych.NO_KEYS,
-                    trial_duration: feedback_duration,
-                    event_type: 'text appears',
-                    event_raw_details: function() {
-                        if(vvrIsCorrect) { 
-                            return 'correct_text';
-                        } else {
-                            return 'incorrect_text';
-                        }
-                    },
-                    event_converted_details: 'VVR_copy_2 question-left contingency degradation feedback text appears'
+                vars: {
+                    VVR_q_text_a1: VVR_q_text_a1,
+                    VVR_q_text_a2: VVR_q_text_a2,
+                    VVR_q_text_b1: VVR_q_text_b1,
+                    VVR_q_text_b2: VVR_q_text_b2,
+                    VVR_q_text_b3: VVR_q_text_b3,
+                    VVR_q_text_b4: VVR_q_text_b4,
+                    max_num_correct_consecutive_questions: min_num_correct
                 }
-            ]
-        };
-
-        var questions_b = {
-            timeline: [
-                {
-                    type: 'survey-vvr-questions-right',
-                    vvr_stage: 'VVR_copy_2',
-                    stage_name: 'VVR_copy_2 question-right contingency degradation',
-                    details: {
-                        a: {
-                            event_type: 'question appears',
-                            event_raw_details: 'question 2(a) appears',
-                            event_converted_details: 'VVR_copy_2 question-right contingency degradation text appears',
-                        },
-                        b: {
-                            event_type: 'question appears',
-                            event_raw_details: 'question 2(b) appears',
-                            event_converted_details: 'VVR_copy_2 question-right contingency degradation text appears',
-                        }
-                    },
-                    vars: {
-                        question_text_a1: question_text_a1,
-                        question_text_a2: question_text_a2,
-                        question_text_b1: question_text_b1,
-                        question_text_b2: question_text_b2,
-                        question_text_b3: question_text_b3,
-                        question_text_b4: question_text_b4,
-                        popup_text: popup_text,
-                        max_num_correct_consecutive_questions: min_num_correct_VVR2
+            },
+            {
+                stage_name: stage_name,
+                type: 'html-keyboard-response',
+                stimulus: function() {
+                    if(vvrIsCorrect) { 
+                        return '<p style="font-size: 24px;">' + correct_text + '</p>';
+                    } else {
+                        return '<p style="font-size: 24px;">' + incorrect_text + '</p>';
                     }
                 },
-                {
-                    stage_name: 'VVR_copy_2 question-right contingency degradation feedback text',
-                    type: 'html-keyboard-response',
-                    stimulus: function() {
-                        if(vvrIsCorrect) { 
-                            return '<p style="font-size: 24px;">' + correct_text + '</p>';
-                        } else {
-                            return '<p style="font-size: 24px;">' + incorrect_text + '</p>';
-                        }
-                    },
-                    choices: jsPsych.NO_KEYS,
-                    trial_duration: feedback_duration,
-                    event_type: 'text appears',
-                    event_raw_details: function() {
-                        if(vvrIsCorrect) { 
-                            return 'correct_text';
-                        } else {
-                            return 'incorrect_text';
-                        }
-                    },
-                    event_converted_details: 'VVR_copy_2 question-right contingency degradation feedback text appears'
+                choices: jsPsych.NO_KEYS,
+                trial_duration: feedback_duration,
+                vvr_timer: true,
+                event_type: 'text appears',
+                event_raw_details: function() {
+                    if(vvrIsCorrect) { 
+                        return 'correct_text';
+                    } else {
+                        return 'incorrect_text';
+                    }
+                },
+                event_converted_details: function() {
+                    if(vvrIsCorrect) { 
+                        return correct_text + ' text appears';
+                    } else {
+                        return incorrect_text + ' text appears';
+                    }
                 }
-            ]
+            }
+        ]
+    };
+
+    var questions_b = {
+        timeline: [
+            {
+                type: 'survey-vvr-questions-right',
+                stage_name: stage_name,
+                vvr_stage: stage_name,
+                details: {
+                    a: {
+                        event_type: 'question appears',
+                        event_raw_details: 'question 2(a) appears',
+                        event_converted_details: stage_name + ' text appears',
+                    },
+                    b: {
+                        event_type: 'question appears',
+                        event_raw_details: 'question 2(b) appears',
+                        event_converted_details: stage_name + ' text appears',
+                    }
+                },
+                vars: {
+                    VVR_q_text_a1: VVR_q_text_a1,
+                    VVR_q_text_a2: VVR_q_text_a2,
+                    VVR_q_text_b1: VVR_q_text_b1,
+                    VVR_q_text_b2: VVR_q_text_b2,
+                    VVR_q_text_b3: VVR_q_text_b3,
+                    VVR_q_text_b4: VVR_q_text_b4,
+                    max_num_correct_consecutive_questions: min_num_correct
+                }
+            },
+            {
+                stage_name: stage_name,
+                type: 'html-keyboard-response',
+                stimulus: function() {
+                    return vvrIsCorrect? '<p style="font-size: 24px;">' + correct_text + '</p>' : '<p style="font-size: 24px;">' + incorrect_text + '</p>';
+                },
+                choices: jsPsych.NO_KEYS,
+                trial_duration: feedback_duration,
+                vvr_timer: true,
+                event_type: 'text appears',
+                event_raw_details: function() {
+                    return vvrIsCorrect? 'correct_text': 'incorrect_text';
+                },
+                event_converted_details: function() {
+                    return vvrIsCorrect? correct_text + ' text appears': incorrect_text + ' text appears'
+                }
+            }
+        ]
+    };
+
+    var vvr_a_cond = false;
+    var vvr_b_cond = false;
+    var vvr_c_cond = false;
+
+    function vvr_shuffle_questions() {
+        var rand = jsPsych.randomization.sampleWithoutReplacement(['right', 'left'], 1);
+        if(rand[0] === 'right') {
+            vvr_a_cond = false;
+            vvr_b_cond = true;
+            vvr_c_cond = true;
+        } else if(rand[0] === 'left') {
+            vvr_a_cond = true;
+            vvr_b_cond = true;
+            vvr_c_cond = false;
         };
+    };
 
-        var vvr_a_cond = false;
-        var vvr_b_cond = false;
-        var vvr_c_cond = false;
+    vvr_shuffle_questions();
 
-        function vvr_shuffle_questions() {
-            var rand = jsPsych.randomization.sampleWithoutReplacement(['right', 'left'], 1);
-            if(rand[0] === 'right') {
-                vvr_a_cond = false;
-                vvr_b_cond = true;
-                vvr_c_cond = true;
-            } else if(rand[0] === 'left') {
-                vvr_a_cond = true;
-                vvr_b_cond = true;
-                vvr_c_cond = false;
-            };
-        };
-        
-        vvr_shuffle_questions();
-
-        var loop_node_VVR = {
-            timeline: [vvr_a,
+    var loop_node_VVR = {
+        timeline: [ vvr_a, 
                 {
                     timeline: [questions_a],
                     conditional_function: function() {
-                        return vvr_a_cond ? true : false;
+                        return vvr_a_cond;
                     }
                 },
                 {
                     timeline: [questions_b],
                     conditional_function: function() {
-                        return vvr_b_cond ? true : false;
+                        return vvr_b_cond;
                     }
                 },
                 {
                     timeline: [questions_a],
                     conditional_function: function() {
-                        return vvr_c_cond ? true : false;
+                        return vvr_c_cond;
                     }
                 }
-            ],
-            loop_function: function(){
-                function reset_vars() {
-                    degrad_pattern_loop_counter = 0;
-                    prob_value_loop_counter = 0;
-                    loop_node_counter_vvr = 0;
-                    loop_node_counter_vvr_determination = 0;
-                }
-                if(loop_node_counter_vvr_determination >= min_blocks_num && max_num_incorrect <= loop_node_counter_max_num_incorrect) {
-                    reset_vars()
-                    return false;            
-                } else if(loop_node_counter_vvr_determination >= min_blocks_num && min_num_correct <= loop_node_counter_max_num_correct) {
-                    reset_vars()
-                    return false;
-                } else {
-                    vvr_shuffle_questions();
-                    return true;
-                }
-            }
-        }
-
-        return loop_node_VVR;
-    },
-    vvr_c: function() {
-        var min_blocks_num = min_blocks_num_VVR3,
-        min_num_correct = min_num_correct_VVR3,
-        max_num_incorrect = max_num_incorrect_VVR3;
-
-        var vvr_a = {
-            type: 'survey-vvr',
-            stage_name: 'VVR_copy_3 contingency restoration',
-            variables: {
-                VVR_INTERVAL_NUM: interval_num,
-                VVR_INTERVAL_DURATION: interval_duration,
-                VVR_OUTCOME_DURATION: outcome_duration,
-                VVR_PROB_VALUE: prob_value_VVR3,
-                VVR_DEGRAD_PATTERN : degrad_pattern_VVR3
-            }
-        };
-        
-        var questions_a = {
-            timeline: [
-                {
-                    type: 'survey-vvr-questions-left',
-                    vvr_stage: 'VVR_copy_3',
-                    stage_name: 'VVR_copy_3 question-left contingency restoration',
-                    details: {
-                        a: {
-                            event_type: 'question appears',
-                            event_raw_details: 'question 1(a) appears',
-                            event_converted_details: 'VVR_copy_3 question-left contingency restoration text appears',
-                        },
-                        b: {
-                            event_type: 'question appears',
-                            event_raw_details: 'question 1(b) appears',
-                            event_converted_details: 'VVR_copy_3 question-left contingency restoration text appears',
-                        }
-                    },
-                    vars: {
-                        question_text_a1: question_text_a1,
-                        question_text_a2: question_text_a2,
-                        question_text_b1: question_text_b1,
-                        question_text_b2: question_text_b2,
-                        question_text_b3: question_text_b3,
-                        question_text_b4: question_text_b4,
-                        popup_text: popup_text,
-                        max_num_correct_consecutive_questions: min_num_correct_VVR3
-                    }
-                },
-                {
-                    stage_name: 'VVR_copy_3 question-left contingency restoration feedback text',
-                    type: 'html-keyboard-response',
-                    stimulus: function() {
-                        if(vvrIsCorrect) { 
-                            return '<p style="font-size: 24px;">' + correct_text + '</p>';
-                        } else {
-                            return '<p style="font-size: 24px;">' + incorrect_text + '</p>';
-                        }
-                    },
-                    choices: jsPsych.NO_KEYS,
-                    trial_duration: feedback_duration,
-                    event_type: 'text appears',
-                    event_raw_details: function() {
-                        if(vvrIsCorrect) { 
-                            return 'correct_text';
-                        } else {
-                            return 'incorrect_text';
-                        }
-                    },
-                    event_converted_details: 'VVR_copy_3 question-left contingency restoration feedback text appears'
-                }
-            ]
-        };
-
-        var questions_b = {
-            timeline: [
-                {
-                    type: 'survey-vvr-questions-right',
-                    vvr_stage: 'VVR_copy_3',
-                    stage_name: 'VVR_copy_3 question-right contingency restoration',
-                    details: {
-                        a: {
-                            event_type: 'question appears',
-                            event_raw_details: 'question 2(a) appears',
-                            event_converted_details: 'VVR_copy_3 question-right contingency restoration text appears',
-                        },
-                        b: {
-                            event_type: 'question appears',
-                            event_raw_details: 'question 2(b) appears',
-                            event_converted_details: 'VVR_copy_3 question-right contingency restoration text appears',
-                        }
-                    },
-                    vars: {
-                        question_text_a1: question_text_a1,
-                        question_text_a2: question_text_a2,
-                        question_text_b1: question_text_b1,
-                        question_text_b2: question_text_b2,
-                        question_text_b3: question_text_b3,
-                        question_text_b4: question_text_b4,
-                        popup_text: popup_text,
-                        max_num_correct_consecutive_questions: min_num_correct_VVR3
-                    }
-                },
-                {
-                    stage_name: 'VVR_copy_3 question-right contingency restoration feedback text',
-                    type: 'html-keyboard-response',
-                    stimulus: function() {
-                        if(vvrIsCorrect) { 
-                            return '<p style="font-size: 24px;">' + correct_text + '</p>';
-                        } else {
-                            return '<p style="font-size: 24px;">' + incorrect_text + '</p>';
-                        }
-                    },
-                    choices: jsPsych.NO_KEYS,
-                    trial_duration: feedback_duration,
-                    event_type: 'text appears',
-                    event_raw_details: function() {
-                        if(vvrIsCorrect) { 
-                            return 'correct_text';
-                        } else {
-                            return 'incorrect_text';
-                        }
-                    },
-                    event_converted_details: 'VVR_copy_3 question-right contingency restoration feedback text appears'
-                }
-            ]
-        };
-
-        var vvr_a_cond = false;
-        var vvr_b_cond = false;
-        var vvr_c_cond = false;
-
-        function vvr_shuffle_questions() {
-            var rand = jsPsych.randomization.sampleWithoutReplacement(['right', 'left'], 1);
-            if(rand[0] === 'right') {
-                vvr_a_cond = false;
-                vvr_b_cond = true;
-                vvr_c_cond = true;
-            } else if(rand[0] === 'left') {
-                vvr_a_cond = true;
-                vvr_b_cond = true;
-                vvr_c_cond = false;
+        ],
+        loop_function: function(){
+            function reset_vars() {
+                degrad_pattern_loop_counter = 0;
+                prob_value_loop_counter = 0;
+                loop_node_counter_vvr = 0;
+                loop_node_counter_vvr_determination = 0;
+                vvr_timer = 0;
             };
-        };
-        
-        vvr_shuffle_questions();
 
-        var loop_node_VVR = {
-            timeline: [vvr_a,
-                {
-                    timeline: [questions_a],
-                    conditional_function: function() {
-                        return vvr_a_cond ? true : false;
-                    }
-                },
-                {
-                    timeline: [questions_b],
-                    conditional_function: function() {
-                        return vvr_b_cond ? true : false;
-                    }
-                },
-                {
-                    timeline: [questions_a],
-                    conditional_function: function() {
-                        return vvr_c_cond ? true : false;
-                    }
-                }
-            ],
-            loop_function: function(){
-                function reset_vars() {
-                    degrad_pattern_loop_counter = 0;
-                    prob_value_loop_counter = 0;
-                    loop_node_counter_vvr = 0;
-                    loop_node_counter_vvr_determination = 0;
-                }
-                if(loop_node_counter_vvr_determination >= min_blocks_num && max_num_incorrect <= loop_node_counter_max_num_incorrect) {
-                    reset_vars();
-                    return false;            
-                } else if(loop_node_counter_vvr_determination >= min_blocks_num && min_num_correct <= loop_node_counter_max_num_correct) {
-                    reset_vars();
-                    return false;
-                } else {
-                    vvr_shuffle_questions();
-                    return true;
-                }
+            if(loop_node_counter_vvr_determination >= min_blocks_num && max_num_incorrect <= loop_node_counter_max_num_incorrect) {
+                reset_vars();
+                return false;            
+            } else if(loop_node_counter_vvr_determination >= min_blocks_num && min_num_correct <= loop_node_counter_max_num_correct) {
+                reset_vars();
+                return false;
+            } else {
+                vvr_shuffle_questions();
+                return true;
             }
         }
+    };
 
-        return loop_node_VVR;
-    },
-    vvr_d: function() {
-        var min_blocks_num = min_blocks_num_VVR4,
-        min_num_correct = min_num_correct_VVR4,
-        max_num_incorrect = max_num_incorrect_VVR4;
+    return loop_node_VVR;
+};
 
-        var vvr_a = {
-            type: 'survey-vvr',
-            stage_name: 'VVR_copy_4 instrumental reinstatement ',
-            variables: {
-                VVR_INTERVAL_NUM: interval_num,
-                VVR_INTERVAL_DURATION: interval_duration,
-                VVR_OUTCOME_DURATION: outcome_duration,
-                VVR_PROB_VALUE: prob_value_VVR4,
-                VVR_DEGRAD_PATTERN : degrad_pattern_VVR4
-            }
-        };
-        
-        var questions_a = {
-            timeline: [
-                {
-                    type: 'survey-vvr-questions-left',
-                    vvr_stage: 'VVR_copy_4',
-                    stage_name: 'VVR_copy_4 question-left instrumental reinstatement ',
-                    details: {
-                        a: {
-                            event_type: 'question appears',
-                            event_raw_details: 'question 1(a) appears',
-                            event_converted_details: 'VVR_copy_4 question-left instrumental reinstatement  text appears',
-                        },
-                        b: {
-                            event_type: 'question appears',
-                            event_raw_details: 'question 1(b) appears',
-                            event_converted_details: 'VVR_copy_4 question-left instrumental reinstatement  text appears',
-                        }
-                    },
-                    vars: {
-                        question_text_a1: question_text_a1,
-                        question_text_a2: question_text_a2,
-                        question_text_b1: question_text_b1,
-                        question_text_b2: question_text_b2,
-                        question_text_b3: question_text_b3,
-                        question_text_b4: question_text_b4,
-                        popup_text: popup_text,
-                        max_num_correct_consecutive_questions: min_num_correct_VVR4
-                    }
-                },
-                {
-                    stage_name: 'VVR_copy_4 question-left instrumental reinstatement  feedback text',
-                    type: 'html-keyboard-response',
-                    stimulus: function() {
-                        if(vvrIsCorrect) { 
-                            return '<p style="font-size: 24px;">' + correct_text + '</p>';
-                        } else {
-                            return '<p style="font-size: 24px;">' + incorrect_text + '</p>';
-                        }
-                    },
-                    choices: jsPsych.NO_KEYS,
-                    trial_duration: feedback_duration,
-                    event_type: 'text appears',
-                    event_raw_details: function() {
-                        if(vvrIsCorrect) { 
-                            return 'correct_text';
-                        } else {
-                            return 'incorrect_text';
-                        }
-                    },
-                    event_converted_details: 'VVR_copy_4 question-left instrumental reinstatement  feedback text appears'
-                }
-            ]
-        };
-
-        var questions_b = {
-            timeline: [
-                {
-                    type: 'survey-vvr-questions-right',
-                    vvr_stage: 'VVR_copy_4',
-                    stage_name: 'VVR_copy_4 question-right instrumental reinstatement ',
-                    details: {
-                        a: {
-                            event_type: 'question appears',
-                            event_raw_details: 'question 2(a) appears',
-                            event_converted_details: 'VVR_copy_4 question-right instrumental reinstatement  text appears',
-                        },
-                        b: {
-                            event_type: 'question appears',
-                            event_raw_details: 'question 2(b) appears',
-                            event_converted_details: 'VVR_copy_4 question-right instrumental reinstatement  text appears',
-                        }
-                    },
-                    vars: {
-                        question_text_a1: question_text_a1,
-                        question_text_a2: question_text_a2,
-                        question_text_b1: question_text_b1,
-                        question_text_b2: question_text_b2,
-                        question_text_b3: question_text_b3,
-                        question_text_b4: question_text_b4,
-                        popup_text: popup_text,
-                        max_num_correct_consecutive_questions: min_num_correct_VVR4
-                    }
-                },
-                {
-                    stage_name: 'VVR_copy_4 question-right instrumental reinstatement  feedback text',
-                    type: 'html-keyboard-response',
-                    stimulus: function() {
-                        if(vvrIsCorrect) { 
-                            return '<p style="font-size: 24px;">' + correct_text + '</p>';
-                        } else {
-                            return '<p style="font-size: 24px;">' + incorrect_text + '</p>';
-                        }
-                    },
-                    choices: jsPsych.NO_KEYS,
-                    trial_duration: feedback_duration,
-                    event_type: 'text appears',
-                    event_raw_details: function() {
-                        if(vvrIsCorrect) { 
-                            return 'correct_text';
-                        } else {
-                            return 'incorrect_text';
-                        }
-                    },
-                    event_converted_details: 'VVR_copy_4 question-right instrumental reinstatement  feedback text appears'
-                }
-            ]
-        };
-
-        var vvr_a_cond = false;
-        var vvr_b_cond = false;
-        var vvr_c_cond = false;
-
-        function vvr_shuffle_questions() {
-            var rand = jsPsych.randomization.sampleWithoutReplacement(['right', 'left'], 1);
-            if(rand[0] === 'right') {
-                vvr_a_cond = false;
-                vvr_b_cond = true;
-                vvr_c_cond = true;
-            } else if(rand[0] === 'left') {
-                vvr_a_cond = true;
-                vvr_b_cond = true;
-                vvr_c_cond = false;
-            };
-        };
-        
-        vvr_shuffle_questions();
-
-        var loop_node_VVR = {
-            timeline: [vvr_a, 
-                {
-                    timeline: [questions_a],
-                    conditional_function: function() {
-                        return vvr_a_cond ? true : false;
-                    }
-                },
-                {
-                    timeline: [questions_b],
-                    conditional_function: function() {
-                        return vvr_b_cond ? true : false;
-                    }
-                },
-                {
-                    timeline: [questions_a],
-                    conditional_function: function() {
-                        return vvr_c_cond ? true : false;
-                    }
-                }
-            ],
-            loop_function: function(){
-                function reset_vars() {
-                    degrad_pattern_loop_counter = 0;
-                    prob_value_loop_counter = 0;
-                    loop_node_counter_vvr = 0;
-                    loop_node_counter_vvr_determination = 0;
-                }
-                if(loop_node_counter_vvr_determination >= min_blocks_num && max_num_incorrect <= loop_node_counter_max_num_incorrect) {
-                    reset_vars();
-                    return false;            
-                } else if(loop_node_counter_vvr_determination >= min_blocks_num && min_num_correct <= loop_node_counter_max_num_correct) {
-                    reset_vars();
-                    return false;
-                } else {
-                    vvr_shuffle_questions();
-                    return true;
-                }
-            }
-        }
-
-        return loop_node_VVR;
-    },
-    instructions_a: {
-        instructions_open: {
+var VVR_1 = {
+    timeline: [
+        {
             timeline: [{ 
-                stage_name: 'VVR_copy_1 instrumental conditioning open instructions page',
+                stage_name: 'VVR1_open',
                 type: 'html-keyboard-response',
                 stimulus: open_instruct_text_VVR1,
                 trial_latency: open_instruct_latency,
                 response_ends_trial: false,
                 event_type: 'text appears',
                 event_raw_details: 'open_instruct_text_VVR1',
-                event_converted_details: 'instrumental conditioning open text appears'
+                event_converted_details: 'VVR1_open text appears'
             }],
             conditional_function: function(){
                 return  open_instruct_VVR1;
             }
         },
-        instructions_close: {
+        VVR(vvr_1_vars),
+        {
             timeline: [{
-                stage_name: 'VVR_copy_1 instrumental conditioning close instructions page',
+                stage_name: 'VVR1_close',
                 type: 'html-keyboard-response',
                 stimulus: close_instruct_text_VVR1,
                 trial_latency: close_instruct_latency,
                 response_ends_trial: false,
                 event_type: 'text appears',
+                id: 'vvr_close_instruct',
                 event_raw_details: 'close_instruct_text_VVR1',
-                event_converted_details: 'instrumental conditioning close text appears'
+                event_converted_details: 'VVR1_close text appears'
             }],
             conditional_function: function(){
                 return close_instruct_VVR1;
             }
         }
-    },
-    instructions_b: {
-        instructions_open: {
-            timeline: [{ 
-                stage_name: 'VVR_copy_2 contingency degradation open instructions page',
-                type: 'html-keyboard-response',
-                stimulus: open_instruct_text_VVR2,
-                trial_latency: open_instruct_latency,
-                response_ends_trial: false,
-                event_type: 'text appears',
-                event_raw_details: 'open_instruct_text',
-                event_converted_details: 'contingency degradation open text appears'
-            }],
-            conditional_function: function(){
-                return  open_instruct_VVR2;
-            }
-        },
-        instructions_close: {
-            timeline: [{
-                stage_name: 'VVR_copy_2 contingency degradation close instructions page',
-                type: 'html-keyboard-response',
-                stimulus: close_instruct_text_VVR2,
-                trial_latency: close_instruct_latency,
-                response_ends_trial: false,
-                event_type: 'text appears',
-                event_raw_details: 'close_instruct_text',
-                event_converted_details: 'contingency degradation close text appears'
-            }],
-            conditional_function: function(){
-                return close_instruct_VVR2;
-            }
-        }
-    },
-    instructions_c: {
-        instructions_open: {
-            timeline: [{ 
-                stage_name: 'VVR_copy_3 contingency restoration open instructions page',
-                type: 'html-keyboard-response',
-                stimulus: open_instruct_text_VVR3,
-                trial_latency: open_instruct_latency,
-                response_ends_trial: false,
-                event_type: 'text appears',
-                event_raw_details: 'open_instruct_text',
-                event_converted_details: 'contingency restoration open text appears'
-            }],
-            conditional_function: function(){
-                return  open_instruct_VVR3;
-            }
-        },
-        instructions_close: {
-            timeline: [{
-                stage_name: 'VVR_copy_3 contingency restoration close instructions page',
-                type: 'html-keyboard-response',
-                stimulus: close_instruct_text_VVR3,
-                trial_latency: close_instruct_latency,
-                response_ends_trial: false,
-                event_type: 'text appears',
-                event_raw_details: 'close_instruct_text',
-                event_converted_details: 'contingency restoration close text appears'
-            }],
-            conditional_function: function(){
-                return close_instruct_VVR3;
-            }
-        }
-    },
-    instructions_d: {
-        instructions_open: {
-            timeline: [{ 
-                stage_name: 'VVR_copy_4 instrumental reinstatement open instructions page',
-                type: 'html-keyboard-response',
-                stimulus: open_instruct_text_VVR4,
-                trial_latency: open_instruct_latency,
-                response_ends_trial: false,
-                event_type: 'text appears',
-                event_raw_details: 'open_instruct_text',
-                event_converted_details: 'instrumental reinstatement open text appears'
-            }],
-            conditional_function: function(){
-                return  open_instruct_VVR4;
-            }
-        },
-        instructions_close: {
-            timeline: [{
-                stage_name: 'VVR_copy_4 instrumental reinstatement close instructions page',
-                type: 'html-keyboard-response',
-                stimulus: close_instruct_text_VVR4,
-                trial_latency: close_instruct_latency,
-                response_ends_trial: false,
-                event_type: 'text appears',
-                event_raw_details: 'close_instruct_text',
-                event_converted_details: 'instrumental reinstatement close text appears'
-            }],
-            conditional_function: function(){
-                return close_instruct_VVR4;
-            }
-        }
-    }
-};
-
-var VVR_1 = {
-    timeline: [
-        vvr_.instructions_a.instructions_open,
-        vvr_.vvr_a(),
-        vvr_.instructions_a.instructions_close
     ]
 };
 
 var VVR_2 = {
     timeline: [
-        vvr_.instructions_b.instructions_open,
-        vvr_.vvr_b(),
-        vvr_.instructions_b.instructions_close
+        {
+            timeline: [{ 
+                stage_name: 'VVR2_open',
+                type: 'html-keyboard-response',
+                stimulus: open_instruct_text_VVR2,
+                trial_latency: open_instruct_latency,
+                response_ends_trial: false,
+                event_type: 'text appears',
+                event_raw_details: 'open_instruct_text_VVR2',
+                event_converted_details: 'VVR2_open text appears'
+            }],
+            conditional_function: function(){
+                return  open_instruct_VVR2;
+            }
+        },
+        VVR(vvr_2_vars),
+        {
+            timeline: [{
+                stage_name: 'VVR2_close',
+                type: 'html-keyboard-response',
+                stimulus: close_instruct_text_VVR2,
+                trial_latency: close_instruct_latency,
+                response_ends_trial: false,
+                event_type: 'text appears',
+                id: 'vvr_close_instruct',
+                event_raw_details: 'close_instruct_text_VVR2',
+                event_converted_details: 'VVR2_close text appears'
+            }],
+            conditional_function: function(){
+                return close_instruct_VVR2;
+            }
+        }
     ]
 };
 
 var VVR_3 = {
     timeline: [
-        vvr_.instructions_c.instructions_open,
-        vvr_.vvr_c(),
-        vvr_.instructions_c.instructions_close
+        {
+            timeline: [{ 
+                stage_name: 'VVR3_open',
+                type: 'html-keyboard-response',
+                stimulus: open_instruct_text_VVR3,
+                trial_latency: open_instruct_latency,
+                response_ends_trial: false,
+                event_type: 'text appears',
+                event_raw_details: 'open_instruct_text_VVR3',
+                event_converted_details: 'VVR3_open text appears'
+            }],
+            conditional_function: function(){
+                return  open_instruct_VVR3;
+            }
+        },
+        VVR(vvr_3_vars),
+        {
+            timeline: [{
+                stage_name: 'VVR3_close',
+                type: 'html-keyboard-response',
+                stimulus: close_instruct_text_VVR3,
+                trial_latency: close_instruct_latency,
+                response_ends_trial: false,
+                event_type: 'text appears',
+                id: 'vvr_close_instruct',
+                event_raw_details: 'close_instruct_text_VVR3',
+                event_converted_details: 'VVR3_close text appears'
+            }],
+            conditional_function: function(){
+                return close_instruct_VVR3;
+            }
+        }
     ]
 };
 
 var VVR_4 = {
     timeline: [
-        vvr_.instructions_d.instructions_open,
-        vvr_.vvr_d(),
-        vvr_.instructions_d.instructions_close
+        {
+            timeline: [{ 
+                stage_name: 'VVR4_open',
+                type: 'html-keyboard-response',
+                stimulus: open_instruct_text_VVR4,
+                trial_latency: open_instruct_latency,
+                response_ends_trial: false,
+                event_type: 'text appears',
+                event_raw_details: 'open_instruct_text_VVR4',
+                event_converted_details: 'VVR4_open text appears'
+            }],
+            conditional_function: function(){
+                return  open_instruct_VVR4;
+            }
+        },
+        VVR(vvr_4_vars),
+        {
+            timeline: [{
+                stage_name: 'VVR4_close',
+                type: 'html-keyboard-response',
+                stimulus: close_instruct_text_VVR4,
+                trial_latency: close_instruct_latency,
+                response_ends_trial: false,
+                event_type: 'text appears',
+                id: 'vvr_close_instruct',
+                event_raw_details: 'close_instruct_text_VVR4',
+                event_converted_details: 'VVR4_close text appears'
+            }],
+            conditional_function: function(){
+                return close_instruct_VVR4;
+            }
+        }
     ]
 };
 
 
 var CLINICAL_OPEN = {
-    stage_name: 'Clinical open',
+    stage_name: 'WBF_open',
     type: 'html-keyboard-response',
-    stimulus: open_instruct_text_clinical,
+    stimulus: open_instruct_text_WBF,
     trial_latency: open_instruct_latency,
     trial_duration: null,
     response_ends_trial: false,
     event_type: 'text appears',
-    event_raw_details: 'open_instruct_text_clinical',
-    event_converted_details: 'Clinical open text appears'
+    event_raw_details: 'open_instruct_text_WBF',
+    event_converted_details: 'WBF_open text appears'
 };
 
 var CLINICAL_CLOSE = {
-    stage_name: 'Clinical close',
+    stage_name: 'WBF_close',
     type: 'html-keyboard-response',
-    stimulus: close_instruct_text_clinical,
+    stimulus: close_instruct_text_WBF,
     trial_latency: close_instruct_latency,
     trial_duration: null,
     response_ends_trial: false,
     event_type: 'text appears',
-    event_raw_details: 'close_instruct_text_clinical',
-    event_converted_details: 'Clinical close text appears'
+    event_raw_details: 'close_instruct_text_WBF',
+    event_converted_details: 'WBF_close text appears'
 };
 
 var SYMPTOM_INVENTORY_INSTRUCT_OPEN = {
     timeline: [{
-        stage_name: 'Symptom Inventories open instructions page',
+        stage_name: 'inventory_open',
         type: 'html-keyboard-response',
-        stimulus: open_instruct_text_symptom_inventories,
+        stimulus: open_instruct_text_inventory,
         trial_latency: open_instruct_latency,
         trial_duration: null,
         response_ends_trial: false,
         event_type: 'text appears',
-        event_raw_details: 'open_instruct_text_symptom_inventories',
-        event_converted_details: "Symptom Inventories open instructions text appears",
+        event_raw_details: 'open_instruct_text_inventory',
+        event_converted_details: "inventory_open text appears",
     }],
     conditional_function: function() {
-        return open_instruct_symptom_inventories ? true : false;
+        return open_instruct_inventory ? true : false;
     }
 };
 
 var SYMPTOM_INVENTORY_INSTRUCT_CLOSE = {
     timeline: [{
-        stage_name: 'Symptom Inventories close instructions page',
+        stage_name: 'inventory_close',
         type: 'html-keyboard-response',
-        stimulus: close_instruct_text_symptom_inventories,
+        stimulus: close_instruct_text_inventory,
         trial_latency: close_instruct_latency,
         trial_duration: null,
         response_ends_trial: false,
         event_type: 'text appears',
-        event_raw_details: 'close_instruct_text_symptom_inventories',
-        event_converted_details: "Symptom Inventories close instructions text appears",
+        event_raw_details: 'close_instruct_text_inventory',
+        event_converted_details: "inventory_close text appears",
     }],
     conditional_function: function() {
-        return close_instruct_symptom_inventories ? true : false;
+        return close_instruct_inventory ? true : false;
     }
 };
 
@@ -1473,6 +938,7 @@ var pav_correct_holder = 0;
 var pav_incorrect_holder = 0;
 var pav_is_correct = false;
 var pav_multi_choice_counter = 0;
+var pav_con_timer = 0;
 
 var pav_stimuli = [
     {
@@ -1506,16 +972,17 @@ var pav_multi_choice_array = jsPsych.randomization.shuffle(pav_stimuli);
 var PAV_CONDITIONING_MAIN = {
     timeline: [
         {
-            stage_name: 'Pav Conditioning',
+            stage_name: 'pav_con',
+            type: 'animation',
             frame_isi: ITI_duration,
             frame_time: stim_duration,
             stimuli: [],
             stimulus: jsPsych.randomization.shuffle(pav_stimuli),
-            type: 'animation'
         },
         {
-            stage_name: 'Pav Conditioning Response',
-            type: 'survey-multi-choice',
+            stage_name: 'pav_con',
+            stage_type: 'Pav Conditioning Response',
+            type: 'survey-pav-multi-choice',
             questions: [
                 { prompt: "Which snack is overstocked?", name: 'response', options: [
                     {
@@ -1543,37 +1010,44 @@ var PAV_CONDITIONING_MAIN = {
             button_label: 'submit answer',
         },
         {
-            stage_name: 'Pav Conditioning',
+            stage_name: 'pav_con',
             type: 'html-keyboard-response',
+            pav_con_timer: true,
             stimulus: function() {
                 if(pav_is_correct) { 
-                    return '<p style="font-size: 24px;">Correct</p>';
+                    return '<p style="font-size: 24px;">' + correct_text + '</p>';
                 } else {
-                    return '<p style="font-size: 24px;">Incorrect</p>';
+                    return '<p style="font-size: 24px;">' + incorrect_text + '</p>';
                 }
             },
-            trial_duration: 1000,
+            trial_duration: feedback_duration,
             event_type: 'text appears',
             event_raw_details: function() {
                if(pav_is_correct){
-                   return 'Correct'
+                   return 'correct_text'
                } else {
-                   return 'Incorrect'
+                   return 'incorrect_text'
                } 
             },
             event_converted_details: function() {
                 if(pav_is_correct){
-                    return 'Correct'
+                    return 'correct_text text appears'
                 } else {
-                    return 'Incorrect'
+                    return 'incorrect_text text appears'
                 } 
-             }
+            }
         }
     ],
     loop_function: function(){
         pav_multi_choice_counter ++;
         pav_is_correct = false;
         if(pav_correct_holder >= min_num_correct_pav || pav_incorrect_holder >= max_num_incorrect_pav) {
+            pav_correct_holder = 0;
+            pav_incorrect_holder = 0;
+            pav_is_correct = false;
+            pav_multi_choice_counter = 0;
+            pav_con_timer = 0;
+            pav_multi_choice_array = jsPsych.randomization.shuffle(pav_stimuli);
             return false;
         } else {
             return true;
@@ -1583,7 +1057,7 @@ var PAV_CONDITIONING_MAIN = {
 
 var PAV_TEST_INSTRUCT_OPEN = {
     timeline: [{
-        stage_name: 'Pav Conditioning open instructions page',
+        stage_name: 'pav_con_open',
         type: 'html-keyboard-response',
         stimulus: open_instruct_text_pav,
         trial_latency: open_instruct_latency,
@@ -1591,7 +1065,7 @@ var PAV_TEST_INSTRUCT_OPEN = {
         response_ends_trial: false,
         event_type: 'text appears',
         event_raw_details: 'open_instruct_text_pav',
-        event_converted_details: "Pav Conditioning open instructions text appears",
+        event_converted_details: "pav_con_open text appears",
     }],
     conditional_function: function() {
         return open_instruct_pav ? true : false;
@@ -1600,7 +1074,7 @@ var PAV_TEST_INSTRUCT_OPEN = {
 
 var PAV_TEST_INSTRUCT_CLOSE = {
     timeline: [{
-        stage_name: 'Pav Conditioning close instructions page',
+        stage_name: 'pav_con_close',
         type: 'html-keyboard-response',
         stimulus: close_instruct_text_pav,
         trial_latency: close_instruct_latency,
@@ -1608,7 +1082,7 @@ var PAV_TEST_INSTRUCT_CLOSE = {
         response_ends_trial: false,
         event_type: 'text appears',
         event_raw_details: 'close_instruct_text_pav',
-        event_converted_details: "Pav Conditioning close instructions text appears",
+        event_converted_details: "pav_con_close text appears",
     }],
     conditional_function: function() {
         return close_instruct_pav ? true : false;
@@ -1617,61 +1091,150 @@ var PAV_TEST_INSTRUCT_CLOSE = {
 
 var PAV_CONDITIONING = {
     timeline: [
-        PAV_TEST_INSTRUCT_OPEN, PAV_CONDITIONING_MAIN, PAV_TEST_INSTRUCT_CLOSE
+        PAV_TEST_INSTRUCT_OPEN,
+        PAV_CONDITIONING_MAIN, 
+        PAV_TEST_INSTRUCT_CLOSE
     ]
 };
 
-var TRANSFER_TEST_MAIN = {
-    stage_name: 'Transfer Test',
-    type: 'transfer-test',
-    stimulus: 'vending machine',
-    transfer_test_color_duration: stim_duration,
-    transfer_test_white_duration: ITI_duration,
-    sequence_reps: block_num_transfer_test
-};
 
-var TRANSFER_TEST_INSTRUCT_OPEN = {
-    timeline: [{
-        stage_name: 'Transfer Test open instructions page',
-        type: 'html-keyboard-response',
-        stimulus: open_instruct_text_transfer_test,
-        trial_latency: open_instruct_latency,
-        trial_duration: null,
-        response_ends_trial: false,
-        event_type: 'text appears',
-        event_raw_details: 'open_instruct_text_transfer_test',
-        event_converted_details: "Transfer Test open instructions text appears",
-    }],
-    conditional_function: function() {
-        return open_instruct_transfer_test ? true : false;
-    }
-};
-
-var TRANSFER_TEST_INSTRUCT_CLOSE = {
-    timeline: [{
-        stage_name: 'Transfer Test close instructions page',
-        type: 'html-keyboard-response',
-        stimulus: close_instruct_text_transfer_test,
-        trial_latency: close_instruct_latency,
-        trial_duration: null,
-        response_ends_trial: false,
-        event_type: 'text appears',
-        event_raw_details: 'close_instruct_text_transfer_test',
-        event_converted_details: "Transfer Test close instructions text appears",
-    }],
-    conditional_function: function() {
-        return close_instruct_transfer_test ? true : false;
-    }
-};
-
-var TRANSFER_TEST = {
+var TRANSFER_TEST1 = {
     timeline: [
-        TRANSFER_TEST_INSTRUCT_OPEN, TRANSFER_TEST_MAIN, TRANSFER_TEST_INSTRUCT_CLOSE
+        {
+            timeline: [{
+                stage_name: 'transfer1_open',
+                type: 'html-keyboard-response',
+                stimulus: open_instruct_text_transfer_test,
+                trial_latency: open_instruct_latency,
+                trial_duration: null,
+                response_ends_trial: false,
+                event_type: 'text appears',
+                event_raw_details: 'open_instruct_text_transfer_test',
+                event_converted_details: "transfer1_open text appears",
+            }],
+            conditional_function: function() {
+                return open_instruct_transfer_test ? true : false;
+            }
+        },
+        {
+            stage_name: 'transfer1',
+            type: 'transfer-test',
+            stimulus: 'vending machine',
+            transfer_test_color_duration: stim_duration,
+            transfer_test_white_duration: ITI_duration,
+            sequence_reps: block_num_transfer_test
+        }, 
+        {
+            timeline: [{
+                stage_name: 'transfer1_close',
+                type: 'html-keyboard-response',
+                stimulus: close_instruct_text_transfer_test,
+                trial_latency: close_instruct_latency,
+                trial_duration: null,
+                response_ends_trial: false,
+                event_type: 'text appears',
+                event_raw_details: 'close_instruct_text_transfer_test',
+                event_converted_details: "transfer1_close text appears",
+            }],
+            conditional_function: function() {
+                return close_instruct_transfer_test ? true : false;
+            }
+        }
+    ]
+};
+
+var TRANSFER_TEST2 = {
+    timeline: [
+        {
+            timeline: [{
+                stage_name: 'transfer2_open',
+                type: 'html-keyboard-response',
+                stimulus: open_instruct_text_transfer_test,
+                trial_latency: open_instruct_latency,
+                trial_duration: null,
+                response_ends_trial: false,
+                event_type: 'text appears',
+                event_raw_details: 'open_instruct_text_transfer_test',
+                event_converted_details: "transfer2_open text appears",
+            }],
+            conditional_function: function() {
+                return open_instruct_transfer_test ? true : false;
+            }
+        },
+        {
+            stage_name: 'transfer2',
+            type: 'transfer-test',
+            stimulus: 'vending machine',
+            transfer_test_color_duration: stim_duration,
+            transfer_test_white_duration: ITI_duration,
+            sequence_reps: block_num_transfer_test
+        }, 
+        {
+            timeline: [{
+                stage_name: 'transfer2_close',
+                type: 'html-keyboard-response',
+                stimulus: close_instruct_text_transfer_test,
+                trial_latency: close_instruct_latency,
+                trial_duration: null,
+                response_ends_trial: false,
+                event_type: 'text appears',
+                event_raw_details: 'close_instruct_text_transfer_test',
+                event_converted_details: "transfer2_close text appears",
+            }],
+            conditional_function: function() {
+                return close_instruct_transfer_test ? true : false;
+            }
+        }
+    ]
+};
+
+var TRANSFER_TEST3 = {
+    timeline: [
+        {
+            timeline: [{
+                stage_name: 'transfer3_open',
+                type: 'html-keyboard-response',
+                stimulus: open_instruct_text_transfer_test,
+                trial_latency: open_instruct_latency,
+                trial_duration: null,
+                response_ends_trial: false,
+                event_type: 'text appears',
+                event_raw_details: 'open_instruct_text_transfer_test',
+                event_converted_details: "transfer3_open text appears",
+            }],
+            conditional_function: function() {
+                return open_instruct_transfer_test ? true : false;
+            }
+        },
+        {
+            stage_name: 'transfer3',
+            type: 'transfer-test',
+            stimulus: 'vending machine',
+            transfer_test_color_duration: stim_duration,
+            transfer_test_white_duration: ITI_duration,
+            sequence_reps: block_num_transfer_test
+        }, 
+        {
+            timeline: [{
+                stage_name: 'transfer3_close',
+                type: 'html-keyboard-response',
+                stimulus: close_instruct_text_transfer_test,
+                trial_latency: close_instruct_latency,
+                trial_duration: null,
+                response_ends_trial: false,
+                event_type: 'text appears',
+                event_raw_details: 'close_instruct_text_transfer_test',
+                event_converted_details: "transfer3_close text appears",
+            }],
+            conditional_function: function() {
+                return close_instruct_transfer_test ? true : false;
+            }
+        }
     ]
 };
 
 var DEVAL_VIDEO = {
-    stage_name: 'Deval Video',
+    stage_name: 'deval_video',
     type: 'video-keyboard-response',
     sources: [counter_balancing[0].video + '.mp4', counter_balancing[0].video + '.ogg'],
     autoplay: true,
@@ -1685,7 +1248,7 @@ var DEVAL_VIDEO = {
 };
 
 var DEVAL_TEST_MAIN = {
-    stage_name: 'Deval Test',
+    stage_name: 'deval_test',
     type: 'transfer-test',
     stimulus: 'vending machine',
     transfer_test_white_duration: deval_test_duration,
@@ -1694,7 +1257,7 @@ var DEVAL_TEST_MAIN = {
 
 var DEVAL_TEST_INSTRUCT_OPEN = {
     timeline: [{
-        stage_name: 'Deval Test open instructions page',
+        stage_name: 'deval_test_open',
         type: 'html-keyboard-response',
         stimulus: open_instruct_text_deval_test,
         trial_latency: open_instruct_latency,
@@ -1702,7 +1265,7 @@ var DEVAL_TEST_INSTRUCT_OPEN = {
         response_ends_trial: false,
         event_type: 'text appears',
         event_raw_details: 'open_instruct_text_deval_test',
-        event_converted_details: "Deval Test open instructions text appears",
+        event_converted_details: "deval_test_open text appears",
     }],
     conditional_function: function() {
         return open_instruct_deval_test ? true : false;
@@ -1711,7 +1274,7 @@ var DEVAL_TEST_INSTRUCT_OPEN = {
 
 var DEVAL_TEST_INSTRUCT_CLOSE = {
     timeline: [{
-        stage_name: 'Deval Test close instructions page',
+        stage_name: 'deval_test_close',
         type: 'html-keyboard-response',
         stimulus: close_instruct_text_deval_test,
         trial_latency: close_instruct_latency,
@@ -1719,7 +1282,7 @@ var DEVAL_TEST_INSTRUCT_CLOSE = {
         response_ends_trial: false,
         event_type: 'text appears',
         event_raw_details: 'close_instruct_text_deval_test',
-        event_converted_details: "Deval Test close instructions text appears",
+        event_converted_details: "deval_test_close text appears",
     }],
     conditional_function: function() {
         return close_instruct_deval_test ? true : false;
@@ -1733,7 +1296,7 @@ var DEVAL_TEST = {
 };
 
 var CLOSE_HIT = {
-    stage_name: 'Close HIT Questions',
+    stage_name: 'close_HIT_q',
     type: 'close-hit-questions',
     preamble: 'Thank you for helping us to research OCD. We could not do this without you.',
     questions: [
@@ -1743,13 +1306,13 @@ var CLOSE_HIT = {
     ],
     button_label: 'submit answer',
     event_type: 'questions appears',
-    event_raw_details: 'Close HIT Questions',
-    event_converted_details: "Close HIT Questions text appears"
+    event_raw_details: 'close_HIT_q',
+    event_converted_details: "close_HIT_q text appears"
 };
 
 
 var THANKS = {
-    stage_name: 'Thanks',
+    stage_name: 'thanks',
     type: 'html-keyboard-response',
     stimulus: close_instruct_text_thanks,
     trial_latency: close_instruct_latency,
@@ -1757,21 +1320,21 @@ var THANKS = {
     response_ends_trial: false,
     event_type: 'text appears',
     event_raw_details: 'close_instruct_text_thanks',
-    event_converted_details: "'Thank You!' text appears"
+    event_converted_details: "thanks text appears"
 };
 
 var timeline = [];
 var symptom_inventories_random = jsPsych.randomization.shuffle(symptom_inventory);
 var symptom_inventories_ordered = symptom_inventory;
-var symptom_inventory_arr = symptom_inventory_randomization ?  symptom_inventories_random : symptom_inventories_ordered;
+var symptom_inventory_arr = inventory_rand ?  symptom_inventories_random : symptom_inventories_ordered;
 
 /************************************************************
  * Stages sequence configuration
  ***********************************************************/
 // Init parameters
 timeline.push({
-    type: 'Parameters',
-    stage_name: 'Parameters',
+    type: 'parameters',
+    stage_name: 'parameters',
 });
 
 // Key-testing
@@ -1799,11 +1362,11 @@ timeline.push(PAV_CONDITIONING);
 //  Instrumental Conditioning (VVR_copy_1)
 timeline.push(VVR_1);
 // Transfer Test
-timeline.push(TRANSFER_TEST);
+timeline.push(TRANSFER_TEST1);
 // Instrumental Degradation (VVR_copy_2)
 timeline.push(VVR_2);
-// Transfer Test
-timeline.push(TRANSFER_TEST);
+// Transfer Test 2
+timeline.push(TRANSFER_TEST2);
 // Instrumental Restoration (VVR_copy_3)
 timeline.push(VVR_3);
 // Deval Video
@@ -1812,8 +1375,8 @@ timeline.push(DEVAL_VIDEO);
 timeline.push(DEVAL_TEST);
 // Food & Hunger Questions post-rating
 timeline.push(FHQ_POST_INSTRUCT_OPEN, FHQ_POST_1, FHQ_POST_2, FHQ_POST_3, FHQ_POST_4, FHQ_POST_INSTRUCT_CLOSE);
-// Transfer Test
-timeline.push(TRANSFER_TEST);
+// Transfer Test 3
+timeline.push(TRANSFER_TEST3);
 // Instrumental Reinstatement (VVR_copy_4)
 timeline.push(VVR_4);
 //  Close HIT Questions

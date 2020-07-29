@@ -62,7 +62,12 @@ jsPsych.plugins.animation = (function () {
         var response = {
             trial_events: []
         };
-        var timestamp_onload = jsPsych.totalTime();
+
+        if(pav_con_timer <= 0) {
+            pav_con_timer = jsPsych.totalTime();
+        };
+
+        var timestamp_onload = pav_con_timer;
 
         trial.stimuli = [];
         var pav_stimuli_arr = jsPsych.randomization.shuffle(pav_stimuli)
@@ -76,24 +81,36 @@ jsPsych.plugins.animation = (function () {
         var interval_time = trial.frame_time + trial.frame_isi;
         var animate_frame = -1;
         var reps = 0;
-        var startTime = performance.now();
         var animation_sequence = [];
         var responses = [];
-        var current_stim = "";
-
         
         display_element.innerHTML = 
-        html += '<style id="pav-conditioning">' +
-                    '.outcome_transparent { height: 340px; }' +
-                '</style>' +
+        html += '<style id="pav-conditioning">.outcome_transparent { height: 340px; }</style>' +
         '<svg class="vending-machine"  viewBox="0 0 253 459" fill="none" xmlns="http://www.w3.org/2000/svg">' +
         '<rect x="27" y="20" width="203" height="359" fill="#000"/>' +
         '<path fill-rule="evenodd" clip-rule="evenodd" d="M253 0V440.506H209.527V459H44.6212V440.506H0V0H253ZM222 279H32V363H222V279ZM59.957 282.531L133.253 309.209L118.546 349.616L45.2501 322.938L59.957 282.531ZM86 210H32V256H86V210ZM154 210H100V256H154V210ZM222 210H168V256H222V210ZM86 148H32V194H86V148ZM154 148H100V194H154V148ZM222 148H168V194H222V148ZM86 86H32V132H86V86ZM154 86H100V132H154V86ZM222 86H168V132H222V86ZM86 24H32V70H86V24ZM154 24H100V70H154V24ZM222 24H168V70H222V24Z" fill="white"/>' +
         '</svg>' +
         '<div class="outcome_transparent"></div>';
 
+        animation_sequence.push({
+            "stimulus": 'blank',
+            "time": jsPsych.totalTime() - timestamp_onload
+        });
+        
+        response.trial_events.push({
+            "event_type": 'image appears',
+            "event_raw_details": 'blank vending machine',
+            "event_converted_details": 'blank vending machine appears',
+            "timestamp": jsPsych.totalTime(),
+            "time_elapsed": jsPsych.totalTime() - timestamp_onload
+        });
 
-        var animate_interval = setInterval(function () {
+        setTimeout(function() {
+            animate_frame++;
+            show_next_frame();
+        }, ITI_duration);
+
+        var animate_interval = setInterval(function() {
             var showImage = true;
             display_element.innerHTML = ''; // clear everything
             animate_frame++;
@@ -107,7 +124,29 @@ jsPsych.plugins.animation = (function () {
                 }
             }
             if (showImage) {
-                show_next_frame();
+                display_element.innerHTML = 
+                '<div>' +
+                '<svg class="vending-machine"  viewBox="0 0 253 459" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+                '<rect x="27" y="20" width="203" height="359" fill="#000"/>' +
+                '<path fill-rule="evenodd" clip-rule="evenodd" d="M253 0V440.506H209.527V459H44.6212V440.506H0V0H253ZM222 279H32V363H222V279ZM59.957 282.531L133.253 309.209L118.546 349.616L45.2501 322.938L59.957 282.531ZM86 210H32V256H86V210ZM154 210H100V256H154V210ZM222 210H168V256H222V210ZM86 148H32V194H86V148ZM154 148H100V194H154V148ZM222 148H168V194H222V148ZM86 86H32V132H86V86ZM154 86H100V132H154V86ZM222 86H168V132H222V86ZM86 24H32V70H86V24ZM154 24H100V70H154V24ZM222 24H168V70H222V24Z" fill="white"/>' +
+                '</svg>' +
+                '</div>' +
+                '<div style="height: 340px"></div>';
+
+                animation_sequence.push({
+                    "stimulus": 'blank',
+                    "time": jsPsych.totalTime() - timestamp_onload
+                });
+                response.trial_events.push({
+                    "event_type": 'image appears',
+                    "event_raw_details": 'blank vending machine ',
+                    "event_converted_details": 'blank vending machine',
+                    "timestamp": jsPsych.totalTime(),
+                    "time_elapsed": jsPsych.totalTime() - timestamp_onload
+                });
+                setTimeout(function() {
+                    show_next_frame();
+                }, ITI_duration);
             }
         }, interval_time);
 
@@ -121,23 +160,24 @@ jsPsych.plugins.animation = (function () {
             '<path fill-rule="evenodd" clip-rule="evenodd" d="M253 0V440.506H209.527V459H44.6212V440.506H0V0H253ZM222 279H32V363H222V279ZM59.957 282.531L133.253 309.209L118.546 349.616L45.2501 322.938L59.957 282.531ZM86 210H32V256H86V210ZM154 210H100V256H154V210ZM222 210H168V256H222V210ZM86 148H32V194H86V148ZM154 148H100V194H154V148ZM222 148H168V194H222V148ZM86 86H32V132H86V86ZM154 86H100V132H154V86ZM222 86H168V132H222V86ZM86 24H32V70H86V24ZM154 24H100V70H154V24ZM222 24H168V70H222V24Z" fill="white"/>' +
             '</svg>' +
             '</div>' +
-            '<div style="height: 340px"><img class="outcome" src="' + trial.stimuli[animate_frame] + '" id="jspsych-animation-image" style="margin-top: 4rem; "></div>';
+            '<div style="height: 340px"><img class="outcome hidden" src="' + trial.stimuli[animate_frame] + '" id="jspsych-animation-image" style="margin-top: 4rem; "></div>';
 
-            current_stim = trial.stimuli[animate_frame];
-
-            response.trial_events.push({
-                "event_type": 'image appears',
-                "event_raw_details": 'outcome image appears',
-                "event_converted_details": trial.stimuli[animate_frame] + ' image appears',
-                "timestamp": jsPsych.totalTime(),
-                "time_elapsed": jsPsych.totalTime() - timestamp_onload
-            });
-
-            // record when image was shown
-            animation_sequence.push({
-                "stimulus": trial.stimuli[animate_frame],
-                "time": performance.now() - startTime
-            });
+            var outcome_presentation = stim_duration - outcome_duration;
+            jsPsych.pluginAPI.setTimeout(function () {
+                $('.outcome').removeClass('hidden');
+                response.trial_events.push({
+                    "event_type": 'image appears',
+                    "event_raw_details": 'outcome image appears',
+                    "event_converted_details": trial.stimuli[animate_frame] + ' image appears',
+                    "timestamp": jsPsych.totalTime(),
+                    "time_elapsed": jsPsych.totalTime() - timestamp_onload
+                });
+                // record when image was shown
+                animation_sequence.push({
+                    "stimulus": trial.stimuli[animate_frame],
+                    "time": jsPsych.totalTime() - timestamp_onload
+                });
+            }, outcome_presentation);
 
             if (trial.prompt !== null) {
                 display_element.innerHTML += trial.prompt;
@@ -147,29 +187,12 @@ jsPsych.plugins.animation = (function () {
                 var color = pav_stimuli_arr[animate_frame].color;
                 $('.vending-machine rect').css({ fill: color });
                 response.trial_events.push({
-                    "event_type": 'vending machine appears',
+                    "event_type": 'image appears',
                     "event_raw_details": color + ' vending machine ',
                     "event_converted_details": color + ' vending machine',
                     "timestamp": jsPsych.totalTime(),
                     "time_elapsed": jsPsych.totalTime() - timestamp_onload
                 });
-                jsPsych.pluginAPI.setTimeout(function () {
-                    display_element.querySelector('#jspsych-animation-image').style.visibility = 'hidden';
-                    current_stim = 'blank';
-                    // record when blank image was shown
-                    $('.vending-machine rect').css({ fill: '#000' });
-                    animation_sequence.push({
-                        "stimulus": 'blank',
-                        "time": performance.now() - startTime
-                    });
-                    response.trial_events.push({
-                        "event_type": 'vending machine appears',
-                        "event_raw_details": 'white vending machine ',
-                        "event_converted_details": 'white vending machine',
-                        "timestamp": jsPsych.totalTime(),
-                        "time_elapsed": jsPsych.totalTime() - timestamp_onload
-                    });
-                }, trial.frame_time);
             }
         }
 

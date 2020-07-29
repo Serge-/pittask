@@ -3,7 +3,7 @@ jsPsych.plugins['Smoking-Status'] = (function () {
   
     plugin.info = {
       name: 'SS',
-      stage_name: 'Smoking Status',
+      stage_name: 'smoking',
       description: '',
       parameters: {
         questions: {
@@ -214,7 +214,7 @@ jsPsych.plugins['Smoking-Status'] = (function () {
                   </header>
                   <main class="modal__content" id="modal-1-content">
                     <p>
-                    ${popup_text_web_forms}
+                    ${popup_text_WBF}
                     </p>
                   </main>
                   <footer class="modal__footer">
@@ -369,7 +369,7 @@ jsPsych.plugins['Smoking-Status'] = (function () {
           response.trial_events.push({
             "event_type": "error message",
             "event_raw_details": 'Error message',
-            "event_converted_details": popup_text_web_forms,
+            "event_converted_details": popup_text_WBF,
             "timestamp": jsPsych.totalTime(),
             "time_elapsed": jsPsych.totalTime() - timestamp_onload
           });

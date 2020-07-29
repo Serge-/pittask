@@ -22,346 +22,357 @@ Parameters <- data.table(
   PIN = character(),
   complete = character(),
   date = character(), 
-  `calendar time` = character(),
+  calendar_time = character(),
   location = character(),
-  `commit code` = character(),
+  commit = character(),
   version = character(),
-  `parameter name` = character(), 
-  `parameter value` = character()
+  parameter_name = character(), 
+  parameter_value = character()
 )
 
 Demographics <- data.table(
   PIN = character(),
   complete = character(),
   date = character(),
-  `calendar time` = character(),
+  calendar_time = character(),
   timestamp = numeric(),
   location = character(),
-  `commit code` = character(),
-  `version number` = character(),
-  `Item ID` = character(),
-  Response = character()
+  timezone = character(),
+  commit = character(),
+  version = character(),
+  item = character(),
+  response = character()
 )
 
 OCI_R <- data.table(
   PIN = character(),
   complete = character(),
   date = character(),
-  `calendar time` = character(),
+  calendar_time = character(),
   timestamp = numeric(),
   location = character(),
-  `commit code` = character(),
-  `version number` = character(),
-  `Item ID` = numeric(),
-  Response = numeric()
+  commit = character(),
+  version = character(),
+  item = numeric(),
+  response = numeric()
 )
 
 MOVES <- data.table(
   PIN = character(),
   complete = character(),
   date = character(),
-  `calendar time` = character(),
+  calendar_time = character(),
   timestamp = numeric(),
   location = character(),
-  `commit code` = character(),
-  `version number` = character(),
-  `Item ID` = numeric(),
-  Response = character()
+  commit = character(),
+  version = character(),
+  item = numeric(),
+  response = character()
 )
 
 DASS <- data.table(
   PIN = character(),
   complete = character(),
   date = character(),
-  `calendar time` = character(),
+  calendar_time = character(),
   timestamp = numeric(),
   location = character(),
-  `commit code` = character(),
-  `version number` = character(),
-  `Item ID` = numeric(),
-  Response = numeric()
+  commit = character(),
+  version = character(),
+  item = numeric(),
+  response = numeric()
 )
 
 ASRS5 <- data.table(
   PIN = character(),
   complete = character(),
   date = character(),
-  `calendar time` = character(),
+  calendar_time = character(),
   timestamp = numeric(),
   location = character(),
-  `commit code` = character(),
-  `version number` = character(),
-  `Item ID` = numeric(),
-  Response = character()
+  commit = character(),
+  version = character(),
+  item = numeric(),
+  response = character()
 )
 
 EAT_26 <- data.table(
   PIN = character(),
   complete = character(),
   date = character(),
-  `calendar time` = character(),
+  calendar_time = character(),
   timestamp = numeric(),
   location = character(),
-  `commit code` = character(),
-  `version number` = character(),
-  `Item ID` = character(),
-  Response = character()
+  commit = character(),
+  version = character(),
+  item = character(),
+  response = character()
 )
 
 RAADS_14 <- data.table(
   PIN = character(),
   complete = character(),
   date = character(),
-  `calendar time` = character(),
+  calendar_time = character(),
   timestamp = numeric(),
   location = character(),
-  `commit code` = character(),
-  `version number` = character(),
-  `Item ID` = numeric(),
-  Response = character()
+  commit = character(),
+  version = character(),
+  item = numeric(),
+  response = character()
 )
 
 PHQ_9 <- data.table(
   PIN = character(),
   complete = character(),
   date = character(),
-  `calendar time` = character(),
+  calendar_time = character(),
   timestamp = numeric(),
   location = character(),
-  `commit code` = character(),
-  `version number` = character(),
-  `Item ID` = numeric(),
-  Response = numeric()
+  commit = character(),
+  version = character(),
+  item = numeric(),
+  response = numeric()
 )
 
 GAD_7 <- data.table(
   PIN = character(),
   complete = character(),
   date = character(),
-  `calendar time` = character(),
+  calendar_time = character(),
   timestamp = numeric(),
   location = character(),
-  `commit code` = character(),
-  `version number` = character(),
-  `Item ID` = character(),
-  Response = character()
+  commit = character(),
+  version = character(),
+  item = character(),
+  response = character()
 )
 
 ASRM <- data.table(
   PIN = character(),
   complete = character(),
   date = character(),
-  `calendar time` = character(),
+  calendar_time = character(),
   timestamp = numeric(),
   location = character(),
-  `commit code` = character(),
-  `version number` = character(),
-  `Item ID` = numeric(),
-  Response = numeric()
+  commit = character(),
+  version = character(),
+  item = numeric(),
+  response = numeric()
 )
 
 PC_PTSD_5 <- data.table(
   PIN = character(),
   complete = character(),
   date = character(),
-  `calendar time` = character(),
+  calendar_time = character(),
   timestamp = numeric(),
   location = character(),
-  `commit code` = character(),
-  `version number` = character(),
-  `Item ID` = character(),
-  Response = character()
+  commit = character(),
+  version = character(),
+  item = character(),
+  response = character()
 )
 
 PRIME_R <- data.table(
   PIN = character(),
   complete = character(),
   date = character(),
-  `calendar time` = character(),
+  calendar_time = character(),
   timestamp = numeric(),
   location = character(),
-  `commit code` = character(),
-  `version number` = character(),
-  `Item ID` = numeric(),
-  Response = character()
+  commit = character(),
+  version = character(),
+  item = numeric(),
+  response = character()
 )
 
 AUDIT <- data.table(
   PIN = character(),
   complete = character(),
   date = character(),
-  `calendar time` = character(),
+  calendar_time = character(),
   timestamp = numeric(),
   location = character(),
-  `commit code` = character(),
-  `version number` = character(),
-  `Item ID` = numeric(),
-  Response = character()
+  commit = character(),
+  version = character(),
+  item = numeric(),
+  response = character()
 )
 
 PGSI <- data.table(
   PIN = character(),
   complete = character(),
   date = character(),
-  `calendar time` = character(),
+  calendar_time = character(),
   timestamp = numeric(),
   location = character(),
-  `commit code` = character(),
-  `version number` = character(),
-  `Item ID` = numeric(),
-  Response = character()
+  commit = character(),
+  version = character(),
+  item = numeric(),
+  response = character()
 )
 
 YIAT <- data.table(
   PIN = character(),
   complete = character(),
   date = character(),
-  `calendar time` = character(),
+  calendar_time = character(),
   timestamp = numeric(),
   location = character(),
-  `commit code` = character(),
-  `version number` = character(),
-  `Item ID` = numeric(),
-  Response = character()
+  commit = character(),
+  version = character(),
+  item = numeric(),
+  response = character()
 )
 
 SmokingStatus <- data.table(
   PIN = character(),
   complete = character(),
   date = character(),
-  `calendar time` = character(),
+  calendar_time = character(),
   timestamp = numeric(),
   location = character(),
-  `commit code` = character(),
-  `version number` = character(),
-  `Item ID` = numeric(),
-  Response = character()
+  commit = character(),
+  version = character(),
+  item = numeric(),
+  response = character()
 )
 
 FTND <- data.table(
   PIN = character(),
   complete = character(),
   date = character(),
-  `calendar time` = character(),
+  calendar_time = character(),
   timestamp = numeric(),
   location = character(),
-  `commit code` = character(),
-  `version number` = character(),
-  `Item ID` = numeric(),
-  Response = character()
+  commit = character(),
+  version = character(),
+  item = numeric(),
+  response = character()
 )
 
 ISI <- data.table(
   PIN = character(),
   complete = character(),
   date = character(),
-  `calendar time` = character(),
+  calendar_time = character(),
   timestamp = numeric(),
   location = character(),
-  `commit code` = character(),
-  `version number` = character(),
-  `Item ID` = character(),
-  Response = numeric()
+  commit = character(),
+  version = character(),
+  item = character(),
+  response = numeric()
 )
 
 PID_5_BF <- data.table(
   PIN = character(),
   complete = character(),
   date = character(),
-  `calendar time` = character(),
+  calendar_time = character(),
   timestamp = numeric(),
   location = character(),
-  `commit code` = character(),
-  `version number` = character(),
-  `Item ID` = numeric(),
-  Response = numeric()
+  commit = character(),
+  version = character(),
+  item = numeric(),
+  response = numeric()
 )
 
 LSAS <- data.table(
   PIN = character(),
   complete = character(),
   date = character(),
-  `calendar time` = character(),
+  calendar_time = character(),
   timestamp = numeric(),
   location = character(),
-  `commit code` = character(),
-  `version number` = character(),
-  `Item ID` = character(),
-  Response = numeric()
+  commit = character(),
+  version = character(),
+  item = character(),
+  response = numeric()
 )
 
 ICAR <- data.table(
   PIN = character(),
   complete = character(),
   date = character(),
-  `calendar time` = character(),
+  calendar_time = character(),
   timestamp = numeric(),
   location = character(),
-  `commit code` = character(),
-  `version number` = character(),
-  `Item ID` = character(),
-  `Response ID` = character(),
-  `Response content` = character()
+  commit = character(),
+  version = character(),
+  item = character(),
+  response = character(),
+  response_content = character()
 )
 
 SDS <- data.table(
   PIN = character(),
   complete = character(),
   date = character(),
-  `calendar time` = character(),
+  calendar_time = character(),
   timestamp = numeric(),
   location = character(),
-  `commit code` = character(),
-  `version number` = character(),
-  `Item ID` = character(),
-  Response = character()
+  commit = character(),
+  version = character(),
+  item = character(),
+  response = character()
 )
 
 VVR <- data.table(
   PIN = character(),
   complete = character(),
   date = character(),
-  `calendar time` = character(),
+  calendar_time = character(),
   timestamp = numeric(),
-  stage = character(),
-  `commit code` = character(),
-  `version number` = character(),
   location = character(),
-  `block number` = character(),
-  `Item ID` = character(),
-  `Food item` = character(),
-  `correct` = character(),
-  `strength of belief` = character()
+  stage = character(),
+  commit = character(),
+  version = character(),
+  block = character(),
+  item = character(),
+  food_item = character(),
+  correct = character(),
+  belief_strength = character()
 )
 
 FoodRatings <- data.table(
   PIN = character(),
   complete = character(),
   date = character(),
+  calendar_time = character(),
+  timestamp = numeric(),
   location = character(),
+  commit = character(),
   version = character(),
-  `Item ID` = character(),
-  `Pre-rating` = character(),
-  `Post-rating` = character()
+  item = character(),
+  pre_rating = character(),
+  post_rating = character()
 )
 
 HungerRating <- data.table(
   PIN = character(),
   complete = character(),
   date = character(),
+  calendar_time = character(),
+  timestamp = numeric(),
   location = character(),
-  `Hunger pre-rating` = character(),
-  `Hunger post-rating` = character()
+  commit = character(),
+  version = character(),
+  pre_rating = character(),
+  post_rating = character()
 )
 
 ConsentFeedback <- data.table(
   PIN = character(),
   complete = character(),
   date = character(),
-  `calendar time` = character(),
+  calendar_time = character(),
+  timestamp = numeric(),
   location = character(),
-  `Question number` = numeric(),
-  `Question Text` = character(),
+  commit = character(),
+  version = character(),
+  q_num = numeric(),
+  q_text = character(),
   `Y/N` = character()
 )
 
@@ -369,31 +380,32 @@ PavCondition <- data.table(
   PIN = character(),
   complete = character(),
   date = character(),
-  `calendar time` = character(),
-  `commit code` = character(),
-  version = character(),
-  location = character(),   
+  calendar_time = character(),
+  timestamp = numeric(),
+  location = character(),
+  commit = character(),
+  version = character(),  
   Q = numeric(),
-  `response submitted` = character(),
-  Correct = character()
+  response = character(),
+  correct = character()
 )
 
 CompleteData <- data.table(
   PIN = character(),
   complete = character(),
   date = character(),
-  `calendar time` = character(),
+  calendar_time = character(),
   timestamp = numeric(),
   location = character(),
   timezone = character(),
   stage = character(),
-  `commit code` = character(),
-  `version number` = character(),
-  `block number` = character(),
-  `interval number` = character(),
-  `event type` = character(),
-  `event raw details` = character(),
-  `event converted details` = character()
+  commit = character(),
+  version = character(),
+  block = character(),
+  interval = character(),
+  event_type = character(),
+  event_raw = character(),
+  event_converted = character()
 )
 
 # Geo ---------------------------------------------------------------------
@@ -437,7 +449,7 @@ formatDateTime <- function(dateTime){
 
 # Connection --------------------------------------------------------------
 
-connection = dbConnect(MySQL(), user = 'root', password='Psiturk_1', dbname = 'pittask', host='127.0.0.1')
+connection = dbConnect(MySQL(), user = 'root', password='VolitionL101', dbname = 'pittask', host='127.0.0.1')
 
 query <- tryCatch(
   dbSendQuery(connection, "SELECT * FROM turkdemo"),
@@ -501,7 +513,7 @@ if(isClass(query))
     
     # Demographics --------------------------------------------------------------------
     
-    demographics_index <- which(trialdata$stage_name %in% "\"Demographics\"")
+    demographics_index <- which(trialdata$stage_name %in% "\"demographics\"")
     
     if(length(demographics_index) != 0){
       demographics_responses <- fromJSON(trialdata[demographics_index,]$responses)
@@ -522,7 +534,7 @@ if(isClass(query))
             if(timestamp != 'NA') timestamp
           ))))),
           timestamp,
-          country, commit, version,
+          country, timezone, commit, version,
           names(demographics_responses)[j],
           demographics_responses[[j]]
         )))
@@ -900,7 +912,7 @@ if(isClass(query))
     
     # SmokingStatus --------------------------------------------------------------------
     
-    SmokingStatus_index <- which(trialdata$stage_name %in% "\"Smoking Status\"")
+    SmokingStatus_index <- which(trialdata$stage_name %in% "\"smoking\"")
     
     if(length(SmokingStatus_index) != 0){
       SmokingStatus_responses <- fromJSON(trialdata[SmokingStatus_index,]$responses)
@@ -1098,9 +1110,8 @@ if(isClass(query))
         if(!is.na(trialdata$vvr_stage[j])) {
           VVR <- rbindlist(list(VVR, list(
             PIN, complete, date, time,
-            trialdata$timestamp[j],
+            trialdata$timestamp[j], country,
             fromJSON(trialdata$vvr_stage[j]), commit, version,
-            country,
             trialdata$block_number[j],
             trialdata$item_id[j],
             trialdata$food_item[j],
@@ -1113,19 +1124,20 @@ if(isClass(query))
     }
     
     # FoodRatings ------------------------------------------------------------
-    
+
     food_ratings_indices <- which(
-      trialdata$stage_name %in% "\"food-and-hunger-questions\"" &
-        trialdata$food_item != "hunger")
-    
+        trialdata$trial_type %in% "food-and-hunger-questions" &
+        trialdata$food_item != "\"hunger\"")
+
     if(length(food_ratings_indices) != 0){
-      food_ratings <- trialdata[food_ratings_indices,]
+      food_ratings <- trialdata[food_ratings_indices,]   
       
       for(fr in 1:dim(food_ratings)[1]) {
         FoodRatings <- rbindlist(list(FoodRatings, list(
-          PIN,  complete,
+          PIN, complete,
           format(as.Date(dateTime[food_ratings_indices[fr]]), "%d-%m-%Y"),
-          country, version, fromJSON(food_ratings$food_item[fr]),
+          time, food_ratings$timestamp[fr], country, commit,
+          version, fromJSON(food_ratings$food_item[fr]),
           ifelse(fromJSON(food_ratings$rating_status[fr]) == "pre-rating", fromJSON(food_ratings$rating[fr]), ""),
           ifelse(fromJSON(food_ratings$rating_status[fr]) == "post-rating", fromJSON(food_ratings$rating[fr]), "")
         )))
@@ -1135,17 +1147,18 @@ if(isClass(query))
     # HungerRatings ---------------------------------------------------------
     
     hunger_rating_indices <- which(
-      trialdata$stage_name %in% "\"food-and-hunger-questions\"" &
+        trialdata$trial_type %in% "food-and-hunger-questions" &
         trialdata$food_item == "\"hunger\"")
     
     if(length(hunger_rating_indices) != 0){
       hunger_ratings <- trialdata[hunger_rating_indices,]
+      time <- as.character(as.ITime(dateTime[hunger_rating_indices]))
       
       for(hr in 1:dim(hunger_ratings)[1]) {
         HungerRating <- rbindlist(list(HungerRating, list(
           PIN, complete,
           format(as.Date(dateTime[hunger_rating_indices[hr]]), "%d-%m-%Y"),
-          country,
+          time, hunger_ratings$timestamp[hr], country, commit, version,
           ifelse(fromJSON(hunger_ratings$rating_status[hr]) == "pre-rating", fromJSON(hunger_ratings$rating[hr]), ""),
           ifelse(fromJSON(hunger_ratings$rating_status[hr]) == "post-rating", fromJSON(hunger_ratings$rating[hr]), "")
         )))
@@ -1153,18 +1166,21 @@ if(isClass(query))
     }
     
     # ConsentFeedback ---------------------------------------------------------
-    
-    consent_feedback_index <- which(trialdata$stage_name %in% "\"Close HIT Questions\"")
-    
+
+    consent_feedback_index <- which(trialdata$stage_name %in% "\"close_HIT_q\"")
+
     if(length(consent_feedback_index ) != 0){
       consent_feedback_responses <- fromJSON(trialdata[consent_feedback_index,]$responses)
-      
+      consent_feedback_timestamp <- fromJSON(trialdata[consent_feedback_index,]$timestamp)
+
       date <- format(as.Date(dateTime[consent_feedback_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[consent_feedback_index]))
-      
+
       for(j in 1:length(consent_feedback_responses)){
+        
         ConsentFeedback <- rbindlist(list(ConsentFeedback, list(
-          PIN, complete, date, time, country,
+          PIN, complete, date, time, consent_feedback_timestamp[[j]], country,
+          commit, version,
           ifelse(j == 4, 3, j),
           names(consent_feedback_responses)[j] %>% str_replace("^\\d+ :", "") %>% str_trim(),
           consent_feedback_responses[[j]]
@@ -1174,10 +1190,11 @@ if(isClass(query))
 
     # PavCondition ------------------------------------------------------------
 
-    pav_condition_index <- which(trialdata$stage_name %in% "\"Pav Conditioning Response\"")
+    pav_condition_index <- which(trialdata$stage_type %in% "\"Pav Conditioning Response\"")
     
     if(length(pav_condition_index) != 0){
       pav_condition_responses <- trialdata[pav_condition_index,]$responses
+      pav_condition_timestamp <- trialdata[pav_condition_index,]$timestamp
     
       for(j in 1:length(pav_condition_responses)){
         events <- trialdata[pav_condition_index,]
@@ -1188,15 +1205,15 @@ if(isClass(query))
         time <- as.character(as.ITime(dateTime[j]))
     
         PavCondition <- rbindlist(list(PavCondition, list(
-          PIN, complete, date, time, commit, version, country,
+          PIN, complete, date, time, pav_condition_timestamp[j], country, commit, version, 
           j, response_submitted, substring(correct, 1, 1)
-        )))
+          )))
       }
     }
     
     # CompleteData ------------------------------------------------------------
-
-    if(!is.null(trialdata$stage) & !is.null(version) & !is.null(trialdata$events)){
+    
+    if(!is.null(trialdata$stage_name) & !is.null(version) & !is.null(trialdata$events)){
       for(j in 1:length(trialdata$events)){
         if(!is.na(trialdata$events[j]) & trialdata$events[j] != "[]"){
           date <- format(as.Date(dateTime[j]), "%d-%m-%Y")
@@ -1212,7 +1229,7 @@ if(isClass(query))
               as.character(as.ITime(formatDateTime(time_ms + events$timestamp[e]))),
               ifelse(is.na(events$time_elapsed[e]), 'NA', events$time_elapsed[e]), 
               country, timezone,
-              gsub('"', "", trialdata$stage[j]), commit, version,
+              gsub('"', "", trialdata$stage_name[j]), commit, version,
               ifelse(!is.na(trialdata$block_number[j]), trialdata$block_number[j], 'NA'),
               ifelse(!is.null(events$interval_number[e]), events$interval_number[e], 'NA'),
               events$event_type[e],
@@ -1241,8 +1258,8 @@ if(isClass(query))
   filesProgressBar <- txtProgressBar(min = 0, max = 6, style = 3, char = '|')
   
   results <- list(
-    "Parameters" = Parameters,
-    'Demographics' = Demographics,
+    "parameters" = Parameters,
+    'demographics' = Demographics,
     "OCI-R" = OCI_R,
     "MOVES" = MOVES,
     "DASS" = DASS,
@@ -1257,7 +1274,7 @@ if(isClass(query))
     "AUDIT" = AUDIT,
     "PGSI" = PGSI,
     "YIAT" = YIAT,
-    "SmokingStatus" = SmokingStatus,
+    "smoking_status" = SmokingStatus,
     "FTND" = FTND,
     "ISI" = ISI,
     "PID-5-BF" = PID_5_BF,
@@ -1265,11 +1282,11 @@ if(isClass(query))
     "ICAR" = ICAR,
     "SDS" = SDS,
     "VVR" = VVR,
-    "FoodRatings" = FoodRatings,
-    "HungerRating" = HungerRating,
-    "ConsentFeedback" = ConsentFeedback,
-    "PavCondition" = PavCondition,
-    "CompleteData" = CompleteData
+    "food_ratings" = FoodRatings,
+    "hunger_rating" = HungerRating,
+    "consent_feedback" = ConsentFeedback,
+    "pav_con" = PavCondition,
+    "complete" = CompleteData
   )
   
   for (i in 1:length(results)) {

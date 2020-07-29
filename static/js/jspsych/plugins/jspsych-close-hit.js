@@ -60,7 +60,13 @@ jsPsych.plugins['close-hit-questions'] = (function() {
           pretty_name: 'Button label',
           default:  'Continue',
           description: 'Label of the button.'
-        }
+        },
+        time_stamp: {
+          type: jsPsych.plugins.parameterType.OBJECT,
+          pretty_name: 'Timestamp',
+          default: {},
+          description: 'Object for collecting timestamp'
+        },
       }
     }
     plugin.trial = function(display_element, trial) {
@@ -149,14 +155,14 @@ jsPsych.plugins['close-hit-questions'] = (function() {
   
           // add radio button container
           html += '<div id="'+option_id_name+'" class="jspsych-survey-multi-choice-option">';
-          html += '<label class="jspsych-survey-multi-choice-text" for="'+input_id+'">'+question.options[j]+'</label>';
-          html += '<input type="radio" name="'+input_name+'" id="'+input_id+'" class="form-radio" value="'+question.options[j]+'" '+required_attr+'></input>';
+          html += '<label class="jspsych-survey-multi-choice-text" data-time-stamp="Q' + i + '" for="'+input_id+'">'+question.options[j]+'</label>';
+          html += '<input type="radio" name="'+input_name+'" data-time-stamp="Q' + i + '" id="'+input_id+'" class="form-radio" value="'+question.options[j]+'" '+required_attr+'></input>';
           html += '</div>';
         }
   
         html += '</div>';
       }
-      html += '<div><textarea class="text_box" rows="6" cols="80" name="comment" placeholder="Please type your suggestions for us here..." form="usrform"></textarea></div>'
+      html += '<div><textarea class="text_box" data-time-stamp="Q4" rows="6" cols="80" name="comment" placeholder="Please type your suggestions for us here..." form="usrform"></textarea></div>'
       // add submit button
       html += '<input type="submit" id="'+plugin_id_name+'-next" class="'+plugin_id_name+' jspsych-btn"' + (trial.button_label ? ' value="'+trial.button_label + '"': '') + '></input>';
       html += '</form>';
@@ -208,7 +214,21 @@ jsPsych.plugins['close-hit-questions'] = (function() {
             "time_elapsed": jsPsych.totalTime() - timestamp_onload
           });
         }
-      }
+      };
+
+      $("label").on("click",function(){
+        var labelID = $(this).attr('for');
+        if('labelID') {
+          $("#" + labelID).prop('checked', true).trigger('click').trigger('change');
+        };
+      });
+  
+      $("input[type=radio]").on("click change touchstart",function(){
+        var time_stamp_key = $(this).data('time-stamp');
+        if(time_stamp_key) {
+          trial.time_stamp[time_stamp_key] = jsPsych.totalTime() - timestamp_onload;
+        };
+      });
   
       document.querySelector('form').addEventListener('submit', function(event) {
         event.preventDefault();
@@ -218,6 +238,8 @@ jsPsych.plugins['close-hit-questions'] = (function() {
   
         // create object to hold responses
         var question_data = {};
+        var timestamp_data = {};
+
         for(var i=0; i<trial.questions.length; i++){
           var match = display_element.querySelector('#jspsych-survey-multi-choice-'+i);
           var id = trial.questions[i].prompt;
@@ -230,6 +252,7 @@ jsPsych.plugins['close-hit-questions'] = (function() {
 
           var obje = {};
           obje[id] = val;
+          timestamp_data[id] = trial.time_stamp['Q' + i] ? trial.time_stamp['Q' + i] : 'NA';
           Object.assign(question_data, obje);
         }
 
@@ -237,8 +260,10 @@ jsPsych.plugins['close-hit-questions'] = (function() {
         var obj = {};
         if(text_box) {
           obj['Text Response'] = text_box;
+          timestamp_data['Text Response'] = trial.time_stamp['Q4'] ? trial.time_stamp['Q4'] : 'NA';
         } else {
           obj['Text Response'] = 'NA';
+          timestamp_data['Text Response'] = 'NA';
         }
 
         Object.assign(question_data, obj);
@@ -252,6 +277,7 @@ jsPsych.plugins['close-hit-questions'] = (function() {
         var trial_data = {
             "stage_name": JSON.stringify(trial.stage_name),
             "responses": JSON.stringify(question_data),
+            "timestamp": JSON.stringify(timestamp_data),
             "events": JSON.stringify(response.trial_events)
         };
         display_element.innerHTML = '';

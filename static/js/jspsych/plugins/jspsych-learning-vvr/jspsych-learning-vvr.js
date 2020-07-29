@@ -59,7 +59,12 @@ jsPsych.plugins['survey-vvr'] = (function() {
         var response = {
           trial_events: []
         };
-        var timestamp_onload = jsPsych.totalTime();
+
+        if(vvr_timer <= 0) {
+          vvr_timer = jsPsych.totalTime();
+        };
+
+        var timestamp_onload = vvr_timer;
           
         var new_html = '<div id="jspsych-stimulus" class="vvr_stage"><img class="vending-machine" src='+ VENDING_MACHINE +'/><div class="outcome-container"></div></div>';
 

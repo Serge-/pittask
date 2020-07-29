@@ -122,11 +122,12 @@ jsPsych.plugins['ASRS-5'] = (function () {
   
       // inject CSS for trial
       html += '<style id="jspsych-survey-multi-choice-css">';
-      html += ".jspsych-survey-multi-choice-question { display: flex; text-align: left; border-bottom: 1px solid }" +
+      html += ".jspsych-survey-multi-choice-question { display: flex; text-align: left; border-top: 1px solid }" +
         ".jspsych-survey-multi-choice-text span.required {color: darkred;}" +
         ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-text {  text-align: center;}" +
         ".jspsych-survey-multi-choice-option { display: flex; justify-content: center; align-items: center; line-height: 2; padding: 1rem 0; }" +
         ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-option {  width: 100%; border-left: 1px solid;}" +
+        ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-option:first-child {  border-left: 2px solid;}" +
         ".jspsych-survey-highlight { cursor: pointer; width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; }" +
         ".form-radio { top: 0; }" +
         ".jspsych-survey-multi-choice-form { max-width: 1000px; }" +
@@ -135,10 +136,10 @@ jsPsych.plugins['ASRS-5'] = (function () {
         "ul {list-style: none}" +
         ".jspsych-survey-multi-choice { margin-top: 10rem; }" +
         ".jspsych-survey-multi-choice-number { display: flex; height: 100%; width: 30px; text-align: center; justify-content: center; }" +
-        ".jspsych-survey-multi-choice-preamble { text-align: left; max-width: 1000px; padding-bottom: 1rem; }" +
-        ".jspsych-survey-multi-choice-instructions { display: flex; justify-content: space-between; border-bottom: 1px solid; font-weight: bold; }" +
+        ".jspsych-survey-multi-choice-instructions { display: flex; justify-content: space-between; border-bottom: 3px solid; font-weight: bold; }" +
         ".jspsych-survey-multi-choice-instructions ul { display: flex; justify-content: space-between; padding-inline-start: 0; margin-bottom: 0; width: 60%; }" +
-        ".jspsych-survey-multi-choice-instructions li { display: flex; justify-content: center; border-left: 1px solid; width: 164px; align-items: center; }" +
+        ".jspsych-survey-multi-choice-instructions li { display: flex; justify-content: center; border-left: 1px solid; width: 20%; align-items: center; padding: 2.2rem 0; }" +
+        ".jspsych-survey-multi-choice-instructions li:first-child { border-left: 3px solid; }" +
         "label.jspsych-survey-multi-choice-text input[type='radio'] {margin-right: 1em;}" +
         ".jspsych-survey-highlight { width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; }" +
         "p { margin: 0 0 0px; }"
@@ -158,7 +159,7 @@ jsPsych.plugins['ASRS-5'] = (function () {
       html +=
         `<div id="jspsych-survey-multi-choice-preamble" class="jspsych-survey-multi-choice-instructions">
             <div style="width: 40%; text-align: left;">
-            <p><b>Check the box that best describes how you have felt and conducted yourself over the past 6 months.</b></p>
+            
             </div>
             <ul>
               <li><div>Never</div></li>
@@ -196,7 +197,7 @@ jsPsych.plugins['ASRS-5'] = (function () {
         html += '<div id="jspsych-survey-multi-choice-' + question_id + '" class="' + question_classes.join(' ') + '"  data-name="' + question.name + '">';
   
         // add question text
-        html += '<div style="display: flex; align-items: center; width: 40%;"><span class="jspsych-survey-multi-choice-number">' + (i + 1) + '.</span><p class="jspsych-survey-multi-choice-text survey-multi-choice jspsych-survey-multi-choice-question-text" style="text-align: left; padding: 0 10px; width: 100%;">' + question.prompt
+        html += '<div style="display: flex; align-items: center; width: 40%; padding: 1rem 0;"><span class="jspsych-survey-multi-choice-number">' + (i + 1) + '.</span><p class="jspsych-survey-multi-choice-text survey-multi-choice jspsych-survey-multi-choice-question-text" style="text-align: left; padding: 0 10px; width: 100%;">' + question.prompt
         // question.required
         html += '</p></div>';
         html += '<div style="display: flex; width: 60%; justify-content: space-around; border-left: 1px solid;">';
@@ -237,7 +238,7 @@ jsPsych.plugins['ASRS-5'] = (function () {
                     <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
                   </header>
                   <main class="modal__content" id="modal-1-content">
-                    <p>${popup_text_web_forms}</p>
+                    <p>${popup_text_WBF}</p>
                   </main>
                   <footer class="modal__footer">
                     <button class="modal__btn" data-micromodal-close aria-label="Close this dialog window">Close</button>
@@ -369,7 +370,7 @@ jsPsych.plugins['ASRS-5'] = (function () {
           response.trial_events.push({
             "event_type": "error message",
             "event_raw_details": 'Error message',
-            "event_converted_details": popup_text_web_forms,
+            "event_converted_details": popup_text_WBF,
             "timestamp": jsPsych.totalTime(),
             "time_elapsed": jsPsych.totalTime() - timestamp_onload
           });

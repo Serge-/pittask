@@ -11,12 +11,14 @@ var stim_duration = 3000;
 var ITI_duration = 500;
 var interval_duration = 1500;
 var interval_num = 60;
-var answer_latency = 3000;
+var answer_latency_countdown = true;
+var answer_latency = 1350;
+var answer_latency_text = 'please wait for a moment till you can answer the question...';
 var correct_text = 'Correct!';
 var incorrect_text = 'Incorrect!';
 var feedback_duration = 1000;
-var popup_text = 'Please provide your answer prior to submission.';
-var popup_text_web_forms = 'Sorry, all questions need to be answered prior to submission.';
+var popup_text_behav = 'Please provide your answer prior to submission.';
+var popup_text_WBF = 'Sorry, all questions need to be answered prior to submission.';
 /************************************************************
  * Vending Machine Animation Parameters
  ***********************************************************/
@@ -36,22 +38,22 @@ var shake_transition = 0.05;
 var open_instruct_text_key_testing = "<p>This is a key-testing stage.</p> <p>We need to check whether key presses on your keyboard can be registered.</p> <p>Press any key when you are ready.</p>";
 var close_instruct_text_key_testing = "<p>Thank you for your patience.</p> <p>Press any key when you are ready to start the experiment.</p>";
 /************************************************************
- * Clinical Open/Close Instruction Text
- ***********************************************************/
-var open_instruct_text_clinical = "<p class='v-center-txt'>We'd like to briefly ask you about some symptoms before the online game. <br> Press any key when you are ready. </p>"
-var close_instruct_text_clinical = "<p class='v-center-txt'>That's it for the symptom questions. Now we're ready to start the online game. <br> Press any key when you are ready. </p>"
-/************************************************************
  * Web-based forms
  ***********************************************************/
+var open_instruct_text_WBF = "<p>We'd like to briefly ask you about some symptoms before the online game. <br> Press any key when you are ready. </p>"
+var close_instruct_text_WBF = "<p>That's it for the symptom questions. Now we're ready to start the online game. <br> Press any key when you are ready. </p>"
+var open_instruct_WBF = true;
+var close_instruct_WBF = true;
+
 var open_instruct_demographics = false;
 var close_instruct_demographics = false;
 var open_instruct_text_demographics = 'Demographics open';
 var close_instruct_text_demographics = 'Demographics close';
 
-var open_instruct_symptom_inventories = true;
-var close_instruct_symptom_inventories = true;
-var open_instruct_text_symptom_inventories = 'Symptom inventories open';
-var close_instruct_text_symptom_inventories = 'Symptom inventories close';
+var open_instruct_inventory = true;
+var close_instruct_inventory = true;
+var open_instruct_text_inventory = 'Symptom inventories open';
+var close_instruct_text_inventory = 'Symptom inventories close';
 
 var open_instruct_SDS = false;
 var close_instruct_SDS = false;
@@ -65,7 +67,7 @@ var close_instruct_text_ICAR = 'ICAR close';
 /************************************************************
  * Symptom Inventories
  ***********************************************************/
-var symptom_inventory_randomization = true;
+var inventory_rand = true;
 var symptom_inventory = [
     // OCI-R
     OCIR,
@@ -135,20 +137,20 @@ var FHQ_4 = "How hungry do you feel right now?";
 var FHQ_1_bottom_text = "Rate the pleasantness of Tiny Teddies";
 var FHQ_2_bottom_text = "Rate the pleasantness of M&Ms";
 var FHQ_3_bottom_text = "Rate the pleasantness of BBQ shapes";
-var vas_left = "Very Unpleasant";
-var vas_center = "";
-var vas_right = "Very Pleasant";
-var vas_left_hungry = "Not at All";
-var vas_right_hungry = "Extremely";
+var FHQ_VAS_left = "Very Unpleasant";
+var FHQ_VAS_center = "";
+var FHQ_VAS_right = "Very Pleasant";
+var FHQ_VAS_left_hungry = "Not at All";
+var FHQ_VAS_right_hungry = "Extremely";
 /************************************************************
  * VVR
  ************************************************************/
-var question_text_a1 = 'Which directions did you tilt to get';
-var question_text_a2 = 'Press Left or Right button';
-var question_text_b1 = 'How strongly do you believe in your answer?';
-var question_text_b2 = 'Very little';
-var question_text_b3 = 'Very much';
-var question_text_b4 = '<li><span>Please select your answer on the scale.</span></li><li><span>Click \'submit answer\' when ready</span></li>';
+var VVR_q_text_a1 = 'Which directions did you tilt to get';
+var VVR_q_text_a2 = 'Press Left or Right button';
+var VVR_q_text_b1 = 'How strongly do you believe in your answer?';
+var VVR_q_text_b2 = 'Very little';
+var VVR_q_text_b3 = 'Very much';
+var VVR_q_text_b4 = '<li>Please click anywhere on the line to answer this question.</li>';
 /************************************************************
  * Instrumental conditioning [VVR_1]
  ************************************************************/
@@ -203,15 +205,15 @@ var max_num_incorrect_VVR4 = 2;
 var open_instruct_pav = true;
 var close_instruct_pav = true;
 var open_instruct_text_pav = "<p>The vending machine cannot be tipped now. " +
-"However, when the machine is overstocked a free snack will fall out.</p><br/>" +
+"However, when the machine is overstocked a free snack will fall out.</p><br>" +
 "<p>Coloured lights will appear on the front of the machine when it is overstocked. "+
-"Watch the lights and learn which snack will fall out.</p><br/>" +
+"Watch the lights and learn which snack will fall out.</p><br>" +
 "<p>Questionnaires will test what you have learnt.</p>" +
-"<br/><p>Press any key to begin </p>";
+"<br><p>Press any key to begin </p>";
 /************************************************************
  * Pavlovian Conditioning
  ************************************************************/
-var min_num_correct_pav = 6;
+var min_num_correct_pav = 2;
 var max_num_incorrect_pav = 4;
 var close_instruct_text_pav = "Close Instruction Pavlovian Conditioning";
 /************************************************************
@@ -235,7 +237,7 @@ var open_instruct_deval_test = true;
 var close_instruct_deval_test = true;
 var open_instruct_text_deval_test =  'Open Instruction Deval Test';
 var close_instruct_text_deval_test = 'Close Instruction Deval Test'
-var deval_test_duration = 1200; // default 12000
+var deval_test_duration = 12000; // default 12000
 /************************************************************
  * Thanks
  ************************************************************/

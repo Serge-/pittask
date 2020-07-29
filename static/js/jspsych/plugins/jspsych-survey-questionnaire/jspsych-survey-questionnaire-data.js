@@ -1,7 +1,7 @@
 var DEMOGRAPHICS_STAGE = {
     type: 'Demographics',
     preamble:
-        '<p>We would like to ask you a few questions about your personal information to better understand our study' +
+        '<p>We would like to ask you a few questions about your personal information to better understand our study ' +
         'population. All your responses will be confidential.</p>'
     ,
     questions: [
@@ -11,7 +11,7 @@ var DEMOGRAPHICS_STAGE = {
             horizontal: true
         }, {
             prompt: 'Age',
-            options: ['Years', 'Months'],
+            options: ['Years'],
             horizontal: true
         }, {
             prompt: 'Height',
@@ -31,7 +31,7 @@ var DEMOGRAPHICS_STAGE = {
             horizontal: true
         }, {
             prompt: 'Employment status',
-            options: ['Employed - full time', 'Employed - part-time', 'Self-employed', 'Student', 'Unemployed', 'Retired'],
+            options: ['Employed (full-time)', 'Employed (part-time)', 'Self-employed', 'Student', 'Unemployed', 'Retired'],
             horizontal: true
         }, {
             prompt: 'Gross annual household income (US dollars)',
@@ -1098,6 +1098,7 @@ var ASRS5 = {
         'Often',
         'Very often'
     ],
+    preamble: 'Check the box that best describes how you have felt and conducted yourself over the past 6 months.',
     questions: [
         {
             prompt: 'How often do you have difficulty concentrating on what people are saying to you even when they are speaking to you directly?',

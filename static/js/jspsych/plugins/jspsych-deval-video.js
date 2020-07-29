@@ -1,13 +1,3 @@
-/**
- * jspsych-video-keyboard-response
- * Josh de Leeuw
- *
- * plugin for playing a video file and getting a keyboard response
- *
- * documentation: docs.jspsych.org
- *
- **/
-
 jsPsych.plugins["video-keyboard-response"] = (function() {
 
     var plugin = {};
@@ -161,6 +151,14 @@ jsPsych.plugins["video-keyboard-response"] = (function() {
       if(trial.open_instruct) {
         video_html += '<p>' + open_instruct_text_video + '</p>';
         $('video').addClass('hidden');
+
+        response.trial_events.push({
+          "event_type": 'deval_video_open',
+          "event_raw_details": 'deval_video_open',
+          "event_converted_details": "deval_video_open text appears",
+          "timestamp": jsPsych.totalTime(),
+          "time_elapsed": jsPsych.totalTime() - timestamp_onload
+        });
         
         setTimeout(function() {
           $('video').removeClass('hidden');
@@ -304,6 +302,13 @@ jsPsych.plugins["video-keyboard-response"] = (function() {
             $('p').removeClass('hidden');
             $('video').addClass('hidden');
             display_element.innerHTML = '<p>' + close_instruct_text_video + '</p>';
+            response.trial_events.push({
+              "event_type": 'deval_video_close',
+              "event_raw_details": 'deval_video_close',
+              "event_converted_details": "deval_video_close text appears",
+              "timestamp": jsPsych.totalTime(),
+              "time_elapsed": jsPsych.totalTime() - timestamp_onload
+            });
             setTimeout(function() {
               end_trial();
             }, close_instruct_latency);

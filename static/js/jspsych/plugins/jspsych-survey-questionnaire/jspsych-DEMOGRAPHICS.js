@@ -3,7 +3,7 @@ jsPsych.plugins['Demographics'] = (function () {
   
     plugin.info = {
       name: 'Demographics',
-      stage_name: 'Demographics',
+      stage_name: 'demographics',
       description: '',
       parameters: {
         questions: {
@@ -89,7 +89,7 @@ jsPsych.plugins['Demographics'] = (function () {
       }
     }
     plugin.trial = function (display_element, trial) {
-      var plugin_id_name = "jspsych-survey-multi-choice";
+      var plugin_id_name = "jspsych-survey-multi-choice-DEMOGRAPHICS";
   
       var html = "";
       var timestamp_onload = jsPsych.totalTime();
@@ -160,7 +160,7 @@ jsPsych.plugins['Demographics'] = (function () {
       }
   
       // form element
-      html += '<form id="jspsych-survey-multi-choice-form" class="jspsych-survey-multi-choice-form">';
+      html += '<form id="' + plugin_id_name + '" class="jspsych-survey-multi-choice-form">';
   
       // generate question order. this is randomized here as opposed to randomizing the order of trial.questions
       // so that the data are always associated with the same question regardless of order
@@ -419,7 +419,7 @@ jsPsych.plugins['Demographics'] = (function () {
                 </header>
                 <main class="modal__content" id="modal-1-content">
                   <p>
-                  ${popup_text_web_forms}
+                  ${popup_text_WBF}
                   </p>
                 </main>
                 <footer class="modal__footer">
@@ -716,7 +716,7 @@ jsPsych.plugins['Demographics'] = (function () {
           response.trial_events.push({
             "event_type": "error message",
             "event_raw_details": 'Error message',
-            "event_converted_details": popup_text_web_forms,
+            "event_converted_details": popup_text_WBF,
             "timestamp": jsPsych.totalTime(),
             "time_elapsed": jsPsych.totalTime() - timestamp_onload
           });

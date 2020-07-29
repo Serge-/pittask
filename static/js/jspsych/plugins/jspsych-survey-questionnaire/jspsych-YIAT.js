@@ -237,7 +237,7 @@ jsPsych.plugins['YIAT'] = (function () {
                     <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
                   </header>
                   <main class="modal__content" id="modal-1-content">
-                    <p>${popup_text_web_forms}</p>
+                    <p>${popup_text_WBF}</p>
                   </main>
                   <footer class="modal__footer">
                     <button class="modal__btn" data-micromodal-close aria-label="Close this dialog window">Close</button>
@@ -369,7 +369,7 @@ jsPsych.plugins['YIAT'] = (function () {
           response.trial_events.push({
             "event_type": "error message",
             "event_raw_details": 'Error message',
-            "event_converted_details": popup_text_web_forms,
+            "event_converted_details": popup_text_WBF,
             "timestamp": jsPsych.totalTime(),
             "time_elapsed": jsPsych.totalTime() - timestamp_onload
           });

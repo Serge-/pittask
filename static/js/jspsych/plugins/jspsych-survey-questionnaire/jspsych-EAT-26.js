@@ -320,7 +320,7 @@ jsPsych.plugins['EAT-26'] = (function () {
                   </header>
                   <main class="modal__content" id="modal-1-content">
                     <p>
-                    ${popup_text_web_forms}
+                    ${popup_text_WBF}
                     </p>
                   </main>
                   <footer class="modal__footer">
@@ -468,7 +468,7 @@ jsPsych.plugins['EAT-26'] = (function () {
           response.trial_events.push({
             "event_type": "error message",
             "event_raw_details": 'Error message',
-            "event_converted_details": popup_text_web_forms,
+            "event_converted_details": popup_text_WBF,
             "timestamp": jsPsych.totalTime(),
             "time_elapsed": jsPsych.totalTime() - timestamp_onload
           });
