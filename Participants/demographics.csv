@@ -1,0 +1,13 @@
+PIN,complete,date,calendar_time,timestamp,location,timezone,commit,version,item,response
+'00001',y,30-07-2020,12:07:17,53,local,local,dcfd592,B,1. Gender,Female
+'00001',y,30-07-2020,12:07:17,89,local,local,dcfd592,B,2a. Age (years),80
+'00001',y,30-07-2020,NA,NA,local,local,dcfd592,B,2b. Age (months),NA
+'00001',y,30-07-2020,12:07:17,122,local,local,dcfd592,B,3a. Height (cm),197
+'00001',y,30-07-2020,NA,NA,local,local,dcfd592,B,3b. Height (feet),NA
+'00001',y,30-07-2020,NA,NA,local,local,dcfd592,B,3c. Height (inches),NA
+'00001',y,30-07-2020,12:07:17,154,local,local,dcfd592,B,4a Weight(kg),81
+'00001',y,30-07-2020,NA,NA,local,local,dcfd592,B,4b Weight (lbs),NA
+'00001',y,30-07-2020,12:07:17,205,local,local,dcfd592,B,5. Education level,Primary
+'00001',y,30-07-2020,12:07:17,224,local,local,dcfd592,B,6. Marital status,Married
+'00001',y,30-07-2020,12:07:17,238,local,local,dcfd592,B,7. Employment status,Employed (full-time)
+'00001',y,30-07-2020,12:07:17,255,local,local,dcfd592,B,8. Gross annual household income (US dollars),"< $15,000"

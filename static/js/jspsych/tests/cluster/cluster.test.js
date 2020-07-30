@@ -2,11 +2,11 @@
 const { Cluster } = require('puppeteer-cluster');
 
 // const timeout = 750000;
-const timeout = 800000;
+const timeout = 3e+6;
 
 // sets number of concurrency working process
 const concurrency_number = 1;
-const headless_browser = false;
+const headless_browser = true;
  
 function delay(time) {
   return new Promise(function(resolve) { 
@@ -29,6 +29,7 @@ describe('DDG', () => {
     cluster = await Cluster.launch({
       concurrency: Cluster.CONCURRENCY_CONTEXT,
       maxConcurrency: concurrency_number,
+      monitor: false,
       puppeteerOptions: {
         headless: headless_browser,
         // slowMo: 50,
@@ -41,6 +42,7 @@ describe('DDG', () => {
 
   test('complete game', async () => {
     await cluster.task(async ({ page, data: url }) => {
+   
         await page.goto(url);
         await page.waitForSelector('#container-consent');
         await page.evaluate(() => {
@@ -81,10 +83,8 @@ describe('DDG', () => {
           '.jspsych-html-keyboard-response-stimulus'
         ];
 
-   
-        // Key Testing
+        
         await page.waitForSelector('#jspsych-html-keyboard-response-stimulus');
-
         // await page.waitFor(() => typeof(stim_duration) !== "undefined") // <== WAITING ?
         // Get global variables
         const stim_duration = await page.evaluate(() => stim_duration);
@@ -141,9 +141,13 @@ describe('DDG', () => {
         const close_instruct_pav = await page.evaluate(() => close_instruct_pav);
         const open_instruct_text_pav = await page.evaluate(() => open_instruct_text_pav);
         const close_instruct_text_pav = await page.evaluate(() => close_instruct_text_pav);
-
+        const open_instruct_transfer_test = await page.evaluate(() => open_instruct_transfer_test);
+        const close_instruct_transfer_test = await page.evaluate(() => close_instruct_transfer_test);
+        const open_instruct_text_transfer_test = await page.evaluate(() => open_instruct_text_transfer_test);
+        const close_instruct_text_transfer_test = await page.evaluate(() => close_instruct_text_transfer_test);
 
         // key_testing
+        await page.waitForSelector('#jspsych-html-keyboard-response-stimulus');
         const open_instruct_text_kt = await page.evaluate(() => document.querySelector('#jspsych-html-keyboard-response-stimulus').innerHTML);
         await expect(open_instruct_text_kt).toContain(open_instruct_text_key_testing);
         await delay(open_instruct_latency);
@@ -692,11 +696,8 @@ describe('DDG', () => {
           await page.mouse.down();
           await page.mouse.move(box.x + getRangeInt(-200, 200), box.y + box.height / 2); // move to (400, 200) coordinates
           await page.mouse.up();
-          await delay(500);
-          await page.waitForSelector("#jspsych-html-keyboard-response-stimulus");
-          let text_slider = await page.evaluate(() => document.body.textContent);
-  
-          await delay(1000);
+
+          await delay(feedback_duration + 500);
           await page.waitForSelector(".vvr-question-a");
           await delay(answer_latency);
           const innerTextOfButton_inst_cond_second = await raceSelectors(page, ['.vvr-question-left', '.vvr-question-right']);
@@ -712,9 +713,8 @@ describe('DDG', () => {
           await page.mouse.down();
           await page.mouse.move(box.x + getRangeInt(-200, 200), box.y + box.height / 2); // move to (400, 200) coordinates
           await page.mouse.up();
-          await delay(500);
-          await page.waitForSelector(".jspsych-html-keyboard-response-stimulus");
-          text_slider = await page.evaluate(() => document.body.textContent);
+          await delay(feedback_duration + 500);
+
           is_vvr_1 = await raceSelectors(page, ['.vvr_stage', '.vvr_close_instruct']);
           if(is_vvr_1 === '.vvr_close_instruct') {
             break;
@@ -730,6 +730,15 @@ describe('DDG', () => {
           await page.click(".vvr_close_instruct");
         }
 
+        if(open_instruct_transfer_test) {
+            await page.waitForSelector('#jspsych-html-keyboard-response-stimulus');
+            const open_instruct_text = await page.evaluate(() => document.querySelector('#jspsych-html-keyboard-response-stimulus').innerHTML);
+            await expect(open_instruct_text).toContain(open_instruct_text_transfer_test);
+            await delay(open_instruct_latency);
+            await page.click("#jspsych-html-keyboard-response-stimulus");
+        }
+
+        
         // transfer_test1
         await page.waitForSelector('#transfer-test');
         for (let index = 1; index < block_num_transfer_test; index++) {
@@ -741,6 +750,14 @@ describe('DDG', () => {
             await delay(ITI_duration);
           }
         };
+
+        if(close_instruct_transfer_test) {
+            await page.waitForSelector('#jspsych-html-keyboard-response-stimulus');
+            const close_instruct_text = await page.evaluate(() => document.querySelector('#jspsych-html-keyboard-response-stimulus').innerHTML);
+            await expect(close_instruct_text).toContain(close_instruct_text_transfer_test);
+            await delay(close_instruct_latency);
+            await page.click("#jspsych-html-keyboard-response-stimulus");
+        }
 
         // open_instruct_VVR2
         if(open_instruct_VVR2) {
@@ -781,12 +798,8 @@ describe('DDG', () => {
           await page.mouse.down();
           await page.mouse.move(box.x + getRangeInt(-200, 200), box.y + box.height / 2); // move to (400, 200) coordinates
           await page.mouse.up();
-          await delay(500);
-          await page.waitForSelector("#jspsych-html-keyboard-response-stimulus");
-          let text_slider = await page.evaluate(() => document.body.textContent);
-          //  expect(text_slider).toContain('Correct');
-  
-          await delay(1000);
+          await delay(feedback_duration + 500);
+
           await page.waitForSelector(".vvr-question-a");
           await delay(answer_latency);
           const innerTextOfButton_inst_cond_second = await raceSelectors(page, ['.vvr-question-left', '.vvr-question-right']);
@@ -802,10 +815,8 @@ describe('DDG', () => {
           await page.mouse.down();
           await page.mouse.move(box.x + getRangeInt(-200, 200), box.y + box.height / 2); // move to (400, 200) coordinates
           await page.mouse.up();
-          await delay(500);
-          await page.waitForSelector("#jspsych-html-keyboard-response-stimulus");
-          text_slider = await page.evaluate(() => document.body.textContent);
-          //  expect(text_slider).toContain('Correct');
+          await delay(feedback_duration + 500);
+
           is_vvr_2 = await raceSelectors(page, ['.vvr_stage', '.vvr_close_instruct']);
           if(is_vvr_2 === '.vvr_close_instruct') {
             break;
@@ -821,6 +832,14 @@ describe('DDG', () => {
           await page.click(".vvr_close_instruct");
         };
 
+        if(open_instruct_transfer_test) {
+            await page.waitForSelector('#jspsych-html-keyboard-response-stimulus');
+            const open_instruct_text = await page.evaluate(() => document.querySelector('#jspsych-html-keyboard-response-stimulus').innerHTML);
+            await expect(open_instruct_text).toContain(open_instruct_text_transfer_test);
+            await delay(open_instruct_latency);
+            await page.click("#jspsych-html-keyboard-response-stimulus");
+        }
+
 
         // transfer_test2
         await page.waitForSelector('#transfer-test');
@@ -833,6 +852,14 @@ describe('DDG', () => {
             await delay(ITI_duration);
           }
         };
+
+        if(close_instruct_transfer_test) {
+            await page.waitForSelector('#jspsych-html-keyboard-response-stimulus');
+            const close_instruct_text = await page.evaluate(() => document.querySelector('#jspsych-html-keyboard-response-stimulus').innerHTML);
+            await expect(close_instruct_text).toContain(close_instruct_text_transfer_test);
+            await delay(close_instruct_latency);
+            await page.click("#jspsych-html-keyboard-response-stimulus");
+        }
 
         // open_instruct_VVR3
         if(open_instruct_VVR3) {
@@ -873,12 +900,8 @@ describe('DDG', () => {
           await page.mouse.down();
           await page.mouse.move(box.x + getRangeInt(-200, 200), box.y + box.height / 2); // move to (400, 200) coordinates
           await page.mouse.up();
-          await delay(500);
-          await page.waitForSelector("#jspsych-html-keyboard-response-stimulus");
-          let text_slider = await page.evaluate(() => document.body.textContent);
-          //  expect(text_slider).toContain('Correct');
-  
-          await delay(1000);
+          await delay(feedback_duration + 500);
+      
           await page.waitForSelector(".vvr-question-a");
           await delay(answer_latency);
           const innerTextOfButton_inst_cond_second = await raceSelectors(page, ['.vvr-question-left', '.vvr-question-right']);
@@ -894,10 +917,8 @@ describe('DDG', () => {
           await page.mouse.down();
           await page.mouse.move(box.x + getRangeInt(-200, 200), box.y + box.height / 2); // move to (400, 200) coordinates
           await page.mouse.up();
-          await delay(500);
-          await page.waitForSelector("#jspsych-html-keyboard-response-stimulus");
-          text_slider = await page.evaluate(() => document.body.textContent);
-          //  expect(text_slider).toContain('Correct');
+          await delay(feedback_duration + 500);
+ 
           is_vvr_3 = await raceSelectors(page, ['.vvr_stage', '.vvr_close_instruct']);
           if(is_vvr_3 === '.vvr_close_instruct') {
             break;
@@ -964,7 +985,7 @@ describe('DDG', () => {
         await page.mouse.move(box.x + getRangeInt(-200, 200), box.y + box.height / 2); // move to (400, 200) coordinates
         await page.mouse.up();
         await delay(getRangeInt(300, 1000));
-        // await page.click(".confirm-button");
+
         // FHQ2 MM
         await page.waitForSelector('.ui-slider-handle');
         await delay(getRangeInt(300, 1000));
@@ -975,7 +996,7 @@ describe('DDG', () => {
         await page.mouse.move(box.x + getRangeInt(-200, 200), box.y + box.height / 2); // move to (400, 200) coordinates
         await page.mouse.up();
         await delay(getRangeInt(300, 1000));
-        // await page.click(".confirm-button");
+
         // FHQ2 BBQ
         await page.waitForSelector('.ui-slider-handle');
         await delay(getRangeInt(300, 1000));
@@ -986,7 +1007,7 @@ describe('DDG', () => {
         await page.mouse.move(box.x + getRangeInt(-200, 200), box.y + box.height / 2); // move to (400, 200) coordinates
         await page.mouse.up();
         await delay(getRangeInt(300, 1000));
-        // await page.click(".confirm-button");
+
         // FHQ2 HUNGER
         await page.waitForSelector('.ui-slider-handle');
         await delay(getRangeInt(300, 1000));
@@ -997,7 +1018,6 @@ describe('DDG', () => {
         await page.mouse.move(box.x + getRangeInt(-200, 200), box.y + box.height / 2); // move to (400, 200) coordinates
         await page.mouse.up();
         await delay(getRangeInt(300, 1000));
-        // await page.click(".confirm-button");
 
         if(close_instruct_FHQ_post_rating) {
           await page.waitForSelector('#jspsych-html-keyboard-response-stimulus');
@@ -1007,15 +1027,33 @@ describe('DDG', () => {
           await page.click("#jspsych-html-keyboard-response-stimulus");
         };
 
+        if(open_instruct_transfer_test) {
+            await page.waitForSelector('#jspsych-html-keyboard-response-stimulus');
+            const open_instruct_text = await page.evaluate(() => document.querySelector('#jspsych-html-keyboard-response-stimulus').innerHTML);
+            await expect(open_instruct_text).toContain(open_instruct_text_transfer_test);
+            await delay(open_instruct_latency);
+            await page.click("#jspsych-html-keyboard-response-stimulus");
+        };
+
          // transfer_test3
         await page.waitForSelector('#transfer-test');
-        for (let index = 0; index < block_num_transfer_test; index++) {
-            const items = ['ArrowLeft', 'ArrowRight'];
-            const item = items[Math.floor(Math.random() * items.length)];
+        for (let index = 1; index < block_num_transfer_test; index++) {
+          for (let index = 1; index < 6; index++) {
+            var items = ['ArrowLeft', 'ArrowRight'];
+            var item = items[Math.floor(Math.random() * items.length)];
             await delay(stim_duration);
             await page.keyboard.press(item);
             await delay(ITI_duration);
-        }
+          }
+        };
+        
+        if(close_instruct_transfer_test) {
+            await page.waitForSelector('#jspsych-html-keyboard-response-stimulus');
+            const close_instruct_text = await page.evaluate(() => document.querySelector('#jspsych-html-keyboard-response-stimulus').innerHTML);
+            await expect(close_instruct_text).toContain(close_instruct_text_transfer_test);
+            await delay(close_instruct_latency);
+            await page.click("#jspsych-html-keyboard-response-stimulus");
+        };
 
         // open_instruct_VVR4
         if(open_instruct_VVR4) {
@@ -1024,7 +1062,7 @@ describe('DDG', () => {
           await expect(VVR_4_text_instr_open).toContain(open_instruct_text_VVR4);
           await delay(open_instruct_latency);
           await page.click("#jspsych-html-keyboard-response-stimulus");
-        }
+        };
 
         // VVR4
         let is_vvr_4 = await raceSelectors(page, ['.vvr_stage', '.vvr_close_instruct']);
@@ -1056,12 +1094,8 @@ describe('DDG', () => {
           await page.mouse.down();
           await page.mouse.move(box.x + getRangeInt(-200, 200), box.y + box.height / 2); // move to (400, 200) coordinates
           await page.mouse.up();
-          await delay(500);
-          await page.waitForSelector("#jspsych-html-keyboard-response-stimulus");
-          let text_slider = await page.evaluate(() => document.body.textContent);
-          //  expect(text_slider).toContain('Correct');
-  
-          await delay(1000);
+          await delay(feedback_duration + 500);
+
           await page.waitForSelector(".vvr-question-a");
           await delay(answer_latency);
           const innerTextOfButton_inst_cond_second = await raceSelectors(page, ['.vvr-question-left', '.vvr-question-right']);
@@ -1077,10 +1111,8 @@ describe('DDG', () => {
           await page.mouse.down();
           await page.mouse.move(box.x + getRangeInt(-200, 200), box.y + box.height / 2); // move to (400, 200) coordinates
           await page.mouse.up();
-          await delay(500);
-          await page.waitForSelector("#jspsych-html-keyboard-response-stimulus");
-          text_slider = await page.evaluate(() => document.body.textContent);
-          //  expect(text_slider).toContain('Correct');
+          await delay(feedback_duration + 500);
+
           is_vvr_4 = await raceSelectors(page, ['.vvr_stage', '.vvr_close_instruct']);
           if(is_vvr_4 === '.vvr_close_instruct') {
             break;

@@ -219,15 +219,15 @@ var close_instruct_text_pav = "Close Instruction Pavlovian Conditioning";
 /************************************************************
  * Transfer Test
  ************************************************************/
-var open_instruct_transfer_test = false;
-var close_instruct_transfer_test = false;
+var open_instruct_transfer_test = true;
+var close_instruct_transfer_test = true;
 var open_instruct_text_transfer_test =  "<p>You have found a new vending machine. " +
-"It will sometimes be overstocked with different snacks.</p><br/> " +
-"<p>You will be able to earn snacks by tipping the machine. However, no snacks will appear on the screen.</p></br> " +
+"It will sometimes be overstocked with different snacks.</p><br> " +
+"<p>You will be able to earn snacks by tipping the machine. However, no snacks will appear on the screen.</p><br> " +
 "<p>Remember what you have learned. " +
 "Try to get as many snacks as you want. " +
 "The amount earned will be recorded.</p>" +
-"<br/><p>Press any key to begin </p>";
+"<br><p>Press any key to begin </p>";
 var close_instruct_text_transfer_test = 'Close Instruction Transfer Test'
 var block_num_transfer_test  = 4; // default 4
 /************************************************************

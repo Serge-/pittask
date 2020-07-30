@@ -1,0 +1,11 @@
+PIN,complete,date,calendar_time,timestamp,location,commit,version,item,response
+'00001',y,30-07-2020,12:07:17,172,local,dcfd592,B,1,Monthly or less
+'00001',y,30-07-2020,12:07:17,311,local,dcfd592,B,2,1 or 2
+'00001',y,30-07-2020,12:07:17,454,local,dcfd592,B,3,Monthly
+'00001',y,30-07-2020,12:07:18,486,local,dcfd592,B,4,Monthly
+'00001',y,30-07-2020,12:07:18,571,local,dcfd592,B,5,Monthly
+'00001',y,30-07-2020,12:07:18,740,local,dcfd592,B,6,Less than monthly
+'00001',y,30-07-2020,12:07:18,841,local,dcfd592,B,7,Never
+'00001',y,30-07-2020,12:07:18,936,local,dcfd592,B,8,Never
+'00001',y,30-07-2020,12:07:18,969,local,dcfd592,B,9,Yes but not in the last year
+'00001',y,30-07-2020,12:07:18,1019,local,dcfd592,B,10,Yes but not in the last year

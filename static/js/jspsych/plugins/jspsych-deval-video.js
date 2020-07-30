@@ -104,14 +104,6 @@ jsPsych.plugins["video-keyboard-response"] = (function() {
       };
       var timestamp_onload = jsPsych.totalTime();
 
-      response.trial_events.push({
-        "event_type": 'video appears',
-        "event_raw_details": counter_balancing[0].video,
-        "event_converted_details": counter_balancing[0].video + '.mp4' + " video started playing",
-        "timestamp": jsPsych.totalTime(),
-        "time_elapsed": jsPsych.totalTime() - timestamp_onload
-      });
-
       // setup stimulus
       var video_html = '<div>';
       
@@ -153,7 +145,7 @@ jsPsych.plugins["video-keyboard-response"] = (function() {
         $('video').addClass('hidden');
 
         response.trial_events.push({
-          "event_type": 'deval_video_open',
+          "event_type": 'text appears',
           "event_raw_details": 'deval_video_open',
           "event_converted_details": "deval_video_open text appears",
           "timestamp": jsPsych.totalTime(),
@@ -163,8 +155,25 @@ jsPsych.plugins["video-keyboard-response"] = (function() {
         setTimeout(function() {
           $('video').removeClass('hidden');
           $('p').addClass('hidden');
+          response.trial_events.push({
+            "event_type": 'video appears',
+            "event_raw_details": counter_balancing[0].video,
+            "event_converted_details": counter_balancing[0].video + '.mp4' + " video started playing",
+            "timestamp": jsPsych.totalTime(),
+            "time_elapsed": jsPsych.totalTime() - timestamp_onload
+          });
         }, open_instruct_latency);
+      } else {
+        response.trial_events.push({
+          "event_type": 'video appears',
+          "event_raw_details": counter_balancing[0].video,
+          "event_converted_details": counter_balancing[0].video + '.mp4' + " video started playing",
+          "timestamp": jsPsych.totalTime(),
+          "time_elapsed": jsPsych.totalTime() - timestamp_onload
+        });
       }
+
+
 
       video_html += "</div>";
   
@@ -303,7 +312,7 @@ jsPsych.plugins["video-keyboard-response"] = (function() {
             $('video').addClass('hidden');
             display_element.innerHTML = '<p>' + close_instruct_text_video + '</p>';
             response.trial_events.push({
-              "event_type": 'deval_video_close',
+              "event_type": 'text appears',
               "event_raw_details": 'deval_video_close',
               "event_converted_details": "deval_video_close text appears",
               "timestamp": jsPsych.totalTime(),

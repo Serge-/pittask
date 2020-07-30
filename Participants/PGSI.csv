@@ -1,0 +1,10 @@
+PIN,complete,date,calendar_time,timestamp,location,commit,version,item,response
+'00001',y,30-07-2020,12:07:17,215,local,dcfd592,B,1,Most of the time
+'00001',y,30-07-2020,12:07:17,332,local,dcfd592,B,2,Most of the time
+'00001',y,30-07-2020,12:07:17,434,local,dcfd592,B,3,Almost always
+'00001',y,30-07-2020,12:07:18,552,local,dcfd592,B,4,Never
+'00001',y,30-07-2020,12:07:18,648,local,dcfd592,B,5,Sometimes
+'00001',y,30-07-2020,12:07:18,763,local,dcfd592,B,6,Sometimes
+'00001',y,30-07-2020,12:07:18,828,local,dcfd592,B,7,Almost always
+'00001',y,30-07-2020,12:07:18,862,local,dcfd592,B,8,Most of the time
+'00001',y,30-07-2020,12:07:18,881,local,dcfd592,B,9,Sometimes

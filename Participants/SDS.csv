@@ -1,0 +1,7 @@
+PIN,complete,date,calendar_time,timestamp,location,commit,version,item,response
+'00001',y,30-07-2020,12:07:17,151,local,dcfd592,B,WORK*,3
+'00001',y,30-07-2020,NA,NA,local,dcfd592,B,Not worked/studied,not checked
+'00001',y,30-07-2020,12:07:17,236,local,dcfd592,B,SOCIAL*,1
+'00001',y,30-07-2020,12:07:17,318,local,dcfd592,B,FAMILY*,1
+'00001',y,30-07-2020,12:07:17,337,local,dcfd592,B,DAYS LOST**,5
+'00001',y,30-07-2020,12:07:17,346,local,dcfd592,B,DAYS UNPRODUCTIVE**,5

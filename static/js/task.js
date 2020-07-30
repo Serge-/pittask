@@ -304,7 +304,7 @@ var KEY_TESTING_CLOSE = {
 }
 
 var FHR_timestamp = 0;
-var FHQ_PRE_1 = {
+var FHQ1_1 = {
     stage_name: "FHQ1",
     type: 'food-and-hunger-questions',
     stimulus: '/static/images/TT.png',
@@ -319,7 +319,7 @@ var FHQ_PRE_1 = {
     event_converted_details: 'TT scale'
 }
 
-var FHQ_PRE_2 = {
+var FHQ1_2 = {
     stage_name: "FHQ1",
     type: 'food-and-hunger-questions',
     stimulus: '/static/images/MM.png',
@@ -334,7 +334,7 @@ var FHQ_PRE_2 = {
     event_converted_details: 'MM scale'
 }
 
-var FHQ_PRE_3 = {
+var FHQ1_3 = {
     stage_name: "FHQ1",
     type: 'food-and-hunger-questions',
     stimulus: '/static/images/BBQ.png',
@@ -349,7 +349,7 @@ var FHQ_PRE_3 = {
     event_converted_details: 'BBQ scale'
 }
 
-var FHQ_PRE_4 = {
+var FHQ1_4 = {
     stage_name: "FHQ1",
     type: 'food-and-hunger-questions',
     stimulus: 'hunger',
@@ -363,7 +363,7 @@ var FHQ_PRE_4 = {
     event_converted_details: 'Hunger scale'
 }
 
-var FHQ_PRE_INSTRUCT_OPEN = {
+var FHQ1_OPEN = {
     timeline: [{
         stage_name: 'FHQ1_open',
         type: 'html-keyboard-response',
@@ -380,7 +380,7 @@ var FHQ_PRE_INSTRUCT_OPEN = {
     }
 };
 
-var FHQ_PRE_INSTRUCT_CLOSE = {
+var FHQ1_CLOSE = {
     timeline: [{
         stage_name: 'FHQ1_close',
         type: 'html-keyboard-response',
@@ -397,7 +397,7 @@ var FHQ_PRE_INSTRUCT_CLOSE = {
     }
 };
 
-var FHQ_POST_1 = {
+var FHQ2_1 = {
     stage_name: "FHQ2",
     type: 'food-and-hunger-questions',
     stimulus: '/static/images/TT.png',
@@ -412,7 +412,7 @@ var FHQ_POST_1 = {
     event_converted_details: 'TT scale'
 }
 
-var FHQ_POST_2 = {
+var FHQ2_2 = {
     stage_name: "FHQ2",
     type: 'food-and-hunger-questions',
     stimulus: '/static/images/MM.png',
@@ -427,7 +427,7 @@ var FHQ_POST_2 = {
     event_converted_details: 'MM scale'
 }
 
-var FHQ_POST_3 = {
+var FHQ2_3 = {
     stage_name: "FHQ2",
     type: 'food-and-hunger-questions',
     stimulus: '/static/images/BBQ.png',
@@ -442,7 +442,7 @@ var FHQ_POST_3 = {
     event_converted_details: 'BBQ scale'
 }
 
-var FHQ_POST_4 = {
+var FHQ2_4 = {
     stage_name: "FHQ2",
     type: 'food-and-hunger-questions',
     stimulus: 'hunger',
@@ -456,7 +456,7 @@ var FHQ_POST_4 = {
     event_converted_details: 'Hunger scale'
 };
 
-var FHQ_POST_INSTRUCT_OPEN = {
+var FHQ2_OPEN = {
     timeline: [{
         stage_name: 'FHQ2_open',
         type: 'html-keyboard-response',
@@ -473,7 +473,7 @@ var FHQ_POST_INSTRUCT_OPEN = {
     }
 };
 
-var FHQ_POST_INSTRUCT_CLOSE = {
+var FHQ2_CLOSE = {
     timeline: [{
         stage_name: 'FHQ2_close',
         type: 'html-keyboard-response',
@@ -876,7 +876,7 @@ var VVR_4 = {
 };
 
 
-var CLINICAL_OPEN = {
+var WBF_OPEN = {
     stage_name: 'WBF_open',
     type: 'html-keyboard-response',
     stimulus: open_instruct_text_WBF,
@@ -888,7 +888,7 @@ var CLINICAL_OPEN = {
     event_converted_details: 'WBF_open text appears'
 };
 
-var CLINICAL_CLOSE = {
+var WBF_CLOSE = {
     stage_name: 'WBF_close',
     type: 'html-keyboard-response',
     stimulus: close_instruct_text_WBF,
@@ -900,7 +900,7 @@ var CLINICAL_CLOSE = {
     event_converted_details: 'WBF_close text appears'
 };
 
-var SYMPTOM_INVENTORY_INSTRUCT_OPEN = {
+var INVENTORY_OPEN = {
     timeline: [{
         stage_name: 'inventory_open',
         type: 'html-keyboard-response',
@@ -917,7 +917,7 @@ var SYMPTOM_INVENTORY_INSTRUCT_OPEN = {
     }
 };
 
-var SYMPTOM_INVENTORY_INSTRUCT_CLOSE = {
+var INVENTORY_CLOSE = {
     timeline: [{
         stage_name: 'inventory_close',
         type: 'html-keyboard-response',
@@ -1089,7 +1089,7 @@ var PAV_TEST_INSTRUCT_CLOSE = {
     }
 };
 
-var PAV_CONDITIONING = {
+var PAV_CON = {
     timeline: [
         PAV_TEST_INSTRUCT_OPEN,
         PAV_CONDITIONING_MAIN, 
@@ -1098,7 +1098,7 @@ var PAV_CONDITIONING = {
 };
 
 
-var TRANSFER_TEST1 = {
+var TRANSFER1 = {
     timeline: [
         {
             timeline: [{
@@ -1143,7 +1143,7 @@ var TRANSFER_TEST1 = {
     ]
 };
 
-var TRANSFER_TEST2 = {
+var TRANSFER2 = {
     timeline: [
         {
             timeline: [{
@@ -1188,7 +1188,7 @@ var TRANSFER_TEST2 = {
     ]
 };
 
-var TRANSFER_TEST3 = {
+var TRANSFER3 = {
     timeline: [
         {
             timeline: [{
@@ -1342,31 +1342,31 @@ timeline.push(KEY_TESTING_OPEN, KEY_TESTING, KEY_TESTING_CLOSE);
 // Demographics
 timeline.push(DEMOGRAPHICS);
 // Intro: We'd like to briefly ask you about some symptoms before the online game.
-timeline.push(CLINICAL_OPEN);
-timeline.push(SYMPTOM_INVENTORY_INSTRUCT_OPEN);
+timeline.push(WBF_OPEN);
+timeline.push(INVENTORY_OPEN);
 // Symptom Inventories
 for(var item of symptom_inventory_arr){
     timeline.push(item);
 }
-timeline.push(SYMPTOM_INVENTORY_INSTRUCT_CLOSE);
+timeline.push(INVENTORY_CLOSE);
 // SDS
 timeline.push(SDS);
 // ICAR
 timeline.push(ICAR);
 // Close: That's it for the symptom questions. Now we're ready to start the online game
-timeline.push(CLINICAL_CLOSE);
+timeline.push(WBF_CLOSE);
 // Food & Hunger Questions pre-rating
-timeline.push(FHQ_PRE_INSTRUCT_OPEN, FHQ_PRE_1, FHQ_PRE_2, FHQ_PRE_3, FHQ_PRE_4, FHQ_PRE_INSTRUCT_CLOSE);
+timeline.push(FHQ1_OPEN, FHQ1_1, FHQ1_2, FHQ1_3, FHQ1_4, FHQ1_CLOSE);
 // Pavlovian Condition
-timeline.push(PAV_CONDITIONING);
+timeline.push(PAV_CON);
 //  Instrumental Conditioning (VVR_copy_1)
 timeline.push(VVR_1);
 // Transfer Test
-timeline.push(TRANSFER_TEST1);
+timeline.push(TRANSFER1);
 // Instrumental Degradation (VVR_copy_2)
 timeline.push(VVR_2);
 // Transfer Test 2
-timeline.push(TRANSFER_TEST2);
+timeline.push(TRANSFER2);
 // Instrumental Restoration (VVR_copy_3)
 timeline.push(VVR_3);
 // Deval Video
@@ -1374,9 +1374,9 @@ timeline.push(DEVAL_VIDEO);
 // Deval Test
 timeline.push(DEVAL_TEST);
 // Food & Hunger Questions post-rating
-timeline.push(FHQ_POST_INSTRUCT_OPEN, FHQ_POST_1, FHQ_POST_2, FHQ_POST_3, FHQ_POST_4, FHQ_POST_INSTRUCT_CLOSE);
+timeline.push(FHQ2_OPEN, FHQ2_1, FHQ2_2, FHQ2_3, FHQ2_4, FHQ2_CLOSE);
 // Transfer Test 3
-timeline.push(TRANSFER_TEST3);
+timeline.push(TRANSFER3);
 // Instrumental Reinstatement (VVR_copy_4)
 timeline.push(VVR_4);
 //  Close HIT Questions

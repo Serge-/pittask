@@ -1,0 +1,136 @@
+PIN,complete,date,calendar_time,location,commit,version,parameter_name,parameter_value
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,re_captcha,FALSE
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,re_captcha_duration,15
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,full_screen_mode,FALSE
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,open_instruct_latency,1500
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,close_instruct_latency,1500
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,outcome_duration,1000
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,stim_duration,3000
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,ITI_duration,500
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,interval_duration,1500
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,interval_num,60
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,answer_latency_countdown,TRUE
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,answer_latency,1000
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,answer_latency_text,please wait for a moment till you can answer the question...
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,correct_text,Correct!
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,incorrect_text,Incorrect!
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,feedback_duration,1000
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,popup_text_behav,Please provide your answer prior to submission.
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,popup_text_WBF,"Sorry, all questions need to be answered prior to submission."
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,shake_right_rotate,15
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,shake_right_translateX,5
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,shake_left_rotate,-15
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,shake_left_translateX,-5
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,shake_return_time,300
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,shake_transition,0.05
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,left_tilt,37
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,right_tilt,39
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,open_instruct_text_key_testing,<p>This is a key-testing stage.</p> <p>We need to check whether key presses on your keyboard can be registered.</p> <p>Press any key when you are ready.</p>
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,close_instruct_text_key_testing,<p>Thank you for your patience.</p> <p>Press any key when you are ready to start the experiment.</p>
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,open_instruct_WBF,TRUE
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,close_instruct_WBF,TRUE
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,open_instruct_text_WBF,<p>We'd like to briefly ask you about some symptoms before the online game. <br> Press any key when you are ready. </p>
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,close_instruct_text_WBF,<p>That's it for the symptom questions. Now we're ready to start the online game. <br> Press any key when you are ready. </p>
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,open_instruct_demographics,FALSE
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,close_instruct_demographics,FALSE
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,open_instruct_text_demographics,Demographics open
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,close_instruct_text_demographics,Demographics close
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,open_instruct_inventory,TRUE
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,close_instruct_inventory,TRUE
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,open_instruct_text_inventory,Symptom inventories open
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,close_instruct_text_inventory,Symptom inventories close
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,open_instruct_SDS,FALSE
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,close_instruct_SDS,FALSE
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,open_instruct_text_SDS,SDS open
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,close_instruct_text_SDS,SDS close
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,open_instruct_ICAR,FALSE
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,close_instruct_ICAR,FALSE
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,open_instruct_text_ICAR,ICAR open
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,close_instruct_text_ICAR,ICAR close
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,inventory_rand,TRUE
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,symptom_inventory,"OCI-R, MOVES, DASS, ASRS-5, EAT-26, RAADS-14, PHQ-9, GAD-7, LSAS, ASRM, PC-PTSD-5, PRIME-R, AUDIT, PGSI, YIAT, SMOKING STATUS, ISI, PID-5-BF"
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,video_duration,15
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,video_sound,TRUE
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,open_instruct_video,TRUE
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,open_instruct_text_video,One of the snacks has been infested.
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,close_instruct_video,TRUE
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,close_instruct_text_video,Thank you!
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,open_instruct_FHQ_pre_rating,TRUE
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,close_instruct_FHQ_pre_rating,TRUE
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,open_instruct_text_FHQ_pre_rating,Open Instruction Food and Hunger Questions
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,close_instruct_text_FHQ_pre_rating,Close Instruction Food and Hunger Questions
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,open_instruct_FHQ_post_rating,TRUE
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,close_instruct_FHQ_post_rating,TRUE
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,open_instruct_text_FHQ_post_rating,Open Instruction Food and Hunger Questions
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,close_instruct_text_FHQ_post_rating,Close Instruction Food and Hunger Questions
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,FHQ_1,How much do you like Tiny Teddies?
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,FHQ_2,How much do you like M&Ms?
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,FHQ_3,How much do you like BBQ shapes?
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,FHQ_4,How hungry do you feel right now?
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,FHQ_1_bottom_text,Rate the pleasantness of Tiny Teddies
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,FHQ_2_bottom_text,Rate the pleasantness of M&Ms
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,FHQ_3_bottom_text,Rate the pleasantness of BBQ shapes
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,FHQ_VAS_left,Very Unpleasant
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,FHQ_VAS_center,""
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,FHQ_VAS_right,Very Pleasant
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,FHQ_VAS_left_hungry,Not at All
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,FHQ_VAS_right_hungry,Extremely
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,VVR_q_text_a1,Which directions did you tilt to get
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,VVR_q_text_a2,Press Left or Right button
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,VVR_q_text_b1,How strongly do you believe in your answer?
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,VVR_q_text_b2,Very little
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,VVR_q_text_b3,Very much
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,VVR_q_text_b4,<li>Please click anywhere on the line to answer this question.</li>
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,open_instruct_VVR1,TRUE
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,close_instruct_VVR1,TRUE
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,open_instruct_text_VVR1,You may now interact with the vending machine to earn snacks.
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,close_instruct_text_VVR1,Thank you for your input. Proceeding to the next stage.
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,degrad_pattern_VVR1,"d0, d0, d0, d0, d0, d0"
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,prob_value_VVR1,"0.6, 0.6, 0.6, 0.6, 0.6, 0.6"
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,min_blocks_num_VVR1,4
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,min_num_correct_VVR1,6
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,max_num_incorrect_VVR1,4
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,open_instruct_VVR2,TRUE
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,close_instruct_VVR2,TRUE
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,open_instruct_text_VVR2,You may now interact with the vending machine to earn snacks.
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,close_instruct_text_VVR2,Thank you for your input. Proceeding to the next stage.
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,degrad_pattern_VVR2,"d1, d2, d2, d1, d1, d2"
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,prob_value_VVR2,"0.6, 0.6, 0.6, 0.6, 0.6, 0.6"
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,min_blocks_num_VVR2,4
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,min_num_correct_VVR2,6
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,max_num_incorrect_VVR2,4
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,open_instruct_VVR3,TRUE
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,close_instruct_VVR3,TRUE
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,open_instruct_text_VVR3,You may now interact with the vending machine to earn snacks.
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,close_instruct_text_VVR3,Thank you for your input. Proceeding to the next stage.
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,degrad_pattern_VVR3,"d0, d0, d0, d0, d0, d0"
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,prob_value_VVR3,"0.6, 0.6, 0.6, 0.6, 0.6, 0.6"
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,min_blocks_num_VVR3,4
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,min_num_correct_VVR3,6
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,max_num_incorrect_VVR3,4
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,open_instruct_VVR4,TRUE
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,close_instruct_VVR4,TRUE
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,open_instruct_text_VVR4,You can now interact with the vending machine to earn snacks.
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,close_instruct_text_VVR4,"Some text for close instructions VVR ""instrumental conditioning."
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,degrad_pattern_VVR4,"d2, d2, d2"
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,prob_value_VVR4,"1, 1, 1"
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,min_blocks_num_VVR4,3
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,min_num_correct_VVR4,4
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,max_num_incorrect_VVR4,2
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,open_instruct_pav,TRUE
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,close_instruct_pav,TRUE
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,open_instruct_text_pav,"<p>The vending machine cannot be tipped now. However, when the machine is overstocked a free snack will fall out.</p><br><p>Coloured lights will appear on the front of the machine when it is overstocked. Watch the lights and learn which snack will fall out.</p><br><p>Questionnaires will test what you have learnt.</p><br><p>Press any key to begin </p>"
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,min_num_correct_pav,2
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,max_num_incorrect_pav,4
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,close_instruct_text_pav,Close Instruction Pavlovian Conditioning
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,open_instruct_transfer_test,TRUE
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,close_instruct_transfer_test,TRUE
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,open_instruct_text_transfer_test,"<p>You have found a new vending machine. It will sometimes be overstocked with different snacks.</p><br> <p>You will be able to earn snacks by tipping the machine. However, no snacks will appear on the screen.</p><br> <p>Remember what you have learned. Try to get as many snacks as you want. The amount earned will be recorded.</p><br><p>Press any key to begin </p>"
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,close_instruct_text_transfer_test,Close Instruction Transfer Test
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,block_num_transfer_test,4
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,close_instruct_text_thanks,<p>Thank you!</p><p>Press any key to return to the Amazon Mechanical Turk page.</p><p>This window will close automatically after any keypress on the keyboard.</p><p>Please do NOT close the window by clicking on the ‘X’ at the top right corner of this window</p>
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,open_instruct_deval_test,TRUE
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,close_instruct_deval_test,TRUE
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,open_instruct_text_deval_test,Open Instruction Deval Test
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,close_instruct_text_deval_test,Close Instruction Deval Test
+'00001',y,30-07-2020,12:07:17,local,dcfd592,B,deval_test_duration,12000

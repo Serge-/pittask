@@ -1,0 +1,8 @@
+PIN,complete,date,calendar_time,timestamp,location,commit,version,item,response
+'00001',y,30-07-2020,12:07:17,331,local,dcfd592,B,1,4
+'00001',y,30-07-2020,12:07:17,400,local,dcfd592,B,2,0
+'00001',y,30-07-2020,12:07:18,467,local,dcfd592,B,3,3
+'00001',y,30-07-2020,12:07:18,518,local,dcfd592,B,4,2
+'00001',y,30-07-2020,12:07:17,116,local,dcfd592,B,1 (falling),4
+'00001',y,30-07-2020,12:07:17,198,local,dcfd592,B,1 (staying),0
+'00001',y,30-07-2020,12:07:17,299,local,dcfd592,B,1 (waking),0

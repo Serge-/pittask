@@ -1,0 +1,32 @@
+PIN,complete,date,calendar_time,timestamp,location,commit,version,item,response
+'00001',y,30-07-2020,12:07:17,252,local,dcfd592,B,1,Rarely
+'00001',y,30-07-2020,12:07:17,331,local,dcfd592,B,2,Sometimes
+'00001',y,30-07-2020,12:07:17,421,local,dcfd592,B,3,Rarely
+'00001',y,30-07-2020,12:07:18,500,local,dcfd592,B,4,Rarely
+'00001',y,30-07-2020,12:07:18,548,local,dcfd592,B,5,Usually
+'00001',y,30-07-2020,12:07:18,617,local,dcfd592,B,6,Sometimes
+'00001',y,30-07-2020,12:07:18,637,local,dcfd592,B,7,Usually
+'00001',y,30-07-2020,12:07:18,681,local,dcfd592,B,8,Usually
+'00001',y,30-07-2020,12:07:18,732,local,dcfd592,B,9,Sometimes
+'00001',y,30-07-2020,12:07:18,781,local,dcfd592,B,10,Rarely
+'00001',y,30-07-2020,12:07:18,867,local,dcfd592,B,11,Usually
+'00001',y,30-07-2020,12:07:18,948,local,dcfd592,B,12,Often
+'00001',y,30-07-2020,12:07:18,998,local,dcfd592,B,13,Sometimes
+'00001',y,30-07-2020,12:07:18,1082,local,dcfd592,B,14,Often
+'00001',y,30-07-2020,12:07:18,1182,local,dcfd592,B,15,Often
+'00001',y,30-07-2020,12:07:18,1249,local,dcfd592,B,16,Rarely
+'00001',y,30-07-2020,12:07:18,1335,local,dcfd592,B,17,Usually
+'00001',y,30-07-2020,12:07:18,1436,local,dcfd592,B,18,Always
+'00001',y,30-07-2020,12:07:19,1531,local,dcfd592,B,19,Always
+'00001',y,30-07-2020,12:07:19,1633,local,dcfd592,B,20,Rarely
+'00001',y,30-07-2020,12:07:19,1702,local,dcfd592,B,21,Rarely
+'00001',y,30-07-2020,12:07:19,1750,local,dcfd592,B,22,Sometimes
+'00001',y,30-07-2020,12:07:19,1797,local,dcfd592,B,23,Sometimes
+'00001',y,30-07-2020,12:07:19,1847,local,dcfd592,B,24,Sometimes
+'00001',y,30-07-2020,12:07:19,1946,local,dcfd592,B,25,Sometimes
+'00001',y,30-07-2020,12:07:19,1981,local,dcfd592,B,26,Always
+'00001',y,30-07-2020,12:07:19,2016,local,dcfd592,B,A,Never
+'00001',y,30-07-2020,12:07:19,2097,local,dcfd592,B,B,2-3 times a month
+'00001',y,30-07-2020,12:07:19,2182,local,dcfd592,B,C,2-3 times a month
+'00001',y,30-07-2020,12:07:19,2248,local,dcfd592,B,D,Once a month or less
+'00001',y,30-07-2020,12:07:19,2269,local,dcfd592,B,E,Yes
