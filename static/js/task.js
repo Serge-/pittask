@@ -150,6 +150,8 @@ resubmit = function() {
     });
 };
 
+var images = ['/static/images/BBQ.png', '/static/images/TT.png', '/static/images/MM.png', '/static/images/EMPTY.png', '/static/images/audit_image.jpg'];
+
 var DEMOGRAPHICS_INSTRUCT_OPEN = {
     timeline: [{
         stage_name: 'demographics_open',
@@ -1386,7 +1388,8 @@ timeline.push(THANKS)
 
 function startExperiment(){
     jsPsych.init({
-			timeline: timeline,
+            timeline: timeline,
+            preload_images: images,
             // on_finish: function(){ jsPsych.data.displayData(); }, // Debug
             on_finish: function() {
                 psiTurk.saveData({
