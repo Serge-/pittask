@@ -195,19 +195,6 @@ var min_blocks_num_VVR3 = 2;
 var min_num_correct_VVR3 = 2;
 var max_num_incorrect_VVR3 = 4;
 /************************************************************
- * Instrumental reinstatement [VVR_4]
- ************************************************************/
-// TO SERGE: Can the VVR4 parameters in here be deleted? (Since VOR will be replacing VVR4 and we don't need VVR4 anymore)
-var open_instruct_VVR4 = true;
-var close_instruct_VVR4 = true;
-var open_instruct_text_VVR4 = 'You can now interact with the vending machine to earn snacks.';
-var close_instruct_text_VVR4 = 'Some text for close instructions VVR "instrumental conditioning.';
-var degrad_pattern_VVR4 = ['d2', 'd2', 'd2'];
-var prob_value_VVR4 = [1, 1, 1];
-var min_blocks_num_VVR4 = 3;
-var min_num_correct_VVR4 = 4;
-var max_num_incorrect_VVR4 = 2;
-/************************************************************
  * Pavlovian Conditioning
  ************************************************************/
 var open_instruct_pav = true;
@@ -254,6 +241,10 @@ var open_instruct_text_deval_test =  "<p>The vending machine is still overflowin
 "<p>Press any key to begin. </p>";
 var close_instruct_text_deval_test = 'Close Instruction Deval Test'
 var deval_test_duration = 60000; // default 120000
+/************************************************************
+ * Close HIT Questions
+ ************************************************************/
+var close_instruct_text_close_HIT_q = 'Thank you for your participation!'
 /************************************************************
  * Thanks
  ************************************************************/

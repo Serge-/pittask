@@ -145,16 +145,6 @@ jsPsych.plugins['parameters'] = (function(){
             "min_num_correct_VVR3": min_num_correct_VVR3,
             "max_num_incorrect_VVR3": max_num_incorrect_VVR3,
 
-            "open_instruct_VVR4": open_instruct_VVR4,
-            "close_instruct_VVR4": close_instruct_VVR4,
-            "open_instruct_text_VVR4": open_instruct_text_VVR4,
-            "close_instruct_text_VVR4": close_instruct_text_VVR4,
-            "degrad_pattern_VVR4": "",
-            "prob_value_VVR4": "",
-            "min_blocks_num_VVR4": min_blocks_num_VVR4,
-            "min_num_correct_VVR4": min_num_correct_VVR4,
-            "max_num_incorrect_VVR4": max_num_incorrect_VVR4,
-
             "open_instruct_pav": open_instruct_pav,
             "close_instruct_pav": close_instruct_pav,
             "open_instruct_text_pav": open_instruct_text_pav,
@@ -174,7 +164,9 @@ jsPsych.plugins['parameters'] = (function(){
             "close_instruct_deval_test": close_instruct_deval_test,
             "open_instruct_text_deval_test": open_instruct_text_deval_test,
             "close_instruct_text_deval_test": close_instruct_text_deval_test, 
-            "deval_test_duration": deval_test_duration
+            "deval_test_duration": deval_test_duration,
+
+            "close_instruct_text_close_HIT_q": close_instruct_text_close_HIT_q
         };
 
         symptom_inventory.forEach(function(element, index) {
@@ -194,12 +186,10 @@ jsPsych.plugins['parameters'] = (function(){
         array_extraction(degrad_pattern_VVR1, 'degrad_pattern_VVR1');
         array_extraction(degrad_pattern_VVR2, 'degrad_pattern_VVR2');
         array_extraction(degrad_pattern_VVR3, 'degrad_pattern_VVR3');
-        array_extraction(degrad_pattern_VVR4, 'degrad_pattern_VVR4');
 
         array_extraction(prob_value_VVR1, 'prob_value_VVR1');
         array_extraction(prob_value_VVR2, 'prob_value_VVR2');
         array_extraction(prob_value_VVR3, 'prob_value_VVR3');
-        array_extraction(prob_value_VVR4, 'prob_value_VVR4');
 
         var trial_data = {
             "stage_name": "Parameters",
