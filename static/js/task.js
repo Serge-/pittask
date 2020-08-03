@@ -288,8 +288,8 @@ var KEY_TESTING = {
     stimulus: '',
     trial_duration: null,
     response_ends_trial: false,
-    event_type: 'image appears',
-    event_raw_details: 'key_testing_close',
+    event_type: 'text image appears',
+    event_raw_details: 'blank vending machine, text',
     event_converted_details: 'blank vending machine appears'
 }
 
@@ -503,7 +503,7 @@ var item_id = 0;
 var vvr_timer = 0;
 
 var vvr_1_vars = {
-    stage_name: 'VVR_1',
+    stage_name: 'VVR1',
     min_blocks_num: min_blocks_num_VVR1,
     min_num_correct: min_num_correct_VVR1,
     max_num_incorrect: max_num_incorrect_VVR1,
@@ -512,7 +512,7 @@ var vvr_1_vars = {
 };
 
 var vvr_2_vars = {
-    stage_name: 'VVR_2',
+    stage_name: 'VVR2',
     min_blocks_num: min_blocks_num_VVR2,
     min_num_correct: min_num_correct_VVR2,
     max_num_incorrect: max_num_incorrect_VVR2,
@@ -521,21 +521,12 @@ var vvr_2_vars = {
 };
 
 var vvr_3_vars = {
-    stage_name: 'VVR_3',
+    stage_name: 'VVR3',
     min_blocks_num: min_blocks_num_VVR3,
     min_num_correct: min_num_correct_VVR3,
     max_num_incorrect: max_num_incorrect_VVR3,
     prob_value: prob_value_VVR3,
     degrad_pattern: degrad_pattern_VVR3
-};
-
-var vvr_4_vars = {
-    stage_name: 'VVR_4',
-    min_blocks_num: min_blocks_num_VVR4,
-    min_num_correct: min_num_correct_VVR4,
-    max_num_incorrect: max_num_incorrect_VVR4,
-    prob_value: prob_value_VVR4,
-    degrad_pattern: degrad_pattern_VVR4
 };
 
 var VVR = function(data) {
@@ -729,7 +720,7 @@ var VVR = function(data) {
     return loop_node_VVR;
 };
 
-var VVR_1 = {
+var VVR1 = {
     timeline: [
         {
             timeline: [{ 
@@ -766,7 +757,7 @@ var VVR_1 = {
     ]
 };
 
-var VVR_2 = {
+var VVR2 = {
     timeline: [
         {
             timeline: [{ 
@@ -803,7 +794,7 @@ var VVR_2 = {
     ]
 };
 
-var VVR_3 = {
+var VVR3 = {
     timeline: [
         {
             timeline: [{ 
@@ -839,44 +830,6 @@ var VVR_3 = {
         }
     ]
 };
-
-var VVR_4 = {
-    timeline: [
-        {
-            timeline: [{ 
-                stage_name: 'VVR4_open',
-                type: 'html-keyboard-response',
-                stimulus: open_instruct_text_VVR4,
-                trial_latency: open_instruct_latency,
-                response_ends_trial: false,
-                event_type: 'text appears',
-                event_raw_details: 'open_instruct_text_VVR4',
-                event_converted_details: 'VVR4_open text appears'
-            }],
-            conditional_function: function(){
-                return  open_instruct_VVR4;
-            }
-        },
-        VVR(vvr_4_vars),
-        {
-            timeline: [{
-                stage_name: 'VVR4_close',
-                type: 'html-keyboard-response',
-                stimulus: close_instruct_text_VVR4,
-                trial_latency: close_instruct_latency,
-                response_ends_trial: false,
-                event_type: 'text appears',
-                id: 'vvr_close_instruct',
-                event_raw_details: 'close_instruct_text_VVR4',
-                event_converted_details: 'VVR4_close text appears'
-            }],
-            conditional_function: function(){
-                return close_instruct_VVR4;
-            }
-        }
-    ]
-};
-
 
 var WBF_OPEN = {
     stage_name: 'WBF_open',
@@ -1300,7 +1253,7 @@ var DEVAL_TEST = {
 var CLOSE_HIT = {
     stage_name: 'close_HIT_q',
     type: 'close-hit-questions',
-    preamble: 'Thank you for helping us to research OCD. We could not do this without you.',
+    preamble: close_instruct_text_close_HIT_q,
     questions: [
         { prompt: "Would you like to receive information on the outcomes of the research?", horizontal: true, name: 'response', options: ['Yes', 'No'] },
         { prompt: "Could we contact you about future research projects?", horizontal: true, name: 'response', options: ['Yes', 'No'] },
@@ -1361,16 +1314,16 @@ timeline.push(WBF_CLOSE);
 timeline.push(FHQ1_OPEN, FHQ1_1, FHQ1_2, FHQ1_3, FHQ1_4, FHQ1_CLOSE);
 // Pavlovian Condition
 timeline.push(PAV_CON);
-//  Instrumental Conditioning (VVR_copy_1)
-timeline.push(VVR_1);
+//  Instrumental Conditioning (VVR1)
+timeline.push(VVR1);
 // Transfer Test
 timeline.push(TRANSFER1);
-// Instrumental Degradation (VVR_copy_2)
-timeline.push(VVR_2);
+// Instrumental Degradation (VVR2)
+timeline.push(VVR2);
 // Transfer Test 2
 timeline.push(TRANSFER2);
-// Instrumental Restoration (VVR_copy_3)
-timeline.push(VVR_3);
+// Instrumental Restoration (VVR3)
+timeline.push(VVR3);
 // Deval Video
 timeline.push(DEVAL_VIDEO);
 // Deval Test
@@ -1379,8 +1332,6 @@ timeline.push(DEVAL_TEST);
 timeline.push(FHQ2_OPEN, FHQ2_1, FHQ2_2, FHQ2_3, FHQ2_4, FHQ2_CLOSE);
 // Transfer Test 3
 timeline.push(TRANSFER3);
-// Instrumental Reinstatement (VVR_copy_4)
-timeline.push(VVR_4);
 //  Close HIT Questions
 timeline.push(CLOSE_HIT);
 // Thanks
