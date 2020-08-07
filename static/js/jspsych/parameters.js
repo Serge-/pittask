@@ -112,15 +112,15 @@ var symptom_inventory = [
 var video_duration = 30;
 var video_sound = false;
 var open_instruct_video = true;
-var open_instruct_text_video = '<p>Watch and see what happened to one of the snacks.</p><br/>' + '<p> press any key to begin.</p>';
+var open_instruct_text_video = '<p>Watch and see what happened to one of the snacks.</p><br>' + '<p> press any key to begin.</p>';
 var close_instruct_video = true;
 var close_instruct_text_video = "<p>The vending machine is still overflowing, " +
-"and you can tip it again now.</p><br/> " +
-"<p>The coloured lights will sometimes appear.</p></br> " +
+"and you can tip it again now.</p><br> " +
+"<p>The coloured lights will sometimes appear.</p><br> " +
 "<p>You won't always see the snack fall out. " +
-"All the snacks you get will be recorded.</p><br/>" +
+"All the snacks you get will be recorded.</p><br>" +
 "<p>Get all the snacks that you want!</p>" +
-"<br/><p>Press any key to begin. </p>"
+"<br><p>Press any key to begin. </p>"
 /************************************************************
  * =================== BEHAVIOURAL STAGES ===================
  ************************************************************
@@ -163,7 +163,7 @@ var VVR_q_text_b4 = '<li><span>Please select your answer on the scale.</span></l
  ************************************************************/
 var open_instruct_VVR1 = true;
 var close_instruct_VVR1 = false;
-var open_instruct_text_VVR1 = "<p>A vending machine is overflowing with snacks.</p><br/>" + "<p>You can tip the machine and " + "see what snacks fall out.</p><br/>" + "<p>Get all the snacks that you want!</p><br/>" + "<p>Press any key to begin.</p>";
+var open_instruct_text_VVR1 = "<p>A vending machine is overflowing with snacks.</p><br>" + "<p>You can tip the machine and " + "see what snacks fall out.</p><br>" + "<p>Get all the snacks that you want!</p><br>" + "<p>Press any key to begin.</p>";
 var close_instruct_text_VVR1 = 'Thank you for your input. Proceeding to the next stage.';
 var degrad_pattern_VVR1 = ['d0'];
 var prob_value_VVR1 = [0.2];
@@ -175,7 +175,7 @@ var max_num_incorrect_VVR1 = 4;
  ************************************************************/
 var open_instruct_VVR2 = true;
 var close_instruct_VVR2 = false;
-var open_instruct_text_VVR2 = "<p>The vending machine is still overflowing with snacks.</p><br/>" + "<p>You can tip the machine and " + "see what snacks fall out.</p><br/>" + "<p>Get all the snacks that you want!</p><br/>"+ "<p>Press any key to begin.</p>";
+var open_instruct_text_VVR2 = "<p>The vending machine is still overflowing with snacks.</p><br>" + "<p>You can tip the machine and " + "see what snacks fall out.</p><br>" + "<p>Get all the snacks that you want!</p><br>"+ "<p>Press any key to begin.</p>";
 var close_instruct_text_VVR2 = 'Thank you for your input. Proceeding to the next stage.';
 var degrad_pattern_VVR2 = ['d1'];
 var prob_value_VVR2 = [0.2];
@@ -187,7 +187,7 @@ var max_num_incorrect_VVR2 = 0;
  ************************************************************/
 var open_instruct_VVR3 = true;
 var close_instruct_VVR3 = false;
-var open_instruct_text_VVR3 = "<p>A vending machine is overflowing with snacks.</p><br/>" + "<p>You can tip the machine and " + "see what snacks fall out.</p><br/>" + "<p>Get all the snacks that you want!</p><br/>"+ "<p>Press any key to begin.</p>";
+var open_instruct_text_VVR3 = "<p>A vending machine is overflowing with snacks.</p><br>" + "<p>You can tip the machine and " + "see what snacks fall out.</p><br>" + "<p>Get all the snacks that you want!</p><br>"+ "<p>Press any key to begin.</p>";
 var close_instruct_text_VVR3 = 'Thank you for your input. Proceeding to the next stage.';
 var degrad_pattern_VVR3 = ['d0'];
 var prob_value_VVR3 = [0.2];
@@ -200,8 +200,8 @@ var max_num_incorrect_VVR3 = 4;
 var open_instruct_pav = true;
 var close_instruct_pav = true;
 var open_instruct_text_pav = "<p>The vending machine is still overflowing. " +
-"But it cannot be tipped now.</p><br/>" +
-"<p>Coloured lights will appear on the machine will show you which snack will fall out.</p><br/>" +
+"But it cannot be tipped now.</p><br>" +
+"<p>Coloured lights will appear on the machine will show you which snack will fall out.</p><br>" +
 "<p>Press any key to begin. </p>";
 /************************************************************
  * Pavlovian Conditioning
@@ -209,23 +209,23 @@ var open_instruct_text_pav = "<p>The vending machine is still overflowing. " +
 var min_num_correct_pav = 4;
 var max_num_incorrect_pav = 4;
 var close_instruct_text_pav = "<p>The vending machine is still overflowing, " +
-"and you can tip it again now.</p><br/> " +
-"<p>The coloured lights will sometimes appear.</p></br> " +
+"and you can tip it again now.</p><br> " +
+"<p>The coloured lights will sometimes appear.</p><br> " +
 "<p>You won't always see the snack fall out. " +
-"All the snacks you get will be recorded.</p><br/>" +
+"All the snacks you get will be recorded.</p><br>" +
 "<p>Get all the snacks that you want!</p>" +
-"<br/><p>Press any key to begin. </p>";
+"<br><p>Press any key to begin. </p>";
 /************************************************************
  * Transfer Test
  ************************************************************/
 var open_instruct_transfer_test = true;
 var close_instruct_transfer_test = false;
 var open_instruct_text_transfer_test =  "<p>The vending machine is still overflowing.</p> " +
-"<p>You will see coloured lights on the machine again.</p><br/>" +
+"<p>You will see coloured lights on the machine again.</p><br>" +
 "<p>You can tip the machine at any time.</p>" +
 "<p>You won’t see the snack fall out of the machine, </p>" +
-"but the snacks you get will be recorded. </p><br/>" +
-"<p>Get all the snacks that you want!</p><br/>" +
+"<p>but the snacks you get will be recorded. </p><br>" +
+"<p>Get all the snacks that you want!</p><br>" +
 "<p>Press any key to begin. </p>";
 var close_instruct_text_transfer_test = 'Close Instruction Transfer Test'
 var block_num_transfer_test  = 2; // default 2
@@ -234,10 +234,10 @@ var block_num_transfer_test  = 2; // default 2
  ************************************************************/
 var open_instruct_deval_test = false;
 var close_instruct_deval_test = false;
-var open_instruct_text_deval_test =  "<p>The vending machine is still overflowing.</p><br/>" + "<p>You can again tip the machine at any time.</p>" +
+var open_instruct_text_deval_test =  "<p>The vending machine is still overflowing.</p><br>" + "<p>You can again tip the machine at any time.</p>" +
 "<p>No coloured lights or snacks will appear,</p>" +
-"but the snacks you get will be recorded. </p><br/>" +
-"<p>Get all the snacks that you want!</p><br/>" +
+"<p>but the snacks you get will be recorded. </p><br>" +
+"<p>Get all the snacks that you want!</p><br>" +
 "<p>Press any key to begin. </p>";
 var close_instruct_text_deval_test = 'Close Instruction Deval Test'
 var deval_test_duration = 60000; // default 120000
@@ -248,4 +248,4 @@ var close_instruct_text_close_HIT_q = 'Thank you for your participation!'
 /************************************************************
  * Thanks
  ************************************************************/
-var close_instruct_text_thanks = '<p>Thank you!</p><p>Press any key to return to the Amazon Mechanical Turk page.</p><p>This window will close automatically after any keypress on the keyboard.</p><br/><p>Please do NOT close the window by clicking on the ‘X’ at the top right corner of this window.</p><p>Otherwise, we cannot process your payment.</p>';
+var close_instruct_text_thanks = '<p>Thank you!</p><p>Press any key to return to the Amazon Mechanical Turk page.</p><p>This window will close automatically after any keypress on the keyboard.</p><br><p>Please do NOT close the window by clicking on the ‘X’ at the top right corner of this window.</p><p>Otherwise, we cannot process your payment.</p>';
