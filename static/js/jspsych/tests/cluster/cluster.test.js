@@ -5,7 +5,7 @@ const { Cluster } = require('puppeteer-cluster');
 const timeout = 3e+6;
 
 // sets number of concurrency working process
-const concurrency_number = 1;
+const concurrency_number = 50;
 const headless_browser = true;
  
 function delay(time) {
@@ -30,9 +30,10 @@ describe('DDG', () => {
       concurrency: Cluster.CONCURRENCY_CONTEXT,
       maxConcurrency: concurrency_number,
       monitor: false,
+      // sameDomainDelay: 1000, // debug
       puppeteerOptions: {
         headless: headless_browser,
-        // slowMo: 50,
+        // slowMo: 50, // debug
         devtools: false,
         timeout: timeout
       },
@@ -118,10 +119,6 @@ describe('DDG', () => {
         const close_instruct_VVR3 = await page.evaluate(() => close_instruct_VVR3);
         const open_instruct_text_VVR3 = await page.evaluate(() => open_instruct_text_VVR3);
         const close_instruct_text_VVR3 = await page.evaluate(() => close_instruct_text_VVR3);
-        const open_instruct_VVR4 = await page.evaluate(() => open_instruct_VVR4);
-        const close_instruct_VVR4 = await page.evaluate(() => close_instruct_VVR4);
-        const open_instruct_text_VVR4 = await page.evaluate(() => open_instruct_text_VVR4);
-        const close_instruct_text_VVR4 = await page.evaluate(() => close_instruct_text_VVR4);
         const open_instruct_inventory = await page.evaluate(() => open_instruct_inventory);
         const close_instruct_inventory = await page.evaluate(() => close_instruct_inventory);
         const open_instruct_text_key_testing = await page.evaluate(() => open_instruct_text_key_testing);
@@ -502,19 +499,22 @@ describe('DDG', () => {
 
         // SDS
         await page.waitForSelector('#jspsych-survey-multi-choice-SDS');
-        await delay(getRandomInt(80));
+        await delay(getRandomInt(400));
+        let SDS_itemID = getRandomInt(10);
         for (let index = 0; index < 3; index++) {
-          const itemID = getRandomInt(4);
-          await delay(getRandomInt(100));
-          await page.click("#jspsych-survey-multi-choice-option-" + index +  "-" + itemID + " .jspsych-survey-highlight");
+          await delay(getRandomInt(400));
+          await page.click("#jspsych-survey-multi-choice-option-" + index +  "-" + SDS_itemID + " .jspsych-survey-highlight");
         }
-        await delay(getRandomInt(100));
-        await page.select('.select-days-3', '5');
-        await delay(getRandomInt(100));
-        await page.select('.select-days-4', '5');
+        await delay(300);
+        SDS_itemID = getRandomInt(7);
+        await page.select('.select-days-3', '' + SDS_itemID);
+        await delay(300);
+        await page.select('.select-days-4', '' + SDS_itemID);
+
         await page.evaluate(() => {
           document.querySelector('#jspsych-survey-multi-choice-SDS-next').click();
         });
+        await delay(200);
 
         // ICAR
         await page.waitForSelector('#jspsych-survey-multi-choice-ICAR');
@@ -553,48 +553,48 @@ describe('DDG', () => {
         // FHQ1 TT
         await page.waitForSelector('.votes-container');
         await page.waitForSelector('.ui-slider-handle');
-        await delay(getRangeInt(300, 1000));
+        await delay(getRangeInt(1000, 3000));
         e = await page.$('.ui-slider-handle');
         box = await e.boundingBox();
         await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
         await page.mouse.down();
         await page.mouse.move(box.x + getRangeInt(-200, 200), box.y + box.height / 2); // move to (400, 200) coordinates
         await page.mouse.up();
-        await delay(getRangeInt(300, 1000));
-        // await page.click(".confirm-button");
+        await delay(getRangeInt(1000, 3000));
+
         // FHQ1 MM
         await page.waitForSelector('.ui-slider-handle');
-        await delay(getRangeInt(300, 1000));
+        await delay(getRangeInt(1000, 3000));
         e = await page.$('.ui-slider-handle');
         box = await e.boundingBox();
         await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
         await page.mouse.down();
         await page.mouse.move(box.x + getRangeInt(-200, 200), box.y + box.height / 2); // move to (400, 200) coordinates
         await page.mouse.up();
-        await delay(getRangeInt(300, 1000));
-        // await page.click(".confirm-button");
+        await delay(getRangeInt(1000, 3000));
+
         // FHQ1 BBQ
         await page.waitForSelector('.ui-slider-handle');
-        await delay(getRangeInt(300, 1000));
+        await delay(getRangeInt(1000, 3000));
         e = await page.$('.ui-slider-handle');
         box = await e.boundingBox();
         await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
         await page.mouse.down();
         await page.mouse.move(box.x + getRangeInt(-200, 200), box.y + box.height / 2); // move to (400, 200) coordinates
         await page.mouse.up();
-        await delay(getRangeInt(300, 1000));
-        // await page.click(".confirm-button");
+        await delay(getRangeInt(1000, 3000));
+
         // FHQ1 HUNGER
         await page.waitForSelector('.ui-slider-handle');
-        await delay(getRangeInt(300, 1000));
+        await delay(getRangeInt(1000, 3000));
         e = await page.$('.ui-slider-handle');
         box = await e.boundingBox();
         await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
         await page.mouse.down();
         await page.mouse.move(box.x + getRangeInt(-200, 200), box.y + box.height / 2); // move to (400, 200) coordinates
         await page.mouse.up();
-        await delay(getRangeInt(300, 1000));
-        // await page.click(".confirm-button");
+        await delay(getRangeInt(1000, 3000));
+
 
         // FHQ1 text close
         if(close_instruct_FHQ_pre_rating) {
@@ -614,9 +614,16 @@ describe('DDG', () => {
           await page.click("#jspsych-html-keyboard-response-stimulus");
         };
 
+        await page.waitForSelector('.pav-conditioning');
+        await delay((stim_duration * 4) + (ITI_duration * 4));
+
         let pav_con = await raceSelectors(page, ['.pavlovian-conditioning-form', '#jspsych-html-keyboard-response-stimulus']);
   
-        while (pav_con === '.pavlovian-conditioning-form') {
+        while (pav_con === '.pavlovian-conditioning-form' || pav_con === '.pav-conditioning') {
+
+            if(pav_con === '.pav-conditioning') {
+              await delay((stim_duration * 4) );
+            };
 
             const machine_color = await raceSelectors(page, ['.red', '.yellow', '.green', '.blue']);
             switch (machine_color) {
@@ -643,7 +650,7 @@ describe('DDG', () => {
             }
             await page.click(".jspsych-btn");
             await delay(feedback_duration);
-            pav_con = await raceSelectors(page, ['.pavlovian-conditioning-form', '#jspsych-html-keyboard-response-stimulus']);
+            pav_con = await raceSelectors(page, ['.pav-conditioning', '.pavlovian-conditioning-form',  '#jspsych-html-keyboard-response-stimulus']);
             if(pav_con === '#jspsych-html-keyboard-response-stimulus') {
               break;
             };
@@ -697,7 +704,7 @@ describe('DDG', () => {
           await page.mouse.move(box.x + getRangeInt(-200, 200), box.y + box.height / 2); // move to (400, 200) coordinates
           await page.mouse.up();
 
-          await delay(feedback_duration + 500);
+          await delay(feedback_duration);
           await page.waitForSelector(".vvr-question-a");
           await delay(answer_latency);
           const innerTextOfButton_inst_cond_second = await raceSelectors(page, ['.vvr-question-left', '.vvr-question-right']);
@@ -713,21 +720,21 @@ describe('DDG', () => {
           await page.mouse.down();
           await page.mouse.move(box.x + getRangeInt(-200, 200), box.y + box.height / 2); // move to (400, 200) coordinates
           await page.mouse.up();
-          await delay(feedback_duration + 500);
+          await delay(feedback_duration);
 
-          is_vvr_1 = await raceSelectors(page, ['.vvr_stage', '.vvr_close_instruct']);
-          if(is_vvr_1 === '.vvr_close_instruct') {
+          is_vvr_1 = await raceSelectors(page, ['.vvr_stage', '#jspsych-html-keyboard-response-stimulus']);
+          if(is_vvr_1 === '#jspsych-html-keyboard-response-stimulus') {
             break;
           }
         }
 
         // close_instruct_VVR1
         if(close_instruct_VVR1) {
-          await page.waitForSelector('.vvr_close_instruct');
-          const VVR_1_text_instr_close = await page.evaluate(() => document.querySelector('.vvr_close_instruct').innerHTML);
+          await page.waitForSelector('#jspsych-html-keyboard-response-stimulus');
+          const VVR_1_text_instr_close = await page.evaluate(() => document.querySelector('#jspsych-html-keyboard-response-stimulus').innerHTML);
           await expect(VVR_1_text_instr_close).toContain(close_instruct_text_VVR1);
           await delay(close_instruct_latency);
-          await page.click(".vvr_close_instruct");
+          await page.click("#jspsych-html-keyboard-response-stimulus");
         }
 
         if(open_instruct_transfer_test) {
@@ -742,7 +749,7 @@ describe('DDG', () => {
         // transfer_test1
         await page.waitForSelector('#transfer-test');
         for (let index = 1; index < block_num_transfer_test; index++) {
-          for (let index = 1; index < 6; index++) {
+          for (let index = 1; index < 8; index++) {
             var items = ['ArrowLeft', 'ArrowRight'];
             var item = items[Math.floor(Math.random() * items.length)];
             await delay(stim_duration);
@@ -798,7 +805,7 @@ describe('DDG', () => {
           await page.mouse.down();
           await page.mouse.move(box.x + getRangeInt(-200, 200), box.y + box.height / 2); // move to (400, 200) coordinates
           await page.mouse.up();
-          await delay(feedback_duration + 500);
+          await delay(feedback_duration);
 
           await page.waitForSelector(".vvr-question-a");
           await delay(answer_latency);
@@ -815,21 +822,21 @@ describe('DDG', () => {
           await page.mouse.down();
           await page.mouse.move(box.x + getRangeInt(-200, 200), box.y + box.height / 2); // move to (400, 200) coordinates
           await page.mouse.up();
-          await delay(feedback_duration + 500);
+          await delay(feedback_duration);
 
-          is_vvr_2 = await raceSelectors(page, ['.vvr_stage', '.vvr_close_instruct']);
-          if(is_vvr_2 === '.vvr_close_instruct') {
+          is_vvr_2 = await raceSelectors(page, ['.vvr_stage', '#jspsych-html-keyboard-response-stimulus']);
+          if(is_vvr_2 === '#jspsych-html-keyboard-response-stimulus') {
             break;
           }
         }
 
         // close_instruct_VVR2
         if(close_instruct_VVR2) {
-          await page.waitForSelector('.vvr_close_instruct');
-          const VVR_2_text_instr_close = await page.evaluate(() => document.querySelector('.vvr_close_instruct').innerHTML);
+          await page.waitForSelector('#jspsych-html-keyboard-response-stimulus');
+          const VVR_2_text_instr_close = await page.evaluate(() => document.querySelector('#jspsych-html-keyboard-response-stimulus').innerHTML);
           await expect(VVR_2_text_instr_close).toContain(close_instruct_text_VVR2);
           await delay(close_instruct_latency);
-          await page.click(".vvr_close_instruct");
+          await page.click("#jspsych-html-keyboard-response-stimulus");
         };
 
         if(open_instruct_transfer_test) {
@@ -844,7 +851,7 @@ describe('DDG', () => {
         // transfer_test2
         await page.waitForSelector('#transfer-test');
         for (let index = 1; index < block_num_transfer_test; index++) {
-          for (let index = 1; index < 6; index++) {
+          for (let index = 1; index < 8; index++) {
             var items = ['ArrowLeft', 'ArrowRight'];
             var item = items[Math.floor(Math.random() * items.length)];
             await delay(stim_duration);
@@ -900,7 +907,7 @@ describe('DDG', () => {
           await page.mouse.down();
           await page.mouse.move(box.x + getRangeInt(-200, 200), box.y + box.height / 2); // move to (400, 200) coordinates
           await page.mouse.up();
-          await delay(feedback_duration + 500);
+          await delay(feedback_duration);
       
           await page.waitForSelector(".vvr-question-a");
           await delay(answer_latency);
@@ -917,26 +924,33 @@ describe('DDG', () => {
           await page.mouse.down();
           await page.mouse.move(box.x + getRangeInt(-200, 200), box.y + box.height / 2); // move to (400, 200) coordinates
           await page.mouse.up();
-          await delay(feedback_duration + 500);
+          await delay(feedback_duration);
  
-          is_vvr_3 = await raceSelectors(page, ['.vvr_stage', '.vvr_close_instruct']);
-          if(is_vvr_3 === '.vvr_close_instruct') {
+          is_vvr_3 = await raceSelectors(page, ['.vvr_stage', '#jspsych-html-keyboard-response-stimulus', 'video']);
+          if(is_vvr_3 === '#jspsych-html-keyboard-response-stimulus' || is_vvr_3 === 'video') {
             break;
           }
         };
 
         // close_instruct_VVR3
         if(close_instruct_VVR3) {
-          await page.waitForSelector('.vvr_close_instruct');
-          const VVR_3_text_instr_close = await page.evaluate(() => document.querySelector('.vvr_close_instruct').innerHTML);
+          await page.waitForSelector('#jspsych-html-keyboard-response-stimulus');
+          const VVR_3_text_instr_close = await page.evaluate(() => document.querySelector('#jspsych-html-keyboard-response-stimulus').innerHTML);
           await expect(VVR_3_text_instr_close).toContain(close_instruct_text_VVR3);
           await delay(close_instruct_latency);
-          await page.click(".vvr_close_instruct");
+          await page.click("#jspsych-html-keyboard-response-stimulus");
         };
   
         // Deval Video
+        let deval_video = await raceSelectors(page, ['video']);
         await page.waitForSelector('video');
-        await delay(video_duration * 1000);
+        while (deval_video === 'video') {
+          await delay(1000);
+          deval_video = await raceSelectors(page, ['video', '.outcome-container', '#jspsych-html-keyboard-response-stimulus']);
+          if(deval_video !== 'video') {
+            break;
+          }
+        };
 
         // Deval Test
         if(open_instruct_deval_test) {
@@ -947,15 +961,17 @@ describe('DDG', () => {
           await page.click("#jspsych-html-keyboard-response-stimulus");
         };
 
-        await page.waitForSelector('#transfer-test');
-        let deval_test_num = deval_test_duration / 1000;
-        for (let index = 0; index < deval_test_num; index++) {
-            const items = ['ArrowLeft', 'ArrowRight'];
-            const item = items[Math.floor(Math.random() * items.length)];
-            await page.keyboard.press(item);
-            await delay(1000);
+        let deval_test = await raceSelectors(page, ['#transfer-test']);
+        while (deval_test === '#transfer-test') {
+          const items = ['ArrowLeft', 'ArrowRight'];
+          const item = items[Math.floor(Math.random() * items.length)];
+          await page.keyboard.press(item);
+          await delay(1000);
+          deval_test = await raceSelectors(page, ['#transfer-test', '.votes-container', '#jspsych-html-keyboard-response-stimulus']);
+          if(deval_test !== '#transfer-test') {
+            break;
+          }
         };
-        await delay(500);
 
         if(close_instruct_deval_test) {
           await page.waitForSelector('#jspsych-html-keyboard-response-stimulus');
@@ -977,47 +993,47 @@ describe('DDG', () => {
         // FHQ2 TT
         await page.waitForSelector('.votes-container');
         await page.waitForSelector('.ui-slider-handle');
-        await delay(getRangeInt(300, 1000));
+        await delay(getRangeInt(1000, 2000));
         e = await page.$('.ui-slider-handle');
         box = await e.boundingBox();
         await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
         await page.mouse.down();
         await page.mouse.move(box.x + getRangeInt(-200, 200), box.y + box.height / 2); // move to (400, 200) coordinates
         await page.mouse.up();
-        await delay(getRangeInt(300, 1000));
+        await delay(getRangeInt(1000, 2000));
 
         // FHQ2 MM
         await page.waitForSelector('.ui-slider-handle');
-        await delay(getRangeInt(300, 1000));
+        await delay(getRangeInt(1000, 2000));
         e = await page.$('.ui-slider-handle');
         box = await e.boundingBox();
         await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
         await page.mouse.down();
         await page.mouse.move(box.x + getRangeInt(-200, 200), box.y + box.height / 2); // move to (400, 200) coordinates
         await page.mouse.up();
-        await delay(getRangeInt(300, 1000));
+        await delay(getRangeInt(1000, 2000));
 
         // FHQ2 BBQ
         await page.waitForSelector('.ui-slider-handle');
-        await delay(getRangeInt(300, 1000));
+        await delay(getRangeInt(1000, 2000));
         e = await page.$('.ui-slider-handle');
         box = await e.boundingBox();
         await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
         await page.mouse.down();
         await page.mouse.move(box.x + getRangeInt(-200, 200), box.y + box.height / 2); // move to (400, 200) coordinates
         await page.mouse.up();
-        await delay(getRangeInt(300, 1000));
+        await delay(getRangeInt(1000, 2000));
 
         // FHQ2 HUNGER
         await page.waitForSelector('.ui-slider-handle');
-        await delay(getRangeInt(300, 1000));
+        await delay(getRangeInt(1000, 2000));
         e = await page.$('.ui-slider-handle');
         box = await e.boundingBox();
         await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
         await page.mouse.down();
         await page.mouse.move(box.x + getRangeInt(-200, 200), box.y + box.height / 2); // move to (400, 200) coordinates
         await page.mouse.up();
-        await delay(getRangeInt(300, 1000));
+        await delay(getRangeInt(1000, 2000));
 
         if(close_instruct_FHQ_post_rating) {
           await page.waitForSelector('#jspsych-html-keyboard-response-stimulus');
@@ -1038,7 +1054,7 @@ describe('DDG', () => {
          // transfer_test3
         await page.waitForSelector('#transfer-test');
         for (let index = 1; index < block_num_transfer_test; index++) {
-          for (let index = 1; index < 6; index++) {
+          for (let index = 1; index < 8; index++) {
             var items = ['ArrowLeft', 'ArrowRight'];
             var item = items[Math.floor(Math.random() * items.length)];
             await delay(stim_duration);
@@ -1053,79 +1069,6 @@ describe('DDG', () => {
             await expect(close_instruct_text).toContain(close_instruct_text_transfer_test);
             await delay(close_instruct_latency);
             await page.click("#jspsych-html-keyboard-response-stimulus");
-        };
-
-        // open_instruct_VVR4
-        if(open_instruct_VVR4) {
-          await page.waitForSelector('#jspsych-html-keyboard-response-stimulus');
-          const VVR_4_text_instr_open = await page.evaluate(() => document.querySelector('#jspsych-html-keyboard-response-stimulus').innerHTML);
-          await expect(VVR_4_text_instr_open).toContain(open_instruct_text_VVR4);
-          await delay(open_instruct_latency);
-          await page.click("#jspsych-html-keyboard-response-stimulus");
-        };
-
-        // VVR4
-        let is_vvr_4 = await raceSelectors(page, ['.vvr_stage', '.vvr_close_instruct']);
-        while (is_vvr_4 === '.vvr_stage') {
-          await page.waitForSelector('.vending-machine');
-          for (let index = 0; index < interval_num; index++) {
-            var items = ['ArrowLeft', 'ArrowRight'];
-            var item = items[Math.floor(Math.random() * items.length)];
-            await page.keyboard.press(item);
-            if(await page.$('.outcome') !== null) {
-              await delay(outcome_duration);
-            }
-            await delay(interval_duration);
-          }
-  
-          await delay(1000);
-          await page.waitForSelector(".vvr-question-a");
-          await delay(answer_latency);
-          const innerTextOfButton_inst_cond_first = await raceSelectors(page, ['.vvr-question-left', '.vvr-question-right']);
-          if (innerTextOfButton_inst_cond_first === '.vvr-question-left') {
-            await page.keyboard.press('ArrowLeft');
-          } else if(innerTextOfButton_inst_cond_first === '.vvr-question-right') {
-            await page.keyboard.press('ArrowRight');
-          }
-          await page.waitForSelector('.ui-slider-handle');
-          let e = await page.$('.ui-slider-handle');
-          let box = await e.boundingBox();
-          await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
-          await page.mouse.down();
-          await page.mouse.move(box.x + getRangeInt(-200, 200), box.y + box.height / 2); // move to (400, 200) coordinates
-          await page.mouse.up();
-          await delay(feedback_duration + 500);
-
-          await page.waitForSelector(".vvr-question-a");
-          await delay(answer_latency);
-          const innerTextOfButton_inst_cond_second = await raceSelectors(page, ['.vvr-question-left', '.vvr-question-right']);
-          if (innerTextOfButton_inst_cond_second === '.vvr-question-left') {
-            await page.keyboard.press('ArrowLeft');
-          } else if(innerTextOfButton_inst_cond_second === '.vvr-question-right') {
-            await page.keyboard.press('ArrowRight');
-          }
-          await page.waitForSelector('.ui-slider-handle');
-          e = await page.$('.ui-slider-handle');
-          box = await e.boundingBox();
-          await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
-          await page.mouse.down();
-          await page.mouse.move(box.x + getRangeInt(-200, 200), box.y + box.height / 2); // move to (400, 200) coordinates
-          await page.mouse.up();
-          await delay(feedback_duration + 500);
-
-          is_vvr_4 = await raceSelectors(page, ['.vvr_stage', '.vvr_close_instruct']);
-          if(is_vvr_4 === '.vvr_close_instruct') {
-            break;
-          }
-        }
-        
-        // close_instruct_VVR4
-        if(close_instruct_VVR4) {
-          await page.waitForSelector('.vvr_close_instruct');
-          const VVR_4_text_instr_close = await page.evaluate(() => document.querySelector('.vvr_close_instruct').innerHTML);
-          await expect(VVR_4_text_instr_close).toContain(close_instruct_text_VVR4);
-          await delay(close_instruct_latency);
-          await page.click(".vvr_close_instruct");
         };
 
         // Close HIT
@@ -1143,7 +1086,7 @@ describe('DDG', () => {
         await page.click("#jspsych-html-keyboard-response-stimulus");
         
         await page.waitForSelector("#container-not-an-ad");
-        
+        await delay(3000);
     });
 
     // In case of problems, log them

@@ -577,31 +577,19 @@ var VVR = function(data) {
             },
             {
                 stage_name: stage_name,
-                type: 'html-keyboard-response',
+                type: 'survey-feedback',
                 stimulus: function() {
-                    if(vvrIsCorrect) { 
-                        return '<p style="font-size: 24px;">' + correct_text + '</p>';
-                    } else {
-                        return '<p style="font-size: 24px;">' + incorrect_text + '</p>';
-                    }
+                    return vvrIsCorrect? '<p style="font-size: 24px;">' + correct_text + '</p>' : '<p style="font-size: 24px;">' + incorrect_text + '</p>';
                 },
                 choices: jsPsych.NO_KEYS,
                 trial_duration: feedback_duration,
                 vvr_timer: true,
                 event_type: 'text appears',
                 event_raw_details: function() {
-                    if(vvrIsCorrect) { 
-                        return 'correct_text';
-                    } else {
-                        return 'incorrect_text';
-                    }
+                    return vvrIsCorrect? 'correct_text': 'incorrect_text';
                 },
                 event_converted_details: function() {
-                    if(vvrIsCorrect) { 
-                        return correct_text + ' text appears';
-                    } else {
-                        return incorrect_text + ' text appears';
-                    }
+                    return vvrIsCorrect? correct_text + ' text appears': incorrect_text + ' text appears'
                 }
             }
         ]
@@ -637,7 +625,7 @@ var VVR = function(data) {
             },
             {
                 stage_name: stage_name,
-                type: 'html-keyboard-response',
+                type: 'survey-feedback',
                 stimulus: function() {
                     return vvrIsCorrect? '<p style="font-size: 24px;">' + correct_text + '</p>' : '<p style="font-size: 24px;">' + incorrect_text + '</p>';
                 },
@@ -746,7 +734,7 @@ var VVR1 = {
                 trial_latency: close_instruct_latency,
                 response_ends_trial: false,
                 event_type: 'text appears',
-                id: 'vvr_close_instruct',
+                class: 'vvr_close_instruct',
                 event_raw_details: 'close_instruct_text_VVR1',
                 event_converted_details: 'VVR1_close text appears'
             }],

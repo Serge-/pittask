@@ -229,7 +229,6 @@ jsPsych.plugins["transfer-test"] = (function() {
   
 
       if(info.key_release === undefined) {
-        machine_tilt();
         response.trial_events.push({
           "event_type": "key press",
           "event_raw_details": info.key,
@@ -237,6 +236,7 @@ jsPsych.plugins["transfer-test"] = (function() {
           "timestamp": jsPsych.totalTime(),
           "time_elapsed": jsPsych.totalTime() - timestamp_onload
         });
+        machine_tilt();
       } else {
           response.trial_events.push({
             "event_type": "key release",

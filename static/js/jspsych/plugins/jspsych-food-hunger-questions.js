@@ -110,8 +110,8 @@ jsPsych.plugins["food-and-hunger-questions"] = (function() {
                 'img { width: 300px; margin: 20px 0; }' +
                 '.votes-container { margin-top: 8rem; }' +
                 '.key-testing-text { padding-bottom: 4rem; }' +
-                'ul { outline: 1px solid #fff; padding: 3rem; }'
-        html += '</style>';
+                'ul { display: flex; outline: 1px solid #fff; padding: 3rem; justify-content: center; }' +
+                '</style>';
 
         html += '<div id="jspsych-stimulus"><h3 class="key-testing-text">' + h3 + '</h3>';
 
