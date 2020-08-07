@@ -417,7 +417,7 @@ getGeoInfoByIP <- function(ipList){
   timezones <- c()
   
   for(i in 1:length(ipBatches)){
-    if(i %% 140 == 0){
+    if(i %% 44 == 0){
       for(sec in seq(60, 1)){
         cat("\r", paste("  Please, wait for a ", sec, " seconds"))
         flush.console()
@@ -436,8 +436,8 @@ getGeoInfoByIP <- function(ipList){
     stop_for_status(request)
     response <- content(request, "text")
 
-    countries <- c(countries, ifelse(is.null(fromJSON(response)$country), "local", fromJSON(response[i])$country))
-    timezones <- c(timezones, ifelse(is.null(fromJSON(response)$timezone), "local", fromJSON(response[i])$timezone))
+    countries <- c(countries, ifelse(fromJSON(response)[i] == 'fail', "local", fromJSON(response)$country))
+    timezones <- c(timezones, ifelse(fromJSON(response)[i] == 'fail', "local", fromJSON(response)$timezone))
   }
   
   list("countries" = countries, "timezones" = timezones)
@@ -484,11 +484,11 @@ if(isClass(query))
     version <- trialdata$`counter-balancing version`[1]
 
     if(is.na(geoInfo$countries[i])) {
-      country = "local"
-      timezone = "local"
+      country <- "local"
+      timezone <- "local"
     } else {
-      country = geoInfo$countries[i]
-      timezone = geoInfo$timezones[i]
+      country <- geoInfo$countries[i]
+      timezone <- geoInfo$timezones[i]
     }
 
     # Parameters --------------------------------------------------------------
