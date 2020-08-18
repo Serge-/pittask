@@ -122,23 +122,34 @@ jsPsych.plugins['FTND'] = (function () {
       html += '<style id="jspsych-survey-multi-choice-css">';
       html += ".jspsych-survey-multi-choice-question { display: flex; text-align: left; border-bottom: 1px solid;}" +
         ".jspsych-survey-multi-choice-text span.required {color: darkred;}" +
-        ".jspsych-survey-multi-choice-text { padding-left: 2rem; }" +
+        ".jspsych-survey-multi-choice-text { padding-left: 1rem; }" +
+        "#jspsych-survey-multi-choice-5 { border-bottom: none; }" +
         ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-text {  text-align: center;}" +
         ".jspsych-survey-multi-choice-option { padding-left: 2rem; }" +
         ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-option {  width: 100%; border-left: 1px solid; text-align: center; padding: 0 1rem;}" +
         ".jspsych-survey-highlight { cursor: pointer; width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; }" +
+        ".jspsych-survey-multi-choice-option-right { width: 60%; padding: 1rem 0; flex-flow: column; align-items: flex-start; }" +
+        ".jspsych-survey-multi-choice-option-left { display: flex; width: 40%; border-right: 1px solid #fff; padding: 1rem 0; }" +
         ".jspsych-content { width: 1000px}" +
         ".jspsych-btn { margin: 100px 0; }" +
         ".jspsych-content { margin-top: 130px;}" +
         "ul {list-style: none}" +
-        ".form-radio { top: 3px; }" +
+        ".form-radio { top: -4px; }" +
         ".jspsych-survey-multi-choice-number { padding-right: 2rem; }" +
         ".jspsych-survey-multi-choice-preamble { text-align: left; padding-bottom: 3rem; }" +
         ".jspsych-survey-multi-choice-instructions { display: flex; justify-content: space-between;  border-bottom: 3px solid; font-weight: bold; }" +
         ".jspsych-survey-multi-choice-instructions ul { display: flex; width: 60%; margin-bottom: 0; }" +
         "label.jspsych-survey-multi-choice-text input[type='radio'] {margin-right: 1em;}" +
         ".jspsych-survey-highlight { width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; }" +
-        "p { margin: 0 0 0px;}"
+        "p { margin: 0 0 0px;}" +
+        "@media (max-width: 700px) {" +
+          ".jspsych-display-element { font-size: 12px;}" +
+          "label { display: inline;}" +
+          ".jspsych-survey-multi-choice-option { padding-left: 1rem; }" +
+          ".jspsych-survey-multi-choice-number { width: 25px; }" +
+          ".jspsych-survey-multi-choice-number {padding-right: .5rem;}" +
+          ".jspsych-survey-multi-choice-text { padding: 0 1rem; }" +
+        "}"
       html += '</style>';
   
   
@@ -152,14 +163,6 @@ jsPsych.plugins['FTND'] = (function () {
       if (trial.preamble !== null) {
         html += '<div class="jspsych-survey-multi-choice-content"><div id="jspsych-survey-multi-choice-preamble" class="jspsych-survey-multi-choice-preamble">' + trial.preamble + '</div>';
       }
-  
-      html +=
-        `<div id="jspsych-survey-multi-choice-preamble" class="jspsych-survey-multi-choice-instructions">
-            <div style="width: 40%; text-align: left; border-right: 2px solid #fff; ">Questions</div>
-            <ul>
-              <li><div>Answers</div></li>
-            </ul>
-        </div>`
   
       // generate question order. this is randomized here as opposed to randomizing the order of trial.questions
       // so that the data are always associated with the same question regardless of order
@@ -187,10 +190,10 @@ jsPsych.plugins['FTND'] = (function () {
         html += '<div id="jspsych-survey-multi-choice-' + question_id + '" class="' + question_classes.join(' ') + '"  data-name="' + (i + 1) + '">';
   
         // add question text
-        html += '<div style="display: flex; width: 40%; border-right: 1px solid #fff;"><p class="jspsych-survey-multi-choice-text survey-multi-choice jspsych-survey-multi-choice-question-text" style="text-align: left; padding: 1rem; width: 100%;"><span class="jspsych-survey-multi-choice-number">' + (i + 1) + '.</span>' + question.prompt
+        html += '<div class="jspsych-survey-multi-choice-option-left"><p class="jspsych-survey-multi-choice-text survey-multi-choice jspsych-survey-multi-choice-question-text" style="text-align: left; display: flex; width: 100%;"><span class="jspsych-survey-multi-choice-number">' + (i + 1) + '.</span>' + question.prompt
         // question.required
         html += '</p></div>';
-        html += '<div>';
+        html += '<div class="jspsych-survey-multi-choice-option-right">';
   
         // create option radio buttons
         for (var j = 0; j < question.options.length; j++) {

@@ -120,24 +120,35 @@ jsPsych.plugins['RAADS-14'] = (function () {
 
     // inject CSS for trial
     html += '<style id="jspsych-survey-multi-choice-css">';
-    html += ".jspsych-survey-multi-choice-question { display: flex; margin-top: .2em; margin-bottom: .2em; text-align: left; }" +
+    html += ".jspsych-survey-multi-choice-question { display: flex; text-align: left;  }" +
+      ".jspsych-survey-multi-choice-question.jspsych-survey-multi-choice-horizontal { border-bottom: 1px solid #fff; }" +
+      "#jspsych-survey-multi-choice-13  { border-bottom: none; }" +
       ".jspsych-survey-multi-choice-text span.required {color: darkred;}" +
-      ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-text {  text-align: center;}" +
-      ".jspsych-survey-multi-choice-option { line-height: 2; }" +
-      ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-option {  display: inline-block;  margin-left: 1em;  margin-right: 1em;  vertical-align: top;}" +
-      ".jspsych-survey-multi-choice-content { border-bottom: 1px solid;}" +
+      ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-text {  text-align: center; }" +
+      ".jspsych-survey-multi-choice-option { display: flex; justify-content: center; align-items: center; }" +
+      ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-option {  width: 100%; border-right: 1px solid; text-align: center; padding: 0 1rem;}" +
+      ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-option:last-child {  border-right: none; }" +
       ".jspsych-survey-highlight { cursor: pointer; width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; }" +
-      ".jspsych-survey-multi-choice-form { max-width: 1000px }" +
+      ".jspsych-survey-multi-choice-form { max-width: 1000px; min-width: 360px; }" +
       "ul {list-style: none}" +
       ".jspsych-btn { margin: 100px 0; }" +
       ".jspsych-content { margin-top: 130px;}" +
-      ".jspsych-survey-multi-choice-preamble { text-align: left; border-top: 1px solid #fff;}" +
-      ".jspsych-survey-multi-choice-information { display: flex; justify-content: space-between }" +
-      ".jspsych-survey-multi-choice-information div { width: 40%; text-align: left; padding: 2rem 0; }" +
-      ".jspsych-survey-multi-choice-information ul { display: flex; width: 50%; justify-content: space-around; padding-inline-start: 0; }" +
-      ".jspsych-survey-multi-choice-information li { width: 100px; display: flex; align-items: center; }" +
-      "label.jspsych-survey-multi-choice-text input[type='radio'] {margin-right: 1em;}";
-    ".jspsych-survey-highlight { width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; }"
+      ".form-radio { top: -4px;}" +
+      "@media (max-width: 900px) {" +
+        ".jspsych-survey-multi-choice-instructions li { font-size: 15px; }" +
+      "}" +
+      "@media (max-width: 700px) {" +
+        ".jspsych-display-element { font-size: 15px;}" +
+        ".jspsych-survey-multi-choice-instructions li { font-size: 3vw; }" +
+        ".jspsych-survey-multi-choice-option-left { width: 30%; }" +
+        ".jspsych-survey-multi-choice-option-right { width: 70%; }" +
+        ".jspsych-survey-multi-choice-instructions ul { width: 70%; }" +
+        ".jspsych-survey-multi-choice-instructions li { padding: 0 .1rem; }" +
+        ".jspsych-survey-multi-choice-number { width: 25px; }" +
+      "}"+
+      "@media (max-width: 700px) {" +
+        ".jspsych-survey-multi-choice-instructions li { font-size: 14px; }" +
+      "}"
     html += '</style>';
 
     // show preamble text
@@ -152,8 +163,8 @@ jsPsych.plugins['RAADS-14'] = (function () {
     // show preamble text
     html +=
       `<div class="jspsych-survey-multi-choice-content">
-        <div id="jspsych-survey-multi-choice-information" class="jspsych-survey-multi-choice-information">
-          <div>Some life experiences and personality characteristics that may apply to you</div>
+        <div class="jspsych-survey-multi-choice-instructions">
+          <div class="jspsych-survey-multi-choice-option-left"></div>
           <ul>
             <li>True now and when I was young</li>
             <li>True only now</li>
@@ -188,10 +199,10 @@ jsPsych.plugins['RAADS-14'] = (function () {
       html += '<div id="jspsych-survey-multi-choice-' + question_id + '" class="' + question_classes.join(' ') + '"  data-name="' + question.name + '">';
 
       // add question text
-      html += '<div style="width: 50%;"><p class="jspsych-survey-multi-choice-question survey-multi-choice" style="padding-top: 3px; text-align: left;">' + (i + 1) + '&ensp;&ensp;' + question.prompt
+      html += '<div class="jspsych-survey-multi-choice-option-left"><span class="jspsych-survey-multi-choice-number">' +  + (i + 1)  + '.</span><p class="jspsych-survey-multi-choice-question survey-multi-choice">' + question.prompt
       // question.required
       html += '</p></div>';
-      html += '<div style="display: flex; width: 50%; justify-content: space-around;">';
+      html += '<div class="jspsych-survey-multi-choice-option-right">';
 
       // create option radio buttons
       for (var j = 0; j < question.options.length; j++) {
@@ -319,9 +330,11 @@ jsPsych.plugins['RAADS-14'] = (function () {
         var id = i + 1;
         if (match.querySelector("input[type=radio]:checked") !== null) {
           var val = match.querySelector("input[type=radio]:checked").value;
-          $(match).find('.jspsych-survey-multi-choice-question').removeClass('survey-error');
+          $(match).find('.jspsych-survey-multi-choice-question').removeClass('survey-error-after');
+          $(match).find('.jspsych-survey-multi-choice-number').removeClass('survey-error-text');
         } else {
-          $(match).find('.jspsych-survey-multi-choice-question').addClass('survey-error');
+          $(match).find('.jspsych-survey-multi-choice-question').addClass('survey-error-after');
+          $(match).find('.jspsych-survey-multi-choice-number').addClass('survey-error-text');
           var val = "";
         }
         var obje = {};
@@ -334,7 +347,7 @@ jsPsych.plugins['RAADS-14'] = (function () {
         Object.assign(question_data, obje);
       }
 
-      if ($(".survey-error").length < 1) {
+      if ($(".survey-error-after").length < 1) {
         // kill keyboard listeners
         if (typeof keyboardListener !== 'undefined') {
           jsPsych.pluginAPI.cancelKeyboardResponse(keyboardListener);

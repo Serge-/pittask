@@ -94,7 +94,6 @@ List of Stages (name/prefix in csv files):
     o devaluation test (deval_test)
     o food and hunger questions (FHQ2)
     o transfer test (transfer3)
-    o instrumental reinstatement (VVR4)
     o close HIT questions (close_HIT_q)
 • Thanks (thanks)
 =======

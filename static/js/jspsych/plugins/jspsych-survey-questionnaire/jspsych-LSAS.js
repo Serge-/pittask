@@ -130,20 +130,30 @@ jsPsych.plugins['LSAS'] = (function () {
         ".jspsych-survey-highlight { cursor: pointer; width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; }" +
         ".jspsych-survey-multi-choice-form { max-width: 1400px }" +
         ".jspsych-btn { margin: 100px 0; }" +
+        "h4 { font-weight: bold; text-decoration: underline; }" +
         ".jspsych-content { margin-top: 130px;}" +
         "ul {list-style: none}" +
         ".jspsych-survey-multi-choice { margin-top: 10rem; }" +
-        ".jspsych-survey-multi-choice-number { display: flex; height: 100%; width: 30px; text-align: center; justify-content: center; }" +
-        ".jspsych-survey-multi-choice-preamble { text-align: left; max-width: 1400px; padding-bottom: 1rem; }" +
-        ".jspsych-survey-multi-choice-preamble ul {  list-style-type: disc; }" +
+        ".jspsych-survey-multi-choice-number { display: flex; height: 100%; width: 45px; text-align: center; justify-content: center; }" +
+        ".jspsych-survey-multi-choice-preamble { text-align: left; max-width: 1400px;}" +
+        ".jspsych-survey-multi-choice-preamble ul {  padding-inline-start: 10px; }" +
         ".jspsych-survey-multi-choice-instructions { display: flex; justify-content: space-between; border-bottom: 2px solid; }" +
         ".jspsych-survey-multi-choice-instructions .jspsych-survey-multi-choice-instructions-title { display: flex;  padding-inline-start: 0; margin-bottom: 0; width: 70%; }" +
         ".jspsych-survey-multi-choice-instructions .jspsych-survey-multi-choice-instructions-title div { width: 100%; }" +
         ".jspsych-survey-multi-choice-instructions ul { display: flex; width: 100%; height: 120px; padding-inline-start: 0; justify-content: space-around; }" +
-        ".jspsych-survey-multi-choice-instructions li { display: flex; justify-content: center; width: 90px; align-items: center; }" +
+        ".jspsych-survey-multi-choice-instructions li { display: flex; justify-content: center; width: 100%; align-items: center;  }" +
         "label.jspsych-survey-multi-choice-text input[type='radio'] {margin-right: 1em;}" +
         ".jspsych-survey-highlight { width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; }" +
-        "p { margin: 0 0 0px; }"
+        "p { margin: 0 0 0px; }" +
+        "@media (max-width: 1000px) {" +
+          ".jspsych-survey-multi-choice-form { min-width: 700px; }" +
+          ".jspsych-display-element { font-size: 13px;}" +
+        "}"+
+        "@media (max-width: 700px) {" +
+          ".jspsych-display-element { font-size: 10px;}" +
+          ".jspsych-survey-multi-choice-form { min-width: 600px; }" +
+          ".jspsych-survey-multi-choice-number { width: 25px; }" +
+        "}"
       html += '</style>';
   
       // show preamble text
@@ -157,7 +167,6 @@ jsPsych.plugins['LSAS'] = (function () {
       html +=
         `<div id="jspsych-survey-multi-choice-preamble" class="jspsych-survey-multi-choice-instructions">
             <div style="display: flex; align-items: center; border-right: 3px solid #fff; width: 30%">
-                <p>Understanding the situations:</p>
             </div>
             <div class="jspsych-survey-multi-choice-instructions-title">
                 <div style="border-right: 1px solid #fff;">
@@ -207,7 +216,7 @@ jsPsych.plugins['LSAS'] = (function () {
         html += '<div id="jspsych-survey-multi-choice-' + question_id + '" class="' + question_classes.join(' ') + '"  data-name="' + question.name + '">';
   
         // add question text
-        html += '<div style="display: flex; width: 30%; border-right: 3px solid #fff;"><span class="jspsych-survey-multi-choice-number">' + (i + 1) + '.</span><p class="jspsych-survey-multi-choice-text survey-multi-choice jspsych-survey-multi-choice-question-text" style="text-align: left; padding: 0 10px; width: 100%;">' + question.prompt
+        html += '<div style="display: flex; width: 30%; border-right: 3px solid #fff;"><span class="jspsych-survey-multi-choice-number">' + (i + 1) + '.</span><p class="jspsych-survey-multi-choice-text survey-multi-choice jspsych-survey-multi-choice-question-text" style="text-align: left; width: 100%;">' + question.prompt
         // question.required
         html += '</p></div>';
         html += '<div style="display: flex; width: 70%; justify-content: space-around;">';

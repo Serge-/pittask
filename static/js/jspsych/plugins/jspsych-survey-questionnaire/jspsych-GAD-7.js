@@ -123,33 +123,50 @@ jsPsych.plugins['GAD-7'] = (function() {
       html += ".jspsych-survey-multi-choice-question { display: flex; text-align: left; }"+
         ".jspsych-survey-multi-choice-text span.required {color: darkred;}"+
         ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-text {  text-align: center;}"+
-        ".jspsych-survey-multi-choice-option { line-height: 2; }"+
-        ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-option {  display: inline-block;  margin-left: 1em;  margin-right: 1em;  vertical-align: top;}"+
-        ".jspsych-survey-multi-choice-content { outline: 1px solid #fff; padding: 1rem;}" +
+        ".jspsych-survey-multi-choice-horizontal { border-bottom: 1px solid #fff; }"+
+        ".jspsych-survey-multi-choice-option { line-height: 2; border-right: 1px solid #fff; }"+
+        ".jspsych-survey-multi-choice-option:last-child { border-right: none; }"+
+        "#jspsych-survey-multi-choice-6 { border-bottom: none; }"+
+        "#jspsych-survey-multi-choice-6 .jspsych-survey-multi-choice-question { border-bottom: none; }"+
+        ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-option {  display: flex; width: 100%; justify-content: center; align-items: center; padding: 1rem 0;  }"+
+        ".jspsych-survey-multi-choice-number { display: flex; height: 100%; width: 45px; text-align: center; justify-content: center; }" +
         ".jspsych-survey-highlight { cursor: pointer; width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; }" +
         ".jspsych-survey-multi-choice-form { max-width: 1000px }" +
         ".jspsych-btn { margin: 100px 0; }" +
         ".jspsych-content { margin-top: 130px;}" +
         "ul {list-style: none}" +
-        ".jspsych-survey-multi-choice-preamble { display: flex; justify-content: space-between }" +
-        ".jspsych-survey-multi-choice-preamble div { width: 40%; text-align: left; padding: 2rem 0; }" +
-        ".jspsych-survey-multi-choice-preamble ul { display: flex; width: 50%; justify-content: space-around; padding-inline-start: 0; }" +
-        ".jspsych-survey-multi-choice-preamble li { width: 100px; display: flex; align-items: center; }" +
+        ".jspsych-survey-multi-choice-option-left { display: flex; width: 40%; text-align: left; border-right: 3px solid #fff; padding-right: .3rem; }" +
+        ".jspsych-survey-multi-choice-option-right { display: flex; width: 60%; justify-content: space-around; }" +
+        ".jspsych-survey-multi-choice-instructions { display: flex; justify-content: space-between; border-bottom: 3px solid #fff; }" +
+        ".jspsych-survey-multi-choice-instructions div { width: 40%; text-align: left; padding: 2rem 0; }" +
+        ".jspsych-survey-multi-choice-instructions ul { display: flex; width: 60%; justify-content: space-around; padding-inline-start: 0; margin-bottom: 0; }" +
+        ".jspsych-survey-multi-choice-instructions li { width: 100%; display: flex; justify-content: center; align-items: center; border-right: 1px solid #fff; padding: 3rem 0; }" +
+        ".jspsych-survey-multi-choice-instructions li:last-child { border-right: none; }" +
         "label.jspsych-survey-multi-choice-text input[type='radio'] {margin-right: 1em;}" +
-        ".jspsych-survey-highlight { width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; }"
+        ".jspsych-survey-highlight { width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; }" +
+        "@media (max-width: 700px) {" +
+          ".jspsych-display-element { font-size: 14px;}" +
+          ".jspsych-survey-multi-choice-option-left, .jspsych-survey-multi-choice-instructions div { width: 30%; }" +
+          ".jspsych-survey-multi-choice-option-right { width: 70%; }" +
+          ".jspsych-survey-multi-choice-instructions ul { width: 70%; }" +
+          ".jspsych-survey-multi-choice-number { width: 25px; padding-right: 1rem; }" +
+        "}"
       html += '</style>';
   
 
       // form element
       html += '<div id="' + plugin_id_name + '">'
+
       html += '<form id="jspsych-survey-multi-choice-form" class="jspsych-survey-multi-choice-form">';
       
       // show preamble text
+      if (trial.preamble !== null) {
+        html += '<div class="jspsych-survey-multi-choice-content"><div class="jspsych-survey-multi-choice-preamble">' + trial.preamble + '</div>';
+      }
  
       html += 
-      `<div class="jspsych-survey-multi-choice-content">
-        <div id="jspsych-survey-multi-choice-preamble" class="jspsych-survey-multi-choice-preamble">
-          <div>Over the <u>last 2 weeks</u>, how often have you been bothered by the following problems?</div>
+      `<div class="jspsych-survey-multi-choice-instructions">
+          <div class="jspsych-survey-multi-choice-option-left"></div>
           <ul>
             <li>Not at all</li>
             <li>Several days</li>
@@ -185,10 +202,10 @@ jsPsych.plugins['GAD-7'] = (function() {
         html += '<div id="jspsych-survey-multi-choice-'+question_id+'" class="'+question_classes.join(' ')+'"  data-name="'+question.name+'">';
   
         // add question text
-        html += '<div style="width: 50%;"><p class="jspsych-survey-multi-choice-question survey-multi-choice" style="padding-top: 3px; text-align: left;">' + (i+1) + '. ' + question.prompt 
+        html += '<div class="jspsych-survey-multi-choice-option-left jspsych-survey-multi-choice-question"><span class="jspsych-survey-multi-choice-number">' + (i+1) + '.</span><p class=" survey-multi-choice">' + question.prompt 
         // question.required
         html += '</p></div>';
-        html += '<div style="display: flex; width: 50%; justify-content: space-around;">';
+        html += '<div class="jspsych-survey-multi-choice-option-right">';
   
         // create option radio buttons
         for (var j = 0; j < question.options.length; j++) {
@@ -224,9 +241,9 @@ jsPsych.plugins['GAD-7'] = (function() {
         html += '<div id="jspsych-survey-multi-choice-checkbox"   data-name="'+checkbox.name+'">';
   
         // add question text
-        html += '<p class="jspsych-survey-multi-choice-text survey-multi-choice" style="padding: 2rem 0; text-align: left">' + checkbox.prompt + '</p>'
+        html += '<p class="jspsych-survey-multi-choice-text survey-multi-choice" style="padding: 4rem 0; text-align: left">' + checkbox.prompt + '</p>'
 
-        html += '<div style="display: flex; justify-content: space-around; height: 150px; align-items: baseline;">';
+        html += '<div style="display: flex; justify-content: space-around; height: 150px; align-items: baseline; font-size: 18px;">';
   
 
         for (var j = 0; j < checkbox.options.length; j++) {
@@ -238,7 +255,7 @@ jsPsych.plugins['GAD-7'] = (function() {
           var required_attr = checkbox.required ? 'required' : '';
   
           // add radio button container
-          html += '<div id="'+checkbox_id_name+'" class="jspsych-survey-multi-choice-option" style="width: 116px">';
+          html += '<div id="'+checkbox_id_name+'" class="jspsych-survey-multi-choice-option-checkbox" style="width: 116px">';
           html += '<label class="jspsych-survey-multi-choice-text" data-time-stamp="Q8" for="'+input_id+'">' +checkbox.options[j]+'</label>';
           html += '<input type="radio" name="'+input_name+'" class="form-radio" data-time-stamp="Q8" data-question-number="Q8A' + (j+1) +'" id="'+input_id+'" value="'+checkbox.options[j]+'" '+required_attr+'></input>';
           html += '</div>';
@@ -365,10 +382,10 @@ jsPsych.plugins['GAD-7'] = (function() {
         
           if(match.querySelector("input[type=radio]:checked") !== null){
             var val = match.querySelector("input[type=radio]:checked").value;
-            $(match).find('.jspsych-survey-multi-choice-question').removeClass('survey-error-after');
+            $(match).find('.jspsych-survey-multi-choice-question').removeClass('survey-error');
           } else {
             var val = "";
-            $(match).find('.jspsych-survey-multi-choice-question').addClass('survey-error-after');
+            $(match).find('.jspsych-survey-multi-choice-question').addClass('survey-error');
           }
           var obje = {};
           var name = id;
@@ -400,7 +417,7 @@ jsPsych.plugins['GAD-7'] = (function() {
         }());
 
 
-        if ($(".survey-error-after").length < 1) {
+        if ($(".survey-error").length < 1) {
           // kill keyboard listeners
           if (typeof keyboardListener !== 'undefined') {
             jsPsych.pluginAPI.cancelKeyboardResponse(keyboardListener);

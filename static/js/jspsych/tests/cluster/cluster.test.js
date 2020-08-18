@@ -5,7 +5,7 @@ const { Cluster } = require('puppeteer-cluster');
 const timeout = 3e+6;
 
 // sets number of concurrency working process
-const concurrency_number = 50;
+const concurrency_number = 20;
 const headless_browser = true;
  
 function delay(time) {
@@ -526,10 +526,10 @@ describe('DDG', () => {
               document.querySelector('.next-question').click();
             });
           };
-          await delay(400);
+          await delay(500);
         };
         await page.waitForSelector('#jspsych-survey-multi-choice-ICAR-next');
-        await delay(500);
+        await delay(700);
         await page.evaluate(() => {
           document.querySelector('#jspsych-survey-multi-choice-ICAR-next').click();
         });

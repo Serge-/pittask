@@ -49,9 +49,9 @@ var DEMOGRAPHICS_STAGE = {
 var OCIR = {
     type: 'OCI-R',
     preamble:
-        '<p>The following statements refer to experiences that many people have in their everyday lives. Select' +
-        'the number that best describes <b>HOW MUCH</b> that experience has <b>DISTRESSED</b> or <b>BOTHERED</b>' +
-        'you during the <b>PAST MONTH</b>. The numbers refer to the following verbal labels:</p>',
+        '<p>The following statements refer to experiences that many people have in their everyday lives. Select ' +
+        'the number that best describes <b>HOW MUCH</b> that experience has <b>DISTRESSED</b> or <b>BOTHERED</b> ' +
+        'you during the <b>PAST MONTH</b>.</p>',
     questions: [
         {
             prompt: "I have saved up so many things that they get in the way.",
@@ -136,11 +136,10 @@ var OCIR = {
 var ASRM = {
     type: 'ASRM',
     preamble:
-        '<h2><b>Instructions</b></h1>' +
-        '<div class="preamble-wrapper"><span>1.</span><p> On this questionnaire are groups of five statements; read each group of statements carefully</p></div>' +
-        '<div class="preamble-wrapper"><span>2.</span><p> Choose the one statement in each group that best describes the way you have been feeling for the past week. </p></div>' +
-        '<div class="preamble-wrapper"><span>3.</span><p> Click on the number next to the statement you picked</p></div>' +
-        '<div class="preamble-wrapper"><span>4.</span><p> Please note: The word “occasionally” when used here means once or twice; “often” means several' +
+        '<div class="preamble-wrapper"><p> On this questionnaire are groups of five statements; read each group of statements carefully.</p></div>' +
+        '<div class="preamble-wrapper"><p> Choose the one statement in each group that best describes the way you have been feeling for the past week. </p></div>' +
+        '<div class="preamble-wrapper"><p> Click on the number next to the statement you picked.</p></div>' +
+        '<div class="preamble-wrapper"><p> Please note: The word “occasionally” when used here means once or twice; “often” means several' +
         'times or more; “frequently” means most of the time.</p></div>',
     questions: [
         {
@@ -205,6 +204,7 @@ var ASRM = {
 
 var GAD7 = {
     type: 'GAD-7',
+    preamble: 'Over the <u>last 2 weeks</u>, how often have you been bothered by the following problems?',
     checkboxes: [
         {
             prompt: 'If you checked off <u>any</u> problems, how <u>difficult</u> have these problems made it for you to do your work, take care of things at home, or get along with other people?',
@@ -215,31 +215,31 @@ var GAD7 = {
     ],
     questions: [
         {
-            prompt: 'Feeling nervous, anxious or on edge',
+            prompt: 'Feeling nervous, anxious or on edge.',
             options: [0, 1, 2, 3],
             horizontal: true
         }, {
-            prompt: 'Not being able to stop or control worrying',
+            prompt: 'Not being able to stop or control worrying.',
             options: [0, 1, 2, 3],
             horizontal: true
         }, {
-            prompt: 'Worrying too much about different things',
+            prompt: 'Worrying too much about different things.',
             options: [0, 1, 2, 3],
             horizontal: true
         }, {
-            prompt: 'Trouble relaxing',
+            prompt: 'Trouble relaxing.',
             options: [0, 1, 2, 3],
             horizontal: true
         }, {
-            prompt: 'Being so restless that it is hard to sit still',
+            prompt: 'Being so restless that it is hard to sit still.',
             options: [0, 1, 2, 3],
             horizontal: true
         }, {
-            prompt: 'Becoming easily annoyed or irritable',
+            prompt: 'Becoming easily annoyed or irritable.',
             options: [0, 1, 2, 3],
             horizontal: true
         }, {
-            prompt: 'Feeling afraid as if something awful might happen',
+            prompt: 'Feeling afraid as if something awful might happen.',
             options: [0, 1, 2, 3],
             horizontal: true
         },
@@ -253,9 +253,10 @@ var GAD7 = {
 
 var ISI = {
     type: 'ISI',
+    preamble: 'We would like to ask you about your quality of your current sleep (that is, last 2 weeks). Please answer the following questions',
     questions: [
         {
-            prompt: '1. Please rate the current (i.e., last 2 weeks) <b>SEVERITY</b> of your insomnia problem(s).',
+            prompt: 'Please rate the current <b>SEVERITY</b> of your insomnia problem(s).',
             options: [
                 {
                     prompt: 'Difficulty falling asleep:',
@@ -273,25 +274,25 @@ var ISI = {
             horizontal: true,
             title: ['None', 'Mild', 'Moderate', 'Severe', 'Very']
         }, {
-            prompt: '2. How <b>SATISFIED</b>/dissatisfied are you with your current sleep pattern?',
+            prompt: 'How <b>SATISFIED</b>/dissatisfied are you with your current sleep pattern?',
             options: [0, 1, 2, 3, 4],
             horizontal: true,
-            title: ['Very Satisfied', 'Very Dissatisfied']
+            title: ['Very satisfied', 'A little satisfied', 'Somewhat', 'A little dissatisfied', 'Very dissatisfied']
         }, {
-            prompt: '3. To what extent do you consider your sleep problem to <b>INTERFERE</b> with your daily functioning (e.g. daytime fatigue, ability to function at work/daily chores, concentration, memory, mood, etc.).',
+            prompt: 'To what extent do you consider your sleep problem to <b>INTERFERE</b> with your daily functioning (e.g. daytime fatigue, ability to function at work/daily chores, concentration, memory, mood, etc.).',
             options: [0, 1, 2, 3, 4],
             horizontal: true,
-            title: ['Not at all Interfering', 'A Little ', 'Somewhat', 'Much', 'Very Much Interfering']
+            title: ['Not at all interfering', 'A little ', 'Somewhat', 'Much', 'Very much interfering']
         }, {
-            prompt: '4. To what extent do you consider your sleep problem to <b>INTERFERE</b> with your daily functioning (e.g. daytime fatigue, ability to function at work/daily chores, concentration, memory, mood, etc.).',
+            prompt: 'How <b>NOTICEABLE</b> to others do you think your sleeping problem is in terms of impairing the quality of your life?',
             options: [0, 1, 2, 3, 4],
             horizontal: true,
-            title: ['Not at all Interfering', 'A Little ', 'Somewhat', 'Much', 'Very Much Interfering']
+            title: ['Not at all noticeable', 'Barely', 'Somewhat', 'Much', 'Very much noticeable']
         }, {
-            prompt: '5. To what extent do you consider your sleep problem to <b>INTERFERE</b> with your daily functioning (e.g. daytime fatigue, ability to function at work/daily chores, concentration, memory, mood, etc.).',
+            prompt: 'How <b>WORRIED</b>/distressed are you about your current sleep problem?',
             options: [0, 1, 2, 3, 4],
             horizontal: true,
-            title: ['Not at all', 'A Little ', 'Somewhat', 'Much', 'Very Much']
+            title: ['Not at all', 'A little ', 'Somewhat', 'Much', 'Very much']
         },
 
     ],
@@ -304,15 +305,14 @@ var ISI = {
 var EAT26 = {
     type: 'EAT-26',
     preamble:
-        '<p>Please fill out the below form as accurately, honestly and completely as possible. There are no right or wrong answers. All of' +
-        'your responses are confidential.</p>',
+        '<p>Please fill out the form below as accurately, honestly and completely as possible. There are not right or wrong answers. All of your responses are confidential.</p>',
     questions: [
         {
             prompt: 'Am terrified about being overweight.',
             options: ['Always', 'Usually', 'Often', 'Sometimes', 'Rarely', 'Never'],
             horizontal: true
         }, {
-            prompt: 'I feel like I act totally on impulse.',
+            prompt: 'Avoid eating when I’m hungry.',
             options: ['Always', 'Usually', 'Often', 'Sometimes', 'Rarely', 'Never'],
             horizontal: true
         }, {
@@ -320,7 +320,7 @@ var EAT26 = {
             options: ['Always', 'Usually', 'Often', 'Sometimes', 'Rarely', 'Never'],
             horizontal: true
         }, {
-            prompt: 'Have gone on eating binges where I feel that I may not be able to stop',
+            prompt: 'Have gone on eating binges where I feel that I may not be able to stop.',
             options: ['Always', 'Usually', 'Often', 'Sometimes', 'Rarely', 'Never'],
             horizontal: true
         }, {
@@ -352,7 +352,7 @@ var EAT26 = {
             options: ['Always', 'Usually', 'Often', 'Sometimes', 'Rarely', 'Never'],
             horizontal: true
         }, {
-            prompt: 'Think about burning up calories when I exercise',
+            prompt: 'Think about burning up calories when I exercise.',
             options: ['Always', 'Usually', 'Often', 'Sometimes', 'Rarely', 'Never'],
             horizontal: true
         }, {
@@ -451,7 +451,7 @@ var EAT26 = {
 var PID = {
     type: 'PID-5-BF',
     preamble:
-        '<p><b>Instructions</b>: This is a list of things different people might say about themselves. We are interested in how' +
+        '<p>This is a list of things different people might say about themselves. We are interested in how' +
         'you would describe yourself. There are no right or wrong answers. So you can describe yourself as honestly' +
         'as possible, we will keep your responses confidential. We’d like you to take your time and read each' +
         'statement carefully, selecting the response that best describes you.</p>',
@@ -465,7 +465,7 @@ var PID = {
             options: [0, 1, 2, 3],
             horizontal: true
         }, {
-            prompt: 'Even though I know better, I can’t stop making rash decisions',
+            prompt: 'Even though I know better, I can’t stop making rash decisions.',
             options: [0, 1, 2, 3],
             horizontal: true
         }, {
@@ -501,7 +501,7 @@ var PID = {
             options: [0, 1, 2, 3],
             horizontal: true
         }, {
-            prompt: 'I have seen things that weren’t really there',
+            prompt: 'I have seen things that weren’t really there.',
             options: [0, 1, 2, 3],
             horizontal: true
         }, {
@@ -537,7 +537,7 @@ var PID = {
             options: [0, 1, 2, 3],
             horizontal: true
         }, {
-            prompt: 'I often have thoughts that make sense to me but that other people say are strange',
+            prompt: 'I often have thoughts that make sense to me but that other people say are strange.',
             options: [0, 1, 2, 3],
             horizontal: true
         }, {
@@ -567,43 +567,42 @@ var PID = {
 var PHQ9 = {
     type: 'PHQ-9',
     preamble:
-        '<p><b>Instructions</b>: Over the <b>last 7 days</b>, how often have you been bothered by any of the following problems? (Click' +
-        'on the numbers to indicate your answer)</p>',
+        '<p>Over the <b>last 7 days</b>, how often have you been bothered by any of the following problems?</p>',
     questions: [
         {
-            prompt: 'Little interest or pleasure in doing things',
+            prompt: 'Little interest or pleasure in doing things.',
             options: [0, 1, 2, 3],
             horizontal: true
         }, {
-            prompt: 'Feeling down, depressed, or hopeless',
+            prompt: 'Feeling down, depressed, or hopeless.',
             options: [0, 1, 2, 3],
             horizontal: true
         }, {
-            prompt: 'Trouble falling or staying asleep, or sleeping too much',
+            prompt: 'Trouble falling or staying asleep, or sleeping too much.',
             options: [0, 1, 2, 3],
             horizontal: true
         }, {
-            prompt: 'Feeling tired or having little energy',
+            prompt: 'Feeling tired or having little energy.',
             options: [0, 1, 2, 3],
             horizontal: true
         }, {
-            prompt: 'Poor appetite or overeating',
+            prompt: 'Poor appetite or overeating.',
             options: [0, 1, 2, 3],
             horizontal: true
         }, {
-            prompt: 'Feeling bad about yourself—or that you are a failure or have let yourself or your family down',
+            prompt: 'Feeling bad about yourself—or that you are a failure or have let yourself or your family down.',
             options: [0, 1, 2, 3],
             horizontal: true
         }, {
-            prompt: 'Trouble concentrating on things, such as reading the newspaper or watching television',
+            prompt: 'Trouble concentrating on things, such as reading the newspaper or watching television.',
             options: [0, 1, 2, 3],
             horizontal: true
         }, {
-            prompt: 'Moving or speaking so slowly that other people could have noticed? Or the opposite—being so fidgety or restless that you have been moving around a lot more than usual',
+            prompt: 'Moving or speaking so slowly that other people could have noticed? Or the opposite—being so fidgety or restless that you have been moving around a lot more than usual.',
             options: [0, 1, 2, 3],
             horizontal: true
         }, {
-            prompt: 'Thoughts that you would be better off dead or of hurting yourself in some way',
+            prompt: 'Thoughts that you would be better off dead or of hurting yourself in some way.',
             options: [0, 1, 2, 3],
             horizontal: true
         }
@@ -627,7 +626,8 @@ var PTSD = {
                     '<li>a war</li>' +
                     '<li>seeing someone be killed or seriously injured</li>' +
                     '<li>having a loved one die through homicide or suicide</li>' +
-                '</ul>',
+                '</ul>' +
+                '<p>Have you ever experienced this kind of event?</p>',
             options: ['YES', 'NO'],
             horizontal: true
         }, {
@@ -647,7 +647,7 @@ var PTSD = {
             options: ['YES', 'NO'],
             horizontal: true
         }, {
-            prompt: 'felt guilty or unable to stop blaming yourself or others for the events(s) or any problems the event(s) may have caused?',
+            prompt: 'felt guilty or unable to stop blaming yourself or others for the event(s) or any problems the event(s) may have caused?',
             options: ['YES', 'NO'],
             horizontal: true
         },
@@ -660,69 +660,62 @@ var PTSD = {
 
 var RAADS = {
     type: 'RAADS-14',
-    preamble:
-        '<p>Please choose one of the following alternatives:</p>' +
-        '<p>This is true or describes me now and when I was young.</p>' +
-        '<p>This was true or describes me only now (refers to skills acquired).</p>' +
-        '<p>This was true only when I was young (16 years or younger).</p>' +
-        '<p>This was never true and never described me.</p>' +
-        '<p>Please answer the questions according to what is true for you.' +
-        'Check only one column per statement!</p>',
+    preamble: '<p>Please answer the following questions according to life experiences and personality characteristics that are true to you.</p>',
     questions: [
         {
-            prompt: 'It is difficult for me to understand how other people are feeling when we are talking',
+            prompt: 'It is difficult for me to understand how other people are feeling when we are talking.',
             options: ['True now and when I was young', 'True only now', 'True only when I was younger than 16', 'Never true'],
             horizontal: true
         }, {
-            prompt: 'Some ordinary textures that do not bother others feel very offensive when they touch my skin',
+            prompt: 'Some ordinary textures that do not bother others feel very offensive when they touch my skin.',
             options: ['True now and when I was young', 'True only now', 'True only when I was younger than 16', 'Never true'],
             horizontal: true
         }, {
-            prompt: 'It is very difficult for me to work and function in groups',
+            prompt: 'It is very difficult for me to work and function in groups.',
             options: ['True now and when I was young', 'True only now', 'True only when I was younger than 16', 'Never true'],
             horizontal: true
         }, {
-            prompt: 'It is difficult to figure out what other people expect of me',
+            prompt: 'It is difficult to figure out what other people expect of me.',
             options: ['True now and when I was young', 'True only now', 'True only when I was younger than 16', 'Never true'],
             horizontal: true
         }, {
-            prompt: ' I often don’t know how to act in social situations',
+            prompt: ' I often don’t know how to act in social situations.',
             options: ['True now and when I was young', 'True only now', 'True only when I was younger than 16', 'Never true'],
             horizontal: true
         }, {
-            prompt: 'I can chat and make small talk with people',
+            prompt: 'I can chat and make small talk with people.',
             options: ['True now and when I was young', 'True only now', 'True only when I was younger than 16', 'Never true'],
             horizontal: true
         }, {
-            prompt: 'When I feel overwhelmed by my senses, I have to isolate myself to shut them down',
+            prompt: 'When I feel overwhelmed by my senses, I have to isolate myself to shut them down.',
             options: ['True now and when I was young', 'True only now', 'True only when I was younger than 16', 'Never true'],
             horizontal: true
         }, {
-            prompt: 'How to make friends and socialize is a mystery to me',
+            prompt: 'How to make friends and socialize is a mystery to me.',
             options: ['True now and when I was young', 'True only now', 'True only when I was younger than 16', 'Never true'],
             horizontal: true
         }, {
-            prompt: ' When talking to someone, I have a hard time telling when it is my turn to talk or to listen',
+            prompt: ' When talking to someone, I have a hard time telling when it is my turn to talk or to listen.',
             options: ['True now and when I was young', 'True only now', 'True only when I was younger than 16', 'Never true'],
             horizontal: true
         }, {
-            prompt: ' Sometimes I have to cover my ears to block out painful noises (like vacuum cleaners or people talking too much or too loudly)',
+            prompt: ' Sometimes I have to cover my ears to block out painful noises (like vacuum cleaners or people talking too much or too loudly).',
             options: ['True now and when I was young', 'True only now', 'True only when I was younger than 16', 'Never true'],
             horizontal: true
         }, {
-            prompt: 'It can be very hard to read someone’s face, hand, and body movements when we are talking',
+            prompt: 'It can be very hard to read someone’s face, hand, and body movements when we are talking.',
             options: ['True now and when I was young', 'True only now', 'True only when I was younger than 16', 'Never true'],
             horizontal: true
         }, {
-            prompt: ' I focus on details rather than the overall idea',
+            prompt: ' I focus on details rather than the overall idea.',
             options: ['True now and when I was young', 'True only now', 'True only when I was younger than 16', 'Never true'],
             horizontal: true
         }, {
-            prompt: 'I take things too literally, so I often miss what people are trying to say',
+            prompt: 'I take things too literally, so I often miss what people are trying to say.',
             options: ['True now and when I was young', 'True only now', 'True only when I was younger than 16', 'Never true'],
             horizontal: true
         }, {
-            prompt: 'I get extremely upset when the way I like to do things is suddenly changed',
+            prompt: 'I get extremely upset when the way I like to do things is suddenly changed.',
             options: ['True now and when I was young', 'True only now', 'True only when I was younger than 16', 'Never true'],
             horizontal: true
         }
@@ -736,6 +729,7 @@ var RAADS = {
 
 var PRIME_R = {
     type: 'PRIME-R',
+    preamble: 'We would like to ask you about gambling. Thinking about the past 12 months, please answer the following questions.',
     title: [
         'Definitely disagree',
         'Somewhat disagree',
@@ -763,11 +757,11 @@ var PRIME_R = {
             options: [0, 1, 2, 3, 4, 5, 6],
             horizontal: true
         }, {
-            prompt: 'I think that I may get confused at times whether something I experience or perceive may be real or may be just part of my imagination or dreams',
+            prompt: 'I think that I may get confused at times whether something I experience or perceive may be real or may be just part of my imagination or dreams.',
             options: [0, 1, 2, 3, 4, 5, 6],
             horizontal: true
         }, {
-            prompt: ' I have thought that it might be possible that other people can read my mid, or that I can read others’ minds.',
+            prompt: 'I have thought that it might be possible that other people can read my mind, or that I can read others’ minds.',
             options: [0, 1, 2, 3, 4, 5, 6],
             horizontal: true
         }, {
@@ -814,168 +808,168 @@ var LSAS = {
         '</ul>',
     questions: [
         {
-            prompt: '<b>Telephoning in public</b> – speaking on the phone in a public place',
+            prompt: '<b>Telephoning in public</b> – speaking on the phone in a public place.',
             options: [
                 [0, 1, 2, 3],
                 [0, 1, 2, 3]
             ],
             horizontal: true
         }, {
-            prompt: '<b>Participating in small groups</b> – having a discussion with a few others',
+            prompt: '<b>Participating in small groups</b> – having a discussion with a few others.',
             options: [
                 [0, 1, 2, 3],
                 [0, 1, 2, 3]
             ],
             horizontal: true
         }, {
-            prompt: '<b>Eating in public places</b> – do you tremble or feel awkward handling food',
+            prompt: '<b>Eating in public places</b> – do you tremble or feel awkward handling food.',
             options: [
                 [0, 1, 2, 3],
                 [0, 1, 2, 3]
             ],
             horizontal: true
         }, {
-            prompt: '<b>Drinking with others in public places</b> – refers to any beverage including alcohol',
+            prompt: '<b>Drinking with others in public places</b> – refers to any beverage including alcohol.',
             options: [
                 [0, 1, 2, 3],
                 [0, 1, 2, 3]
             ],
             horizontal: true
         }, {
-            prompt: '<b>Talking to people in authority</b> – for example, a boss or teacher',
+            prompt: '<b>Talking to people in authority</b> – for example, a boss or teacher.',
             options: [
                 [0, 1, 2, 3],
                 [0, 1, 2, 3]
             ],
             horizontal: true
         }, {
-            prompt: '<b>Acting, performing or giving a talk in front of an audience</b> – refers to a large audience',
+            prompt: '<b>Acting, performing or giving a talk in front of an audience</b> – refers to a large audience.',
             options: [
                 [0, 1, 2, 3],
                 [0, 1, 2, 3]
             ],
             horizontal: true
         }, {
-            prompt: '<b>Going to a party</b> – an average party to which you may be invited; assume you know some but not all people at the party',
+            prompt: '<b>Going to a party</b> – an average party to which you may be invited; assume you know some but not all people at the party.',
             options: [
                 [0, 1, 2, 3],
                 [0, 1, 2, 3]
             ],
             horizontal: true
         }, {
-            prompt: '<b>Working while being observed</b> – any type of work you might do including school work or housework',
+            prompt: '<b>Working while being observed</b> – any type of work you might do including school work or housework.',
             options: [
                 [0, 1, 2, 3],
                 [0, 1, 2, 3]
             ],
             horizontal: true
         }, {
-            prompt: '<b>Writing while being observed</b> – for example, signing a check in a bank',
+            prompt: '<b>Writing while being observed</b> – for example, signing a check in a bank.',
             options: [
                 [0, 1, 2, 3],
                 [0, 1, 2, 3]
             ],
             horizontal: true
         }, {
-            prompt: '<b>Calling someone you don’t know very well</b>',
+            prompt: '<b>Calling someone you don’t know very well</b>.',
             options: [
                 [0, 1, 2, 3],
                 [0, 1, 2, 3]
             ],
             horizontal: true
         }, {
-            prompt: '<b>Talking with people you don’t know very well</b>',
+            prompt: '<b>Talking with people you don’t know very well</b>.',
             options: [
                 [0, 1, 2, 3],
                 [0, 1, 2, 3]
             ],
             horizontal: true
         }, {
-            prompt: '<b>Meeting strangers</b> – assume others are of average importance to you',
+            prompt: '<b>Meeting strangers</b> – assume others are of average importance to you.',
             options: [
                 [0, 1, 2, 3],
                 [0, 1, 2, 3]
             ],
             horizontal: true
         }, {
-            prompt: '<b>Urinating in a public bathroom</b> – assume that others are sometimes present, as might normally be expected',
+            prompt: '<b>Urinating in a public bathroom</b> – assume that others are sometimes present, as might normally be expected.',
             options: [
                 [0, 1, 2, 3],
                 [0, 1, 2, 3]
             ],
             horizontal: true
         }, {
-            prompt: '<b>Entering a room when others are already seated</b> – refers to a small group, and nobody has to move seats for you',
+            prompt: '<b>Entering a room when others are already seated</b> – refers to a small group, and nobody has to move seats for you.',
             options: [
                 [0, 1, 2, 3],
                 [0, 1, 2, 3]
             ],
             horizontal: true
         }, {
-            prompt: '<b>Being the center of attention</b> – telling a story to a group of people',
+            prompt: '<b>Being the center of attention</b> – telling a story to a group of people.',
             options: [
                 [0, 1, 2, 3],
                 [0, 1, 2, 3]
             ],
             horizontal: true
         }, {
-            prompt: '<b>Speaking up at a meeting</b> – speaking from your seat in a small meeting or standing up in a place in large meeting',
+            prompt: '<b>Speaking up at a meeting</b> – speaking from your seat in a small meeting or standing up in a place in large meeting.',
             options: [
                 [0, 1, 2, 3],
                 [0, 1, 2, 3]
             ],
             horizontal: true
         }, {
-            prompt: '<b>Taking a written test</b>',
+            prompt: '<b>Taking a written test</b>.',
             options: [
                 [0, 1, 2, 3],
                 [0, 1, 2, 3]
             ],
             horizontal: true
         }, {
-            prompt: '<b>Expressing appropriate disagreement or disapproval to people you don’t know very well</b>',
+            prompt: '<b>Expressing appropriate disagreement or disapproval to people you don’t know very well</b>.',
             options: [
                 [0, 1, 2, 3],
                 [0, 1, 2, 3]
             ],
             horizontal: true
         }, {
-            prompt: '<b>Looking at people you don’t know very well in the eyes</b> – refers to appropriate eye contact',
+            prompt: '<b>Looking at people you don’t know very well in the eyes</b> – refers to appropriate eye contact.',
             options: [
                 [0, 1, 2, 3],
                 [0, 1, 2, 3]
             ],
             horizontal: true
         }, {
-            prompt: '<b>Giving a report to a group</b> – refers to an oral report to a small group',
+            prompt: '<b>Giving a report to a group</b> – refers to an oral report to a small group.',
             options: [
                 [0, 1, 2, 3],
                 [0, 1, 2, 3]
             ],
             horizontal: true
         }, {
-            prompt: '<b>Trying to pick up someone</b> – refers to a single person attempting to initiate a relationship with a stranger',
+            prompt: '<b>Trying to pick up someone</b> – refers to a single person attempting to initiate a relationship with a stranger.',
             options: [
                 [0, 1, 2, 3],
                 [0, 1, 2, 3]
             ],
             horizontal: true
         }, {
-            prompt: '<b>Returning goods to a store where returns are normally accepted</b>',
+            prompt: '<b>Returning goods to a store where returns are normally accepted</b>.',
             options: [
                 [0, 1, 2, 3],
                 [0, 1, 2, 3]
             ],
             horizontal: true
         }, {
-            prompt: '<b>Giving a party</b>',
+            prompt: '<b>Giving a party</b>.',
             options: [
                 [0, 1, 2, 3],
                 [0, 1, 2, 3]
             ],
             horizontal: true
         }, {
-            prompt: '<b>Resisting a high pressure salesperson</b> – avoidance refers to listening to the salesperson for too long',
+            prompt: '<b>Resisting a high pressure salesperson</b> – avoidance refers to listening to the salesperson for too long.',
             options: [
                 [0, 1, 2, 3],
                 [0, 1, 2, 3]
@@ -994,6 +988,7 @@ var LSAS = {
 
 var MOVES = {
     type: 'MOVES',
+    preamble: 'Answer the questions below for the past 2 weeks',
     title: [
         'Never',
         'Sometimes',
@@ -1006,7 +1001,7 @@ var MOVES = {
             options: [0, 1, 2, 3],
             horizontal: true
         }, {
-            prompt: 'Parts of my body jerk again and again, that I can\'t control',
+            prompt: 'Parts of my body jerk again and again, that I can\'t control.',
             options: [0, 1, 2, 3],
             horizontal: true
         }, {
@@ -1070,7 +1065,7 @@ var MOVES = {
             options: [0, 1, 2, 3],
             horizontal: true
         }, {
-            prompt: 'I have to do things I see other people do',
+            prompt: 'I have to do things I see other people do.',
             options: [0, 1, 2, 3],
             horizontal: true
         }, {
@@ -1134,6 +1129,7 @@ var ASRS5 = {
 
 var YIAT = {
     type: 'YIAT',
+    preamble: 'We would like to ask you about your internet use, please answer the following questions.',
     title: [
         'Never',
         'Rarely',
@@ -1155,7 +1151,7 @@ var YIAT = {
             options: ['Never', 'Rarely', 'Sometimes', 'Often', 'Very often'],
             horizontal: true
         }, {
-            prompt: 'How often do you become defensive or secretive when anyone asks you what you do online?',
+            prompt: 'How often do you become defensive or secretive when anyone asks you what you do on-line?',
             options: ['Never', 'Rarely', 'Sometimes', 'Often', 'Very often'],
             horizontal: true
         }, {
@@ -1163,7 +1159,7 @@ var YIAT = {
             options: ['Never', 'Rarely', 'Sometimes', 'Often', 'Very often'],
             horizontal: true
         }, {
-            prompt: 'How often do you lose sleep due to being online late at night?',
+            prompt: 'How often do you lose sleep due to being on-line late at night?',
             options: ['Never', 'Rarely', 'Sometimes', 'Often', 'Very often'],
             horizontal: true
         }, {
@@ -1175,7 +1171,7 @@ var YIAT = {
             options: ['Never', 'Rarely', 'Sometimes', 'Often', 'Very often'],
             horizontal: true
         }, {
-            prompt: 'How often do you try to cut down the amount of time you spend online and fail?',
+            prompt: 'How often do you try to cut down the amount of time you spend on-line and fail?',
             options: ['Never', 'Rarely', 'Sometimes', 'Often', 'Very often'],
             horizontal: true
         }, {
@@ -1203,8 +1199,8 @@ var DASS = {
     type: 'DASS',
     preamble:
         '<p>Please read each statement and select a number (0, 1, 2 or 3) which indicates how much the statement applied to you' +
-        '<u>over the past week</u>. There are no right or wrong answers. Do not spend too much time on any statement.</p>' +
-        '<p style="font-style: italic; padding: 2rem 0; ">The rating scale is as follows:</p>' +
+        '<u> over the past week</u>. There are no right or wrong answers. Do not spend too much time on any statement.</p><br>' +
+        '<p>The rating scale is as follows:</p>' +
         '<p>0 Did not apply to me at all – NEVER</p>' +
         '<p>1 Applied to me to some degree, or some of the time – SOMETIMES</p>' +
         '<p>2 Applied to me to a considerable degree, or a good part of time – OFTEN</p>' +
@@ -1283,7 +1279,7 @@ var DASS = {
             options: [0, 1, 2, 3],
             horizontal: true
         }, {
-            prompt: 'I was aware of the action of my heart in the absence of physicalexertion (eg, sense of heart rate increase, heart missing a beat)',
+            prompt: 'I was aware of the action of my heart in the absence of physical exertion (eg, sense of heart rate increase, heart missing a beat)',
             options: [0, 1, 2, 3],
             horizontal: true
         }, {
@@ -1306,13 +1302,11 @@ var DASS = {
 var AUDIT = {
     type: 'AUDIT',
     preamble:
-        '<p>Because alcohol use can affect health and interfere with certain medications and treatments, it is important that we ask you some questions about your use of alcohol. Your answers will remain confidential, so please be as accurate as possible. Try to answer the questions in terms of ‘standard drinks’. Please tick the response that best fits your drinking.</p>' +
+        "<p>Because alcohol use can affect health and interfere with certain medications and treatments, it is important that we ask you some questions about your use of alcohol over the past year. Your answers will remain confidential, so please by as accurate as possible. Try to answer the questions in terms of ‘standard drinks’. Please tick the response that best fits your drinking</p><br>" +
+        '<p>This guide contains examples of <strong>one standard drink.</strong></p>' +
+        '<p>A full strength can or stubbie contains <strong>one and a half standard drinks.</strong></p>' +
         '<div class="audit-img-container">' +
             '<img src="../static/images/audit_image.jpg">' +
-            '<div>' +
-                '<p>This guide contains examples of <strong>one standard drink.</strong></p>' +
-                '<p>A full strength can or stubbie contains <strong>one and a half standard drinks.</strong></p>' +
-            '</div>' +
         '</div>',
     questions: [
         {
@@ -1369,6 +1363,7 @@ var SMOKE_FTND = {
     timeline: [
         {
             type: 'Smoking-Status',
+            preamble:'We would like to ask you about your smoking. Please answer the following questions.',
             questions: [
                 {
                     prompt: 'Have you smoked at least 100 cigarettes in your ENTIRE LIFE?',
@@ -1387,6 +1382,7 @@ var SMOKE_FTND = {
         },
         {
             type: 'FTND',
+            preamble:'We would like to ask you a little more about your current smoking habits. Please answer the following questions.',
             questions: [
                 {
                     prompt: 'How soon after you wake up do you smoke your first cigarette?',
@@ -1425,57 +1421,62 @@ var SMOKE_FTND = {
 
 var PGSI = {
     type: 'PGSI',
+    title: [
+        'Never',
+        'Sometimes',
+        'Most of the time',
+        'Almost always'
+    ],
+    preamble: 'We would like to ask you about gambling. Thinking about the past 12 months, please answer the following questions.',
     questions: [
         {
-            prompt: 'Q1. Thinking about the past 12 months, how often have you bet more than you could really afford to lose? Would you say:',
+            prompt: 'How often have you bet more than you could really afford to lose? Would you say:',
             options: ['Never', 'Sometimes', 'Most of the time', 'Almost always'],
-            horizontal: false
+            horizontal: true
         },{
-            prompt: 'Q2. Thinking about the past 12 months, how often have you needed to gamble with larger amounts of money to get the same feeling of excitement?',
+            prompt: 'How often have you needed to gamble with larger amounts of money to get the same feeling of excitement?',
             options: ['Never', 'Sometimes', 'Most of the time', 'Almost always'],
-            horizontal: false
+            horizontal: true
         },{
-            prompt: 'Q3. Thinking about the past 12 months, how often have you gone back another day to try to win back the money you lost?',
+            prompt: 'How often have you gone back another day to try to win back the money you lost?',
             options: ['Never', 'Sometimes', 'Most of the time', 'Almost always'],
-            horizontal: false
+            horizontal: true
         },{
-            prompt: 'Q4. Thinking about the past 12 months, how often have you borrowed money or sold anything to get money to gamble?',
+            prompt: 'How often have you borrowed money or sold anything to get money to gamble?',
             options: ['Never', 'Sometimes', 'Most of the time', 'Almost always'],
-            horizontal: false
+            horizontal: true
         },{
-            prompt: 'Q5. Thinking about the past 12 months, how often have you felt that you might have a problem with gambling?',
+            prompt: 'How often have you felt that you might have a problem with gambling?',
             options: ['Never', 'Sometimes', 'Most of the time', 'Almost always'],
-            horizontal: false
+            horizontal: true
         },{
-            prompt: 'Q6. Thinking about the past 12 months, how often have people criticized your betting or told you that you had a gambling problem, regardless of whether or not you thought it was true?',
+            prompt: 'How often have people criticized your betting or told you that you had a gambling problem, regardless of whether or not you thought it was true?',
             options: ['Never', 'Sometimes', 'Most of the time', 'Almost always'],
-            horizontal: false
+            horizontal: true
         },{
-            prompt: 'Q7. Thinking about the past 12 months, how often have you felt guilty about the way you gamble, or what happens when you gamble?',
+            prompt: 'How often have you felt guilty about the way you gamble, or what happens when you gamble?',
             options: ['Never', 'Sometimes', 'Most of the time', 'Almost always'],
-            horizontal: false
+            horizontal: true
         },{
-            prompt: 'Q8. Thinking about the past 12 months, how often has your gambling caused you any health problems, including stress or anxiety?',
+            prompt: 'How often has your gambling caused you any health problems, including stress or anxiety?',
             options: ['Never', 'Sometimes', 'Most of the time', 'Almost always'],
-            horizontal: false
+            horizontal: true
         },{
-            prompt: 'Q9. Thinking about the past 12 months, how often has your gambling caused any financial problems for you or your household?',
+            prompt: 'How often has your gambling caused any financial problems for you or your household?',
             options: ['Never', 'Sometimes', 'Most of the time', 'Almost always'],
-            horizontal: false
+            horizontal: true
         }
     ],
     button_label: 'submit answers',
     event_type: 'questions appears',
-    event_raw_details: "FTND, options",
-    event_converted_details: 'FTND questions appears'
+    event_raw_details: "PGSI, options",
+    event_converted_details: 'PGSI questions appears'
 }
 
 
 var SDS_STAGE = {
     type: 'SDS',
-    preamble:
-    '<p><b>A brief, patient rated, measure of disability and impairment.</b></p>' +
-    '<p>Please mark ONE circle for each scale.</p>',
+    preamble: '<p>We would now like to ask you if/how the above experiences and symptoms have affected you. Please mark ONE circle for each scale.</p>',
     questions: [
         {
             prompt:
@@ -1506,7 +1507,7 @@ var SDS_STAGE = {
             name: 'DAYS LOST**'
         },{
             title: 'Days Unproductive',
-            prompt: 'On how many days in the last week did you feel your symptoms, than even though you went to school or work, your productivity was reduced?',
+            prompt: 'On how many days in the last week did you feel so impaired by your symptoms that even though you went to school or work, your productivity was reduced?',
             options: [0, 1, 2, 3, 4, 5, 6, 7],
             horizontal: false,
             name: 'DAYS UNPRODUCTIVE**'

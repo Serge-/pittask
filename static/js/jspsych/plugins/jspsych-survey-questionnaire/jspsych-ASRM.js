@@ -123,13 +123,14 @@ jsPsych.plugins['ASRM'] = (function () {
     html += ".jspsych-survey-multi-choice-question { display: flex; margin-bottom: 2em; text-align: left; }" +
       ".jspsych-survey-multi-choice-text span.required {color: darkred;}" +
       ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-text {  text-align: center;}" +
-      ".jspsych-survey-multi-choice-option { line-height: 2; }" +
+      ".jspsych-survey-multi-choice-option { justify-content: flex-start; padding: 0 0 1rem 0; }" +
       ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-option {  display: inline-block;  margin-left: 1em;  margin-right: 1em;  vertical-align: top;}" +
       ".jspsych-survey-multi-choice-form { max-width: 1000px }" +
       ".jspsych-btn { margin: 100px 0; }" +
+      "label { font-weight: 100; }" +
       ".jspsych-content { margin-top: 130px;}" +
       ".jspsych-survey-highlight { cursor: pointer }" +
-      ".jspsych-survey-multi-choice-preamble { max-width: 1000px; text-align: left; border-bottom: 1px solid;} .jspsych-survey-multi-choice-preamble h2 {text-align: center} .preamble-wrapper {display: flex;} .preamble-wrapper p {padding-left: 2rem;}" +
+      ".jspsych-survey-multi-choice-preamble { max-width: 1000px; text-align: left; border-bottom: 1px solid;} .jspsych-survey-multi-choice-preamble h2 {text-align: center} .preamble-wrapper {display: flex;}" +
       "label.jspsych-survey-multi-choice-text input[type='radio'] {margin-right: 1em;}";
     html += '</style>';
 
@@ -168,7 +169,7 @@ jsPsych.plugins['ASRM'] = (function () {
       html += '<div id="jspsych-survey-multi-choice-' + question_id + '" class="' + question_classes.join(' ') + '"  data-name="' + question.name + '">';
 
       // add question text
-      html += '<div><p class="jspsych-survey-multi-choice-question survey-multi-choice " style="padding-top: 3px;">' + (i + 1) + ')'
+      html += '<div><p class="jspsych-survey-multi-choice-question survey-multi-choice">' + (i + 1) + '.'
       // question.required
       html += '</p></div>';
       html += '<div style="padding-left: 2rem;">';

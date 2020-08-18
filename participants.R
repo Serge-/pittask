@@ -5,6 +5,8 @@ if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
   install.packages(setdiff(packages, rownames(installed.packages())))
 }
 
+`%notin%` <- Negate(`%in%`)
+
 library(httr)
 library(RMySQL)
 library(jsonlite)
@@ -390,35 +392,24 @@ PavCondition <- data.table(
   correct = character()
 )
 
-CompleteData <- data.table(
-  PIN = character(),
-  complete = character(),
-  date = character(),
-  calendar_time = character(),
-  timestamp = numeric(),
-  location = character(),
-  timezone = character(),
-  stage = character(),
-  commit = character(),
-  version = character(),
-  block = character(),
-  interval = character(),
-  event_type = character(),
-  event_raw = character(),
-  event_converted = character()
-)
-
 # Geo ---------------------------------------------------------------------
 
 getGeoInfoByIP <- function(ipList){
-  cat("\n  Processing IP addresses . . .\n")
-  ipBatches <- split(ipList, rep(1:ceiling(length(ipList)/100), each = 100)[1:length(ipList)])
-  countries <- c()
-  timezones <- c()
+  non_local_countries <- c()
+  non_local_timezones <- c()
+  
+  local_ips_to_skip <- c("127.0.0.1", "0.0.0.0")
+  
+  non_local_ips <- ipList[ipList %notin% local_ips_to_skip]
+  non_local_ips_indices <- which(ipList %notin% local_ips_to_skip)
+  
+  ipBatches <- split(non_local_ips, rep(1:ceiling(length(non_local_ips)/100), each = 100)[1:length(non_local_ips)])
+  
+  # ip-api is limited by 15 batch requests per minute (with 100 ips for each request)
   
   for(i in 1:length(ipBatches)){
-    if(i %% 44 == 0){
-      for(sec in seq(60, 1)){
+    if(i %% 15 == 0){
+      for(sec in seq(65, 1)){
         cat("\r", paste("  Please, wait for a ", sec, " seconds"))
         flush.console()
         Sys.sleep(1)
@@ -436,11 +427,17 @@ getGeoInfoByIP <- function(ipList){
     stop_for_status(request)
     response <- content(request, "text")
 
-    countries <- c(countries, ifelse(fromJSON(response)[i] == 'fail', "local", fromJSON(response)$country))
-    timezones <- c(timezones, ifelse(fromJSON(response)[i] == 'fail', "local", fromJSON(response)$timezone))
+    non_local_countries <- c(non_local_countries, fromJSON(response)$country)
+    non_local_timezones <- c(non_local_timezones, fromJSON(response)$timezone)
   }
   
-  list("countries" = countries, "timezones" = timezones)
+  all_countries <- rep("local", length(ipList))
+  all_timezones <- rep("local", length(ipList))
+  
+  all_countries[non_local_ips_indices] <- non_local_countries
+  all_timezones[non_local_ips_indices] <- non_local_timezones
+  
+  list("countries" = all_countries, "timezones" = all_timezones)
 }
 
 formatDateTime <- function(dateTime){
@@ -461,6 +458,50 @@ if(isClass(query))
 {
   data <- dbFetch(query, n = -1)
   recordsCount <- nrow(data)
+  
+  # Parsing non-empty trialdata events and counting CompleteData size
+  
+  data$datastring[is.na(data$datastring)] <- "{}"
+  json_data <- purrr::map(data$datastring, fromJSON)
+  
+  complete_data_size <- 0
+  complete_data_index <- 1L
+
+  for(i in 1:recordsCount){
+    
+    if(length(json_data[[i]]) == 0 | is.null(json_data[[i]]$data$trialdata$events)) {
+      next
+    }
+    
+    temp_events <- json_data[[i]]$data$trialdata$events[!is.na(json_data[[i]]$data$trialdata$events)]
+    
+    for(j in 1: length(temp_events)) {
+      complete_data_size <- complete_data_size + nrow(fromJSON(temp_events[j]))
+    }
+  }
+  
+  # Setting vectors sizes pre-allocates memory
+  
+  CompleteData <- data.table(
+    PIN = character(complete_data_size),
+    complete = character(complete_data_size),
+    date = character(complete_data_size),
+    calendar_time = character(complete_data_size),
+    timestamp = character(complete_data_size),
+    location = character(complete_data_size),
+    timezone = character(complete_data_size),
+    stage = character(complete_data_size),
+    commit = character(complete_data_size),
+    version = character(complete_data_size),
+    block = character(complete_data_size),
+    interval = character(complete_data_size),
+    event_type = character(complete_data_size),
+    event_raw = character(complete_data_size),
+    event_converted = character(complete_data_size)
+  )
+  
+  cat("\n  Processing IP addresses . . .\n")
+  
   geoInfo <- getGeoInfoByIP(data$ipaddress)
   
   cat("\n  Processing data . . .\n")
@@ -468,28 +509,21 @@ if(isClass(query))
   progressBar <- txtProgressBar(min = 0, max = recordsCount, style = 3, char = '|')
   
   for(i in 1:recordsCount) {
-    if(is.na(data$datastring[i])){
+    if(length(json_data[[i]]) == 0){
       setTxtProgressBar(progressBar, i)
       next
     }
-  
-    json <- fromJSON(data$datastring[i], T, T)
-    dateTime <- formatDateTime(json$data$dateTime)
-    dateTime_ms <- json$data$dateTime
-    trialdata <- json$data$trialdata
+    
+    dateTime <- formatDateTime(json_data[[i]]$data$dateTime)
+    dateTime_ms <- json_data[[i]]$data$dateTime
+    trialdata <- json_data[[i]]$data$trialdata
     
     PIN <- sQuote(str_pad(toString(i), 5, "left", pad = "0"))
     complete <- ifelse(is.na(data$endhit[i]), "n", "y")
     commit <- trialdata$commit[1]
     version <- trialdata$`counter-balancing version`[1]
-
-    if(is.na(geoInfo$countries[i])) {
-      country <- "local"
-      timezone <- "local"
-    } else {
-      country <- geoInfo$countries[i]
-      timezone <- geoInfo$timezones[i]
-    }
+    country <- geoInfo$countries[i]
+    timezone <- geoInfo$timezones[i]
 
     # Parameters --------------------------------------------------------------
     
@@ -530,11 +564,9 @@ if(isClass(query))
 
         Demographics <- rbindlist(list(Demographics, list(
           PIN, complete, date,
-          ifelse(timestamp == 'NA', 'NA', as.character(as.ITime(formatDateTime(time_ms + as.numeric(
-            if(timestamp != 'NA') timestamp
-          ))))),
-          timestamp,
-          country, timezone, commit, version,
+          ifelse(timestamp == 'NA', 'NA', as.character(as.ITime(formatDateTime(
+            time_ms + as.numeric(if(timestamp != 'NA') timestamp))))),
+          timestamp, country, timezone, commit, version,
           names(demographics_responses)[j],
           demographics_responses[[j]]
         )))
@@ -588,8 +620,7 @@ if(isClass(query))
         MOVES <- rbindlist(list(MOVES, list(
           PIN, complete, date,
           as.character(as.ITime(formatDateTime(time_ms + as.numeric(timestamp)))),
-          timestamp,
-          country, commit, version,
+          timestamp, country, commit, version,
           names(moves_responses)[j],
           moves_responses[[j]]
         )))
@@ -795,9 +826,8 @@ if(isClass(query))
       for(j in 1:length(pc_ptsd_5_responses)){
         PC_PTSD_5 <- rbindlist(list(PC_PTSD_5, list(
           PIN, complete, date,
-          ifelse(pc_ptsd_5_timestamps[[j]] == 'NA', 'NA', as.character(as.ITime(formatDateTime(time_ms + as.numeric(
-            if(pc_ptsd_5_timestamps[[j]] != 'NA') pc_ptsd_5_timestamps[[j]]
-          ))))), 
+          ifelse(pc_ptsd_5_timestamps[[j]] == 'NA', 'NA', as.character(as.ITime(formatDateTime(
+            time_ms + as.numeric(if(pc_ptsd_5_timestamps[[j]] != 'NA') pc_ptsd_5_timestamps[[j]]))))), 
           pc_ptsd_5_timestamps[[j]],
           country, commit, version,
           names(pc_ptsd_5_responses)[j],
@@ -953,9 +983,8 @@ if(isClass(query))
       for(j in 1:length(ftnd_responses)){
         FTND <- rbindlist(list(FTND, list(
           PIN, complete, date,
-          ifelse(ftnd_timestamps[[j]] == 'NA', 'NA', as.character(as.ITime(formatDateTime(time_ms + as.numeric(
-            if(ftnd_timestamps[[j]] != 'NA') ftnd_timestamps[[j]]
-          ))))), 
+          ifelse(ftnd_timestamps[[j]] == 'NA', 'NA', as.character(as.ITime(formatDateTime(
+            time_ms + as.numeric(if(ftnd_timestamps[[j]] != 'NA') ftnd_timestamps[[j]]))))), 
           ftnd_timestamps[[j]],
           country, commit, version,
           names(ftnd_responses)[j],
@@ -1086,11 +1115,9 @@ if(isClass(query))
 
         SDS <- rbindlist(list(SDS, list(
           PIN, complete, date,
-          ifelse(timestamp == 'NA', 'NA', as.character(as.ITime(formatDateTime(time_ms + as.numeric(
-            if(timestamp != 'NA') timestamp
-          ))))),
-          timestamp,
-          country, commit, version,
+          ifelse(timestamp == 'NA', 'NA', as.character(as.ITime(formatDateTime(
+            time_ms + as.numeric(if(timestamp != 'NA') timestamp))))),
+          timestamp, country, commit, version,
           names(sds_responses)[j],
           sds_responses[[j]]
         )))
@@ -1207,35 +1234,43 @@ if(isClass(query))
         PavCondition <- rbindlist(list(PavCondition, list(
           PIN, complete, date, time, pav_condition_timestamp[j], country, commit, version, 
           j, response_submitted, substring(correct, 1, 1)
-          )))
+        )))
       }
     }
     
     # CompleteData ------------------------------------------------------------
     
-    if(!is.null(trialdata$stage_name) & !is.null(version) & !is.null(trialdata$events)){
-      for(j in 1:length(trialdata$events)){
-        if(!is.na(trialdata$events[j]) & trialdata$events[j] != "[]"){
+    if(!is.null(trialdata$stage_name) & !is.null(version) & !is.null(trialdata$events)) {
+      for (j in 1:length(trialdata$events)) {
+        if (!is.na(trialdata$events[j]) & trialdata$events[j] != "[]") {
           date <- format(as.Date(dateTime[j]), "%d-%m-%Y")
           time <- as.character(as.ITime(dateTime[j]))
           events <- fromJSON(trialdata$events[j])
-
+          
           time_elapsed <- trialdata$time_elapsed[j]
           time_ms <- dateTime_ms[j] - time_elapsed
-
-          for(e in 1:nrow(events)){
-            CompleteData <- rbindlist(list(CompleteData, list(
-              PIN, complete, date, 
+          stage_name <- gsub('"', "", trialdata$stage_name[j])
+          
+          block_number <- ifelse(
+            is.na(trialdata$block_number[j]) || 
+            "block_number" %notin% colnames(trialdata), 
+            'NA', trialdata$block_number[j])
+          
+          # set() method with pre-allocated memory is much faster than appending data row by row using rbindlist()
+          
+          for (e in 1:nrow(events)) {
+            set(CompleteData, complete_data_index, 1L:15L, list(
+              PIN, complete, date,
               as.character(as.ITime(formatDateTime(time_ms + events$timestamp[e]))),
-              ifelse(is.na(events$time_elapsed[e]), 'NA', events$time_elapsed[e]), 
-              country, timezone,
-              gsub('"', "", trialdata$stage_name[j]), commit, version,
-              ifelse(!is.na(trialdata$block_number[j]), trialdata$block_number[j], 'NA'),
+              ifelse(is.na(events$time_elapsed[e]), 'NA', events$time_elapsed[e]),
+              country, timezone, stage_name, commit, version, block_number,
               ifelse(!is.null(events$interval_number[e]), events$interval_number[e], 'NA'),
               events$event_type[e],
               ifelse(is.null(events$event_raw_details[e]), NA, events$event_raw_details[e]),
               events$event_converted_details[e]
-            )))
+            ))
+            
+            complete_data_index <- complete_data_index + 1L
           }
         }
       }

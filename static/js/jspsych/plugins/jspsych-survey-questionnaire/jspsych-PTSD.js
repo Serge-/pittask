@@ -120,17 +120,32 @@ jsPsych.plugins['PC-PTSD-5'] = (function() {
 
     // inject CSS for trial
     html += '<style id="jspsych-survey-multi-choice-css">';
-    html += ".jspsych-survey-multi-choice-question { display: flex; margin-top: 2em; margin-bottom: 2em; text-align: left; justify-content: space-between; }"+
+    html += ".jspsych-survey-multi-choice-question { display: flex; margin-top: 1em; margin-bottom: 1em; text-align: left; justify-content: space-between; }"+
       ".jspsych-survey-multi-choice-text span.required {color: darkred;}"+
-      ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-text {  text-align: center;}"+
-      ".jspsych-survey-multi-choice-option { line-height: 2; }"+
+      ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-text {  text-align: left;}"+
+      ".jspsych-survey-multi-choice-option { line-height: 2; padding: 0; }"+
       ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-option {  display: inline-block;  margin-left: 1em;  margin-right: 1em; }"+
-      ".jspsych-survey-multi-choice-form { max-width: 1000px }" +
+      ".jspsych-survey-multi-choice-form { max-width: 1000px; }" +
+      ".jspsych-survey-multi-choice-option-left-first  { width: 90%; display: block; border-right: 0; padding-right: 10%; padding-bottom: 0; }" +
+      ".jspsych-survey-multi-choice-option-left  { width: 90%; border-right: 0; padding-right: 10%; display: flex; padding-bottom: 0; }" +
+      ".jspsych-survey-multi-choice-option-left p { text-align: left; }" +
+      ".jspsych-survey-multi-choice-option-right  { width: 10%; position: relative; align-items: center; }" +
       ".jspsych-btn { margin: 100px 0; }" +
+      ".jspsych-survey-overlay { background: transparent; width: 100%; height: 50px; position: absolute; }" +
+      ".first-right-wrapper { display: flex; justify-content: inherit; position: relative; }" +
       ".jspsych-content { margin-top: 130px;}" +
+      "#jspsych-survey-multi-choice-0 .jspsych-survey-multi-choice-option-right { display: flex; align-items: flex-end; }" +
       ".jspsych-survey-highlight { cursor: pointer; padding: 5px; }" +
       ".jspsych-survey-multi-choice-preamble {width: 800px; text-align: left; border-bottom: 1px solid;} .jspsych-survey-multi-choice-preamble h2 {text-align: center} .preamble-wrapper {display: flex;} .preamble-wrapper p {padding-left: 2rem;}" +
-      "label.jspsych-survey-multi-choice-text input[type='radio'] {margin-right: 1em;}";
+      "label.jspsych-survey-multi-choice-text input[type='radio'] {margin-right: 1em;}" +
+      "@media (max-width: 1060px) {" +
+          ".jspsych-survey-multi-choice-option-right  { width: 20%;  }" +
+      "}" +
+      "@media (max-width: 650px) {" +
+          ".jspsych-survey-multi-choice-option-left-first  { width: 70%; padding-right: 10%;  }" +
+          ".jspsych-survey-multi-choice-option-left  { width: 70%; padding-right: 10%;  }" +
+          ".jspsych-survey-multi-choice-option-right  { width: 30%;  }" +
+      "}"
     html += '</style>';
 
     // show preamble text
@@ -167,20 +182,25 @@ jsPsych.plugins['PC-PTSD-5'] = (function() {
 
       
       if(i === 0) {
-        html += '<div id="jspsych-survey-multi-choice-'+question_id+'" class="'+question_classes.join(' ')+'"  data-name="'+question.name+'">';
+        html += '<div style="margin-bottom: 8rem;" id="jspsych-survey-multi-choice-'+question_id+'" class="'+question_classes.join(' ')+'"  data-name="'+question.name+'">';
         // add question text
-        html += '<div><p class="jspsych-survey-multi-choice-text survey-multi-choice jspsych-survey-multi-choice-question-text" style="padding-top: 3px;">' +  question.prompt 
+        html += '<div class="jspsych-survey-multi-choice-option-left-first"><p class="jspsych-survey-multi-choice-text survey-multi-choice jspsych-survey-multi-choice-question-text" style="padding-top: 3px;">' +  question.prompt 
       
       } else {
+        if(i === 1) {
+          html += '<div class="'+question_classes.join(' ')+' hidden"  data-name="'+question.name+'"><p>In the past month, have you...</p></div>';
+        };
         html += '<div id="jspsych-survey-multi-choice-'+question_id+'" class="'+question_classes.join(' ')+' hidden"  data-name="'+question.name+'">';
         // add question text
-        html += '<div><p class="jspsych-survey-multi-choice-text survey-multi-choice jspsych-survey-multi-choice-question-text" style="padding-top: 3px;">' + i + '. ' +  question.prompt 
+        html += '<div class="jspsych-survey-multi-choice-option-left"><span class="jspsych-survey-multi-choice-number">' + i + '.</span><p class="jspsych-survey-multi-choice-text survey-multi-choice jspsych-survey-multi-choice-question-text">' +  question.prompt 
       }
 
   
       // question.required
       html += '</p></div>';
-      html += '<div style="padding-left: 2rem; margin-top: -5px; ">';
+      html += '<div class="jspsych-survey-multi-choice-option-right">';
+      html += '<div class="first-right-wrapper">';
+      html += '<div class="jspsych-survey-overlay hidden"></div>';
 
       // create option radio buttons
       for (var j = 0; j < question.options.length; j++) {
@@ -193,13 +213,14 @@ jsPsych.plugins['PC-PTSD-5'] = (function() {
 
         // add radio button container
         html += '<div id="'+option_id_name+'" class="jspsych-survey-multi-choice-option">';
-        html += '<label class="jspsych-survey-multi-choice-text jspsych-survey-highlight" data-time-stamp="Q' + (i+1) + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" for="'+input_id+'">' +question.options[j]+'</label>';
+        html += '<label class="jspsych-survey-multi-choice-text jspsych-survey-highlight ' + input_id + ' " data-time-stamp="Q' + (i+1) + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" for="'+input_id+'">' +question.options[j]+'</label>';
         html += '<input hidden type="radio" name="'+input_name+'" id="'+input_id+'" data-time-stamp="Q' + (i+1) + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" value="'+question.options[j]+'" '+required_attr+'></input>';
         html += '</div>';
         if(j === 0) {
           html += '<span style="position: absolute; padding-top: 9px;">/</span>';
         }
       }
+      html += '</div>';
 
       html += '</div></div>';
     }
@@ -284,18 +305,13 @@ jsPsych.plugins['PC-PTSD-5'] = (function() {
       };
     });
 
-    $('#jspsych-survey-multi-choice-option-0-0').click(function() {
+    $('.jspsych-survey-multi-choice-response-0-0').click(function() {
       isHidden = true;
-      $('.jspsych-survey-multi-choice-horizontal').removeClass('hidden')
+      $('.jspsych-survey-multi-choice-horizontal').removeClass('hidden');
+      $(this).parent().parent().find('.jspsych-survey-overlay').removeClass('hidden');
+      $('#jspsych-survey-multi-choice-response-0-0').prop('disabled', true);
+      $('#jspsych-survey-multi-choice-response-0-1').prop('disabled', true);
     })
-    $('#jspsych-survey-multi-choice-option-0-1').click(function() {
-      isHidden = false;
-      $('#jspsych-survey-multi-choice-1').addClass('hidden')
-      $('#jspsych-survey-multi-choice-2').addClass('hidden')
-      $('#jspsych-survey-multi-choice-3').addClass('hidden')
-      $('#jspsych-survey-multi-choice-4').addClass('hidden')
-      $('#jspsych-survey-multi-choice-5').addClass('hidden')
-    });
 
     $(".modal__btn, .modal__close").on("click touchstart",function(){
       response.trial_events.push({
@@ -331,9 +347,11 @@ jsPsych.plugins['PC-PTSD-5'] = (function() {
         if(match.querySelector("input[type=radio]:checked") !== null){
           var val = match.querySelector("input[type=radio]:checked").value;
           $(match).find('.jspsych-survey-multi-choice-question-text').removeClass('survey-error-after');
+          $(match).find('.jspsych-survey-multi-choice-number').removeClass('survey-error-text');
         } else {
           var val = "";
           $(match).find('.jspsych-survey-multi-choice-question-text').addClass('survey-error-after');
+          $(match).find('.jspsych-survey-multi-choice-number').addClass('survey-error-text');
         }
 
         if(i === 0) {

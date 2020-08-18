@@ -143,6 +143,8 @@ jsPsych.plugins['ICAR'] = (function () {
         ".jspsych-survey-highlight { cursor: pointer; padding-left: 2rem; padding-top: .5rem; }" +
         ".jspsych-survey-multi-choice-form { max-width: 1000px }" +
         "ul {list-style: none}" +
+        "label { margin-bottom: 0; }" +
+        ".form-radio { top: 0; }" +
         ".jspsych-btn { margin: 100px 0; }" +
         ".jspsych-content { margin-top: 130px;}" +
         ".jspsych-survey-multi-choice-preamble { text-align: left; border-top: 1px solid #fff;}" +

@@ -96,6 +96,7 @@ jsPsych.plugins['close-hit-questions'] = (function() {
         ".jspsych-survey-multi-choice-text { font-size: 2rem;}"+
         ".jspsych-survey-multi-choice-preamble { font-size: 2.1rem; font-weight: bold; text-align: center;}"+
         "input[type=radio] { margin: 0;}"+ 
+        ".form-radio { top: 0;}"+ 
         "label.jspsych-survey-multi-choice-text { font-size: 18px; }"+
         "textarea { padding: 1rem; color: #111; margin-bottom: 2rem; }"+
         ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-text {  text-align: center;}"+

@@ -122,23 +122,38 @@ jsPsych.plugins['EAT-26'] = (function () {
       html += '<style id="jspsych-survey-multi-choice-css">';
       html += ".jspsych-survey-multi-choice-question { display: flex; text-align: left; border-bottom: 1px solid;}" +
         ".jspsych-survey-multi-choice-text span.required {color: darkred;}" +
+        "#jspsych-survey-multi-choice-30 {  border-bottom: none; }"+
         ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-text {  text-align: center;}" +
-        ".jspsych-survey-multi-choice-option { height: 100px; display: flex; justify-content: center; align-items: center; }" +
-        ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-option {  width: 100%; border-left: 1px solid; text-align: center; padding: 0 1rem;}" +
+        ".jspsych-survey-multi-choice-option {  display: flex; justify-content: center; align-items: center; }" +
+        ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-option {  width: 100%; border-right: 1px solid; text-align: center; padding: 2rem 0;}" +
+        ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-option:last-child { border-right: none;}" +
         ".jspsych-survey-highlight { cursor: pointer; width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; }" +
         ".jspsych-content { width: 1000px}" +
         ".jspsych-btn { margin: 100px 0; }" +
         ".jspsych-content { margin-top: 130px;}" +
         "ul {list-style: none}" +
         ".form-radio { top: 0; }" +
-        ".jspsych-survey-multi-choice-number { display: flex; align-items: center; height: 100%; width: 45px; border-right: 1px solid #fff; text-align: center; justify-content: center; }" +
+        ".jspsych-survey-multi-choice-option-left { display: flex; width: 40%; text-align: left; border-right: 3px solid #fff; padding-bottom: 2rem; }" +
+        ".jspsych-survey-multi-choice-option-right { display: flex; width: 60%; justify-content: space-around; }" +
+        ".jspsych-survey-multi-choice-number { height: 100%; width: 45px; text-align: center; justify-content: center; }" +
         ".jspsych-survey-multi-choice-preamble { text-align: left; padding-bottom: 3rem; }" +
         ".jspsych-survey-multi-choice-instructions { display: flex; justify-content: space-between;  border-bottom: 3px solid; font-weight: bold; font-size: 1.5rem;   }" +
         ".jspsych-survey-multi-choice-instructions ul { display: flex; width: 60%; justify-content: space-around; padding-inline-start: 0; margin-bottom: 0; }" +
-        ".jspsych-survey-multi-choice-instructions li { display: flex; justify-content: center; align-items: center; width: 100%; border-left: 1px solid; }" +
+        ".jspsych-survey-multi-choice-instructions li { display: flex; justify-content: center; align-items: center; width: 100%; border-right: 1px solid; padding: 1rem 0; }" +
+        ".jspsych-survey-multi-choice-instructions li:last-child { border-right: none; }" +
         "label.jspsych-survey-multi-choice-text input[type='radio'] {margin-right: 1em;}" +
         ".jspsych-survey-highlight { width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; }" +
-        "p {     margin: 0 0 0px;}"
+        "p { margin: 0 0 0px;}" +
+        "@media (max-width: 900px) {" +
+          ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-option { padding: 0;}" +
+          ".jspsych-survey-multi-choice-instructions li { padding: 0; }" +
+          ".jspsych-survey-multi-choice-instructions ul { font-size: 1.6vw; }" +
+        "}" +
+        "@media (max-width: 700px) {" +
+          ".jspsych-display-element { font-size: 14px;}" +
+          ".jspsych-survey-multi-choice-number { width: 25px; }" +
+          ".questions-right-row { font-size: 2.6vw; }" +
+      "}"
       html += '</style>';
   
   
@@ -155,8 +170,7 @@ jsPsych.plugins['EAT-26'] = (function () {
   
       html +=
         `<div id="jspsych-survey-multi-choice-preamble" class="jspsych-survey-multi-choice-instructions">
-            <div style="width: 40%; text-align: left;"><p style=" padding-bottom: 1rem;">Please check a response for each of the
-            following statements:</p></div>
+            <div class="jspsych-survey-multi-choice-option-left"></div>
             <ul>
               <li><div>Always</div></li>
               <li><div>Usually</div></li>
@@ -194,7 +208,7 @@ jsPsych.plugins['EAT-26'] = (function () {
         html += '<div id="jspsych-survey-multi-choice-' + question_id + '" class="' + question_classes.join(' ') + '"  data-name="' + (i + 1) + '">';
   
         // add question text
-        html += '<div style="display: flex; align-items: center; width: 40%; border-right: 1px solid #fff;"><span class="jspsych-survey-multi-choice-number">' + (i + 1) + '</span><p class="jspsych-survey-multi-choice-text survey-multi-choice jspsych-survey-multi-choice-question-text" style="text-align: left; padding-left: 10px; width: 100%;">' + question.prompt
+        html += '<div class="jspsych-survey-multi-choice-option-left"><span class="jspsych-survey-multi-choice-number">' + (i + 1) + '.</span><p class="jspsych-survey-multi-choice-text survey-multi-choice jspsych-survey-multi-choice-question-text" style="text-align: left; padding-left: 10px; width: 100%;">' + question.prompt
         // question.required
         html += '</p></div>';
         html += '<div style="display: flex; width: 60%; justify-content: space-around;">';
@@ -234,10 +248,10 @@ jsPsych.plugins['EAT-26'] = (function () {
         html += '<div style="font-weight: bold;" id="jspsych-survey-multi-choice-' + question_id + '" class="' + question_classes.join(' ') + '"  data-name="' + question.name + '">';
   
         // add question text
-        html += '<div style="display: flex; align-items: center; width: 40%; border-right: 1px solid #fff;"><p class="jspsych-survey-multi-choice-text survey-multi-choice jspsych-survey-multi-choice-question-text" style="text-align: left; padding-left: 10px; width: 100%;">Behavioural questions. In the past 6 months have you:'
+        html += '<div class="jspsych-survey-multi-choice-option-left"><p class="jspsych-survey-multi-choice-text survey-multi-choice jspsych-survey-multi-choice-question-text" style="text-align: left; padding-left: 10px; width: 100%;">Behavioural questions. In the past 6 months have you:'
         // question.required
         html += '</p></div>';
-        html += '<div style="display: flex; width: 60%; justify-content: space-around;">';
+        html += '<div class="jspsych-survey-multi-choice-option-right questions-right-row">';
 
         var questionsTitle = ['Never', 'Once a month or less', '2-3 times a month', 'Once a week', '2-6 times a week', 'Once a day or more'];
         // create option radio buttons
@@ -274,10 +288,10 @@ jsPsych.plugins['EAT-26'] = (function () {
         html += '<div id="jspsych-survey-multi-choice-' + question_id + '" class="' + question_classes.join(' ') + '"  data-name="' + letterArray[k] + '">';
   
         // add question text
-        html += '<div style="display: flex; align-items: center; width: 40%; border-right: 1px solid #fff;"><span class="jspsych-survey-multi-choice-number">' + letterArray[k] + '</span><p class="jspsych-survey-multi-choice-text survey-multi-choice jspsych-survey-multi-choice-question-text" style="text-align: left; padding-left: 10px; width: 100%;">' + question.prompt
+        html += '<div class="jspsych-survey-multi-choice-option-left"><span class="jspsych-survey-multi-choice-number">' + letterArray[k] + '</span><p class="jspsych-survey-multi-choice-text survey-multi-choice jspsych-survey-multi-choice-question-text" style="text-align: left; padding-left: 10px; width: 100%;">' + question.prompt
         // question.required
         html += '</p></div>';
-        html += '<div style="display: flex; width: 60%; justify-content: space-around;">';
+        html += '<div class="jspsych-survey-multi-choice-option-right">';
   
         // create option radio buttons
         for (var j = 0; j < question.options.length; j++) {

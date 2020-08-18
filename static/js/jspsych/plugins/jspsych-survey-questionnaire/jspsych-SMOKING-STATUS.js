@@ -122,15 +122,15 @@ jsPsych.plugins['Smoking-Status'] = (function () {
       html += '<style id="jspsych-survey-multi-choice-css">';
       html += ".jspsych-survey-multi-choice-question { text-align: left; }" +
         ".jspsych-survey-multi-choice-text span.required {color: darkred;}" +
-        ".jspsych-survey-multi-choice-text { padding-left: 2rem; }" +
+        ".jspsych-survey-multi-choice-text { padding-left: 2rem; display: flex; }" +
         ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-text {  text-align: center;}" +
-        ".jspsych-survey-multi-choice-option {  }" +
+        ".jspsych-survey-multi-choice-number { padding-right: 2rem; }" +
         ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-option {  width: 100%; border-left: 1px solid; text-align: center; padding: 0 1rem;}" +
         ".jspsych-content { width: 1000px}" +
         ".jspsych-btn { margin: 100px 0; }" +
         ".jspsych-content { margin-top: 130px;}" +
         "ul {list-style: none}" +
-        ".form-radio { top: 3px; }" +
+        ".form-radio { top: -4px; }" +
         "label.jspsych-survey-multi-choice-text input[type='radio'] {margin-left: 1em;}" +
         ".jspsych-survey-highlight { width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; }" +
         "p { margin: 0 0 0px;}"
@@ -172,10 +172,10 @@ jsPsych.plugins['Smoking-Status'] = (function () {
         html += '<div id="jspsych-survey-multi-choice-' + question_id + '" class="' + question_classes.join(' ') + '"  data-name="' + (i + 1) + '">';
   
         // add question text
-        html += '<div><p class="jspsych-survey-multi-choice-text survey-multi-choice jspsych-survey-multi-choice-question-text"><span style=" padding-right: 3rem;">' + (i + 1) + '.</span>' + question.prompt
+        html += '<div><p class="jspsych-survey-multi-choice-text survey-multi-choice jspsych-survey-multi-choice-question-text"><span class="jspsych-survey-multi-choice-number">' + (i + 1) + '.</span>' + question.prompt
         // question.required
         html += '</p></div>';
-        html += '<div style="padding: 3rem;">';
+        html += '<div style="display: flex; flex-flow: column; align-items: flex-start; padding: 2rem;">';
   
         // create option radio buttons
         for (var j = 0; j < question.options.length; j++) {

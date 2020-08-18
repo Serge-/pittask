@@ -127,8 +127,8 @@ jsPsych.plugins['SDS'] = (function () {
         ".jspsych-survey-multi-choice-preamble { text-align: left; padding: 3rem 0; }" +
         ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-option {  width: 100%; border-left: 1px solid; text-align: center; padding: 0 1rem; }" +
         ".jspsych-survey-multi-choice-option  { position: relative; }" +
-        ".jspsych-survey-multi-choice-option:first-of-type::after  { content: '◀'; position: absolute; right: -14px; top: 11px; }" +
-        ".jspsych-survey-multi-choice-option:last-of-type::after  { content: '▶'; position: absolute; left: -14px; top: 11px; }" +
+        ".jspsych-survey-multi-choice-option:first-of-type::after  { content: '◀'; position: absolute; right: -14px; top: 21px; }" +
+        ".jspsych-survey-multi-choice-option:last-of-type::after  { content: '▶'; position: absolute; left: -14px; top: 21px; }" +
         ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-option:first-child  {background-color: red;}" +
         ".jspsych-content { width: 1000px}" +
         ".jspsych-btn { margin: 70px 0; }" +
@@ -220,7 +220,7 @@ jsPsych.plugins['SDS'] = (function () {
            
           </div>
         `;
-        html += '<div style="display: flex; justify-content: space-around; align-items: center; position: relative; padding-top: 6rem; ">';
+        html += '<div style="display: flex; justify-content: space-around; align-items: center; position: relative; padding-top: 5rem; ">';
         html += '<span class="circle-line"></span>';
         // create option radio buttons
         for (var j = 0; j < question.options.length; j++) {
@@ -289,8 +289,6 @@ jsPsych.plugins['SDS'] = (function () {
       
       html += '</div>';
 
-      html += '<p style="margin-top: 5rem; font-style: italic;">© Copryright 1983 David V. Sheehan. All Rights Reserved.</p>';
-
       // add submit button
       html += '<p><input type="submit" id="' + plugin_id_name + '-next" class="' + plugin_id_name + ' jspsych-btn"' + (trial.button_label ? ' value="' + trial.button_label + '"' : '') + '></input></p>';
       html += '</form>';
@@ -354,6 +352,7 @@ jsPsych.plugins['SDS'] = (function () {
       };
   
       $('.jspsych-survey-highlight').click(function () {
+        $(this).parent().parent().find(".jspsych-survey-highlight").removeClass('bg-primary'); // remove previous bg-primary items 
         $(this).addClass('bg-primary');
         $(this).next('input').prop("checked", true);
       })

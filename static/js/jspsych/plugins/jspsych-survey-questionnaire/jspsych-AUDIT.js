@@ -120,26 +120,42 @@ jsPsych.plugins['AUDIT'] = (function () {
   
       // inject CSS for trial
       html += '<style id="jspsych-survey-multi-choice-css">';
-      html += ".jspsych-survey-multi-choice-question { display: flex; text-align: left; border-bottom: 1px solid;}" +
+      html += ".jspsych-survey-multi-choice-question { display: flex; text-align: left;}" +
         ".jspsych-survey-multi-choice-text span.required {color: darkred;}" +
         ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-text {  text-align: center;}" +
-        ".jspsych-survey-multi-choice-option { height: 110px; display: flex; justify-content: center; align-items: center; }" +
-        ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-option {  width: 100%; border-left: 1px solid; text-align: center; padding: 0 1rem;}" +
-        ".audit-img-container { display: flex; padding-top: 2rem; } " +
+        ".jspsych-survey-multi-choice-option { display: flex; justify-content: center; align-items: center; }" +
+        ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-option {  width: 100%; border-right: 1px solid; text-align: center; padding: 0 1rem;}" +
+        ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-option:last-child {  border-right: none; }" +
+        ".audit-img-container { text-align: center; padding-top: 2rem; } " +
+        ".audit-img-container img { width: 75%; } " +
         ".audit-img-container div { display: flex; flex-direction: column; justify-content: space-around; align-content: center; padding-left: 1rem;} " +
         ".jspsych-content { width: 1000px}" +
         ".jspsych-btn { margin: 100px 0; }" +
         ".jspsych-content { margin-top: 130px;}" +
         "ul {list-style: none}" +
         ".form-radio { top: 0; }" +
-        ".jspsych-survey-multi-choice-number { display: flex; align-items: center; height: 100%; width: 45px; text-align: center; justify-content: center; }" +
+        ".jspsych-survey-multi-choice-option-left { display: flex; width: 40%; text-align: left; border-right: 3px solid #fff; padding-bottom: 2rem; }" +
+        ".jspsych-survey-multi-choice-option-right { display: flex; width: 60%; justify-content: space-around; }" +
+        ".jspsych-survey-multi-choice-number { display: flex; height: 100%; width: 45px; text-align: center; justify-content: center; }" +
         ".jspsych-survey-multi-choice-preamble { text-align: left; padding-bottom: 3rem; }" +
         ".jspsych-survey-multi-choice-instructions { display: flex; justify-content: space-between;  border-bottom: 3px solid; font-weight: bold; }" +
         ".jspsych-survey-multi-choice-instructions ul { display: flex; width: 60%; justify-content: space-around; padding-inline-start: 0; margin-bottom: 0; }" +
-        ".jspsych-survey-multi-choice-instructions li { display: flex; justify-content: center; align-items: center; width: 100%; padding: 1rem; border-left: 1px solid; }" +
+        ".jspsych-survey-multi-choice-instructions li { display: flex; justify-content: center; align-items: center; width: 100%; padding: 1rem; border-right: 1px solid; }" +
+        ".jspsych-survey-multi-choice-instructions li:last-child { border-right: none; }" +
         "label.jspsych-survey-multi-choice-text input[type='radio'] {margin-right: 1em;}" +
         ".jspsych-survey-highlight { width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; }" +
-        "p { margin: 0 0 0px;}"
+        "p { margin: 0 0 0px;}" +
+        "@media (max-width: 900px) {" +
+          ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-option { padding: 0;}" +
+          ".jspsych-survey-multi-choice-instructions li { padding: 0; }" +
+        "}" +
+        "@media (max-width: 700px) {" +
+          ".jspsych-display-element { font-size: 10px;}" +
+          ".jspsych-survey-multi-choice-option-left { width: 30%; }" +
+          ".jspsych-survey-multi-choice-option-right { width: 70%; }" +
+          ".jspsych-survey-multi-choice-instructions ul { width: 70%; }" +
+          ".jspsych-survey-multi-choice-number { width: 25px; }" +
+        "}"
       html += '</style>';
   
   
@@ -151,12 +167,12 @@ jsPsych.plugins['AUDIT'] = (function () {
   
       // show preamble text
       if (trial.preamble !== null) {
-        html += '<div class="jspsych-survey-multi-choice-content"><div id="jspsych-survey-multi-choice-preamble" class="jspsych-survey-multi-choice-preamble">' + trial.preamble + '</div>';
+        html += '<div class="jspsych-survey-multi-choice-content"><div class="jspsych-survey-multi-choice-preamble">' + trial.preamble + '</div>';
       }
   
       html +=
-        `<div id="jspsych-survey-multi-choice-preamble" class="jspsych-survey-multi-choice-instructions">
-            <div style="width: 40%; text-align: left; border-right: 2px solid #fff; "></div>
+        `<div class="jspsych-survey-multi-choice-instructions">
+            <div class="jspsych-survey-multi-choice-option-left"></div>
             <ul>
               <li><div>Never</div></li>
               <li><div>Monthly or less</div></li>
@@ -193,10 +209,10 @@ jsPsych.plugins['AUDIT'] = (function () {
         html += '<div id="jspsych-survey-multi-choice-' + question_id + '" class="' + question_classes.join(' ') + '"  data-name="' + (i + 1) + '">';
   
         // add question text
-        html += '<div style="display: flex; align-items: center; width: 40%; border-right: 1px solid #fff;"><span class="jspsych-survey-multi-choice-number">' + (i + 1) + '</span><p class="jspsych-survey-multi-choice-text survey-multi-choice jspsych-survey-multi-choice-question-text" style="text-align: left; padding-left: 10px; width: 100%;">' + question.prompt
+        html += '<div class="jspsych-survey-multi-choice-option-left"><span class="jspsych-survey-multi-choice-number">' + (i + 1) + '.</span><p class="jspsych-survey-multi-choice-text survey-multi-choice jspsych-survey-multi-choice-question-text" style="text-align: left; padding: 0 7px; width: 100%;">' + question.prompt
         // question.required
         html += '</p></div>';
-        html += '<div style="display: flex; width: 60%; justify-content: space-around;">';
+        html += '<div class="jspsych-survey-multi-choice-option-right">';
   
         // create option radio buttons
         for (var j = 0; j < question.options.length; j++) {
@@ -230,13 +246,13 @@ jsPsych.plugins['AUDIT'] = (function () {
           question_classes.push('jspsych-survey-multi-choice-horizontal');
         }
   
-        html += '<div style="font-weight: bold; border-top: 2px solid #fff; " id="jspsych-survey-multi-choice-' + question_id + '" class="' + question_classes.join(' ') + '"  data-name="' + question.name + '">';
+        html += '<div style="font-weight: bold; margin-top: 5rem; border-bottom: 3px solid #fff;" id="jspsych-survey-multi-choice-' + question_id + '" class="' + question_classes.join(' ') + '"  data-name="' + question.name + '">';
   
         // add question text
-        html += '<div style="display: flex; align-items: center; width: 40%; border-right: 1px solid #fff;">';
+        html += '<div class="jspsych-survey-multi-choice-option-left">';
         // question.required
         html += '</div>';
-        html += '<div style="display: flex; width: 60%; justify-content: space-around;">';
+        html += '<div class="jspsych-survey-multi-choice-option-right">';
 
         var questionsTitle = ['1 or 2', '3 or 4', '5 or 6', '7 to 9', '10 or more'];
         // create option radio buttons
@@ -270,10 +286,10 @@ jsPsych.plugins['AUDIT'] = (function () {
         html += '<div id="jspsych-survey-multi-choice-' + question_id + '" class="' + question_classes.join(' ') + '"  data-name="' + (i + 1) + '">';
   
         // add question text
-        html += '<div style="display: flex; align-items: center; width: 40%; border-right: 1px solid #fff;"><span class="jspsych-survey-multi-choice-number">' + (i + 1) + '</span><p class="jspsych-survey-multi-choice-text survey-multi-choice jspsych-survey-multi-choice-question-text" style="text-align: left; padding-left: 10px; width: 100%;">' + question.prompt
+        html += '<div class="jspsych-survey-multi-choice-option-left"><span class="jspsych-survey-multi-choice-number">' + (i + 1) + '.</span><p class="jspsych-survey-multi-choice-text survey-multi-choice jspsych-survey-multi-choice-question-text" style="text-align: left; padding: 0 7px; width: 100%;">' + question.prompt
         // question.required
         html += '</p></div>';
-        html += '<div style="display: flex; width: 60%; justify-content: space-around;">';
+        html += '<div class="jspsych-survey-multi-choice-option-right">';
   
         // create option radio buttons
         for (var j = 0; j < question.options.length; j++) {
@@ -307,13 +323,13 @@ jsPsych.plugins['AUDIT'] = (function () {
           question_classes.push('jspsych-survey-multi-choice-horizontal');
         }
   
-        html += '<div style="font-weight: bold; border-top: 2px solid #fff; " id="jspsych-survey-multi-choice-' + question_id + '" class="' + question_classes.join(' ') + '"  data-name="' + question.name + '">';
+        html += '<div style="font-weight: bold; margin-top: 5rem; border-bottom: 2px solid #fff;" id="jspsych-survey-multi-choice-' + question_id + '" class="' + question_classes.join(' ') + '"  data-name="' + question.name + '">';
   
         // add question text
-        html += '<div style="display: flex; align-items: center; width: 40%; border-right: 1px solid #fff;">';
+        html += '<div class="jspsych-survey-multi-choice-option-left">';
         // question.required
         html += '</div>';
-        html += '<div style="display: flex; width: 60%; justify-content: space-around;">';
+        html += '<div class="jspsych-survey-multi-choice-option-right">';
 
         var questionsTitle = ['Never', 'Less than monthly', 'Monthly', 'Weekly', 'Daily or almost daily'];
         // create option radio buttons
@@ -344,13 +360,13 @@ jsPsych.plugins['AUDIT'] = (function () {
           question_classes.push('jspsych-survey-multi-choice-horizontal');
         }
   
-        html += '<div id="jspsych-survey-multi-choice-' + question_id + '" class="' + question_classes.join(' ') + '"  data-name="' + (i + 1) + '">';
+        html += '<div style="border-top: 1px solid #fff; " id="jspsych-survey-multi-choice-' + question_id + '" class="' + question_classes.join(' ') + '"  data-name="' + (i + 1) + '">';
   
         // add question text
-        html += '<div style="display: flex; align-items: center; width: 40%; border-right: 1px solid #fff;"><span class="jspsych-survey-multi-choice-number">' + (i + 1) + '</span><p class="jspsych-survey-multi-choice-text survey-multi-choice jspsych-survey-multi-choice-question-text" style="text-align: left; padding-left: 10px; width: 100%;">' + question.prompt
+        html += '<div class="jspsych-survey-multi-choice-option-left"><span class="jspsych-survey-multi-choice-number">' + (i + 1) + '.</span><p class="jspsych-survey-multi-choice-text survey-multi-choice jspsych-survey-multi-choice-question-text" style="text-align: left; padding: 0 7px; width: 100%;">' + question.prompt
         // question.required
         html += '</p></div>';
-        html += '<div style="display: flex; width: 60%; justify-content: space-around;">';
+        html += '<div class="jspsych-survey-multi-choice-option-right">';
   
         // create option radio buttons
         for (var j = 0; j < question.options.length; j++) {
@@ -384,13 +400,13 @@ jsPsych.plugins['AUDIT'] = (function () {
           question_classes.push('jspsych-survey-multi-choice-horizontal');
         }
   
-        html += '<div style="font-weight: bold; border-top: 2px solid #fff; " id="jspsych-survey-multi-choice-' + question_id + '" class="' + question_classes.join(' ') + '"  data-name="' + question.name + '">';
+        html += '<div style="margin-top: 5rem; border-bottom: 2px solid #fff; font-weight: bold;" id="jspsych-survey-multi-choice-' + question_id + '" class="' + question_classes.join(' ') + '"  data-name="' + question.name + '">';
   
         // add question text
-        html += '<div style="display: flex; align-items: center; width: 40%; border-right: 1px solid #fff;">';
+        html += '<div class="jspsych-survey-multi-choice-option-left">';
         // question.required
         html += '</div>';
-        html += '<div style="display: flex; width: 60%; justify-content: space-around;">';
+        html += '<div class="jspsych-survey-multi-choice-option-right">';
 
         var questionsTitle = ['No', 'Yes but not in the last year', 'Yes, during the last year'];
         // create option radio buttons
@@ -421,13 +437,13 @@ jsPsych.plugins['AUDIT'] = (function () {
           question_classes.push('jspsych-survey-multi-choice-horizontal');
         }
   
-        html += '<div id="jspsych-survey-multi-choice-' + question_id + '" class="' + question_classes.join(' ') + '"  data-name="' + (i + 1) + '">';
+        html += '<div style="border-top: 1px solid #fff;" id="jspsych-survey-multi-choice-' + question_id + '" class="' + question_classes.join(' ') + '"  data-name="' + (i + 1) + '">';
   
         // add question text
-        html += '<div style="display: flex; align-items: center; width: 40%; border-right: 1px solid #fff;"><span class="jspsych-survey-multi-choice-number">' + (i + 1) + '</span><p class="jspsych-survey-multi-choice-text survey-multi-choice jspsych-survey-multi-choice-question-text" style="text-align: left; padding-left: 10px; width: 100%;">' + question.prompt
+        html += '<div class="jspsych-survey-multi-choice-option-left"><span class="jspsych-survey-multi-choice-number">' + (i + 1) + '.</span><p class="jspsych-survey-multi-choice-text survey-multi-choice jspsych-survey-multi-choice-question-text" style="text-align: left; padding: 0 7px; width: 100%;">' + question.prompt
         // question.required
         html += '</p></div>';
-        html += '<div style="display: flex; width: 60%; justify-content: space-around;">';
+        html += '<div class="jspsych-survey-multi-choice-option-right">';
   
         // create option radio buttons
         for (var j = 0; j < question.options.length; j++) {
@@ -555,11 +571,13 @@ jsPsych.plugins['AUDIT'] = (function () {
             var val = match.querySelector("input[type=radio]:checked").value;
             $(match).find('.jspsych-survey-multi-choice-question-text').removeClass('survey-error-after');
             $(match).find('.jspsych-survey-multi-choice-number').removeClass('survey-error-text');
-          } else {
+          } else if( i < 8) {
             var val = "";
             $(match).find('.jspsych-survey-multi-choice-question-text').addClass('survey-error-after');
             $(match).find('.jspsych-survey-multi-choice-number').addClass('survey-error-text');
-          }
+          } 
+          
+  
           var obje = {};
           var name = id;
       
@@ -568,10 +586,16 @@ jsPsych.plugins['AUDIT'] = (function () {
           }
           obje[name] = val;
           timestamp_data[name] = trial.time_stamp['Q' + id];
+
+          if(trial.time_stamp['Q' + id] === undefined) {
+            timestamp_data[id] = 'NA';
+          }
           Object.assign(question_data, obje);
         }
-  
-        if ($(".survey-error-after").length < 1) {
+
+        var match_first = display_element.querySelector('#jspsych-survey-multi-choice-option-0-0');
+
+        if (match_first.querySelector("input[type=radio]:checked") !== null || $(".survey-error-after").length < 1) {
           // kill keyboard listeners
           if (typeof keyboardListener !== 'undefined') {
             jsPsych.pluginAPI.cancelKeyboardResponse(keyboardListener);

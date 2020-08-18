@@ -123,33 +123,31 @@ jsPsych.plugins['PHQ-9'] = (function() {
       // inject CSS for trial
       html += '<style id="jspsych-survey-multi-choice-css">';
       html += ".jspsych-survey-multi-choice-question { display: flex; text-align: left; border-bottom: 1px solid }"+
-        ".jspsych-survey-multi-choice-question:nth-child(2n+1) { background-color: #444; }"+
+      ".jspsych-survey-multi-choice-question:nth-last-of-type { border-bottom: none; }"+
         ".jspsych-survey-multi-choice-text span.required {color: darkred;}"+
         ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-text {  text-align: center;}"+
         ".jspsych-survey-multi-choice-option { display: flex; justify-content: center; align-items: center; line-height: 2; padding: 1rem 0; }"+
-        ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-option {  width: 100%; border-left: 1px solid;}"+
+        ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-option {  width: 100%; border-right: 1px solid;}"+
+        ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-option:last-child {  border-right: none;}"+
         ".jspsych-survey-multi-choice-content { outline: 1px solid #fff;}" +
         ".jspsych-survey-highlight { cursor: pointer; width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; }" +
-        ".jspsych-survey-multi-choice-form { max-width: 1000px }" +
+        ".jspsych-survey-multi-choice-form { max-width: 1000px; min-width: 400px; }" +
         ".jspsych-btn { margin: 100px 0; }" +
         ".jspsych-content { margin-top: 130px;}" +
         "ul {list-style: none}" +
         ".jspsych-survey-multi-choice { margin-top: 10rem; }" +
-        ".jspsych-survey-multi-choice-number { display: flex; align-items: center; height: 100%; width: 30px; border-left: 1px solid #fff; border-right: 1px solid #fff; text-align: center; justify-content: center; }" +
-        ".jspsych-survey-multi-choice-preamble { text-align: left; max-width: 1000px; padding-bottom: 1rem; }" +
-        ".jspsych-survey-multi-choice-instructions { display: flex; justify-content: space-between;  border-bottom: 1px solid;  border: 1px solid; background-color: #444; }" +
-        ".jspsych-survey-multi-choice-instructions ul { display: flex; width: 50%; justify-content: space-around; padding-inline-start: 0; margin-bottom: 0; }" +
-        ".jspsych-survey-multi-choice-instructions li { display: flex; justify-content: center; width: 100%; border-left: 1px solid; }" +
-        ".jspsych-survey-multi-choice-instructions li div { width: 100px}" +
         "label.jspsych-survey-multi-choice-text input[type='radio'] {margin-right: 1em;}" +
         ".jspsych-survey-highlight { width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; }" +
-        "p { margin: 0 0 0px; }"
+        "p { margin: 0 0 0px; }" +
+        "@media (max-width: 600px) {" +
+          ".jspsych-survey-multi-choice-instructions li { font-size: 12px; }" +
+        "}" 
       html += '</style>';
   
-        // show preamble text
-        if(trial.preamble !== null){
-            html += '<div id="jspsych-survey-multi-choice-preamble" class="jspsych-survey-multi-choice-preamble">'+trial.preamble+'</div>';
-        }
+      // show preamble text
+      if(trial.preamble !== null){
+          html += '<div id="jspsych-survey-multi-choice-preamble" class="jspsych-survey-multi-choice-preamble">'+trial.preamble+'</div>';
+      }
             
 
       // form element
@@ -159,12 +157,12 @@ jsPsych.plugins['PHQ-9'] = (function() {
 
       html += 
       `<div id="jspsych-survey-multi-choice-preamble" class="jspsych-survey-multi-choice-instructions">
-          <div></div>
+          <div class="jspsych-survey-multi-choice-option-left"></div>
           <ul>
-            <li><div>Very False or Often False</div></li>
-            <li><div>Sometimes or Somewhat False</div></li>
-            <li><div>Sometimes or Somewhat True</div></li>
-            <li><div>Very True or Often True</div></li>
+            <li><div>Not at all</div></li>
+            <li><div>Several days</div></li>
+            <li><div>More than half the days</div></li>
+            <li><div>Nearly every day</div></li>
           </ul>
       </div>`
 
@@ -195,10 +193,10 @@ jsPsych.plugins['PHQ-9'] = (function() {
         html += '<div id="jspsych-survey-multi-choice-'+question_id+'" class="'+question_classes.join(' ')+'"  data-name="'+question.name+'">';
   
         // add question text
-        html += '<div style="display: flex; align-items: center; width: 50%;"><span class="jspsych-survey-multi-choice-number">'+ (i+1) +'</span><p class="jspsych-survey-multi-choice-text survey-multi-choice jspsych-survey-multi-choice-question-text" style="text-align: left; padding: 0 10px; width: 100%;">' + question.prompt 
+        html += '<div class="jspsych-survey-multi-choice-option-left"><span class="jspsych-survey-multi-choice-number">'+ (i+1) +'.</span><p class="jspsych-survey-multi-choice-text survey-multi-choice jspsych-survey-multi-choice-question-text" style="text-align: left; padding: 0 10px; width: 100%;">' + question.prompt 
         // question.required
         html += '</p></div>';
-        html += '<div style="display: flex; width: 50%; justify-content: space-around; border-right: 1px solid;">';
+        html += '<div class="jspsych-survey-multi-choice-option-right">';
   
         // create option radio buttons
         for (var j = 0; j < question.options.length; j++) {
