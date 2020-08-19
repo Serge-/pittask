@@ -403,7 +403,7 @@ jsPsych.plugins['ISI'] = (function () {
         if (match.querySelector("input[type=radio]:checked") !== null) {
           var val = match.querySelector("input[type=radio]:checked").value;
           $(match).find('.jspsych-survey-multi-choice-question').removeClass('survey-error-after');
-          $(match).find('.jspsych-survey-multi-choice-number').removeClass('survey-error-text');
+          $(match_first).find('.jspsych-survey-multi-choice-number').removeClass('survey-error-text');
           $(match_first).find('.jspsych-survey-multi-choice-option-left .jspsych-survey-multi-choice-text').removeClass('survey-error-after');
         } else {
           var val = "";
@@ -416,6 +416,7 @@ jsPsych.plugins['ISI'] = (function () {
         if (display_element.querySelector('#jspsych-survey-multi-choice-1-' + 0).querySelector("input[type=radio]:checked") === null ||
             display_element.querySelector('#jspsych-survey-multi-choice-1-' + 1).querySelector("input[type=radio]:checked") === null) {
             $(match_first).find('.jspsych-survey-multi-choice-option-left .jspsych-survey-multi-choice-text').addClass('survey-error-after');
+            $(match_first).find('.jspsych-survey-multi-choice-number').addClass('survey-error-text');
         };
 
         var obje = {};

@@ -139,7 +139,7 @@ jsPsych.plugins['ASRS-5'] = (function () {
         ".jspsych-survey-multi-choice-number { display: flex; height: 100%; width: 30px; text-align: center; justify-content: center; }" +
         ".jspsych-survey-multi-choice-instructions { display: flex; justify-content: space-between; border-bottom: 3px solid; font-weight: bold; }" +
         ".jspsych-survey-multi-choice-instructions ul { display: flex; justify-content: space-between; padding-inline-start: 0; margin-bottom: 0; width: 60%; }" +
-        ".jspsych-survey-multi-choice-instructions li { display: flex; justify-content: center; border-left: 1px solid; align-items: center; padding: 2.2rem 0; width: 100% }" +
+        ".jspsych-survey-multi-choice-instructions li { display: flex; justify-content: center; align-items: center; padding: 2.2rem 0; width: 100% }" +
         ".jspsych-survey-multi-choice-instructions li:first-child { border-left: 3px solid; }" +
         "label.jspsych-survey-multi-choice-text input[type='radio'] {margin-right: 1em;}" +
         ".jspsych-survey-highlight { width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; }" +

@@ -131,7 +131,7 @@ jsPsych.plugins['SDS'] = (function () {
         ".jspsych-survey-multi-choice-option:last-of-type::after  { content: '▶'; position: absolute; left: -14px; top: 21px; }" +
         ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-option:first-child  {background-color: red;}" +
         ".jspsych-content { width: 1000px}" +
-        ".jspsych-btn { margin: 70px 0; }" +
+        ".jspsych-btn { margin: 140px 0; }" +
         ".question-title-heading { text-transform: uppercase; font-weight: bold; }" +
         ".jspsych-content { margin-top: 130px;}" +
         ".square { display: flex; justify-content: space-around; }" +
