@@ -1282,22 +1282,6 @@ timeline.push({
 
 // Key-testing
 timeline.push(KEY_TESTING_OPEN, KEY_TESTING, KEY_TESTING_CLOSE);
-// Demographics
-timeline.push(DEMOGRAPHICS);
-// Intro: We'd like to briefly ask you about some symptoms before the online game.
-timeline.push(WBF_OPEN);
-timeline.push(INVENTORY_OPEN);
-// Symptom Inventories
-for(var item of symptom_inventory_arr){
-    timeline.push(item);
-}
-timeline.push(INVENTORY_CLOSE);
-// SDS
-timeline.push(SDS);
-// ICAR
-timeline.push(ICAR);
-// Close: That's it for the symptom questions. Now we're ready to start the online game
-timeline.push(WBF_CLOSE);
 // Food & Hunger Questions pre-rating
 timeline.push(FHQ1_OPEN, FHQ1_1, FHQ1_2, FHQ1_3, FHQ1_4, FHQ1_CLOSE);
 // Pavlovian Condition
@@ -1320,6 +1304,22 @@ timeline.push(DEVAL_TEST);
 timeline.push(FHQ2_OPEN, FHQ2_1, FHQ2_2, FHQ2_3, FHQ2_4, FHQ2_CLOSE);
 // Transfer Test 3
 timeline.push(TRANSFER3);
+// Demographics
+timeline.push(DEMOGRAPHICS);
+// Intro: We'd like to briefly ask you about some symptoms before the online game.
+timeline.push(WBF_OPEN);
+timeline.push(INVENTORY_OPEN);
+// Symptom Inventories
+for(var item of symptom_inventory_arr){
+    timeline.push(item);
+}
+timeline.push(INVENTORY_CLOSE);
+// SDS
+timeline.push(SDS);
+// ICAR
+timeline.push(ICAR);
+// Close: That's it for the symptom questions. Now we're ready to start the online game
+// timeline.push(WBF_CLOSE);
 //  Close HIT Questions
 timeline.push(CLOSE_HIT);
 // Thanks

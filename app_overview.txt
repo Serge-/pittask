@@ -46,6 +46,30 @@ Then:
 After these steps you can open following link in the browser: http://localhost:22362
 
 ---------------------------------------------------------------------------------------------
+                            Browser and Hardware Specifications
+---------------------------------------------------------------------------------------------
+| This is a list of the hardware and browsers where the pittask experiment 
+| was successfully launched and finished.
+|
+---------------------------------------------------------------------------------------------
+
+---------------------------------
+|           Hardware            |
+---------------------------------
+
+HP ZBook 17 G2 Mobile Workstation - 17.3" touchpad/mouse
+Acer Aspire V3-772G laptop touchpad/mouse
+
+---------------------------------
+|           Browsers            |
+---------------------------------
+Chrome - 83, 84 versions
+Firefox - 76, 77, 78
+Opera - 68, 69
+Microsoft Edge - 84
+Safari - 12 (VMware Workstation 15 PRO, macOS Mojave)
+
+---------------------------------------------------------------------------------------------
                             Tested Operating Systems
 ---------------------------------------------------------------------------------------------
 | On the listed Operating Systems a project runs properly
