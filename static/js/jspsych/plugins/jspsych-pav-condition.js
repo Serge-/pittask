@@ -72,7 +72,7 @@ jsPsych.plugins.animation = (function () {
         trial.stimuli = [];
         var pav_stimuli_arr = jsPsych.randomization.shuffle(pav_stimuli)
 
-        pav_stimuli_arr.forEach(element => {
+        pav_stimuli_arr.forEach(function (element) {
             trial.stimuli.push(element.stimuli);
         });
 

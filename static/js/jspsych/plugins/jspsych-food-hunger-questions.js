@@ -155,7 +155,7 @@ jsPsych.plugins["food-and-hunger-questions"] = (function() {
                 });
                 setTimeout(function() {
                   end_trial();
-              }, 500);
+                }, 500);
             }
         });
 
@@ -195,24 +195,23 @@ jsPsych.plugins["food-and-hunger-questions"] = (function() {
   
         // function to handle responses by the subject
         var after_response = function(info) {
-    
+              
             if(info.key_release === undefined) {
-            response.trial_events.push({
+              response.trial_events.push({
                 "event_type": "key press",
                 "event_raw_details": info.key,
                 "event_converted_details": jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(info.key) + ' key pressed',
                 "timestamp": jsPsych.totalTime(),
                 "time_elapsed": jsPsych.totalTime() - timestamp_onload
-            });
+              });
             } else {
-                response.trial_events.push({
+              response.trial_events.push({
                 "event_type": "key release",
                 "event_raw_details": info.key_release,
                 "event_converted_details": jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(info.key_release) + ' key released',
                 "timestamp": jsPsych.totalTime(),
                 "time_elapsed": jsPsych.totalTime() - timestamp_onload
-                });
-            
+              });
             }
         };
     

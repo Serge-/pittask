@@ -4,7 +4,7 @@ suppressMessages(library(data.table))
 if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
   install.packages(setdiff(packages, rownames(installed.packages())))
 }
-
+options(warn=-1)
 `%notin%` <- Negate(`%in%`)
 
 library(httr)
@@ -446,7 +446,7 @@ formatDateTime <- function(dateTime){
 
 # Connection --------------------------------------------------------------
 
-connection = dbConnect(MySQL(), user = 'root', password='VolitionL101', dbname = 'pittask', host='127.0.0.1')
+connection = dbConnect(MySQL(), user = 'root', password='123', dbname = 'pittask2', host='127.0.0.1')
 
 query <- tryCatch(
   dbSendQuery(connection, "SELECT * FROM turkdemo"),
@@ -532,7 +532,7 @@ if(isClass(query))
     if(length(parameters_index ) != 0){
       parameters_response <- fromJSON(trialdata[parameters_index,]$parameters)
       
-      date <- format(as.Date(dateTime[parameters_index]), "%d-%m-%Y")
+      date <- format(as.IDate(dateTime[parameters_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[parameters_index]))
       
       for(j in 1:length(parameters_response)){
@@ -553,7 +553,7 @@ if(isClass(query))
       demographics_responses <- fromJSON(trialdata[demographics_index,]$responses)
       demographics_timestamps <- fromJSON(trialdata[demographics_index,]$timestamp)
       
-      date <- format(as.Date(dateTime[demographics_index]), "%d-%m-%Y")
+      date <- format(as.IDate(dateTime[demographics_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[demographics_index]))
       time_elapsed <- trialdata$time_elapsed[demographics_index]
       time_ms <- dateTime_ms[demographics_index] - time_elapsed
@@ -581,7 +581,7 @@ if(isClass(query))
       ocir_responses <- fromJSON(trialdata[ocir_index,]$responses)
       ocir_timestamps <- fromJSON(trialdata[ocir_index,]$timestamp)
       
-      date <- format(as.Date(dateTime[ocir_index]), "%d-%m-%Y")
+      date <- format(as.IDate(dateTime[ocir_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[ocir_index]))
 
       time_elapsed <- trialdata$time_elapsed[ocir_index]
@@ -607,7 +607,7 @@ if(isClass(query))
       moves_responses <- fromJSON(trialdata[moves_index,]$responses)
       moves_timestamps <- fromJSON(trialdata[moves_index,]$timestamp)
       
-      date <- format(as.Date(dateTime[moves_index]), "%d-%m-%Y")
+      date <- format(as.IDate(dateTime[moves_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[moves_index]))
 
       time_elapsed <- trialdata$time_elapsed[moves_index]
@@ -635,7 +635,7 @@ if(isClass(query))
       dass_responses <- fromJSON(trialdata[dass_index,]$responses)
       dass_timestamps <- fromJSON(trialdata[dass_index,]$timestamp)
       
-      date <- format(as.Date(dateTime[dass_index]), "%d-%m-%Y")
+      date <- format(as.IDate(dateTime[dass_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[dass_index]))
 
       time_elapsed <- trialdata$time_elapsed[dass_index]
@@ -661,7 +661,7 @@ if(isClass(query))
       asrs5_responses <- fromJSON(trialdata[asrs5_index,]$responses)
       asrs5_timestamps <- fromJSON(trialdata[asrs5_index,]$timestamp)
       
-      date <- format(as.Date(dateTime[asrs5_index]), "%d-%m-%Y")
+      date <- format(as.IDate(dateTime[asrs5_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[asrs5_index]))
 
       time_elapsed <- trialdata$time_elapsed[asrs5_index]
@@ -687,7 +687,7 @@ if(isClass(query))
       eat26_responses <- fromJSON(trialdata[eat26_index,]$responses)
       eat26_timestamps <- fromJSON(trialdata[eat26_index,]$timestamp)
       
-      date <- format(as.Date(dateTime[eat26_index]), "%d-%m-%Y")
+      date <- format(as.IDate(dateTime[eat26_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[eat26_index]))
       
       time_elapsed <- trialdata$time_elapsed[eat26_index]
@@ -716,7 +716,7 @@ if(isClass(query))
       time_elapsed <- trialdata$time_elapsed[raads14_index]
       time_ms <- dateTime_ms[raads14_index] - time_elapsed
       
-      date <- format(as.Date(dateTime[raads14_index]), "%d-%m-%Y")
+      date <- format(as.IDate(dateTime[raads14_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[raads14_index]))
       
       for(j in 1:length(raads14_responses)){
@@ -739,7 +739,7 @@ if(isClass(query))
       phq9_responses <- fromJSON(trialdata[phq9_index,]$responses)
       phq9_timestamps <- fromJSON(trialdata[phq9_index,]$timestamp)
       
-      date <- format(as.Date(dateTime[phq9_index]), "%d-%m-%Y")
+      date <- format(as.IDate(dateTime[phq9_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[phq9_index]))
 
       time_elapsed <- trialdata$time_elapsed[phq9_index]
@@ -765,7 +765,7 @@ if(isClass(query))
       gad7_responses <- fromJSON(trialdata[gad7_index,]$responses)
       gad7_timestamps <- fromJSON(trialdata[gad7_index,]$timestamp)
       
-      date <- format(as.Date(dateTime[gad7_index]), "%d-%m-%Y")
+      date <- format(as.IDate(dateTime[gad7_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[gad7_index]))
 
       time_elapsed <- trialdata$time_elapsed[gad7_index]
@@ -791,7 +791,7 @@ if(isClass(query))
       asrm_responses <- fromJSON(trialdata[asrm_index,]$responses)
       asrm_timestamps <- fromJSON(trialdata[asrm_index,]$timestamp)
       
-      date <- format(as.Date(dateTime[asrm_index]), "%d-%m-%Y")
+      date <- format(as.IDate(dateTime[asrm_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[asrm_index]))
       
       time_elapsed <- trialdata$time_elapsed[asrm_index]
@@ -817,7 +817,7 @@ if(isClass(query))
       pc_ptsd_5_responses <- fromJSON(trialdata[pc_ptsd_5_index,]$responses)
       pc_ptsd_5_timestamps <- fromJSON(trialdata[pc_ptsd_5_index,]$timestamp)
       
-      date <- format(as.Date(dateTime[pc_ptsd_5_index]), "%d-%m-%Y")
+      date <- format(as.IDate(dateTime[pc_ptsd_5_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[pc_ptsd_5_index]))
 
       time_elapsed <- trialdata$time_elapsed[pc_ptsd_5_index]
@@ -844,7 +844,7 @@ if(isClass(query))
       prime_r_responses <- fromJSON(trialdata[prime_r_index,]$responses)
       prime_r_timestamps <- fromJSON(trialdata[prime_r_index,]$timestamp)
       
-      date <- format(as.Date(dateTime[prime_r_index]), "%d-%m-%Y")
+      date <- format(as.IDate(dateTime[prime_r_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[prime_r_index]))
       
       time_elapsed <- trialdata$time_elapsed[prime_r_index]
@@ -870,7 +870,7 @@ if(isClass(query))
       audit_responses <- fromJSON(trialdata[audit_index,]$responses)
       audit_index_timestamps <- fromJSON(trialdata[audit_index,]$timestamp)
       
-      date <- format(as.Date(dateTime[audit_index]), "%d-%m-%Y")
+      date <- format(as.IDate(dateTime[audit_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[audit_index]))
 
       time_elapsed <- trialdata$time_elapsed[audit_index]
@@ -896,7 +896,7 @@ if(isClass(query))
       pgsi_responses <- fromJSON(trialdata[pgsi_index,]$responses)
       pgsi_timestamps <- fromJSON(trialdata[pgsi_index,]$timestamp)
       
-      date <- format(as.Date(dateTime[pgsi_index]), "%d-%m-%Y")
+      date <- format(as.IDate(dateTime[pgsi_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[pgsi_index]))
       
       time_elapsed <- trialdata$time_elapsed[pgsi_index]
@@ -922,7 +922,7 @@ if(isClass(query))
       yiat_responses <- fromJSON(trialdata[yiat_index,]$responses)
       yiat_timestamps <- fromJSON(trialdata[yiat_index,]$timestamp)
             
-      date <- format(as.Date(dateTime[yiat_index]), "%d-%m-%Y")
+      date <- format(as.IDate(dateTime[yiat_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[yiat_index]))
 
       time_elapsed <- trialdata$time_elapsed[yiat_index]
@@ -948,7 +948,7 @@ if(isClass(query))
       SmokingStatus_responses <- fromJSON(trialdata[SmokingStatus_index,]$responses)
       SmokingStatus_timestamps <- fromJSON(trialdata[SmokingStatus_index,]$timestamp)
       
-      date <- format(as.Date(dateTime[SmokingStatus_index]), "%d-%m-%Y")
+      date <- format(as.IDate(dateTime[SmokingStatus_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[SmokingStatus_index]))
 
       time_elapsed <- trialdata$time_elapsed[SmokingStatus_index]
@@ -974,7 +974,7 @@ if(isClass(query))
       ftnd_responses <- fromJSON(trialdata[ftnd_index,]$responses)
       ftnd_timestamps <- fromJSON(trialdata[ftnd_index,]$timestamp)
       
-      date <- format(as.Date(dateTime[ftnd_index]), "%d-%m-%Y")
+      date <- format(as.IDate(dateTime[ftnd_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[ftnd_index]))
 
       time_elapsed <- trialdata$time_elapsed[ftnd_index]
@@ -1001,7 +1001,7 @@ if(isClass(query))
       isi_responses <- fromJSON(trialdata[isi_index,]$responses)
       isi_timestamps <- fromJSON(trialdata[isi_index,]$timestamp)
       
-      date <- format(as.Date(dateTime[isi_index]), "%d-%m-%Y")
+      date <- format(as.IDate(dateTime[isi_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[isi_index]))
 
       time_elapsed <- trialdata$time_elapsed[isi_index]
@@ -1027,7 +1027,7 @@ if(isClass(query))
       pid5bf_responses <- fromJSON(trialdata[pid5bf_index,]$responses)
       pid5bf_timestamps <- fromJSON(trialdata[pid5bf_index,]$timestamp)
       
-      date <- format(as.Date(dateTime[pid5bf_index]), "%d-%m-%Y")
+      date <- format(as.IDate(dateTime[pid5bf_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[pid5bf_index]))
 
       time_elapsed <- trialdata$time_elapsed[pid5bf_index]
@@ -1053,7 +1053,7 @@ if(isClass(query))
       lsas_responses <- fromJSON(trialdata[lsas_index,]$responses)
       lsas_timestamps <- fromJSON(trialdata[lsas_index,]$timestamp)
       
-      date <- format(as.Date(dateTime[lsas_index]), "%d-%m-%Y")
+      date <- format(as.IDate(dateTime[lsas_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[lsas_index]))
  
       time_elapsed <- trialdata$time_elapsed[lsas_index]
@@ -1080,7 +1080,7 @@ if(isClass(query))
       icar_timestamps <- fromJSON(trialdata[icar_index,]$timestamp)
       icar_response_id <- fromJSON(trialdata[icar_index,]$responseId)
     
-      date <- format(as.Date(dateTime[icar_index]), "%d-%m-%Y")
+      date <- format(as.IDate(dateTime[icar_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[icar_index]))
       
       for(j in 1:length(icar_responses)){
@@ -1103,7 +1103,7 @@ if(isClass(query))
       sds_responses <- fromJSON(trialdata[sds_index,]$responses)
       sds_timestamps <- fromJSON(trialdata[sds_index,]$timestamp)
       
-      date <- format(as.Date(dateTime[sds_index]), "%d-%m-%Y")
+      date <- format(as.IDate(dateTime[sds_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[sds_index]))
  
       time_elapsed <- trialdata$time_elapsed[sds_index]
@@ -1131,7 +1131,7 @@ if(isClass(query))
       
       for(j in 1:length(vvr_stages)){
 
-        date <- format(as.Date(dateTime[j]), "%d-%m-%Y")
+        date <- format(as.IDate(dateTime[j]), "%d-%m-%Y")
         time <- as.character(as.ITime(dateTime[j]))
 
         if(!is.na(trialdata$vvr_stage[j])) {
@@ -1162,7 +1162,7 @@ if(isClass(query))
       for(fr in 1:dim(food_ratings)[1]) {
         FoodRatings <- rbindlist(list(FoodRatings, list(
           PIN, complete,
-          format(as.Date(dateTime[food_ratings_indices[fr]]), "%d-%m-%Y"),
+          format(as.IDate(dateTime[food_ratings_indices[fr]]), "%d-%m-%Y"),
           time, food_ratings$timestamp[fr], country, commit,
           version, fromJSON(food_ratings$food_item[fr]),
           ifelse(fromJSON(food_ratings$rating_status[fr]) == "pre-rating", fromJSON(food_ratings$rating[fr]), ""),
@@ -1184,7 +1184,7 @@ if(isClass(query))
       for(hr in 1:dim(hunger_ratings)[1]) {
         HungerRating <- rbindlist(list(HungerRating, list(
           PIN, complete,
-          format(as.Date(dateTime[hunger_rating_indices[hr]]), "%d-%m-%Y"),
+          format(as.IDate(dateTime[hunger_rating_indices[hr]]), "%d-%m-%Y"),
           time, hunger_ratings$timestamp[hr], country, commit, version,
           ifelse(fromJSON(hunger_ratings$rating_status[hr]) == "pre-rating", fromJSON(hunger_ratings$rating[hr]), ""),
           ifelse(fromJSON(hunger_ratings$rating_status[hr]) == "post-rating", fromJSON(hunger_ratings$rating[hr]), "")
@@ -1200,7 +1200,7 @@ if(isClass(query))
       consent_feedback_responses <- fromJSON(trialdata[consent_feedback_index,]$responses)
       consent_feedback_timestamp <- fromJSON(trialdata[consent_feedback_index,]$timestamp)
 
-      date <- format(as.Date(dateTime[consent_feedback_index]), "%d-%m-%Y")
+      date <- format(as.IDate(dateTime[consent_feedback_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[consent_feedback_index]))
 
       for(j in 1:length(consent_feedback_responses)){
@@ -1228,7 +1228,7 @@ if(isClass(query))
         response_submitted <- fromJSON(events$response_submitted[j])
         correct <- events$event_raw_details[j]
         
-        date <- format(as.Date(dateTime[j]), "%d-%m-%Y")
+        date <- format(as.IDate(dateTime[j]), "%d-%m-%Y")
         time <- as.character(as.ITime(dateTime[j]))
     
         PavCondition <- rbindlist(list(PavCondition, list(
@@ -1243,7 +1243,7 @@ if(isClass(query))
     if(!is.null(trialdata$stage_name) & !is.null(version) & !is.null(trialdata$events)) {
       for (j in 1:length(trialdata$events)) {
         if (!is.na(trialdata$events[j]) & trialdata$events[j] != "[]") {
-          date <- format(as.Date(dateTime[j]), "%d-%m-%Y")
+          date <- format(as.IDate(dateTime[j]), "%d-%m-%Y")
           time <- as.character(as.ITime(dateTime[j]))
           events <- fromJSON(trialdata$events[j])
           
@@ -1260,9 +1260,9 @@ if(isClass(query))
           
           for (e in 1:nrow(events)) {
             set(CompleteData, complete_data_index, 1L:15L, list(
-              PIN, complete, date,
+              PIN, complete, format(as.IDate(formatDateTime(time_ms + events$timestamp[e])), "%d-%m-%Y"),
               as.character(as.ITime(formatDateTime(time_ms + events$timestamp[e]))),
-              ifelse(is.na(events$time_elapsed[e]), 'NA', events$time_elapsed[e]),
+              ifelse(is.na(events$timestamp[e]), 'NA', events$timestamp[e]),
               country, timezone, stage_name, commit, version, block_number,
               ifelse(!is.null(events$interval_number[e]), events$interval_number[e], 'NA'),
               events$event_type[e],

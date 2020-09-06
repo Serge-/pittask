@@ -2189,12 +2189,12 @@ jsPsych.pluginAPI = (function() {
               }
           };
 
-          $(document).mouseup(after_up);
+          $(document).on('mouseup', after_up);
       }
 
     };
 
-    $(document).mousedown(listener_function);
+    $(document).on('mousedown', listener_function);
 
     // create listener id object
     listener_id = {
@@ -2211,6 +2211,7 @@ jsPsych.pluginAPI = (function() {
   module.cancelClickResponse = function(listener) {
     // remove the listener from the doc
     $(document).off(listener.type, listener.fn);
+    $(document).unbind('mouseup');
 
     // remove the listener from the list of listeners
     if ($.inArray(listener, click_listeners) > -1) {
@@ -2219,6 +2220,9 @@ jsPsych.pluginAPI = (function() {
   };
 
   module.cancelKeyboardResponse = function(listener) {
+    $(document).off('keyup');
+    $(document).unbind('mouseup');
+    click_listeners.splice($.inArray(listener, click_listeners), 1);
     // remove the listener from the list of listeners
     if (keyboard_listeners.includes(listener)) {
       keyboard_listeners.splice(keyboard_listeners.indexOf(listener), 1);

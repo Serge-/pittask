@@ -1194,7 +1194,7 @@ var DEVAL_TEST_MAIN = {
     stage_name: 'deval_test',
     type: 'transfer-test',
     stimulus: 'vending machine',
-    transfer_test_white_duration: deval_test_duration,
+    trial_duration: deval_test_duration,
     sequence_reps: 1
 };
 
