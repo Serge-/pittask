@@ -931,21 +931,25 @@ var PAV_CONDITIONING_MAIN = {
                     {
                         name: 'M&Ms',
                         value: 'MM',
+                        img: '/static/images/MM.png',
                         response: 'a',
                     },
                     {
                         name: 'BBQ',
                         value: 'BBQ',
+                        img: '/static/images/BBQ.png',
                         response: 'b',
                     },
                     {
                         name: 'Tiny teddy',
                         value: 'TT',
+                        img: '/static/images/TT.png',
                         response: 'c',
                     },
                     {
                         name: 'Empty',
                         value: 'Empty',
+                        img: '/static/images/EMPTY.png',
                         response: 'd',
                     }
                 ]

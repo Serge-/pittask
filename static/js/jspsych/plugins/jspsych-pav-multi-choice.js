@@ -77,18 +77,25 @@ jsPsych.plugins['survey-pav-multi-choice'] = (function() {
 
     // inject CSS for trial
     html += '<style id="jspsych-survey-multi-choice-css">';
-    html += ".jspsych-survey-multi-choice-question { margin-top: 2em; margin-bottom: 2em; text-align: left; }"+
-      ".jspsych-survey-multi-choice-text span.required {color: darkred;}"+
-      ".jspsych-survey-multi-choice-text {font-size: 2rem;}"+
-      ".vending-machine { margin-bottom: 1.6rem;}"+
-      "input[type=radio] { margin: 0;}"+ 
-      ".form-radio { top: 0; }"+ 
-      "label.jspsych-survey-multi-choice-text { font-size: 18px; font-weight: 100; padding-left: 2rem; margin-bottom: 0; }"+
-      ".jspsych-survey-multi-choice-option { display: flex; margin-top: 1.5rem; justify-content: flex-start; padding: 0;  }"+
-      "#jspsych-survey-multi-choice-form { margin-left: 45px; width: 270px; }"+
-      ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-text {  text-align: center;}"+
-      ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-option {  display: inline-block;  margin-left: 1em;  margin-right: 1em;  vertical-align: top;}"+
-      "label.jspsych-survey-multi-choice-text input[type='radio'] {margin-right: 1em;}";
+    html += ".jspsych-survey-multi-choice-question { margin-top: 2em; margin-bottom: 2em; text-align: left; }" +
+        ".jspsych-survey-multi-choice-text span.required {color: darkred;}" +
+        ".jspsych-survey-multi-choice-text {font-size: 2rem;}" +
+        ".vending-machine { margin-bottom: 1.6rem;}" +
+        "input[type=radio] { margin: 0;}" +
+        ".form-radio { top: 0; }" +
+        "label.jspsych-survey-multi-choice-text { font-size: 18px; font-weight: 100; margin-bottom: 0; }" +
+        ".jspsych-survey-multi-choice-option { display: flex; margin: 1.5rem 3rem; justify-content: flex-start; padding: 0; align-items: baseline;  }" +
+        "#jspsych-survey-multi-choice-form { width: 100%; text-align: center;}" +
+        ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-text {  text-align: center;}" +
+        ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-option {  display: inline-block;  margin-left: 1em;  margin-right: 1em;  vertical-align: top;}" +
+        "label.jspsych-survey-multi-choice-text input[type='radio'] {margin-right: 1em;}" +
+        ".jspsych-survey-multi-choice-question:last-of-type { border-bottom: none; display: flex; width: 100%; justify-content: center; flex-wrap: wrap; }" +
+        ".jspsych-survey-multi-choice-preamble {  text-align: center; margin: 0 auto;}" +
+        "img.select-img {width: 115px;}" +
+        "#jspsych-html-keyboard-response-stimulus { margin: 0 auto; text-align: center;}" +
+        ".jspsych-content {width: 100%;}" +
+        "#jspsych-survey-multi-choice-form.pavlovian-conditioning-form {width: 100%;}" +
+        ".jspsych-content-wrapper: {flex: none}";
     html += '</style>';
 
     // show preamble text
@@ -134,10 +141,10 @@ jsPsych.plugins['survey-pav-multi-choice'] = (function() {
         question_classes.push('jspsych-survey-multi-choice-horizontal');
       }
 
-      html += '<div id="jspsych-survey-multi-choice-'+question_id+'" class="'+question_classes.join(' ')+'"  data-name="'+question.name+'">';
-
       // add question text
       html += '<p class="jspsych-survey-multi-choice-text survey-multi-choice">' + question.prompt 
+      html += '<div id="jspsych-survey-multi-choice-'+question_id+'" class="'+question_classes.join(' ')+'"  data-name="'+question.name+'">';
+
       if(question.required){
         html += "<span class='required'>*</span>";
       }
@@ -155,7 +162,11 @@ jsPsych.plugins['survey-pav-multi-choice'] = (function() {
         // add radio button container
         html += '<div id="'+option_id_name+'" class="jspsych-survey-multi-choice-option">';
         html += '<input type="radio" name="'+input_name+'" id="'+input_id+'" class="form-radio" value="'+question.options[j].value+'" '+required_attr+'></input>';
-        html += '<label class="jspsych-survey-multi-choice-text" for="'+input_id+'">'+question.options[j].name+'</label>';
+        html += '<label class="jspsych-survey-multi-choice-text" for="'+input_id+'">';
+        if (question.options[j].img) {
+          html += '<img class="select-img" src="' + question.options[j].img + '" alt="' + question.options[j].name + '">'
+        }
+        html += '</label>';
         html += '</div>';
       }
 
