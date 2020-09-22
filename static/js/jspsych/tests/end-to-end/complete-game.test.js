@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer');
 const timeout = 15000;
-const parameters = require('./parameters');
-let { instrumental_conditioning, contingency_degradation, contingency_restoration } = parameters.parameters;
+// const parameters = require('./parameters');
+// let { instrumental_conditioning, contingency_degradation, contingency_restoration } = parameters.parameters;
 
 let browser;
 let page;

@@ -1207,87 +1207,87 @@ var DASS = {
         '<p>3 Applied to me very much, or most of the time - ALMOST ALWAYS</p>',
     questions: [
         {
-            prompt: 'I found it hard to wind down',
+            prompt: 'I found it hard to wind down.',
             options: [0, 1, 2, 3],
             horizontal: true
         }, {
-            prompt: 'I was aware of dryness of my mouth',
+            prompt: 'I was aware of dryness of my mouth.',
             options: [0, 1, 2, 3],
             horizontal: true
         }, {
-            prompt: 'I couldn’t seem to experience any positive feeling at all',
+            prompt: 'I couldn’t seem to experience any positive feeling at all.',
             options: [0, 1, 2, 3],
             horizontal: true
         }, {
-            prompt: 'I experienced breathing difficulty (eg, excessively rapid breathing, breathlessness in the absence of physical exertion)',
+            prompt: 'I experienced breathing difficulty (eg, excessively rapid breathing, breathlessness in the absence of physical exertion).',
             options: [0, 1, 2, 3],
             horizontal: true
         }, {
-            prompt: 'I found it difficult to work up the initiative to do things',
+            prompt: 'I found it difficult to work up the initiative to do things.',
             options: [0, 1, 2, 3],
             horizontal: true
         }, {
-            prompt: 'I tended to over-react to situations',
+            prompt: 'I tended to over-react to situations.',
             options: [0, 1, 2, 3],
             horizontal: true
         }, {
-            prompt: 'I experienced trembling (eg, in the hands)',
+            prompt: 'I experienced trembling (eg, in the hands).',
             options: [0, 1, 2, 3],
             horizontal: true
         }, {
-            prompt: 'I felt that I was using a lot of nervous energy',
+            prompt: 'I felt that I was using a lot of nervous energy.',
             options: [0, 1, 2, 3],
             horizontal: true
         }, {
-            prompt: 'I was worried about situations in which I might panic and make a fool of myself',
+            prompt: 'I was worried about situations in which I might panic and make a fool of myself.',
             options: [0, 1, 2, 3],
             horizontal: true
         }, {
-            prompt: 'I felt that I had nothing to look forward to',
+            prompt: 'I felt that I had nothing to look forward to.',
             options: [0, 1, 2, 3],
             horizontal: true
         }, {
-            prompt: 'I found myself getting agitated',
+            prompt: 'I found myself getting agitated.',
             options: [0, 1, 2, 3],
             horizontal: true
         }, {
-            prompt: 'I found it difficult to relax',
+            prompt: 'I found it difficult to relax.',
             options: [0, 1, 2, 3],
             horizontal: true
         }, {
-            prompt: 'I felt down-hearted and blue',
+            prompt: 'I felt down-hearted and blue.',
             options: [0, 1, 2, 3],
             horizontal: true
         }, {
-            prompt: 'I was intolerant of anything that kept me from getting on with what I was doing',
+            prompt: 'I was intolerant of anything that kept me from getting on with what I was doing.',
             options: [0, 1, 2, 3],
             horizontal: true
         }, {
-            prompt: 'I felt I was close to panic',
+            prompt: 'I felt I was close to panic.',
             options: [0, 1, 2, 3],
             horizontal: true
         }, {
-            prompt: 'I was unable to become enthusiastic about anything',
+            prompt: 'I was unable to become enthusiastic about anything.',
             options: [0, 1, 2, 3],
             horizontal: true
         }, {
-            prompt: 'I felt I wasn’t worth much as a person',
+            prompt: 'I felt I wasn’t worth much as a person.',
             options: [0, 1, 2, 3],
             horizontal: true
         }, {
-            prompt: 'I felt that I was rather touchy',
+            prompt: 'I felt that I was rather touchy.',
             options: [0, 1, 2, 3],
             horizontal: true
         }, {
-            prompt: 'I was aware of the action of my heart in the absence of physical exertion (eg, sense of heart rate increase, heart missing a beat)',
+            prompt: 'I was aware of the action of my heart in the absence of physical exertion (eg, sense of heart rate increase, heart missing a beat).',
             options: [0, 1, 2, 3],
             horizontal: true
         }, {
-            prompt: 'I felt scared without any good reason',
+            prompt: 'I felt scared without any good reason.',
             options: [0, 1, 2, 3],
             horizontal: true
         }, {
-            prompt: 'I felt that life was meaningless',
+            prompt: 'I felt that life was meaningless.',
             options: [0, 1, 2, 3],
             horizontal: true
         }

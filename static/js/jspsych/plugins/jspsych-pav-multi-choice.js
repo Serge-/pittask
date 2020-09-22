@@ -253,7 +253,7 @@ jsPsych.plugins['survey-pav-multi-choice'] = (function() {
         "stage_type": JSON.stringify(trial.stage_type),
         "response": JSON.stringify(color_value),
         "response_submitted": JSON.stringify(color_response_submitted),
-        "timestamp": JSON.stringify(jsPsych.totalTime() - timestamp_onload),
+        "timestamp": JSON.stringify(jsPsych.totalTime()),
         "responses": JSON.stringify(question_data),
         "question_order": JSON.stringify(question_order),
         "event_raw_details": pav_is_correct ? 'y' : 'n',

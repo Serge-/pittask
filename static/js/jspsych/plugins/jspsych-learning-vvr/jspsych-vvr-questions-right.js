@@ -229,7 +229,7 @@ jsPsych.plugins['survey-vvr-questions-right'] = (function() {
                 "stage_name": JSON.stringify(trial.stage_name),
                 "vvr_stage": JSON.stringify(trial.vvr_stage),
                 "stimulus": trial.stimulus,
-                "timestamp": jsPsych.totalTime() - timestamp_onload,
+                "timestamp": jsPsych.totalTime(),
                 "block_number": loop_node_counter_vvr,
                 "item_id": ++item_id,
                 "food_item": OUTCOME.slice(15),

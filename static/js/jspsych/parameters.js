@@ -62,7 +62,7 @@ var close_instruct_text_key_testing = "<p>Thank you for your patience.</p> <p>Pr
 /************************************************************
  * Web-based forms
  ***********************************************************/
-var open_instruct_text_WBF = "<p>Now we would like to ask you some questions.</p><br/> <p>Press any key when you are ready.</p>";
+var open_instruct_text_WBF = "<p>Now we would like to ask you some questions.</p><br> <p>Press any key when you are ready.</p>";
 var close_instruct_text_WBF = "<p>Thank you.</p> <p>Press any key when you are ready to start.</p>";
 var open_instruct_WBF = true;
 var close_instruct_WBF = false;
@@ -150,13 +150,13 @@ var close_instruct_text_video = "<p>The vending machine is still overflowing, " 
  ***********************************************************/
 var open_instruct_FHQ_pre_rating = true;
 var close_instruct_FHQ_pre_rating = true;
-var open_instruct_text_FHQ_pre_rating =  'Now we would like to ask you some questions about your food preferences.<p><br>' + '<p>Press any key to continue. </p>';
+var open_instruct_text_FHQ_pre_rating =  'Now we would like to ask you some questions about your food preferences.<br>' + '<p>Press any key to continue. </p>';
 var close_instruct_text_FHQ_pre_rating = 'Thank you. That is it for the food questions for now.<p> Press any key to continue. </p>';
 
 
 var open_instruct_FHQ_post_rating = true;
 var close_instruct_FHQ_post_rating = true;
-var open_instruct_text_FHQ_post_rating =  'Now we would again like to ask you some questions about your food preferences.<p><br>' + '<p>Press any key to continue. </p>';
+var open_instruct_text_FHQ_post_rating =  'Now we would again like to ask you some questions about your food preferences.<br>' + '<p>Press any key to continue. </p>';
 var close_instruct_text_FHQ_post_rating = 'Thank you. That is it for the food questions.<p> Press any key to continue. </p>';
 
 var FHQ_1 = "How much would you like a Tiny Teddy?";

@@ -176,7 +176,7 @@ jsPsych.plugins["food-and-hunger-questions"] = (function() {
             var trial_data = {
                 "stage_name": JSON.stringify(trial.stage_name),
                 "events": JSON.stringify(response.trial_events),
-                "timestamp": JSON.stringify(jsPsych.totalTime() - FHR_timestamp),
+                "timestamp": JSON.stringify(jsPsych.totalTime()),
                 "rating_status": JSON.stringify(trial.rating_status),
                 "rating": JSON.stringify(vas_holder),
                 "food_item": JSON.stringify(trial.food_item)

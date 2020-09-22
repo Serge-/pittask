@@ -256,7 +256,7 @@ jsPsych.plugins['PID-5-BF'] = (function () {
 
         if(info.el) {
           if(info.el.dataset.timeStamp) {
-            trial.time_stamp[info.el.dataset.timeStamp] = jsPsych.totalTime() - timestamp_onload;
+            trial.time_stamp[info.el.dataset.timeStamp] = jsPsych.totalTime();
           }
           if(info.el.dataset.questionNumber) {
             response.trial_events.push({
@@ -294,7 +294,7 @@ jsPsych.plugins['PID-5-BF'] = (function () {
     $("input[type=radio]").on("click change touchstart",function(){
       var time_stamp_key = $(this).data('time-stamp'); 
       if(time_stamp_key) {
-        trial.time_stamp[time_stamp_key] = jsPsych.totalTime() - timestamp_onload;
+        trial.time_stamp[time_stamp_key] = jsPsych.totalTime();
       };
     });
 
