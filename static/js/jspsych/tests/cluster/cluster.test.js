@@ -6,7 +6,6 @@ const timeout = 3e+6;
 
 // sets number of concurrency working process
 const concurrency_number = 30;
-const PIN_amount = 100;
 const headless_browser = true;
  
 function delay(time) {
@@ -144,6 +143,7 @@ describe('DDG', () => {
         const close_instruct_transfer_test = await page.evaluate(() => close_instruct_transfer_test);
         const open_instruct_text_transfer_test = await page.evaluate(() => open_instruct_text_transfer_test);
         const close_instruct_text_transfer_test = await page.evaluate(() => close_instruct_text_transfer_test);
+        const open_instruct_demographics = await page.evaluate(() => open_instruct_demographics);
         const open_instruct_WBF = await page.evaluate(() => open_instruct_WBF);
         const close_instruct_WBF = await page.evaluate(() => close_instruct_WBF);
 
@@ -704,12 +704,11 @@ describe('DDG', () => {
           await page.click("#jspsych-html-keyboard-response-stimulus");
         };
 
-        // open instr inventories
-        if(open_instruct_inventory) {
-          await page.waitForSelector('.jspsych-html-keyboard-response-stimulus');
+        if(open_instruct_demographics) {
+          await page.waitForSelector('#jspsych-html-keyboard-response-stimulus');
           await delay(open_instruct_latency);
-          await page.click(".jspsych-html-keyboard-response-stimulus");
-        };
+          await page.click("#jspsych-html-keyboard-response-stimulus");
+        }
 
         // Demographics
         await page.waitForSelector('#jspsych-survey-multi-choice-DEMOGRAPHICS');
@@ -731,6 +730,13 @@ describe('DDG', () => {
         await page.evaluate(() => {
           document.querySelector(".jspsych-btn").click();
         });
+
+        // open instr inventories
+        if(open_instruct_inventory) {
+          await page.waitForSelector('.jspsych-html-keyboard-response-stimulus');
+          await delay(open_instruct_latency);
+          await page.click(".jspsych-html-keyboard-response-stimulus");
+        };
 
         let selector = await raceSelectors(page, inventory_selectors);
         while (selector != '.jspsych-html-keyboard-response-stimulus') {
@@ -1106,7 +1112,7 @@ describe('DDG', () => {
         await page.click("#jspsych-html-keyboard-response-stimulus");
         
         await page.waitForSelector("#container-not-an-ad");
-        await delay(6000);
+        await delay(600);
     });
 
     // In case of problems, log them
@@ -1124,7 +1130,7 @@ describe('DDG', () => {
       return text;
     }
     
-    for (let index = 0; index < PIN_amount; index++) {
+    for (let index = 0; index < concurrency_number; index++) {
       let assignmentId = "debug" + makeid();
       let hitId = "debug" + makeid();
       let workerId = "debug" + makeid();

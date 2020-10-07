@@ -107,7 +107,7 @@ jsPsych.plugins["video-keyboard-response"] = (function() {
       // setup stimulus
       var video_html = '<div>';
       
-      video_html += '<video class="hidden" id="jspsych-video-keyboard-response-stimulus"';
+      video_html += '<video id="jspsych-video-keyboard-response-stimulus"';
   
       if(trial.width) {
         video_html += ' width="'+trial.width+'"';
@@ -140,40 +140,13 @@ jsPsych.plugins["video-keyboard-response"] = (function() {
       }
       video_html += "</video>";
 
-      if(trial.open_instruct) {
-        video_html += '<p>' + open_instruct_text_video + '</p>';
-        $('video').addClass('hidden');
-
-        response.trial_events.push({
-          "event_type": 'text appears',
-          "event_raw_details": 'deval_video_open',
-          "event_converted_details": "deval_video_open text appears",
-          "timestamp": jsPsych.totalTime(),
-          "time_elapsed": jsPsych.totalTime() - timestamp_onload
-        });
-        
-        setTimeout(function() {
-          $('video').removeClass('hidden');
-          $('p').addClass('hidden');
-          response.trial_events.push({
-            "event_type": 'video appears',
-            "event_raw_details": counter_balancing[0].video,
-            "event_converted_details": counter_balancing[0].video + '.mp4' + " video started playing",
-            "timestamp": jsPsych.totalTime(),
-            "time_elapsed": jsPsych.totalTime() - timestamp_onload
-          });
-        }, open_instruct_latency);
-      } else {
-        response.trial_events.push({
-          "event_type": 'video appears',
-          "event_raw_details": counter_balancing[0].video,
-          "event_converted_details": counter_balancing[0].video + '.mp4' + " video started playing",
-          "timestamp": jsPsych.totalTime(),
-          "time_elapsed": jsPsych.totalTime() - timestamp_onload
-        });
-      }
-
-
+      response.trial_events.push({
+        "event_type": 'video appears',
+        "event_raw_details": counter_balancing[0].video,
+        "event_converted_details": counter_balancing[0].video + '.mp4' + " video started playing",
+        "timestamp": jsPsych.totalTime(),
+        "time_elapsed": jsPsych.totalTime() - timestamp_onload
+      });
 
       video_html += "</div>";
   
@@ -212,9 +185,7 @@ jsPsych.plugins["video-keyboard-response"] = (function() {
       var promise = document.getElementById('jspsych-video-keyboard-response-stimulus').play();
       
       if (promise !== undefined) {
-        promise.then(() => {
-        
-        }).catch(error => {
+        promise.then(function () {}).catch(function (error) {
           console.log(error);
         });
       }
@@ -291,39 +262,10 @@ jsPsych.plugins["video-keyboard-response"] = (function() {
 
       var video_duration_real = trial.trial_duration;
 
-      if(trial.open_instruct) {
-        video_duration_real += open_instruct_latency;
-        var vid = document.getElementById("jspsych-video-keyboard-response-stimulus");
-        vid.pause();
-        setTimeout(function() {
-          vid.play();
-        }, open_instruct_latency);
-      } else {
-        $('video').ready(function() {
-          $('video').removeClass('hidden');
-        });
-      }
-
       // end trial if time limit is set
       if (trial.trial_duration !== null) {
         jsPsych.pluginAPI.setTimeout(function() {
-          if(trial.close_instruct) {
-            $('p').removeClass('hidden');
-            $('video').addClass('hidden');
-            display_element.innerHTML = '<p>' + close_instruct_text_video + '</p>';
-            response.trial_events.push({
-              "event_type": 'text appears',
-              "event_raw_details": 'deval_video_close',
-              "event_converted_details": "deval_video_close text appears",
-              "timestamp": jsPsych.totalTime(),
-              "time_elapsed": jsPsych.totalTime() - timestamp_onload
-            });
-            setTimeout(function() {
-              end_trial();
-            }, close_instruct_latency);
-          } else {
-            end_trial();
-          }
+          end_trial();
         }, video_duration_real);
       }
     };

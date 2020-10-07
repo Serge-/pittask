@@ -191,11 +191,21 @@ jsPsych.plugins['parameters'] = (function(){
         array_extraction(prob_value_VVR2, 'prob_value_VVR2');
         array_extraction(prob_value_VVR3, 'prob_value_VVR3');
 
+        // browser, screen, OS info for specs.csv 
+        var version = platform.os.version === null ? '' : ' (' + platform.os.version + ')';
+        var specs = {
+            "platform": platform.os.family + ' ' + platform.os.architecture + version,
+            "browser": platform.name + ' (' + platform.version + ')',
+            "device": device.type,
+            "monitor_size":  window.screen.availHeight + 'x' + window.screen.availWidth
+        };
+
         var trial_data = {
             "stage_name": "Parameters",
             "counter-balancing version": counter_balancing[0]["game_version"],
             "commit": git_commit,
-            "parameters": JSON.stringify(parameters)
+            "parameters": JSON.stringify(parameters),
+            "specs": JSON.stringify(specs)
         };
 
         plugin.trial.variables = parameters;

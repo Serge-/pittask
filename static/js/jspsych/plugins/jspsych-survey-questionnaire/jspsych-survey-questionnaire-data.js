@@ -139,7 +139,7 @@ var ASRM = {
         '<div class="preamble-wrapper"><p> On this questionnaire are groups of five statements; read each group of statements carefully.</p></div>' +
         '<div class="preamble-wrapper"><p> Choose the one statement in each group that best describes the way you have been feeling for the past week. </p></div>' +
         '<div class="preamble-wrapper"><p> Click on the number next to the statement you picked.</p></div>' +
-        '<div class="preamble-wrapper"><p> Please note: The word “occasionally” when used here means once or twice; “often” means several' +
+        '<div class="preamble-wrapper"><p> Please note: The word “occasionally” when used here means once or twice; “often” means several ' +
         'times or more; “frequently” means most of the time.</p></div>',
     questions: [
         {
@@ -157,7 +157,7 @@ var ASRM = {
             options: [
                 'I do not feel more self-confident than usual.',
                 'I occasionally feel more self-confident than usual.',
-                'I often feel more self-confident than usual',
+                'I often feel more self-confident than usual.',
                 'I feel self-confident than usual most of the time.',
                 'I feel extremely self-confident all of the time.'
             ],
@@ -253,7 +253,7 @@ var GAD7 = {
 
 var ISI = {
     type: 'ISI',
-    preamble: 'We would like to ask you about your quality of your current sleep (that is, last 2 weeks). Please answer the following questions',
+    preamble: 'We would like to ask you about your quality of your current sleep (that is, last 2 weeks). Please answer the following questions.',
     questions: [
         {
             prompt: 'Please rate the current <b>SEVERITY</b> of your insomnia problem(s).',
@@ -305,7 +305,7 @@ var ISI = {
 var EAT26 = {
     type: 'EAT-26',
     preamble:
-        '<p>Please fill out the form below as accurately, honestly and completely as possible. There are not right or wrong answers. All of your responses are confidential.</p>',
+        '<p>Please fill out the form below as accurately, honestly and completely as possible. There are no right or wrong answers. All of your responses are confidential.</p>',
     questions: [
         {
             prompt: 'Am terrified about being overweight.',
@@ -450,10 +450,16 @@ var EAT26 = {
 
 var PID = {
     type: 'PID-5-BF',
+    title: [
+        'Very False or Often False',
+        'Sometimes or Somewhat False',
+        'Sometimes or Somewhat True',
+        'Very True or Often True'
+    ],
     preamble:
-        '<p>This is a list of things different people might say about themselves. We are interested in how' +
-        'you would describe yourself. There are no right or wrong answers. So you can describe yourself as honestly' +
-        'as possible, we will keep your responses confidential. We’d like you to take your time and read each' +
+        '<p>This is a list of things different people might say about themselves. We are interested in how ' +
+        'you would describe yourself. There are no right or wrong answers. So you can describe yourself as honestly ' +
+        'as possible, we will keep your responses confidential. We’d like you to take your time and read each ' +
         'statement carefully, selecting the response that best describes you.</p>',
     questions: [
         {
@@ -631,23 +637,23 @@ var PTSD = {
             options: ['YES', 'NO'],
             horizontal: true
         }, {
-            prompt: 'had nightmares about the event(s) or thought about the event(s) when you did not want to?',
+            prompt: 'Had nightmares about the event(s) or thought about the event(s) when you did not want to?',
             options: ['YES', 'NO'],
             horizontal: true
         }, {
-            prompt: 'tried hard not to think about the event(s) or went out of your way to avoid situations that reminded you of the event(s)?',
+            prompt: 'Tried hard not to think about the event(s) or went out of your way to avoid situations that reminded you of the event(s)?',
             options: ['YES', 'NO'],
             horizontal: true
         }, {
-            prompt: 'been constantly on guard, watchful, or easily startled?',
+            prompt: 'Been constantly on guard, watchful, or easily startled?',
             options: ['YES', 'NO'],
             horizontal: true
         }, {
-            prompt: 'felt numb or detached from people, activities, or your surroundings?',
+            prompt: 'Felt numb or detached from people, activities, or your surroundings?',
             options: ['YES', 'NO'],
             horizontal: true
         }, {
-            prompt: 'felt guilty or unable to stop blaming yourself or others for the event(s) or any problems the event(s) may have caused?',
+            prompt: 'Felt guilty or unable to stop blaming yourself or others for the event(s) or any problems the event(s) may have caused?',
             options: ['YES', 'NO'],
             horizontal: true
         },
@@ -729,7 +735,7 @@ var RAADS = {
 
 var PRIME_R = {
     type: 'PRIME-R',
-    preamble: 'We would like to ask you about gambling. Thinking about the past 12 months, please answer the following questions.',
+    preamble: 'Thinking about the past 12 months, please answer the following questions.',
     title: [
         'Definitely disagree',
         'Somewhat disagree',
@@ -987,8 +993,9 @@ var LSAS = {
 
 
 var MOVES = {
-    type: 'MOVES',
-    preamble: 'Answer the questions below for the past 2 weeks',
+    type: 'WBF-checkbox',
+    name: 'MOVES',
+    preamble: 'Answer the questions below for the past 2 weeks.',
     title: [
         'Never',
         'Sometimes',
@@ -1196,7 +1203,14 @@ var YIAT = {
 
 
 var DASS = {
-    type: 'DASS',
+    type: 'WBF',
+    name: 'DASS',
+    title: [
+        'Never',
+        'Sometimes',
+        'Often',
+        'Almost always'
+    ],
     preamble:
         '<p>Please read each statement and select a number (0, 1, 2 or 3) which indicates how much the statement applied to you' +
         '<u> over the past week</u>. There are no right or wrong answers. Do not spend too much time on any statement.</p><br>' +
@@ -1302,7 +1316,7 @@ var DASS = {
 var AUDIT = {
     type: 'AUDIT',
     preamble:
-        "<p>Because alcohol use can affect health and interfere with certain medications and treatments, it is important that we ask you some questions about your use of alcohol over the past year. Your answers will remain confidential, so please by as accurate as possible. Try to answer the questions in terms of ‘standard drinks’. Please tick the response that best fits your drinking</p><br>" +
+        "<p>Because alcohol use can affect health and interfere with certain medications and treatments, it is important that we ask you some questions about your use of alcohol over the past year. Your answers will remain confidential, so please be as accurate as possible. Try to answer the questions in terms of ‘standard drinks’. Please tick the response that best fits your drinking</p><br>" +
         '<p>This guide contains examples of <strong>one standard drink.</strong></p>' +
         '<p>A full strength can or stubbie contains <strong>one and a half standard drinks.</strong></p>' +
         '<div class="audit-img-container">' +
@@ -1420,17 +1434,18 @@ var SMOKE_FTND = {
 }
 
 var PGSI = {
-    type: 'PGSI',
+    type: 'WBF-checkbox',
+    name: 'PGSI',
     title: [
         'Never',
         'Sometimes',
-        'Most of the time',
+        'Most of the &nbsp; time',
         'Almost always'
     ],
-    preamble: 'We would like to ask you about gambling. Thinking about the past 12 months, please answer the following questions.',
+    preamble: 'We would like to ask you about your gambling. Thinking about the past 12 months, please answer the following questions.',
     questions: [
         {
-            prompt: 'How often have you bet more than you could really afford to lose? Would you say:',
+            prompt: 'How often have you bet more than you could really afford to lose?',
             options: ['Never', 'Sometimes', 'Most of the time', 'Almost always'],
             horizontal: true
         },{

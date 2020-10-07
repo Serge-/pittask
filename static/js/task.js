@@ -165,7 +165,7 @@ var DEMOGRAPHICS_INSTRUCT_OPEN = {
         event_converted_details: "demographics_open text appears",
     }],
     conditional_function: function() {
-        return open_instruct_demographics ? true : false;
+        return open_instruct_demographics;
     }
 }
 var DEMOGRAPHICS_INSTRUCT_CLOSE = {
@@ -181,7 +181,7 @@ var DEMOGRAPHICS_INSTRUCT_CLOSE = {
         event_converted_details: "demographics_close text appears",
     }],
     conditional_function: function() {
-        return close_instruct_demographics ? true : false;
+        return close_instruct_demographics;
     }
 }
 
@@ -204,7 +204,7 @@ var SDS_INSTRUCT_OPEN = {
         event_converted_details: "SDS open instructions text appears",
     }],
     conditional_function: function() {
-        return open_instruct_SDS ? true : false;
+        return open_instruct_SDS;
     }
 }
 var SDS_INSTRUCT_CLOSE = {
@@ -220,7 +220,7 @@ var SDS_INSTRUCT_CLOSE = {
         event_converted_details: "SDS close instructions text appears",
     }],
     conditional_function: function() {
-        return close_instruct_SDS ? true : false;
+        return close_instruct_SDS;
     }
 };
 
@@ -243,7 +243,7 @@ var ICAR_INSTRUCT_OPEN = {
         event_converted_details: "ICAR open instructions text appears",
     }],
     conditional_function: function() {
-        return open_instruct_ICAR ? true : false;
+        return open_instruct_ICAR;
     }
 };
 
@@ -260,7 +260,7 @@ var ICAR_INSTRUCT_CLOSE = {
         event_converted_details: "ICAR close instructions text appears",
     }],
     conditional_function: function() {
-        return close_instruct_ICAR ? true : false;
+        return close_instruct_ICAR;
     }
 };
 
@@ -378,7 +378,7 @@ var FHQ1_OPEN = {
         event_converted_details: "FHQ1_open text appears",
     }],
     conditional_function: function() {
-        return open_instruct_FHQ_pre_rating ? true : false;
+        return open_instruct_FHQ_pre_rating;
     }
 };
 
@@ -395,7 +395,7 @@ var FHQ1_CLOSE = {
         event_converted_details: "FHQ1_close text appears",
     }],
     conditional_function: function() {
-        return close_instruct_FHQ_pre_rating ? true : false;
+        return close_instruct_FHQ_pre_rating;
     }
 };
 
@@ -471,7 +471,7 @@ var FHQ2_OPEN = {
         event_converted_details: "FHQ2_open text appears",
     }],
     conditional_function: function() {
-        return open_instruct_FHQ_post_rating ? true : false;
+        return open_instruct_FHQ_post_rating;
     }
 };
 
@@ -488,7 +488,7 @@ var FHQ2_CLOSE = {
         event_converted_details: "FHQ2_close text appears",
     }],
     conditional_function: function() {
-        return close_instruct_FHQ_post_rating ? true : false;
+        return close_instruct_FHQ_post_rating;
     }
 };
 
@@ -856,7 +856,7 @@ var INVENTORY_OPEN = {
         event_converted_details: "inventory_open text appears",
     }],
     conditional_function: function() {
-        return open_instruct_inventory ? true : false;
+        return open_instruct_inventory;
     }
 };
 
@@ -873,7 +873,7 @@ var INVENTORY_CLOSE = {
         event_converted_details: "inventory_close text appears",
     }],
     conditional_function: function() {
-        return close_instruct_inventory ? true : false;
+        return close_instruct_inventory;
     }
 };
 
@@ -1015,7 +1015,7 @@ var PAV_TEST_INSTRUCT_OPEN = {
         event_converted_details: "pav_con_open text appears",
     }],
     conditional_function: function() {
-        return open_instruct_pav ? true : false;
+        return open_instruct_pav;
     }
 };
 
@@ -1032,7 +1032,7 @@ var PAV_TEST_INSTRUCT_CLOSE = {
         event_converted_details: "pav_con_close text appears",
     }],
     conditional_function: function() {
-        return close_instruct_pav ? true : false;
+        return close_instruct_pav;
     }
 };
 
@@ -1060,7 +1060,7 @@ var TRANSFER1 = {
                 event_converted_details: "transfer1_open text appears",
             }],
             conditional_function: function() {
-                return open_instruct_transfer_test ? true : false;
+                return open_instruct_transfer_test;
             }
         },
         {
@@ -1084,7 +1084,7 @@ var TRANSFER1 = {
                 event_converted_details: "transfer1_close text appears",
             }],
             conditional_function: function() {
-                return close_instruct_transfer_test ? true : false;
+                return close_instruct_transfer_test;
             }
         }
     ]
@@ -1105,7 +1105,7 @@ var TRANSFER2 = {
                 event_converted_details: "transfer2_open text appears",
             }],
             conditional_function: function() {
-                return open_instruct_transfer_test ? true : false;
+                return open_instruct_transfer_test;
             }
         },
         {
@@ -1129,7 +1129,7 @@ var TRANSFER2 = {
                 event_converted_details: "transfer2_close text appears",
             }],
             conditional_function: function() {
-                return close_instruct_transfer_test ? true : false;
+                return close_instruct_transfer_test;
             }
         }
     ]
@@ -1150,7 +1150,7 @@ var TRANSFER3 = {
                 event_converted_details: "transfer3_open text appears",
             }],
             conditional_function: function() {
-                return open_instruct_transfer_test ? true : false;
+                return open_instruct_transfer_test;
             }
         },
         {
@@ -1174,7 +1174,7 @@ var TRANSFER3 = {
                 event_converted_details: "transfer3_close text appears",
             }],
             conditional_function: function() {
-                return close_instruct_transfer_test ? true : false;
+                return close_instruct_transfer_test;
             }
         }
     ]
@@ -1192,6 +1192,54 @@ var DEVAL_VIDEO = {
     audio: video_sound,
     open_instruct: open_instruct_video,
     close_instruct: close_instruct_video
+};
+
+var DEVAL_VIDEO = {
+    timeline: [
+        {   
+            timeline: [{
+                stage_name: 'deval_video_open',
+                type: 'html-keyboard-response',
+                stimulus: open_instruct_text_video,
+                trial_latency: open_instruct_latency,
+                trial_duration: null,
+                response_ends_trial: false,
+                event_type: 'text appears',
+                event_raw_details: 'open_instruct_text_video',
+                event_converted_details: "open_instruct_text_video text appears",
+            }],
+            conditional_function: function() {
+                return open_instruct_video;
+            }
+        },
+        {
+            stage_name: 'deval_video',
+            type: 'video-keyboard-response',
+            sources: [counter_balancing[0].video + '.mp4', counter_balancing[0].video + '.ogg'],
+            autoplay: true,
+            trial_duration: video_duration * 1000,
+            controls: false,
+            response_ends_trial: false,
+            trial_ends_after_video: true,
+            audio: video_sound
+        },
+        {   
+            timeline: [{
+                stage_name: 'deval_video_close',
+                type: 'html-keyboard-response',
+                stimulus: close_instruct_text_video,
+                trial_latency: close_instruct_latency,
+                trial_duration: null,
+                response_ends_trial: false,
+                event_type: 'text appears',
+                event_raw_details: 'close_instruct_text_video',
+                event_converted_details: "close_instruct_text_video text appears",
+            }],
+            conditional_function: function() {
+                return close_instruct_video;
+            }
+        },
+    ]
 };
 
 var DEVAL_TEST_MAIN = {
@@ -1212,10 +1260,10 @@ var DEVAL_TEST_INSTRUCT_OPEN = {
         response_ends_trial: false,
         event_type: 'text appears',
         event_raw_details: 'open_instruct_text_deval_test',
-        event_converted_details: "deval_test_open text appears",
+        event_converted_details: "open_instruct_text_deval_test text appears",
     }],
     conditional_function: function() {
-        return open_instruct_deval_test ? true : false;
+        return open_instruct_deval_test;
     }
 };
 
@@ -1232,7 +1280,7 @@ var DEVAL_TEST_INSTRUCT_CLOSE = {
         event_converted_details: "deval_test_close text appears",
     }],
     conditional_function: function() {
-        return close_instruct_deval_test ? true : false;
+        return close_instruct_deval_test;
     }
 };
 
@@ -1310,9 +1358,9 @@ timeline.push(FHQ2_OPEN, FHQ2_1, FHQ2_2, FHQ2_3, FHQ2_4, FHQ2_CLOSE);
 timeline.push(TRANSFER3);
 // Intro: We'd like to briefly ask you about some symptoms before the online game.
 timeline.push(WBF_OPEN);
-timeline.push(INVENTORY_OPEN);
 // Demographics
 timeline.push(DEMOGRAPHICS);
+timeline.push(INVENTORY_OPEN);
 // Symptom Inventories
 for(var item of symptom_inventory_arr){
     timeline.push(item);

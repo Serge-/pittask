@@ -1,9 +1,8 @@
-jsPsych.plugins['MOVES'] = (function () {
+jsPsych.plugins['WBF-checkbox'] = (function () {
     var plugin = {};
   
     plugin.info = {
-      name: 'MOVES',
-      stage_name: 'MOVES',
+      name: '',
       description: '',
       parameters: {
         questions: {
@@ -89,7 +88,10 @@ jsPsych.plugins['MOVES'] = (function () {
       }
     }
     plugin.trial = function (display_element, trial) {
-      var plugin_id_name = "jspsych-survey-multi-choice-MOVES";
+
+      plugin.info.name = trial.name;
+
+      var plugin_id_name = "jspsych-survey-multi-choice-" + plugin.info.name;
   
       var html = "";
   
@@ -156,15 +158,15 @@ jsPsych.plugins['MOVES'] = (function () {
   
   
       html +=
-        `<div id="jspsych-survey-multi-choice-preamble" class="jspsych-survey-multi-choice-instructions">
-            <div class="jspsych-survey-multi-choice-option-left"></div>
-            <ul>
-              <li><div>Never</div></li>
-              <li><div>Sometimes</div></li>
-              <li><div>Often</div></li>
-              <li><div>Always</div></li>
-            </ul>
-        </div>`
+        '<div id="jspsych-survey-multi-choice-preamble" class="jspsych-survey-multi-choice-instructions">' +
+            '<div class="jspsych-survey-multi-choice-option-left"></div>' +
+            '<ul>';
+              for (var i = 0; i < trial.title.length; i++) {
+                 html += '<li><div>' + trial.title[i] + '</div></li>'
+                
+              }
+      html += ' </ul>' +
+        '</div>';
   
   
       // generate question order. this is randomized here as opposed to randomizing the order of trial.questions
@@ -347,7 +349,7 @@ jsPsych.plugins['MOVES'] = (function () {
   
           // save data
           var trial_data = {
-            "stage_name": JSON.stringify(plugin.info.stage_name),
+            "stage_name": JSON.stringify(plugin.info.name),
             "responses": JSON.stringify(question_data),
             "timestamp": JSON.stringify(timestamp_data),
             "time_stamp": JSON.stringify(trial.time_stamp),

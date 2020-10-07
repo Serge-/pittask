@@ -62,20 +62,27 @@ var close_instruct_text_key_testing = "<p>Thank you for your patience.</p> <p>Pr
 /************************************************************
  * Web-based forms
  ***********************************************************/
-var open_instruct_text_WBF = "<p>Now we would like to ask you some questions.</p><br> <p>Press any key when you are ready.</p>";
-var close_instruct_text_WBF = "<p>Thank you.</p> <p>Press any key when you are ready to start.</p>";
 var open_instruct_WBF = true;
 var close_instruct_WBF = false;
+var open_instruct_text_WBF = "<p>Now we would like to ask you some questions.</p><br> <p>Press any key when you are ready.</p>";
+var close_instruct_text_WBF = "<p>Thank you.</p> <p>Press any key when you are ready to start.</p>";
+
+var open_instruct_inventory = true;
+var close_instruct_inventory = false;
+var open_instruct_text_inventory = 
+    '<p>We would like to ask about some experiences you may have had.</p><br>' +
+    '<p>This is in order to help people who may be troubled by such experiences.</p><br>' +
+    '<p>Your answers are anonymous and will not influence your payment.</p><br>' +
+    '<p>Press any key to continue.</p>' 
+var close_instruct_text_inventory = 'Symptom inventories close';
 
 var open_instruct_demographics = false;
 var close_instruct_demographics = false;
-var open_instruct_text_demographics = 'Demographics open';
+var open_instruct_text_demographics = 
+    '<p>We would like to ask some questions about you.</p><br>' +
+    '<p>Your answers are anonymous and will not influence your payment.</p><br>' +
+    '<p>Press any key to begin</p>';
 var close_instruct_text_demographics = 'Demographics close';
-
-var open_instruct_inventory = false;
-var close_instruct_inventory = false;
-var open_instruct_text_inventory = 'Symptom inventories open';
-var close_instruct_text_inventory = 'Symptom inventories close';
 
 var open_instruct_SDS = false;
 var close_instruct_SDS = false;
@@ -135,14 +142,13 @@ var video_duration = 30;
 var video_sound = false;
 var open_instruct_video = true;
 var open_instruct_text_video = '<p>You discover something new about one of the snacks. Watch and see what has changed.</p><br>' + '<p> press any key to begin.</p>';
-var close_instruct_video = false;
-var close_instruct_text_video = "<p>The vending machine is still overflowing, " +
-"and you can tip it again now.</p><br> " +
-"</p><br>"+
-"<p>You won't always see the snack fall out. " +
-"All the snacks you get will be recorded.</p><br>" +
-"<p>Get all the snacks that you want!</p>" +
-"<br><p>Press any key to begin. </p>"
+var close_instruct_video = true;
+var close_instruct_text_video = 
+    "<p>The vending machine is still overflowing, " +
+    "and you can tip it again now.</p><br><br> " +
+    "<p>You won't always see the snack fall out. All the snacks you get will be recorded.</p><br>" +
+    "<p>Get all the snacks that you want!</p><br>" +
+    "<p>Press any key to begin. </p>"
 /************************************************************
  * =================== BEHAVIOURAL STAGES ===================
  ************************************************************
@@ -152,7 +158,6 @@ var open_instruct_FHQ_pre_rating = true;
 var close_instruct_FHQ_pre_rating = true;
 var open_instruct_text_FHQ_pre_rating =  'Now we would like to ask you some questions about your food preferences.<br>' + '<p>Press any key to continue. </p>';
 var close_instruct_text_FHQ_pre_rating = 'Thank you. That is it for the food questions for now.<p> Press any key to continue. </p>';
-
 
 var open_instruct_FHQ_post_rating = true;
 var close_instruct_FHQ_post_rating = true;

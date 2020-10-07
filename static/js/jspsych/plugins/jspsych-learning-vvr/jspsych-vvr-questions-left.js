@@ -208,10 +208,12 @@ jsPsych.plugins['survey-vvr-questions-left'] = (function() {
                 vvrIsCorrect = false;
                 isMachineTilted = true;
                 ++loop_node_counter_max_num_incorrect;
-                loop_node_counter_max_num_correct = 0;
+                if(loop_node_counter_max_num_correct !== trial.vars.max_num_correct_consecutive_questions || loop_node_counter_max_num_correct < trial.vars.max_num_correct_consecutive_questions) {
+                    loop_node_counter_max_num_correct = 0;
+                };
                 showNextQuestion();
             }
-
+            
         }
 
 

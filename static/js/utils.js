@@ -1,4 +1,3 @@
-// import MicroModal from 'micromodal';
 
 function AssertException(message) { this.message = message; }
 AssertException.prototype.toString = function () {

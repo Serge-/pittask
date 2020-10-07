@@ -13,7 +13,7 @@ library(jsonlite)
 library(data.table)
 library(stringr)
 
-output_folder <- "/media/serge/Data/Upwork/Iain/pittask/Participants"
+output_folder <- "/media/sergey/Data/Upwork/Iain/pittask/Participants"
 
 # Options ------------------------------------------------------------------
 options(useFancyQuotes = FALSE)
@@ -30,6 +30,20 @@ Parameters <- data.table(
   version = character(),
   parameter_name = character(), 
   parameter_value = character()
+)
+
+Specs <- data.table(
+  PIN = character(),
+  complete = character(),
+  date = character(), 
+  calendar_time = character(),
+  location = character(),
+  commit = character(),
+  version = character(),
+  hardware = character(),
+  monitor_size = character(),
+  `OS(version)` = character(),
+  `browser(version)` = character()
 )
 
 Demographics <- data.table(
@@ -446,7 +460,7 @@ formatDateTime <- function(dateTime){
 
 # Connection --------------------------------------------------------------
 
-connection = dbConnect(MySQL(), user = 'root', password='123', dbname = 'pittask2', host='127.0.0.1')
+connection = dbConnect(MySQL(), user = 'root', password='VolitionL101', dbname = 'pittask', host='127.0.0.1')
 
 query <- tryCatch(
   dbSendQuery(connection, "SELECT * FROM turkdemo"),
@@ -524,6 +538,7 @@ if(isClass(query))
     version <- trialdata$`counter-balancing version`[1]
     country <- geoInfo$countries[i]
     timezone <- geoInfo$timezones[i]
+    specs <- trialdata$specs[1] 
 
     # Parameters --------------------------------------------------------------
     
@@ -541,6 +556,31 @@ if(isClass(query))
           country, commit, version,
           names(parameters_response)[j],
           parameters_response[[j]]
+        )))
+      }
+    }
+    
+    # Specs --------------------------------------------------------------
+
+    specs_index <- which(trialdata$stage_name %in% "Parameters")
+    
+    if(length(specs_index ) != 0){
+      specs_data <- fromJSON(specs)
+
+      platform <- specs_data[1]
+      browser <- specs_data[2]
+      device <- specs_data[3]
+      monitor <- specs_data[4]
+      
+      date <- format(as.IDate(dateTime[specs_index]), "%d-%m-%Y")
+      time <- as.character(as.ITime(dateTime[specs_index]))
+      
+      for(j in 1:length(specs)){
+        Specs <- rbindlist(list(Specs, list(
+          PIN, complete, date, time,
+          country, commit, version,
+          device, monitor, platform,
+          browser
         )))
       }
     }
@@ -1294,6 +1334,7 @@ if(isClass(query))
   
   results <- list(
     "parameters" = Parameters,
+    "specs" = Specs,
     'demographics' = Demographics,
     "OCI-R" = OCI_R,
     "MOVES" = MOVES,

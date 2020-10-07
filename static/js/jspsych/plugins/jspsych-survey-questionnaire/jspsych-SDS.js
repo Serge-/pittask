@@ -137,6 +137,7 @@ jsPsych.plugins['SDS'] = (function () {
         ".square { display: flex; justify-content: space-around; }" +
         ".square span { width: 85px; height: 60px; border: 1px solid #fff; }" +
         "ul {list-style: none}" +
+        "#jspsych-survey-multi-choice-3 { padding-bottom: 3rem; }" +
         ".form-radio { top: 3px; }" +
         "select { background-color: #000; width: 100px; margin: 0 1rem;}" +
         ".circle-line { width: 90%; position: absolute; border-bottom: 1px solid; z-index: -1; }" +

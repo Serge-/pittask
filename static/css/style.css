@@ -107,11 +107,15 @@ h1 {
 }
 .form-radio:checked::before {
      position: absolute;
-     font: 35px/1 'Open Sans', sans-serif;
-     left: 6px;
-     top: -12px;
-     content: '\02143';
-     transform: rotate(40deg);
+     left: -3px;
+     top: -4px;
+     height: 40px;
+     width: 40px;
+     content: '';
+     background: no-repeat url('../images/checkbox-tick.svg');
+     background-size: 40px;
+     transform: rotate(-8deg);
+     
 }
 .form-radio:hover {
      background-color: #f7f7f7;

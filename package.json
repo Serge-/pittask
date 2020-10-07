@@ -56,6 +56,9 @@
     }
   },
   "dependencies": {
+    "bowser": "^2.11.0",
+    "device-detector-js": "^2.2.1",
+    "imports-loader": "^1.1.0",
     "lodash": "^4.17.15",
     "micromodal": "^0.4.6",
     "puppeteer-cluster": "^0.20.0"
