@@ -41,7 +41,8 @@ Specs <- data.table(
   commit = character(),
   version = character(),
   hardware = character(),
-  monitor_size = character(),
+  screen_resolution = character(),
+  viewport_size = character(),
   `OS(version)` = character(),
   `browser(version)` = character()
 )
@@ -460,7 +461,7 @@ formatDateTime <- function(dateTime){
 
 # Connection --------------------------------------------------------------
 
-connection = dbConnect(MySQL(), user = 'root', password='VolitionL101', dbname = 'pittask', host='127.0.0.1')
+connection = dbConnect(MySQL(), user = 'root', password='123', dbname = 'pittask', host='127.0.0.1')
 
 query <- tryCatch(
   dbSendQuery(connection, "SELECT * FROM turkdemo"),
@@ -538,7 +539,6 @@ if(isClass(query))
     version <- trialdata$`counter-balancing version`[1]
     country <- geoInfo$countries[i]
     timezone <- geoInfo$timezones[i]
-    specs <- trialdata$specs[1] 
 
     # Parameters --------------------------------------------------------------
     
@@ -565,13 +565,7 @@ if(isClass(query))
     specs_index <- which(trialdata$stage_name %in% "Parameters")
     
     if(length(specs_index ) != 0){
-      specs_data <- fromJSON(specs)
-
-      platform <- specs_data[1]
-      browser <- specs_data[2]
-      device <- specs_data[3]
-      monitor <- specs_data[4]
-      
+      specs <- fromJSON(trialdata[parameters_index,]$specs)
       date <- format(as.IDate(dateTime[specs_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[specs_index]))
       
@@ -579,8 +573,7 @@ if(isClass(query))
         Specs <- rbindlist(list(Specs, list(
           PIN, complete, date, time,
           country, commit, version,
-          device, monitor, platform,
-          browser
+          specs[[3]], specs[[4]], specs[[5]], specs[[1]], specs[[2]]
         )))
       }
     }

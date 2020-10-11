@@ -197,7 +197,8 @@ jsPsych.plugins['parameters'] = (function(){
             "platform": platform.os.family + ' ' + platform.os.architecture + version,
             "browser": platform.name + ' (' + platform.version + ')',
             "device": device.type,
-            "monitor_size":  window.screen.availHeight + 'x' + window.screen.availWidth
+            "screen_resolution":  window.screen.availHeight + 'x' + window.screen.availWidth,
+            "viewport_size":  $(window).height() + 'x' + $(window).width() 
         };
 
         var trial_data = {
