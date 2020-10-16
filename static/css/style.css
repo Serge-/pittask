@@ -172,6 +172,7 @@ input[type=file]:focus, input[type=radio]:focus, input[type=checkbox]:focus {
 }
 
 .jspsych-survey-multi-choice-instructions {
+  z-index: 1;
   position: sticky;
   top: 59px;
   display: flex;
