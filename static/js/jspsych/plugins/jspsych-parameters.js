@@ -50,6 +50,11 @@ jsPsych.plugins['parameters'] = (function(){
             "left_tilt": left_tilt,
             "right_tilt": right_tilt,
 
+            "stim1_colour": stim1_colour,
+            "stim2_colour": stim2_colour,
+            "stim3_colour": stim3_colour,
+            "stim4_colour": stim4_colour,
+
             "open_instruct_text_key_testing": open_instruct_text_key_testing,
             "close_instruct_text_key_testing": close_instruct_text_key_testing,
 

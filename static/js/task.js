@@ -887,25 +887,29 @@ var pav_stimuli = [
     {
         stimuli: "/static/images/MM.png",
         value: 'MM',
-        color: "green",
+        color: stim1_colour,
+        color_name: 'stim1_colour',
         response: 'a'
     },
     {
         stimuli: "/static/images/BBQ.png",
         value: 'BBQ',
-        color: "blue",
+        color: stim2_colour,
+        color_name: 'stim2_colour',
         response: 'b'
     },
     {
         stimuli: "/static/images/TT.png",
         value: 'TT',
-        color: "red",
+        color: stim3_colour,
+        color_name: 'stim3_colour',
         response: 'c'
     },
     {
         stimuli: "/static/images/EMPTY.png",
         value: 'Empty',
-        color: "yellow",
+        color: stim4_colour,
+        color_name: 'stim4_colour',
         response: 'd'
     }
 ];

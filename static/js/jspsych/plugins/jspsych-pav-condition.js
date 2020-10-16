@@ -185,11 +185,12 @@ jsPsych.plugins.animation = (function () {
 
             if (trial.frame_isi > 0) {
                 var color = pav_stimuli_arr[animate_frame].color;
+                var color_name = pav_stimuli_arr[animate_frame].color_name;
                 $('.vending-machine rect').css({ fill: color });
                 response.trial_events.push({
                     "event_type": 'image appears',
-                    "event_raw_details": color + ' vending machine ',
-                    "event_converted_details": color + ' vending machine',
+                    "event_raw_details": color_name + ' vending machine ',
+                    "event_converted_details": color_name + ' vending machine',
                     "timestamp": jsPsych.totalTime(),
                     "time_elapsed": jsPsych.totalTime() - timestamp_onload
                 });

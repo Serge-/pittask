@@ -181,13 +181,14 @@ jsPsych.plugins['survey-pav-multi-choice'] = (function() {
     display_element.innerHTML = html;
 
     var color = pav_multi_choice_array[pav_multi_choice_counter].color;
+    var color_name = pav_multi_choice_array[pav_multi_choice_counter].color_name;
     $('.vending-machine rect').css({ fill: color });
-    $('.vending-machine').addClass(color);
+    $('.vending-machine').addClass(color_name);
 
     response.trial_events.push({
       "event_type": 'vending machine appears',
-      "event_raw_details": color + ' vending machine ',
-      "event_converted_details": color + ' vending machine appears',
+      "event_raw_details": color_name + ' vending machine ',
+      "event_converted_details": color_name + ' vending machine appears',
       "timestamp": jsPsych.totalTime(),
       "time_elapsed": jsPsych.totalTime() - timestamp_onload
     });
@@ -210,8 +211,8 @@ jsPsych.plugins['survey-pav-multi-choice'] = (function() {
                 "timestamp": jsPsych.totalTime(),
                 "time_elapsed": jsPsych.totalTime() - timestamp_onload
               });
-        }
-    }
+          };
+    };
 
     document.querySelector('form').addEventListener('submit', function(event) {
       event.preventDefault();
@@ -246,7 +247,8 @@ jsPsych.plugins['survey-pav-multi-choice'] = (function() {
         }
         obje[name] = val;
         Object.assign(question_data, obje);
-      }
+      };
+
       // save data
       var trial_data = {
         "stage_name": JSON.stringify(trial.stage_name),

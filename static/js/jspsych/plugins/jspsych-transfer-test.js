@@ -105,43 +105,55 @@ jsPsych.plugins["transfer-test"] = (function() {
     function change_colors (notes) {
       notes = [];
       
-      sequence = jsPsych.randomization.shuffle(['blue', 'red', 'yellow', 'green']);
+      var sequence = jsPsych.randomization.shuffle([
+        {
+          color: stim1_colour,
+          color_name: 'stim1_colour',
+        },
+        {
+          color: stim2_colour,
+          color_name: 'stim2_colour',
+        },
+        {
+          color: stim3_colour,
+          color_name: 'stim3_colour',
+        },
+        {
+          color: stim4_colour,
+          color_name: 'stim4_colour',
+        },
+      ]);
       sequence.forEach(function (element) {
-        notes.push("white");
+        notes.push({
+          color: '#000',
+          color_name: 'blank',
+        });
         notes.push(element);
       });
 
       if(reps_counter === trial.sequence_reps - 1) {
-        notes.push('white');
+        notes.push({
+          color: '#000',
+          color_name: 'blank',
+        });
       };
 
       var i = 0;
       update_color();
       function update_color() {
           if (i < notes.length) {
-              var color = notes[i];
+              var color = notes[i].color;
+              var color_name = notes[i].color_name;
               var duration = 0;
-              if(color === 'white') {
-                $('.vending-machine rect').css({ fill: '#000' });
-                duration = trial.transfer_test_white_duration;
-                response.trial_events.push({
-                  "event_type": "image appears",
-                  "event_raw_details": "blank vending machine",
-                  "event_converted_details": "blank vending machine appears",
-                  "timestamp": jsPsych.totalTime(),
-                  "time_elapsed": jsPsych.totalTime() - timestamp_onload
-                });
-              } else {
-                $('.vending-machine rect').css({ fill: color });
-                duration = trial.transfer_test_color_duration;
-                response.trial_events.push({
-                  "event_type": "image appears",
-                  "event_raw_details": color + " vending machine",
-                  "event_converted_details": color + " vending machine appears",
-                  "timestamp": jsPsych.totalTime(),
-                  "time_elapsed": jsPsych.totalTime() - timestamp_onload
-                });
-              }
+              $('.vending-machine rect').css({ fill: color });
+              duration = trial.transfer_test_color_duration;
+              response.trial_events.push({
+                "event_type": "image appears",
+                "event_raw_details": color_name + " vending machine",
+                "event_converted_details": color_name + " vending machine appears",
+                "timestamp": jsPsych.totalTime(),
+                "time_elapsed": jsPsych.totalTime() - timestamp_onload
+              });
               i++;
               setTimeout(update_color, duration);
           } else {

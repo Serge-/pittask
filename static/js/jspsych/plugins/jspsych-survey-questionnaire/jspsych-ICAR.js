@@ -127,13 +127,13 @@ jsPsych.plugins['ICAR'] = (function () {
         ".matrix-reasoning-wrap ul { position: absolute; display: flex; justify-content: center; height: 113px; margin-bottom: 3rem; padding-left: 0; bottom: 0; left: 0; right: 0; }" +
         ".matrix-reasoning-wrap ul li { width: 92px; opacity: .4; }" +
         ".matrix-reasoning-wrap ul label { width: 100%; height: 100%;}" +
-        ".matrix-reasoning-wrap ul li.active { background-color: yellow; }" +
+        ".matrix-reasoning-wrap ul li.active { background-color: gb(240, 228, 66); }" +
         "img { width: 100%; height: 475px; }" +
         ".three-dimensional-rotate-wrap { display: flex; position: relative; width: 1000px; }" +
         ".three-dimensional-rotate-wrap ul { position: absolute; display: flex; flex-wrap: wrap; justify-content: center; height: 100%; width: 73%; padding-left: 0; margin-bottom: 0; bottom: 0; right: 0; }" +
         ".three-dimensional-rotate-wrap ul label { width: 100%; height: 100%;}" +
         ".three-dimensional-rotate-wrap ul li { width: 25%; height: 50%; opacity: .4; }" +
-        ".three-dimensional-rotate-wrap ul li.active { background-color: yellow; }" +
+        ".three-dimensional-rotate-wrap ul li.active { background-color: rgb(240, 228, 66); }" +
 
         ".jspsych-survey-multi-choice-text span.required {color: darkred;}" +
         ".jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-text {  text-align: center;}" +
