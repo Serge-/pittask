@@ -171,7 +171,7 @@ jsPsych.plugins['AUDIT'] = (function () {
       }
   
       html +=
-        `<div class="jspsych-survey-multi-choice-instructions">
+        `<div class="jspsych-survey-multi-choice-instructions not-sticky">
             <div class="jspsych-survey-multi-choice-option-left"></div>
             <ul>
               <li><div>Never</div></li>
