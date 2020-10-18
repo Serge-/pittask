@@ -1,2 +1,5 @@
 node_modules
 .fuse_hidden*
+.psiturk_history
+server.log
+__pycache__
