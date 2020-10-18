@@ -172,13 +172,16 @@ input[type=file]:focus, input[type=radio]:focus, input[type=checkbox]:focus {
 }
 
 .jspsych-survey-multi-choice-instructions {
-  z-index: 1;
-  position: sticky;
-  top: 59px;
   display: flex;
   justify-content: space-between;
   border-bottom: 3px solid;
   font-weight: bold;
+}
+
+.jspsych-survey-multi-choice-instructions:not(.not-sticky) {
+  z-index: 1;
+  position: sticky;
+  top: 59px;
   background-color: #000000;
 }
 
