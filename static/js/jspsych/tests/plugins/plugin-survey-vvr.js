@@ -43,7 +43,7 @@ beforeEach(() => {
 
 beforeEach(() => {
 	require(root + 'jspsych.js');
-	require('../../parameters');
+	require(root + 'parameters');
 	require(root + 'plugins/jspsych-learning-vvr/jspsych-learning-vvr.js');
 
 });

@@ -235,9 +235,12 @@ jsPsych.plugins['survey-pav-multi-choice'] = (function() {
             pav_correct_holder ++;
           } else {
             pav_incorrect_holder ++;
+            pav_correct_holder = 0;
           }
         } else {
           var val = "";
+          pav_incorrect_holder ++;
+          pav_correct_holder = 0;
         }
 
         var obje = {};
