@@ -244,9 +244,9 @@ jsPsych.plugins['EAT-26'] = (function () {
         if (question.horizontal) {
           question_classes.push('jspsych-survey-multi-choice-horizontal');
         }
-  
-        html += '<div style="font-weight: bold;" id="jspsych-survey-multi-choice-' + question_id + '" class="' + question_classes.join(' ') + '"  data-name="' + question.name + '">';
-  
+
+        html += '<div style="z-index:2;position:sticky;top:59px;font-weight:bold;background:#000;" id="jspsych-survey-multi-choice-' + question_id + '" class="' + question_classes.join(' ') + '"  data-name="' + question.name + '">';
+
         // add question text
         html += '<div class="jspsych-survey-multi-choice-option-left"><p class="jspsych-survey-multi-choice-text survey-multi-choice jspsych-survey-multi-choice-question-text" style="text-align: left; padding-left: 10px; width: 100%;">In the past 6 months have you:'
         // question.required

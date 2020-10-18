@@ -322,9 +322,9 @@ jsPsych.plugins['AUDIT'] = (function () {
         if (question.horizontal) {
           question_classes.push('jspsych-survey-multi-choice-horizontal');
         }
-  
-        html += '<div style="font-weight: bold; margin-top: 5rem; border-bottom: 2px solid #fff;" id="jspsych-survey-multi-choice-' + question_id + '" class="' + question_classes.join(' ') + '"  data-name="' + question.name + '">';
-  
+
+        html += '<div style="font-weight:bold;margin-top:5rem;border-bottom:2px solid #fff;z-index:2;position:sticky;top:59px;font-weight:bold;background:#000;" id="jspsych-survey-multi-choice-' + question_id + '" class="' + question_classes.join(' ') + '"  data-name="' + question.name + '">';
+
         // add question text
         html += '<div class="jspsych-survey-multi-choice-option-left">';
         // question.required

@@ -1,19 +1,18 @@
-
 body {
-    padding:0px;
-    margin: 0px;
-    background-color: #fff;
-    color: #000;
-    font-weight: 300; 
-    font-size: 13pt;
+  padding: 0px;
+  margin: 0px;
+  background-color: #fff;
+  color: #000;
+  font-weight: 300;
+  font-size: 13pt;
 }
-
 
 /* text styling */
 .navbar-text,
 strong {
-  font-weight: 600;         
+  font-weight: 600;
 }
+
 .navbar-inverse {
   border-color: #222;
 }
@@ -31,19 +30,18 @@ h1 {
   margin-top: 0px;
 }
 
-
 /* these are all the same for now, but easy to modify individually */
 #container-not-an-ad, #container-error, #container-exp, #container-consent, #container-instructions, #container-questionnaire {
-    background: white;
-    margin: 30px;
+  background: white;
+  margin: 30px;
 }
 
 /* ad.html  - the ad that people view first */
 #adlogo {
-    width: 140px;
-    padding: 2px;
-    border: 1px solid #ccc;
-    margin-right: 1em;
+  width: 140px;
+  padding: 2px;
+  border: 1px solid #ccc;
+  margin-right: 1em;
 }
 
 /* consent.html - the consent form */
@@ -82,83 +80,159 @@ h1 {
 
 .jspsych-survey-multi-choice-preamble {
   text-align: left;
-  max-width: 1000px; 
+  max-width: 1000px;
   font-style: italic;
   margin: 3rem 0;
   padding: 3rem 0;
 }
 
 .form-radio {
-     -webkit-appearance: none;
-     -moz-appearance: none;
-     appearance: none;
-     display: inline-block;
-     position: relative;
-     background-color: #f1f1f1;
-     color: #006a4e;
-     top: 10px;
-     height: 20px;
-     width: 20px;
-     border: 0;
-     border-radius: 0px;
-     cursor: pointer;     
-     margin-right: 7px;
-     outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: inline-block;
+  position: relative;
+  background-color: #f1f1f1;
+  color: #006a4e;
+  top: 10px;
+  height: 20px;
+  width: 20px;
+  border: 0;
+  border-radius: 0px;
+  cursor: pointer;
+  margin-right: 7px;
+  outline: none;
 }
+
 .form-radio:checked::before {
-     position: absolute;
-     left: -3px;
-     top: -4px;
-     height: 40px;
-     width: 40px;
-     content: '';
-     background: no-repeat url('../images/checkbox-tick.svg');
-     background-size: 40px;
-     transform: rotate(-8deg);
-     
+  position: absolute;
+  left: -3px;
+  top: -4px;
+  height: 40px;
+  width: 40px;
+  content: '';
+  background: no-repeat url('../images/checkbox-tick.svg');
+  background-size: 40px;
+  transform: rotate(-8deg);
 }
+
 .form-radio:hover {
-     background-color: #f7f7f7;
+  background-color: #f7f7f7;
 }
+
 .form-radio:checked {
-     background-color: #f1f1f1;
+  background-color: #f1f1f1;
 }
+
 /* remove focus outline */
 input[type=file]:focus, input[type=radio]:focus, input[type=checkbox]:focus {
-    outline: none;
+  outline: none;
 }
+
 .survey-error::before {
   content: "\002A ";
   position: absolute;
   left: -15px;
 }
+
 .survey-error-after::after {
   content: " \002A";
   display: contents;
 }
+
 .survey-error-after,
 .survey-error {
   position: relative;
   color: #dc3545;
 }
+
 .survey-error-text {
   color: #dc3545;
 }
+
 /* WBF */
-.jspsych-survey-multi-choice-option { display: flex; justify-content: center; align-items: center; padding: 1rem 0; }
-.jspsych-survey-multi-choice-number { display: flex; height: 100%; width: 45px; text-align: center; justify-content: center; }
-.jspsych-survey-multi-choice-preamble { text-align: left; padding-bottom: 3rem; }
-.jspsych-survey-multi-choice-instructions { display: flex; justify-content: space-between;  border-bottom: 3px solid; font-weight: bold; }
-.jspsych-survey-multi-choice-instructions ul { display: flex; width: 60%; justify-content: space-around; padding-inline-start: 0; margin-bottom: 0; }
-.jspsych-survey-multi-choice-instructions li { display: flex; justify-content: center; align-items: center; width: 100%; padding: 1rem 0; border-right: 1px solid; }
-.jspsych-survey-multi-choice-instructions li:last-child { border-right: none; }
-.jspsych-survey-multi-choice-option-left { display: flex; width: 40%; text-align: left; border-right: 3px solid #fff; padding-bottom: 2rem; }
-.jspsych-survey-multi-choice-option-left p { width: 100%; padding-right: 3px; }
-.jspsych-survey-multi-choice-option-right { display: flex; width: 60%; justify-content: space-around; }
-.jspsych-survey-multi-choice-question:last-of-type { border-bottom: none; }
+.jspsych-survey-multi-choice-option {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+.jspsych-survey-multi-choice-number {
+  display: flex;
+  height: 100%;
+  width: 45px;
+  text-align: center;
+  justify-content: center;
+}
+
+.jspsych-survey-multi-choice-preamble {
+  text-align: left;
+  padding-bottom: 3rem;
+}
+
+.jspsych-survey-multi-choice-instructions {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 3px solid;
+  font-weight: bold;
+}
+
+.jspsych-survey-multi-choice-instructions:not(.not-sticky) {
+  z-index: 1;
+  position: sticky;
+  top: 59px;
+  background-color: #000000;
+}
+
+.jspsych-survey-multi-choice-instructions ul {
+  display: flex;
+  width: 60%;
+  justify-content: space-around;
+  padding-inline-start: 0;
+  margin-bottom: 0;
+}
+
+.jspsych-survey-multi-choice-instructions li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 1rem 0;
+  border-right: 1px solid;
+}
+
+.jspsych-survey-multi-choice-instructions li:last-child {
+  border-right: none;
+}
+
+.jspsych-survey-multi-choice-option-left {
+  display: flex;
+  width: 40%;
+  text-align: left;
+  border-right: 3px solid #fff;
+  padding-bottom: 2rem;
+}
+
+.jspsych-survey-multi-choice-option-left p {
+  width: 100%;
+  padding-right: 3px;
+}
+
+.jspsych-survey-multi-choice-option-right {
+  display: flex;
+  width: 60%;
+  justify-content: space-around;
+}
+
+.jspsych-survey-multi-choice-question:last-of-type {
+  border-bottom: none;
+}
 
 @media (max-width: 700px) {
-  .jspsych-survey-multi-choice-number { width: 25px; }
+  .jspsych-survey-multi-choice-number {
+    width: 25px;
+  }
 }
 
 .jspsych-survey-highlight {
