@@ -122,7 +122,7 @@ jsPsych.plugins['survey-vvr-questions-left'] = (function() {
         response.trial_events.push({
             "event_type": trial.details.a.event_type,
             "event_raw_details": trial.details.a.event_raw_details,
-            "event_converted_details": trial.details.a.event_converted_details,
+            "event_converted_details": trial.details.a.event_converted_details + '; ' +  counter_balancing[0].left + ' image appears',
             "timestamp": jsPsych.totalTime(),
             "time_elapsed": jsPsych.totalTime() - timestamp_onload
         });
