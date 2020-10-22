@@ -142,13 +142,12 @@ jsPsych.plugins['survey-pav-multi-choice'] = (function() {
       }
 
       // add question text
-      html += '<p class="jspsych-survey-multi-choice-text survey-multi-choice">' + question.prompt 
+      html += '<p class="jspsych-survey-multi-choice-text survey-multi-choice">' + question.prompt + '</p>';
       html += '<div id="jspsych-survey-multi-choice-'+question_id+'" class="'+question_classes.join(' ')+'"  data-name="'+question.name+'">';
 
       if(question.required){
         html += "<span class='required'>*</span>";
       }
-      html += '</p>';
 
       // create option radio buttons
       for (var j = 0; j < question.options.length; j++) {
@@ -161,10 +160,10 @@ jsPsych.plugins['survey-pav-multi-choice'] = (function() {
 
         // add radio button container
         html += '<div id="'+option_id_name+'" class="jspsych-survey-multi-choice-option">';
-        html += '<input type="radio" name="'+input_name+'" id="'+input_id+'" class="form-radio" value="'+question.options[j].value+'" '+required_attr+'></input>';
+        html += '<input type="radio" name="'+input_name+'" id="'+input_id+'" class="form-radio" value="'+question.options[j].value+'" '+required_attr+' data-response="'+question.options[j].response+'"></input>';
         html += '<label class="jspsych-survey-multi-choice-text" for="'+input_id+'">';
         if (question.options[j].img) {
-          html += '<img class="select-img" src="' + question.options[j].img + '" alt="' + question.options[j].name + '">'
+          html += '<img class="select-img" src="' + question.options[j].img + '" alt="' + question.options[j].name + '" data-response="'+question.options[j].response+'">'
         }
         html += '</label>';
         html += '</div>';
@@ -203,6 +202,25 @@ jsPsych.plugins['survey-pav-multi-choice'] = (function() {
               "timestamp": jsPsych.totalTime(),
               "time_elapsed": jsPsych.totalTime() - timestamp_onload
             });
+            if(info.el) {
+              if(info.el.dataset.response) {
+                response.trial_events.push({
+                  "event_type": "answer made",
+                  "event_raw_details": info.el.dataset.response,
+                  "event_converted_details": 'answer ' + info.el.dataset.response + ' has been made',
+                  "timestamp": jsPsych.totalTime(),
+                  "time_elapsed": jsPsych.totalTime() - timestamp_onload
+                });
+              } else if (info.el.type === 'submit') {
+                response.trial_events.push({
+                  "event_type": "button clicked",
+                  "event_raw_details": 'Submit',
+                  "event_converted_details": '"Submit" selected',
+                  "timestamp": jsPsych.totalTime(),
+                  "time_elapsed": jsPsych.totalTime() - timestamp_onload
+                });
+              }
+            }
           } else {
               response.trial_events.push({
                 "event_type": "key release",
