@@ -121,16 +121,19 @@ jsPsych.plugins["food-and-hunger-questions"] = (function() {
         }
 
         html += '<div class="votes-container">' +
-                '<div id="slider">' +
                 '<div class="description">';
-        if(trial.stimulus === 'hunger') {  html +=  '<div class="description--left">' + FHQ_VAS_left_hungry + '</div>';}
-        if(trial.stimulus !== 'hunger') {
+        if(trial.stimulus === 'hunger') {  
+          html += '<div class="description--left">' + FHQ_VAS_left_hungry + '</div>' +
+                  '<div class="description--right">' + FHQ_VAS_right_hungry + '</div>';
+        } else {
           html += '<div class="description--left">' + FHQ_VAS_left + '</div>' + 
                   '<div class="description--center">' + FHQ_VAS_center + '</div>' +
                   '<div class="description--right">' + FHQ_VAS_right + '</div>';
         }
-        if(trial.stimulus === 'hunger') {  html +=  '<div class="description--right">' + FHQ_VAS_right_hungry + '</div>';}          
-        html += '</div></div><ul>' + VVR_q_text_b4 + '</ul></div>';
+        html += '</div>';
+        html += '<div id="slider">';
+        html += '<span class="line"></span>';
+        html += '</div><ul>' + VVR_q_text_b4 + '</ul></div>';
         html += '</div>';
     
         // draw

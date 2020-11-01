@@ -289,7 +289,7 @@ var KEY_TESTING = {
     trial_duration: null,
     response_ends_trial: false,
     event_type: 'text image appears',
-    event_raw_details: 'blank vending machine, text',
+    event_raw_details: 'blank vending machine',
     event_converted_details: 'blank vending machine appears'
 }
 

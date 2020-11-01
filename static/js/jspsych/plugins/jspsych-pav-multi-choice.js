@@ -185,11 +185,11 @@ jsPsych.plugins['survey-pav-multi-choice'] = (function() {
     $('.vending-machine').addClass(color_name);
 
     response.trial_events.push({
-      "event_type": 'vending machine appears',
-      "event_raw_details": color_name + ' vending machine ',
-      "event_converted_details": color_name + ' vending machine appears',
-      "timestamp": jsPsych.totalTime(),
-      "time_elapsed": jsPsych.totalTime() - timestamp_onload
+        event_type: "question appears",
+        event_raw_details: color_name + " vending machine question",
+        event_converted_details: "question with " + color_name + " vending machine appears",
+        timestamp: jsPsych.totalTime(),
+        time_elapsed: jsPsych.totalTime() - timestamp_onload,
     });
 
     var after_response = function (info) {
@@ -272,15 +272,15 @@ jsPsych.plugins['survey-pav-multi-choice'] = (function() {
 
       // save data
       var trial_data = {
-        "stage_name": JSON.stringify(trial.stage_name),
-        "stage_type": JSON.stringify(trial.stage_type),
-        "response": JSON.stringify(color_value),
-        "response_submitted": JSON.stringify(color_response_submitted),
-        "timestamp": JSON.stringify(jsPsych.totalTime()),
-        "responses": JSON.stringify(question_data),
-        "question_order": JSON.stringify(question_order),
-        "event_raw_details": pav_is_correct ? 'y' : 'n',
-        "events": JSON.stringify(response.trial_events)
+        stage_name: JSON.stringify(trial.stage_name),
+        stage_type: JSON.stringify(trial.stage_type),
+        response: JSON.stringify(color_value),
+        response_submitted: JSON.stringify(color_response_submitted),
+        timestamp: JSON.stringify(jsPsych.totalTime()),
+        responses: JSON.stringify(question_data),
+        question_order: JSON.stringify(question_order),
+        event_raw_details: pav_is_correct ? "y" : "n",
+        events: response.trial_events,
       };
       
       display_element.innerHTML = '';

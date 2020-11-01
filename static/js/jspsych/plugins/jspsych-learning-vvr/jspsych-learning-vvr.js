@@ -78,12 +78,12 @@ jsPsych.plugins['survey-vvr'] = (function() {
         display_element.innerHTML = new_html;
 
         response.trial_events.push({
-          "event_type": 'image appears',
-          "event_raw_details": 'blank vending machine',
-          "event_converted_details": 'blank vending machine appears',
-          "timestamp": jsPsych.totalTime(),
-          "interval_number": 1,
-          "time_elapsed": jsPsych.totalTime() - timestamp_onload
+          event_type: "image appears",
+          event_raw_details: "blank vending machine",
+          event_converted_details: "blank vending machine appears",
+          timestamp: jsPsych.totalTime(),
+          interval_number: 1,
+          time_elapsed: jsPsych.totalTime() - timestamp_onload,
         });
 
         // outcome presentation logic
