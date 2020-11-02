@@ -280,7 +280,7 @@ jsPsych.plugins['survey-pav-multi-choice'] = (function() {
         responses: JSON.stringify(question_data),
         question_order: JSON.stringify(question_order),
         event_raw_details: pav_is_correct ? "y" : "n",
-        events: response.trial_events,
+        events: JSON.stringify(response.trial_events),
       };
       
       display_element.innerHTML = '';

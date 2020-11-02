@@ -270,40 +270,42 @@ var ICAR = {
     ]
 };
 
-var KEY_TESTING_OPEN = {
-    stage_name: 'key_testing_open',
-    type: 'html-keyboard-response',
-    stimulus: open_instruct_text_key_testing,
-    trial_latency: open_instruct_latency,
-    trial_duration: null,
-    response_ends_trial: false,
-    event_type: 'text appears',
-    event_raw_details: 'open_instruct_text_key_testing',
-    event_converted_details: 'key_testing_open text appears'
-}
-
 var KEY_TESTING = {
-    stage_name: 'key_testing',
-    type: 'key-testing',
-    stimulus: '',
-    trial_duration: null,
-    response_ends_trial: false,
-    event_type: 'text image appears',
-    event_raw_details: 'blank vending machine',
-    event_converted_details: 'blank vending machine appears'
-}
-
-var KEY_TESTING_CLOSE = {
-    stage_name: 'key_testing_close',
-    type: 'html-keyboard-response',
-    stimulus: close_instruct_text_key_testing,
-    trial_latency: close_instruct_latency,
-    trial_duration: null,
-    response_ends_trial: false,
-    event_type: 'text appears',
-    event_raw_details: 'close_instruct_text_key_testing',
-    event_converted_details: 'key_testing_close text appears'
-}
+    timeline: [
+        {
+            stage_name: 'key_testing_open',
+            type: 'html-keyboard-response',
+            stimulus: open_instruct_text_key_testing,
+            trial_latency: open_instruct_latency,
+            trial_duration: null,
+            response_ends_trial: false,
+            event_type: 'text appears',
+            event_raw_details: 'open_instruct_text_key_testing',
+            event_converted_details: 'key_testing_open text appears'
+        },
+        {
+            stage_name: 'key_testing',
+            type: 'key-testing',
+            stimulus: '',
+            trial_duration: null,
+            response_ends_trial: false,
+            event_type: 'text image appears',
+            event_raw_details: 'blank vending machine',
+            event_converted_details: 'blank vending machine appears'
+        },
+        {
+            stage_name: 'key_testing_close',
+            type: 'html-keyboard-response',
+            stimulus: close_instruct_text_key_testing,
+            trial_latency: close_instruct_latency,
+            trial_duration: null,
+            response_ends_trial: false,
+            event_type: 'text appears',
+            event_raw_details: 'close_instruct_text_key_testing',
+            event_converted_details: 'key_testing_close text appears'
+        }
+    ]
+};
 
 var FHR_timestamp = 0;
 var FHQ1_1 = {
@@ -1337,7 +1339,7 @@ timeline.push({
 });
 
 // Key-testing
-timeline.push(KEY_TESTING_OPEN, KEY_TESTING, KEY_TESTING_CLOSE);
+timeline.push(KEY_TESTING);
 // Food & Hunger Questions pre-rating
 timeline.push(FHQ1_OPEN, FHQ1_1, FHQ1_2, FHQ1_3, FHQ1_4, FHQ1_CLOSE);
 //  Instrumental Conditioning (VVR1)

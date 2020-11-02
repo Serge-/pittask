@@ -29,8 +29,8 @@ var full_screen_mode = true;
 var open_instruct_latency = 1500;
 var close_instruct_latency = 500;
 var outcome_duration = 1000;
-var stim_duration = 600;
-var ITI_duration = 600;
+var stim_duration = 6000;
+var ITI_duration = 6000;
 var interval_duration = 500;
 var interval_num = 60;
 var answer_latency_countdown = false;
@@ -54,10 +54,14 @@ var shake_return_time = 300;
 var shake_transition = 0.05;
 /************************************************************
  * ===================== GUI COLORS =========================
+ * stim1_colour = green - associated with MM image
+ * stim2_colour = blue - associated with BBQ image
+ * stim3_colour = red - associated with TT image
+ * stim4_colour = yellow - associated with Empty image 
  ************************************************************/
 var stim1_colour = 'rgb(0,128,0)';
-var stim2_colour = 'rgb(0,0,255)'; 
-var stim3_colour = 'rgb(255,0,0)'; 
+var stim2_colour = 'rgb(0,0,255)';
+var stim3_colour = 'rgb(255,0,0)';
 var stim4_colour = 'rgb(255,215,0)';
 /************************************************************
  * ==================== WEB-BASED FORMS ====================
