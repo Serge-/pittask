@@ -105,6 +105,13 @@ Each test in each browser was completely tested from the beginning of the experi
     Chrome 86.0.4240.75
     Firefox 81.0.2
 ---------------------------------------------------------------------------------------------
+                                    Events activity
+---------------------------------------------------------------------------------------------
+complete.csv records all keyboard and mouse activity in addition to all GUI display. 
+These events are recorded in a stereotyped method, that is, an event is recorded in 
+the same way whether it occurs in transfer or deval_test. All possible events are 
+listed in event_template.csv.
+---------------------------------------------------------------------------------------------
                                 Version control rules
 ---------------------------------------------------------------------------------------------
 | This is a rule for Version Control. Current version information can be found on Github, at

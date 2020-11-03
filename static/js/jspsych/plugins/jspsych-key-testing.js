@@ -81,6 +81,9 @@ jsPsych.plugins["key-testing"] = (function() {
 
     var html = "";
     var isLeftTilted = false;
+    // preventing several timeouts in the stack
+    // because of the high number of keypresses
+    var timeoutLock = false;
 
     // store response
     var response = {
@@ -140,7 +143,7 @@ jsPsych.plugins["key-testing"] = (function() {
     // function to handle responses by the subject
     var after_response = function(info) {
 
-      function machine_tilt() {
+    function machine_tilt() {
         if(info.key === left_tilt) {
             $(".vending-machine").css({
                 "transform":  "rotate(" + shake_left_rotate + "deg) translateX(" + shake_left_translateX + "%)",
@@ -189,18 +192,21 @@ jsPsych.plugins["key-testing"] = (function() {
             });
 
             if(isLeftTilted) {
-              jsPsych.pluginAPI.cancelKeyboardResponse(keyboardListener);
-              setTimeout( function() {
-                end_trial();
-              }, 700);
+              if(!timeoutLock) {
+                setTimeout( function() {
+                  end_trial();
+                }, 700);
+              }
+              timeoutLock = true;
             }
+
         }
     }
   
 
-
       if(info.key_release === undefined) {
         machine_tilt();
+
         response.trial_events.push({
           "event_type": "key press",
           "event_raw_details": info.key,
@@ -216,6 +222,7 @@ jsPsych.plugins["key-testing"] = (function() {
             "timestamp": jsPsych.totalTime(),
             "time_elapsed": jsPsych.totalTime() - timestamp_onload
           });
+
           if (trial.response_ends_trial) {
             end_trial();
           }
@@ -231,6 +238,7 @@ jsPsych.plugins["key-testing"] = (function() {
           persist: true,
           allow_held_key: false
         });
+
         var clickListener = jsPsych.pluginAPI.getMouseResponse({
           callback_function: after_response,
           valid_responses: trial.choices,
