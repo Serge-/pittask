@@ -18,7 +18,7 @@ jsPsych.plugins.animation = (function () {
             stimuli: {
                 type: jsPsych.plugins.parameterType.STRING,
                 pretty_name: 'Stimuli',
-                default: undefined,
+                default: [],
                 array: true,
                 description: 'The images to be displayed.'
             },

@@ -98,14 +98,15 @@ jsPsych.plugins['survey-vvr-questions-left'] = (function() {
                     </svg>
                 </div>
                 <div class='vvr-question-b' style='display: none'>
-                    <p>${trial.vars.VVR_q_text_b1}</p>
+                    <p style="padding-bottom: 5rem;">${trial.vars.VVR_q_text_b1}</p>
                     <div class="votes-container">
+                        <div class="description">
+                            <div class="description--left">${trial.vars.VVR_q_text_b2}</div>
+                            <div class="description--center"></div>
+                            <div class="description--right">${trial.vars.VVR_q_text_b3}</div>
+                        </div>
                         <div id="slider">
-                            <div class="description">
-                                <div class="description--left">${trial.vars.VVR_q_text_b2}</div>
-                                <div class="description--center"></div>
-                                <div class="description--right">${trial.vars.VVR_q_text_b3}</div>
-                            </div>
+                            <span class="line"></span>
                         </div>
                         <ul>${trial.vars.VVR_q_text_b4}</ul>
                     </div>

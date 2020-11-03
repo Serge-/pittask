@@ -924,9 +924,7 @@ var PAV_CONDITIONING_MAIN = {
             stage_name: 'pav_con',
             type: 'animation',
             frame_isi: ITI_duration,
-            frame_time: stim_duration,
-            stimuli: [],
-            stimulus: jsPsych.randomization.shuffle(pav_stimuli),
+            frame_time: stim_duration
         },
         {
             stage_name: 'pav_con',
@@ -1184,20 +1182,6 @@ var TRANSFER3 = {
             }
         }
     ]
-};
-
-var DEVAL_VIDEO = {
-    stage_name: 'deval_video',
-    type: 'video-keyboard-response',
-    sources: [counter_balancing[0].video + '.mp4', counter_balancing[0].video + '.ogg'],
-    autoplay: true,
-    trial_duration: video_duration * 1000,
-    controls: false,
-    response_ends_trial: false,
-    trial_ends_after_video: true,
-    audio: video_sound,
-    open_instruct: open_instruct_video,
-    close_instruct: close_instruct_video
 };
 
 var DEVAL_VIDEO = {
