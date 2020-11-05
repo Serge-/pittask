@@ -275,7 +275,7 @@ jsPsych.plugins['ASRM'] = (function () {
       };
     });
 
-
+    // init form functionality
     document.querySelector('form').addEventListener('submit', function (event) {
       event.preventDefault();
       response.trial_events.push({

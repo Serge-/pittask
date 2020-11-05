@@ -109,6 +109,7 @@ jsPsych.plugins["video-keyboard-response"] = (function() {
       
       video_html += '<video id="jspsych-video-keyboard-response-stimulus"';
   
+      // apply options if set
       if(trial.width) {
         video_html += ' width="'+trial.width+'"';
       }
@@ -140,6 +141,7 @@ jsPsych.plugins["video-keyboard-response"] = (function() {
       }
       video_html += "</video>";
 
+      // save information "video started playing"
       response.trial_events.push({
         "event_type": 'video appears',
         "event_raw_details": counter_balancing[0].video,
@@ -155,6 +157,7 @@ jsPsych.plugins["video-keyboard-response"] = (function() {
         video_html += trial.prompt;
       }
   
+      // draw
       display_element.innerHTML = video_html;
   
       if(video_preload_blob){

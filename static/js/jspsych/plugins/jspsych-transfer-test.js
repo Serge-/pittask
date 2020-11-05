@@ -79,17 +79,20 @@ jsPsych.plugins["transfer-test"] = (function() {
 
   plugin.trial = function(display_element, trial) {
 
+    // plugin used for transfer_test and deva_test stages
     var html = "";
 
-    // store response
+    // store responses
     var response = {
       trial_events: []
     };
 
+    // number of repeats
     var reps_counter = 0;
 
     var timestamp_onload = jsPsych.totalTime();
 
+    // draw blank vending machine 
     html += '<div id="jspsych-stimulus">' +
       '<svg class="vending-machine" viewBox="0 0 253 459" x="10" fill="none" xmlns="http://www.w3.org/2000/svg">' +
         '<rect x="27" y="20" width="203" height="359" fill="#000"/>' +
@@ -105,6 +108,7 @@ jsPsych.plugins["transfer-test"] = (function() {
     function change_colors (notes) {
       notes = [];
       
+      // creating an array with random colors sequence
       var sequence = jsPsych.randomization.shuffle([
         {
           color: stim1_colour,
@@ -123,6 +127,8 @@ jsPsych.plugins["transfer-test"] = (function() {
           color_name: 'stim4_colour',
         },
       ]);
+
+      // each color should be separated with blank vending machine
       sequence.forEach(function (element) {
         notes.push({
           color: '#000',
@@ -131,6 +137,7 @@ jsPsych.plugins["transfer-test"] = (function() {
         notes.push(element);
       });
 
+      // add to the end of array blank vending machine
       if(reps_counter === trial.sequence_reps - 1) {
         notes.push({
           color: '#000',
@@ -168,6 +175,7 @@ jsPsych.plugins["transfer-test"] = (function() {
       }
     };
 
+    // used to determine relevantly stage
     if(trial.stage_name !== 'deval_test') {
       change_colors();
     } else if(trial.stage_name === 'deval_test') {
@@ -208,47 +216,48 @@ jsPsych.plugins["transfer-test"] = (function() {
     // function to handle responses by the subject
     var after_response = function(info) {
 
+      // function to handle vending machine animation (tilting left/right)
       function machine_tilt() {
-        if(info.key === left_tilt) {
-            $(".vending-machine").css({
-              transform: "rotate(" + shake_left_rotate + "deg) translateX(" + shake_left_translateX + "%)",
-              transition: "all " + shake_transition + "s cubic-bezier(0.65, 0.05, 0.36, 1)"
-            });
+          if(info.key === left_tilt) {
+              $(".vending-machine").css({
+                transform: "rotate(" + shake_left_rotate + "deg) translateX(" + shake_left_translateX + "%)",
+                transition: "all " + shake_transition + "s cubic-bezier(0.65, 0.05, 0.36, 1)"
+              });
+    
+              jsPsych.pluginAPI.setTimeout(function(){ $(".vending-machine").css({
+                transform:  "rotate(0deg) translateX(0%)",
+                transition: "all " + shake_transition + "s cubic-bezier(0.65, 0.05, 0.36, 1)"
+              }); }, shake_return_time);
+              
+              response.trial_events.push({
+                event_type: "left tilt",
+                event_raw_details: shake_left_translateX + "%, " + shake_left_rotate + "deg",
+                event_converted_details: "vending machine was tilted left " + shake_left_translateX + "%, " + shake_left_rotate + "deg",
+                timestamp: jsPsych.totalTime(),
+                time_elapsed: jsPsych.totalTime() - timestamp_onload
+              });
+          } else if (info.key === right_tilt) {
+              $(".vending-machine").css({
+                transform:  "rotate(" + shake_right_rotate + "deg) translateX(" + shake_right_translateX + "%)",
+                transition: "all " + shake_transition + "s cubic-bezier(0.65, 0.05, 0.36, 1)"
+              });
+    
+              jsPsych.pluginAPI.setTimeout(function(){ $(".vending-machine").css({
+                transform: "rotate(0deg) translateX(0%)",
+                transition: "all " + shake_transition + "s cubic-bezier(0.65, 0.05, 0.36, 1)"
+              }); }, shake_return_time);
+              
+              response.trial_events.push({
+                event_type: "right tilt",
+                event_raw_details: shake_right_translateX + "%, " + shake_right_rotate + "deg",
+                event_converted_details: "vending machine was tilted right " + shake_right_translateX + "%, " + shake_right_rotate + "deg",
+                timestamp: jsPsych.totalTime(),
+                time_elapsed: jsPsych.totalTime() - timestamp_onload
+              });
+          }
+      }
   
-            jsPsych.pluginAPI.setTimeout(function(){ $(".vending-machine").css({
-              transform:  "rotate(0deg) translateX(0%)",
-              transition: "all " + shake_transition + "s cubic-bezier(0.65, 0.05, 0.36, 1)"
-            }); }, shake_return_time);
-            
-            response.trial_events.push({
-              event_type: "left tilt",
-              event_raw_details: shake_left_translateX + "%, " + shake_left_rotate + "deg",
-              event_converted_details: "vending machine was tilted left " + shake_left_translateX + "%, " + shake_left_rotate + "deg",
-              timestamp: jsPsych.totalTime(),
-              time_elapsed: jsPsych.totalTime() - timestamp_onload
-            });
-        } else if (info.key === right_tilt) {
-            $(".vending-machine").css({
-              transform:  "rotate(" + shake_right_rotate + "deg) translateX(" + shake_right_translateX + "%)",
-              transition: "all " + shake_transition + "s cubic-bezier(0.65, 0.05, 0.36, 1)"
-            });
-  
-            jsPsych.pluginAPI.setTimeout(function(){ $(".vending-machine").css({
-              transform: "rotate(0deg) translateX(0%)",
-              transition: "all " + shake_transition + "s cubic-bezier(0.65, 0.05, 0.36, 1)"
-            }); }, shake_return_time);
-            
-            response.trial_events.push({
-              event_type: "right tilt",
-              event_raw_details: shake_right_translateX + "%, " + shake_right_rotate + "deg",
-              event_converted_details: "vending machine was tilted right " + shake_right_translateX + "%, " + shake_right_rotate + "deg",
-              timestamp: jsPsych.totalTime(),
-              time_elapsed: jsPsych.totalTime() - timestamp_onload
-            });
-        }
-    }
-  
-
+      // save interaction event
       if(info.key_release === undefined) {
         response.trial_events.push({
           event_type: "key press",

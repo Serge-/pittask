@@ -235,9 +235,6 @@ jsPsych.plugins['survey-pav-multi-choice'] = (function() {
 
     document.querySelector('form').addEventListener('submit', function(event) {
       event.preventDefault();
-      // measure response time
-      var endTime = performance.now();
-      var response_time = endTime - startTime;
 
       var color_value = pav_multi_choice_array[pav_multi_choice_counter].value;
       var color_response_submitted = pav_multi_choice_array[pav_multi_choice_counter].response;
@@ -295,8 +292,6 @@ jsPsych.plugins['survey-pav-multi-choice'] = (function() {
       // next trial
       jsPsych.finishTrial(trial_data);
     });
-
-    var startTime = performance.now();
 
     var keyboardListener = jsPsych.pluginAPI.getKeyboardResponse({
         callback_function: after_response,
