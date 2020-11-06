@@ -320,16 +320,6 @@ jsPsych.plugins['WBF'] = (function() {
           trial.time_stamp[time_stamp_key] = jsPsych.totalTime();
         };
       });
-
-      $(".modal__btn, .modal__close").on("click touchstart",function(){
-        response.trial_events.push({
-          "event_type": "popup closed",
-          "event_raw_details": 'Close',
-          "event_converted_details": trial.event_converted_details,
-          "timestamp": jsPsych.totalTime(),
-          "time_elapsed": jsPsych.totalTime() - timestamp_onload
-        });
-      });
   
       document.querySelector('form').addEventListener('submit', function(event) {
         event.preventDefault();

@@ -236,7 +236,8 @@ jsPsych.plugins['YIAT'] = (function () {
   
   
       html += '</form>';
-  
+      
+      // add modal
       html +=
         `<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
               <div class="modal__overlay" tabindex="-1" data-micromodal-close>
@@ -254,7 +255,7 @@ jsPsych.plugins['YIAT'] = (function () {
               </div>
           </div>`;
   
-      // render
+      // draw
       display_element.innerHTML = html;
   
       // function to handle key press responses
@@ -300,23 +301,10 @@ jsPsych.plugins['YIAT'] = (function () {
           trial.time_stamp[time_stamp_key] = jsPsych.totalTime();
         };
       });
-
-      $(".modal__btn, .modal__close").on("click touchstart",function(){
-        response.trial_events.push({
-          "event_type": "popup closed",
-          "event_raw_details": 'Close',
-          "event_converted_details": trial.event_converted_details,
-          "timestamp": jsPsych.totalTime(),
-          "time_elapsed": jsPsych.totalTime() - timestamp_onload
-        });
-      });
+      
   
       document.querySelector('form').addEventListener('submit', function (event) {
         event.preventDefault();
-        // measure response time
-        var endTime = performance.now();
-        var response_time = endTime - startTime;
-
         response.trial_events.push({
           "event_type": "button clicked",
           "event_raw_details": 'Submit',
@@ -373,19 +361,29 @@ jsPsych.plugins['YIAT'] = (function () {
           // next trial
           jsPsych.finishTrial(trial_data);
         } else {
-          MicroModal.show('modal-1');
-          response.trial_events.push({
-            "event_type": "error message",
-            "event_raw_details": 'Error message',
-            "event_converted_details": popup_text_WBF,
-            "timestamp": jsPsych.totalTime(),
-            "time_elapsed": jsPsych.totalTime() - timestamp_onload
+          MicroModal.show('modal-1', {
+            onShow() {
+              response.trial_events.push({
+                "event_type": "error message",
+                "event_raw_details": 'Error message',
+                "event_converted_details": 'popup triggered by incomplete WBF question',
+                "timestamp": jsPsych.totalTime(),
+                "time_elapsed": jsPsych.totalTime() - timestamp_onload
+              });
+            },
+            onClose() {
+              response.trial_events.push({
+                "event_type": "popup closed",
+                "event_raw_details": 'Close',
+                "event_converted_details": trial.event_converted_details,
+                "timestamp": jsPsych.totalTime(),
+                "time_elapsed": jsPsych.totalTime() - timestamp_onload
+              });
+            }
           });
         }
   
       });
-  
-      var startTime = performance.now();
   
       // start the response listener
       var keyboardListener = jsPsych.pluginAPI.getKeyboardResponse({
