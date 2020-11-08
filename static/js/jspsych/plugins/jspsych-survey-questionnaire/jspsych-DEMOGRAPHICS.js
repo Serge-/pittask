@@ -89,12 +89,12 @@ jsPsych.plugins['Demographics'] = (function () {
       }
     }
     plugin.trial = function (display_element, trial) {
+
       var plugin_id_name = "jspsych-survey-multi-choice-DEMOGRAPHICS";
-  
       var html = "";
       var timestamp_onload = jsPsych.totalTime();
   
-      // store response
+      // store responses, events
       var response = {
         trial_events: []
       };
@@ -106,17 +106,6 @@ jsPsych.plugins['Demographics'] = (function () {
         "timestamp": jsPsych.totalTime(),
         "time_elapsed": jsPsych.totalTime() - timestamp_onload
       });
-  
-      $('body').prepend(
-        '<header>' +
-          '<nav class="navbar navbar-inverse navbar-fixed-top">' +
-            '<div class="container-fluid">' +
-              '<div class="navbar-header">' +
-              '<p class="navbar-text">' + plugin.info.name + '</p>' +
-              '</div>' +
-            '</div>' +
-          '</nav>' +
-        '</header>');
   
       // inject CSS for trial
       html += '<style id="jspsych-survey-multi-choice-css">';
@@ -154,7 +143,19 @@ jsPsych.plugins['Demographics'] = (function () {
         "label.jspsych-survey-multi-choice-text input[type='radio'] {margin-right: 1em;}";
       ". { width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; }"
       html += '</style>';
-  
+
+      // fixed heder
+      html += 
+        '<header>' +
+        '<nav class="navbar navbar-inverse navbar-fixed-top">' +
+        '<div class="container-fluid">' +
+        '<div class="navbar-header">' +
+        '<p class="navbar-text"><b>' + plugin.info.name + '</b></p>' +
+        '</div>' +
+        '</div>' +
+        '</nav>' +
+        '</header>';
+    
       // show preamble text
       if (trial.preamble !== null) {
         html += '<div id="jspsych-survey-multi-choice-preamble" class="jspsych-survey-multi-choice-preamble">' + trial.preamble + '</div>';
@@ -214,6 +215,7 @@ jsPsych.plugins['Demographics'] = (function () {
         }
 
 
+        // add multiple-choice questions
         for (var i = 1; i < 2; i++) {
     
             // get question based on question_order
@@ -253,6 +255,7 @@ jsPsych.plugins['Demographics'] = (function () {
             html += '</div></div>';
         }
 
+        // add multiple-choice questions
         for (var i = 2; i < 3; i++) {
     
             // get question based on question_order
@@ -302,6 +305,7 @@ jsPsych.plugins['Demographics'] = (function () {
             html += '</div></div>';
         }
 
+        // add multiple-choice questions
         for (var i = 3; i < 4; i++) {
     
             // get question based on question_order
@@ -400,9 +404,9 @@ jsPsych.plugins['Demographics'] = (function () {
   
       // add submit button
       html += '<p><input type="submit" id="' + plugin_id_name + '-next" class="' + plugin_id_name + ' jspsych-btn"' + (trial.button_label ? ' value="' + trial.button_label + '"' : '') + '></input></p>';
-  
       html += '</form>';
   
+      // add modal
       html +=
         `<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
             <div class="modal__overlay" tabindex="-1" data-micromodal-close>
@@ -425,7 +429,7 @@ jsPsych.plugins['Demographics'] = (function () {
       // render
       display_element.innerHTML = html;
 
-      // function to handle key press responses
+      // function to handle responses by the subject
       var after_response = function (info) {
 
         if (info.key_release === undefined) {
@@ -462,13 +466,15 @@ jsPsych.plugins['Demographics'] = (function () {
         }
       }
 
+      // forced click event fix for some laptops touchpad
       $("label").on("click",function(){
         var labelID = $(this).attr('for');
         if('labelID') {
           $("#" + labelID).prop('checked', true).trigger('click').trigger('change');
-        };
+        }
       });
   
+      // save timestamp on input click
       $("input[type=radio]").on("click change touchstart",function(){
         var time_stamp_key = $(this).data('time-stamp'); 
         if(time_stamp_key) {
@@ -476,7 +482,7 @@ jsPsych.plugins['Demographics'] = (function () {
         };
       });
 
-  
+      // form functionality 
       document.querySelector('form').addEventListener('submit', function (event) {
         event.preventDefault();
         response.trial_events.push({
@@ -682,12 +688,13 @@ jsPsych.plugins['Demographics'] = (function () {
             "events": JSON.stringify(response.trial_events)
           };
   
+          // clear the display
           display_element.innerHTML = '';
-          $('.navbar').remove();
   
           // next trial
           jsPsych.finishTrial(trial_data);
         } else {
+          // show modal, register events
           MicroModal.show('modal-1', {
             onShow() {
               response.trial_events.push({

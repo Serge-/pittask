@@ -19,7 +19,8 @@ jsPsych.plugins['parameters'] = (function(){
             }
         }
     }
-  
+
+    // plugin for saving parameters from parameters.js
     plugin.trial = function(display_element, trial){
         var parameters = {
             "re_captcha": re_captcha,
@@ -174,6 +175,7 @@ jsPsych.plugins['parameters'] = (function(){
             "close_instruct_text_close_HIT_q": close_instruct_text_close_HIT_q
         };
 
+        // copy symptom inventory array
         symptom_inventory.forEach(function(element, index) {
             if(element.type) {
                 index === 0 ? parameters['symptom_inventory'] += element.type : parameters['symptom_inventory'] += ', ' + element.type;
@@ -196,7 +198,7 @@ jsPsych.plugins['parameters'] = (function(){
         array_extraction(prob_value_VVR2, 'prob_value_VVR2');
         array_extraction(prob_value_VVR3, 'prob_value_VVR3');
 
-        // browser, screen, OS info for specs.csv 
+        // browser version, screen size, platform, OS version info for specs.csv 
         var version = platform.os.version === null ? '' : ' (' + platform.os.version + ')';
         var specs = {
             "platform": platform.os.family + ' ' + platform.os.architecture + version,
@@ -206,6 +208,7 @@ jsPsych.plugins['parameters'] = (function(){
             "viewport_size":  $(window).height() + 'x' + $(window).width() 
         };
 
+        // gather the data to store for the trial
         var trial_data = {
             "stage_name": "Parameters",
             "counter-balancing version": counter_balancing[0]["game_version"],

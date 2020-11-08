@@ -26,7 +26,8 @@ var DEGRAD_PATTERN = {
         d2: 'right',
     }
 }
-
+// Each game launching has 
+// a randomly chosen game version
 var counter_balancing_input = [
     a = {
         game_version: 'A',
@@ -114,6 +115,7 @@ var counter_balancing_input = [
     }
 ];
 
+// randomly choose game version
 var counter_balancing = jsPsych.randomization.sampleWithoutReplacement(counter_balancing_input, 1);
 
 // Reconnection to the Database
@@ -152,6 +154,7 @@ resubmit = function() {
 
 var images = ['/static/images/BBQ.png', '/static/images/TT.png', '/static/images/MM.png', '/static/images/EMPTY.png', '/static/images/audit_image.jpg'];
 
+// demographics instructions before the stage
 var DEMOGRAPHICS_INSTRUCT_OPEN = {
     timeline: [{
         stage_name: 'demographics_open',
@@ -167,7 +170,9 @@ var DEMOGRAPHICS_INSTRUCT_OPEN = {
     conditional_function: function() {
         return open_instruct_demographics;
     }
-}
+};
+
+// demographics instructions after the stage
 var DEMOGRAPHICS_INSTRUCT_CLOSE = {
     timeline: [{
         stage_name: 'demographics_close',
@@ -183,14 +188,16 @@ var DEMOGRAPHICS_INSTRUCT_CLOSE = {
     conditional_function: function() {
         return close_instruct_demographics;
     }
-}
+};
 
+// stage with instructions
 var DEMOGRAPHICS = {
     timeline: [
         DEMOGRAPHICS_INSTRUCT_OPEN, DEMOGRAPHICS_STAGE, DEMOGRAPHICS_INSTRUCT_CLOSE
     ]
 };
 
+// SDS instructions before the stage
 var SDS_INSTRUCT_OPEN = {
     timeline: [{
         stage_name: 'SDS open instructions page',
@@ -206,7 +213,9 @@ var SDS_INSTRUCT_OPEN = {
     conditional_function: function() {
         return open_instruct_SDS;
     }
-}
+};
+
+// SDS instructions after the stage
 var SDS_INSTRUCT_CLOSE = {
     timeline: [{
         stage_name: 'SDS close instructions page',
@@ -224,12 +233,14 @@ var SDS_INSTRUCT_CLOSE = {
     }
 };
 
+// stage with instructions
 var SDS = {
     timeline: [
        SDS_INSTRUCT_OPEN, SDS_STAGE, SDS_INSTRUCT_CLOSE
     ]
 };
 
+// ICAR instructions before the stage
 var ICAR_INSTRUCT_OPEN = {
     timeline: [{
         stage_name: 'ICAR open instructions page',
@@ -247,6 +258,7 @@ var ICAR_INSTRUCT_OPEN = {
     }
 };
 
+// ICAR instructions after the stage
 var ICAR_INSTRUCT_CLOSE = {
     timeline: [{
         stage_name: 'ICAR close instructions page',
@@ -264,12 +276,14 @@ var ICAR_INSTRUCT_CLOSE = {
     }
 };
 
+// stage with instructions
 var ICAR = {
     timeline: [
         ICAR_INSTRUCT_OPEN, ICAR_STAGE, ICAR_INSTRUCT_CLOSE
     ]
 };
 
+// key testing stage with instructions before/after
 var KEY_TESTING = {
     timeline: [
         {
@@ -307,7 +321,9 @@ var KEY_TESTING = {
     ]
 };
 
-var FHR_timestamp = 0;
+// FHR_timestamp helps pass timestamp parameter trough
+// the all stages FHQ for simulating uniformity.
+var FHR_timestamp = 0; 
 var FHQ1_1 = {
     stage_name: "FHQ1",
     type: 'food-and-hunger-questions',
@@ -504,6 +520,7 @@ var vvrIsCorrect = false;
 var item_id = 0;
 var vvr_timer = 0;
 
+// pass variables from parameters.js through vvr_*_vars objects
 var vvr_1_vars = {
     stage_name: 'VVR1',
     min_blocks_num: min_blocks_num_VVR1,
@@ -531,6 +548,7 @@ var vvr_3_vars = {
     degrad_pattern: degrad_pattern_VVR3
 };
 
+// main function used for all VVR stages
 var VVR = function(data) {
     var min_blocks_num = data.min_blocks_num;
     var min_num_correct = data.min_num_correct;
@@ -1295,7 +1313,7 @@ var CLOSE_HIT = {
     event_converted_details: "close_HIT_q text appears"
 };
 
-
+// final stage
 var THANKS = {
     stage_name: 'thanks',
     type: 'html-keyboard-response',
@@ -1308,6 +1326,7 @@ var THANKS = {
     event_converted_details: "thanks text appears"
 };
 
+// timeline array holds all stages in a sequence
 var timeline = [];
 var symptom_inventories_random = jsPsych.randomization.shuffle(symptom_inventory);
 var symptom_inventories_ordered = symptom_inventory;
@@ -1315,6 +1334,8 @@ var symptom_inventory_arr = inventory_rand ?  symptom_inventories_random : sympt
 
 /************************************************************
  * Stages sequence configuration
+ * stages can be disabled by commented out
+ * stages can be reordered
  ***********************************************************/
 // Init parameters
 timeline.push({
@@ -1371,7 +1392,7 @@ function startExperiment(){
     jsPsych.init({
             timeline: timeline,
             preload_images: images,
-            // on_finish: function(){ jsPsych.data.displayData(); }, // Debug
+            // on_finish: function(){ jsPsych.data.displayData(); }, // Debug mode, on_finish and on_data_update must be commented out in debug mode
             on_finish: function() {
                 psiTurk.saveData({
                     success: function() { 

@@ -80,12 +80,14 @@ jsPsych.plugins["food-and-hunger-questions"] = (function() {
     plugin.trial = function(display_element, trial) {
   
         var html = "";
+
+        // defines image path, text
         var IMAGE_SRC = trial.stimulus;
         var h3 =  trial.questions.top;
         var bottom_txt =  trial.questions.bottom;
         var vas_holder = 0;
 
-        // store response
+        // store responses, events
         var response = {
           trial_events: []
         };
@@ -115,11 +117,13 @@ jsPsych.plugins["food-and-hunger-questions"] = (function() {
 
         html += '<div id="jspsych-stimulus"><h3 class="key-testing-text">' + h3 + '</h3>';
 
+        // all FHQ (exception Hunger) contain stimuli images
         if(trial.stimulus !== 'hunger') {
           html += '<img src='+ IMAGE_SRC +'/>';
           html += '<p>' + bottom_txt + '</p>';
         }
 
+        // range slider container along with the description
         html += '<div class="votes-container">' +
                 '<div class="description">';
         if(trial.stimulus === 'hunger') {  
@@ -136,10 +140,10 @@ jsPsych.plugins["food-and-hunger-questions"] = (function() {
         html += '</div><ul>' + VVR_q_text_b4 + '</ul></div>';
         html += '</div>';
     
-        // draw
+        // render
         display_element.innerHTML = html;
 
-        // define slider
+        // init range slider
         $("#slider").slider({
             value: 5,
             min: 0,

@@ -89,12 +89,12 @@ jsPsych.plugins['Smoking-Status'] = (function () {
       }
     }
     plugin.trial = function (display_element, trial) {
+
       var plugin_id_name = "jspsych-survey-multi-choice-smoking-status";
-  
       var html = "";
       var timestamp_onload = jsPsych.totalTime();
   
-      // store response
+      // store responses, events
       var response = {
         trial_events: []
       };
@@ -106,17 +106,6 @@ jsPsych.plugins['Smoking-Status'] = (function () {
         "timestamp": jsPsych.totalTime(),
         "time_elapsed": jsPsych.totalTime() - timestamp_onload
       });
-  
-      $('body').prepend(
-        `<header>
-          <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container-fluid">
-              <div class="navbar-header">
-              <p class="navbar-text">${plugin.info.name}</p>
-              </div>
-            </div>
-          </nav>
-        </header>`);
   
       // inject CSS for trial
       html += '<style id="jspsych-survey-multi-choice-css">';
@@ -135,7 +124,18 @@ jsPsych.plugins['Smoking-Status'] = (function () {
         ".jspsych-survey-highlight { width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; }" +
         "p { margin: 0 0 0px;}"
       html += '</style>';
-  
+
+      // fixed heder
+      html += 
+        '<header>' +
+        '<nav class="navbar navbar-inverse navbar-fixed-top">' +
+        '<div class="container-fluid">' +
+        '<div class="navbar-header">' +
+        '<p class="navbar-text"><b>' + plugin.info.name + '</b></p>' +
+        '</div>' +
+        '</div>' +
+        '</nav>' +
+        '</header>';  
   
       // form element
       html += '<div id="' + plugin_id_name + '">';
@@ -202,6 +202,7 @@ jsPsych.plugins['Smoking-Status'] = (function () {
       html += '</form>';
       html += '</div>';
   
+      // add modal
       html +=
         `<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
               <div class="modal__overlay" tabindex="-1" data-micromodal-close>
@@ -224,7 +225,7 @@ jsPsych.plugins['Smoking-Status'] = (function () {
       // render
       display_element.innerHTML = html;
   
-      // function to handle key press responses
+      // function to handle responses by the subject
       var after_response = function (info) {
   
         if (info.key_release === undefined) {
@@ -261,11 +262,13 @@ jsPsych.plugins['Smoking-Status'] = (function () {
         }
       }
   
+      // highlight input
       $('.jspsych-survey-highlight').click(function () {
         $(this).addClass('bg-primary');
         $(this).next('input').prop("checked", true);
       });
       
+      // forced click event fix for some laptops touchpad
       $("label").on("click",function(){
         var labelID = $(this).attr('for');
         if('labelID') {
@@ -273,6 +276,7 @@ jsPsych.plugins['Smoking-Status'] = (function () {
         };
       });
   
+      // save timestamp on input click
       $("input[type=radio]").on("click change touchstart",function(){
         var time_stamp_key = $(this).data('time-stamp'); 
         if(time_stamp_key) {
@@ -280,7 +284,7 @@ jsPsych.plugins['Smoking-Status'] = (function () {
         };
       });
 
-  
+      // form functionality
       document.querySelector('form').addEventListener('submit', function (event) {
         event.preventDefault();
         response.trial_events.push({
@@ -341,10 +345,10 @@ jsPsych.plugins['Smoking-Status'] = (function () {
             "question_order": JSON.stringify(question_order),
             "events": JSON.stringify(response.trial_events)
           };
-  
+
+          // clear the display
           display_element.innerHTML = '';
-          $('.navbar').remove();
-  
+
           // next trial
           jsPsych.finishTrial(trial_data);
         } else {

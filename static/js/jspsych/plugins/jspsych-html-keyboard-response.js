@@ -79,26 +79,23 @@ jsPsych.plugins["html-keyboard-response"] = (function() {
 
   plugin.trial = function(display_element, trial) {
 
-    // store response
+    // store responses, events
     var response = {
       trial_events: []
     };
     var timestamp_onload = jsPsych.totalTime();
 
+    // used for pav_cond stage in correct/incorrect response
+    // for simulating continuous timer
     if(trial.pav_con_timer) {
       timestamp_onload = pav_con_timer;
-    }
+    };
     
-    if(trial.vvr_timer) {
-      timestamp_onload = vvr_timer;
-    }
-
     var new_html = '<div id="jspsych-html-keyboard-response-stimulus" class="jspsych-html-keyboard-response-stimulus">'+trial.stimulus+'</div>';
 
     if(trial.id) {
       new_html = '<div id="jspsych-html-keyboard-response-stimulus" class="' + trial.id  +'">'+trial.stimulus+'</div>';
     }
-
 
     response.trial_events.push({
         event_type: trial.event_type,
@@ -108,7 +105,7 @@ jsPsych.plugins["html-keyboard-response"] = (function() {
         time_elapsed: jsPsych.totalTime() - timestamp_onload,
     });
 
-    // draw
+    // render
     display_element.innerHTML = new_html;
 
     // function to end trial when it is time

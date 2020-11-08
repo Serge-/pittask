@@ -58,9 +58,7 @@ jsPsych.plugins.animation = (function () {
 
     plugin.trial = function (display_element, trial) {
 
-        
-        // store responses
-        // keypress, mouse click
+        // store responses, events
         var response = {
             trial_events: []
         };
@@ -81,11 +79,10 @@ jsPsych.plugins.animation = (function () {
 
         var interval_time = trial.frame_time + trial.frame_isi;
         var animate_frame = -1;
-        // storing the sequence of vending machines
+        // storing the sequence animation of vending machines
         var animation_sequence = [];
-        var responses = [];
 
-        // draw a blank vending machine on page loading
+        // render a blank vending machine
         display_element.innerHTML =
             '<style class="pav-conditioning">.outcome_transparent { height: 340px; }</style>' +
             '<svg class="vending-machine"  viewBox="0 0 253 459" fill="none" xmlns="http://www.w3.org/2000/svg">' +
@@ -112,6 +109,7 @@ jsPsych.plugins.animation = (function () {
             show_next_frame();
         }, ITI_duration);
 
+        // sequence animation
         var animate_interval = jsPsych.pluginAPI.setTimeout(function request() {
             var isShowColor = true;
             // clear page
@@ -201,8 +199,7 @@ jsPsych.plugins.animation = (function () {
             
         }
 
-        // handling keyboard, mouse events
-        // storing keyboard, mouse events in trial_events object
+        // function to handle responses by the subject
         var after_response = function (info) {
 
             if(info.key_release === undefined) {
@@ -236,22 +233,23 @@ jsPsych.plugins.animation = (function () {
                 jsPsych.pluginAPI.cancelClickResponse(clickListener);
             }
 
-            // save data
+            // gather the data to store for the trial
             var trial_data = {
                 stage_name: JSON.stringify(trial.stage_name),
                 animation_sequence: JSON.stringify(animation_sequence),
-                responses: JSON.stringify(responses),
                 events: JSON.stringify(response.trial_events)
             };
 
-            // clear self-called setTimeout function
+            // clear all timeouts
             while (animate_interval--) {
               window.clearTimeout(animate_interval);
             }
 
+            // move on to the next trial
             jsPsych.finishTrial(trial_data);
         }
 
+        // start the response listener
         var keyboardListener = jsPsych.pluginAPI.getKeyboardResponse({
             callback_function: after_response,
             valid_responses: trial.choices,
