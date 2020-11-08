@@ -89,11 +89,11 @@ jsPsych.plugins['YIAT'] = (function () {
       }
     }
     plugin.trial = function (display_element, trial) {
+      
       var plugin_id_name = "jspsych-survey-multi-choice-YIAT";
-  
       var html = "";
   
-      // store response
+      // store responses, events
       var response = {
         trial_events: []
       };
@@ -106,19 +106,6 @@ jsPsych.plugins['YIAT'] = (function () {
         "timestamp": jsPsych.totalTime(),
         "time_elapsed": jsPsych.totalTime() - timestamp_onload
       });
-  
-      $('body').prepend(
-        `<header>
-          <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container-fluid">
-              <div class="navbar-header">
-              <p class="navbar-text">
-                  <b>${plugin.info.name}</b>
-              </p>
-              </div>
-            </div>
-          </nav>
-        </header>`);
   
       // inject CSS for trial
       html += '<style id="jspsych-survey-multi-choice-css">';
@@ -156,18 +143,29 @@ jsPsych.plugins['YIAT'] = (function () {
           ".jspsych-survey-multi-choice-number { width: 25px; }" +
         "}"
       html += '</style>';
+       
+      // fixed heder
+      html += 
+        '<header>' +
+        '<nav class="navbar navbar-inverse navbar-fixed-top">' +
+        '<div class="container-fluid">' +
+        '<div class="navbar-header">' +
+        '<p class="navbar-text"><b>' + plugin.info.name + '</b></p>' +
+        '</div>' +
+        '</div>' +
+        '</nav>' +
+        '</header>';
   
       // show preamble text
       if (trial.preamble !== null) {
         html += '<div id="jspsych-survey-multi-choice-preamble" class="jspsych-survey-multi-choice-preamble">' + trial.preamble + '</div>';
       }
   
-  
       // form element
       html += '<div id="' + plugin_id_name + '">';
       html += '<form id="jspsych-survey-multi-choice-form" class="jspsych-survey-multi-choice-form">';
   
-  
+      // column titles
       html +=
         `<div id="jspsych-survey-multi-choice-preamble" class="jspsych-survey-multi-choice-instructions">
             <div class="jspsych-survey-multi-choice-option-left"></div>
@@ -255,10 +253,10 @@ jsPsych.plugins['YIAT'] = (function () {
               </div>
           </div>`;
   
-      // draw
+      // render
       display_element.innerHTML = html;
   
-      // function to handle key press responses
+      // function to handle responses by the subject
       var after_response = function (info) {
   
         if (info.key_release === undefined) {
@@ -295,6 +293,7 @@ jsPsych.plugins['YIAT'] = (function () {
         }
       };
 
+       // save timestamp on input click
       $("input[type=radio]").on("click change touchstart",function(){
         var time_stamp_key = $(this).data('time-stamp'); 
         if(time_stamp_key) {
@@ -302,7 +301,7 @@ jsPsych.plugins['YIAT'] = (function () {
         };
       });
       
-  
+      // form functionality
       document.querySelector('form').addEventListener('submit', function (event) {
         event.preventDefault();
         response.trial_events.push({
@@ -339,6 +338,7 @@ jsPsych.plugins['YIAT'] = (function () {
         }
   
         if ($(".survey-error-after").length < 1) {
+
           // kill keyboard listeners
           if (typeof keyboardListener !== 'undefined') {
             jsPsych.pluginAPI.cancelKeyboardResponse(keyboardListener);
@@ -355,12 +355,13 @@ jsPsych.plugins['YIAT'] = (function () {
             "events": JSON.stringify(response.trial_events)
           };
   
+          // clear the display
           display_element.innerHTML = '';
-          $('.navbar').remove();
   
           // next trial
           jsPsych.finishTrial(trial_data);
         } else {
+          // show modal, register events
           MicroModal.show('modal-1', {
             onShow() {
               response.trial_events.push({

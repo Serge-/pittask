@@ -65,7 +65,7 @@ jsPsych.plugins['survey-pav-multi-choice'] = (function() {
   }
   plugin.trial = function(display_element, trial) {
 
-    // store response
+    // store responses, events
     var response = {
         trial_events: []
     };
@@ -103,11 +103,13 @@ jsPsych.plugins['survey-pav-multi-choice'] = (function() {
       html += '<div id="jspsych-survey-multi-choice-preamble" class="jspsych-survey-multi-choice-preamble">'+trial.preamble+'</div>';
     }
 
+    // if 4 answers has been made, get next 4 questions in random order
     if(pav_multi_choice_counter === 4) {
       pav_multi_choice_counter = 0;
       pav_multi_choice_array = jsPsych.randomization.shuffle(pav_multi_choice_array);
     }
 
+    // add vending machine
     html +=
         '<div id="jspsych-survey-multi-choice-img" class="jspsych-survey-multi-choice-preamble">' +
         '<svg class="vending-machine" viewBox="0 0 253 459" fill="none" xmlns="http://www.w3.org/2000/svg">' +
@@ -193,6 +195,7 @@ jsPsych.plugins['survey-pav-multi-choice'] = (function() {
         time_elapsed: jsPsych.totalTime() - timestamp_onload,
     });
 
+    // function to handle responses by the subject
     var after_response = function (info) {
 
         if(info.key_release === undefined) {
@@ -233,6 +236,7 @@ jsPsych.plugins['survey-pav-multi-choice'] = (function() {
           };
     };
 
+    // form functionality
     document.querySelector('form').addEventListener('submit', function(event) {
       event.preventDefault();
 
@@ -281,6 +285,7 @@ jsPsych.plugins['survey-pav-multi-choice'] = (function() {
         events: JSON.stringify(response.trial_events),
       };
       
+      // clear the display
       display_element.innerHTML = '';
 
       // kill keyboard listeners
@@ -293,6 +298,7 @@ jsPsych.plugins['survey-pav-multi-choice'] = (function() {
       jsPsych.finishTrial(trial_data);
     });
 
+    // start the response listener
     var keyboardListener = jsPsych.pluginAPI.getKeyboardResponse({
         callback_function: after_response,
         valid_responses: trial.choices,

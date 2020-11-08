@@ -81,6 +81,7 @@ jsPsych.plugins["key-testing"] = (function() {
 
     var html = "";
     var isLeftTilted = false;
+
     // preventing several timeouts in the stack
     // because of the high number of keypresses
     var timeoutLock = false;
@@ -114,7 +115,7 @@ jsPsych.plugins["key-testing"] = (function() {
       "time_elapsed": jsPsych.totalTime() - timestamp_onload
     });
 
-    // draw
+    // render
     display_element.innerHTML = html;
 
     // function to end trial when it is time

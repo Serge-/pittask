@@ -98,7 +98,7 @@ jsPsych.plugins["video-keyboard-response"] = (function() {
   
     plugin.trial = function(display_element, trial) {
 
-      // store response
+      // store responses, events
       var response = {
         trial_events: []
       };
@@ -157,7 +157,7 @@ jsPsych.plugins["video-keyboard-response"] = (function() {
         video_html += trial.prompt;
       }
   
-      // draw
+      // render
       display_element.innerHTML = video_html;
   
       if(video_preload_blob){

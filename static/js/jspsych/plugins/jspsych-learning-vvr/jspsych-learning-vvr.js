@@ -34,6 +34,7 @@ jsPsych.plugins['survey-vvr'] = (function() {
     }
   
     plugin.trial = function(display_element, trial){
+        // define variables
         var _trial$variables = trial.variables,
             VVR_INTERVAL_DURATION = _trial$variables.VVR_INTERVAL_DURATION,
             VVR_INTERVAL_NUM = _trial$variables.VVR_INTERVAL_NUM,
@@ -44,6 +45,8 @@ jsPsych.plugins['survey-vvr'] = (function() {
         var interval_number_holder = 1;
         var interval_holder_key_press = {};
         item_id = 0;
+
+        // src
         var OUTCOME = {
             MM: "/static/images/MM.png",
             TT: "/static/images/TT.png",
@@ -56,7 +59,7 @@ jsPsych.plugins['survey-vvr'] = (function() {
         var condition_outcome = 'A0';
         var condition_outcome_handler = false;
 
-        // store response
+        // store responses, events
         var response = {
           trial_events: []
         };
@@ -66,7 +69,8 @@ jsPsych.plugins['survey-vvr'] = (function() {
         };
 
         var timestamp_onload = vvr_timer;
-          
+        
+        // add vending machine with outcome container
         var new_html =
             '<div id="jspsych-stimulus" class="vvr_stage">' +
             '<svg class="vending-machine" viewBox="0 0 253 459" x="10" fill="none" xmlns="http://www.w3.org/2000/svg">' +
@@ -171,6 +175,7 @@ jsPsych.plugins['survey-vvr'] = (function() {
         // function to handle responses by the subject
         var after_response = function(info) {
    
+            // function to handle vending machine animation (tilting left/right)
             function machine_tilt() {
                 if(info.key === left_tilt) {
                     $(".vending-machine").css({
@@ -248,7 +253,6 @@ jsPsych.plugins['survey-vvr'] = (function() {
         }
         
       
-
         // function to end trial when it is time
         var end_trial = function() {
 
@@ -270,7 +274,8 @@ jsPsych.plugins['survey-vvr'] = (function() {
             
             // kill any remaining setTimeout handlers
             jsPsych.pluginAPI.clearAllTimeouts();
-            // hack to kill all remaining setTimeouts
+
+            // kill all setTimeouts
             while (timerId--) {
               window.clearTimeout(timerId); // will do nothing if no timeout with id is present
             } 

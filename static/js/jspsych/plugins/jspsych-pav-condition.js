@@ -58,8 +58,7 @@ jsPsych.plugins.animation = (function () {
 
     plugin.trial = function (display_element, trial) {
 
-        // store responses
-        // keypress, mouse click
+        // store responses, events
         var response = {
             trial_events: []
         };
@@ -83,7 +82,7 @@ jsPsych.plugins.animation = (function () {
         // storing the sequence animation of vending machines
         var animation_sequence = [];
 
-        // draw a blank vending machine
+        // render a blank vending machine
         display_element.innerHTML =
             '<style class="pav-conditioning">.outcome_transparent { height: 340px; }</style>' +
             '<svg class="vending-machine"  viewBox="0 0 253 459" fill="none" xmlns="http://www.w3.org/2000/svg">' +

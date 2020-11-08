@@ -79,7 +79,7 @@ jsPsych.plugins["html-keyboard-response"] = (function() {
 
   plugin.trial = function(display_element, trial) {
 
-    // store response
+    // store responses, events
     var response = {
       trial_events: []
     };
@@ -105,7 +105,7 @@ jsPsych.plugins["html-keyboard-response"] = (function() {
         time_elapsed: jsPsych.totalTime() - timestamp_onload,
     });
 
-    // draw
+    // render
     display_element.innerHTML = new_html;
 
     // function to end trial when it is time

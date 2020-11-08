@@ -77,15 +77,20 @@ jsPsych.plugins['survey-vvr-questions-left'] = (function() {
     }
 
     plugin.trial = function(display_element, trial){
+
+        // outcome src
         var outcome_collection = {
             MM:'/static/images/MM.png',
             TT:'/static/images/TT.png',
             BBQ:'/static/images/BBQ.png',
         };
+
+        // assign left outcome
         var OUTCOME = outcome_collection[counter_balancing[0].left];
         var isMachineTilted = false;
         var vas_holder = 0;
 
+        // question
         var new_html = 
             `<div id="jspsych-stimulus" class='vvr-question-container vvr-question-left'>
                 <div class='vvr-question-a'>
@@ -113,7 +118,7 @@ jsPsych.plugins['survey-vvr-questions-left'] = (function() {
                 </div>
             </div>`;
 
-        // store response
+        // store responses, events
         var response = {
             trial_events: []
         };
@@ -128,8 +133,10 @@ jsPsych.plugins['survey-vvr-questions-left'] = (function() {
             "time_elapsed": jsPsych.totalTime() - timestamp_onload
         });
 
+        // render
         display_element.innerHTML = new_html;
 
+        // init slider
         $("#slider").slider({
             value: 5,
             min: 0,
@@ -152,6 +159,7 @@ jsPsych.plugins['survey-vvr-questions-left'] = (function() {
             }
         })
 
+        // countdown instruction for preventing random response
         if(item_id === 0 && answer_latency_countdown) {
             $('.answer_latency').text(answer_latency_text);
             setTimeout(function() {
@@ -159,6 +167,7 @@ jsPsych.plugins['survey-vvr-questions-left'] = (function() {
             }, answer_latency);
         };
 
+        // show a second part of the question with VAS
         function showNextQuestion() {
             $('.vvr-question-b').fadeIn('slow');   
             response.trial_events.push({
@@ -192,6 +201,7 @@ jsPsych.plugins['survey-vvr-questions-left'] = (function() {
                 });
             }
  
+            // tilt vending machine and freeze
             if(info.key === left_tilt && !isMachineTilted) {
                 $(".vending-machine").css({
                     "transform":  "rotate(" + shake_left_rotate + "deg) translateX(" + shake_left_translateX + "%)",
@@ -283,7 +293,7 @@ jsPsych.plugins['survey-vvr-questions-left'] = (function() {
             });
         }
 
-            // end trial if trial_duration is set
+        // end trial if trial_duration is set
         if (trial.trial_duration !== null) {
             jsPsych.pluginAPI.setTimeout(function() {
             end_trial();

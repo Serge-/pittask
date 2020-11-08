@@ -80,12 +80,14 @@ jsPsych.plugins["food-and-hunger-questions"] = (function() {
     plugin.trial = function(display_element, trial) {
   
         var html = "";
+
+        // defines image path, text
         var IMAGE_SRC = trial.stimulus;
         var h3 =  trial.questions.top;
         var bottom_txt =  trial.questions.bottom;
         var vas_holder = 0;
 
-        // store response
+        // store responses, events
         var response = {
           trial_events: []
         };
@@ -138,7 +140,7 @@ jsPsych.plugins["food-and-hunger-questions"] = (function() {
         html += '</div><ul>' + VVR_q_text_b4 + '</ul></div>';
         html += '</div>';
     
-        // draw
+        // render
         display_element.innerHTML = html;
 
         // init range slider

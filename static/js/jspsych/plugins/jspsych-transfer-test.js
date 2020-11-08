@@ -82,7 +82,7 @@ jsPsych.plugins["transfer-test"] = (function() {
     // plugin used for transfer_test and deva_test stages
     var html = "";
 
-    // store responses
+    // store responses, events
     var response = {
       trial_events: []
     };
@@ -92,7 +92,7 @@ jsPsych.plugins["transfer-test"] = (function() {
 
     var timestamp_onload = jsPsych.totalTime();
 
-    // draw blank vending machine 
+    // render blank vending machine 
     html += '<div id="jspsych-stimulus">' +
       '<svg class="vending-machine" viewBox="0 0 253 459" x="10" fill="none" xmlns="http://www.w3.org/2000/svg">' +
         '<rect x="27" y="20" width="203" height="359" fill="#000"/>' +
@@ -102,7 +102,7 @@ jsPsych.plugins["transfer-test"] = (function() {
       '</div>';
 
 
-    // draw
+    // render
     display_element.innerHTML = html;
 
     function change_colors (notes) {

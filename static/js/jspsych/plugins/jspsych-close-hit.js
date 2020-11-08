@@ -69,18 +69,18 @@ jsPsych.plugins['close-hit-questions'] = (function() {
         },
       }
     }
+
     plugin.trial = function(display_element, trial) {
 
       var html = "";
 
-       // store responses
+       // store responses, events
       var response = {
         trial_events: []
       };
 
       var timestamp_onload = jsPsych.totalTime();
 
-      // save text with questions appearance
       response.trial_events.push({
         "event_type": trial.event_type,
         "event_raw_details": trial.event_raw_details,
@@ -174,7 +174,7 @@ jsPsych.plugins['close-hit-questions'] = (function() {
       // render
       display_element.innerHTML = html;
 
-       // function to handle key press responses
+       // function to handle responses by the subject
        var after_response = function (info) {
   
         if (info.key_release === undefined) {
@@ -288,7 +288,7 @@ jsPsych.plugins['close-hit-questions'] = (function() {
             "events": JSON.stringify(response.trial_events)
         };
         
-        // clear page
+        // clear the display
         display_element.innerHTML = '';
   
         // next trial
