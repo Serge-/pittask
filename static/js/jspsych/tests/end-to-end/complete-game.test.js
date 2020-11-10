@@ -1,7 +1,7 @@
 const puppeteer = require("puppeteer");
-const timeout = 125000;
+const timeout = 215000;
 
-const headless_browser = false;
+const headless_browser = true;
 
 let browser;
 let page;
@@ -37,7 +37,7 @@ describe("Browser run", () => {
   test("browser settings", async () => {
     browser = await puppeteer.launch({
       headless: headless_browser,
-      slowMo: 10,
+      slowMo: 0,
       devtools: false,
     });
 
@@ -79,9 +79,6 @@ describe("Browser run", () => {
       await page.waitForSelector("#container-consent");
       await page.click(".btn-primary");
   }, timeout);
-
-
-  
 
 }, timeout);
 
@@ -146,6 +143,9 @@ describe('key testing', () => {
     close_instruct_transfer_test = await page.evaluate(() => close_instruct_transfer_test);
     open_instruct_text_transfer_test = await page.evaluate(() => open_instruct_text_transfer_test);
     close_instruct_text_transfer_test = await page.evaluate(() => close_instruct_text_transfer_test);
+    transfer_test1 = await page.evaluate(() => transfer_test1);
+    transfer_test2 = await page.evaluate(() => transfer_test2);
+    transfer_test3 = await page.evaluate(() => transfer_test3);
     open_instruct_demographics = await page.evaluate(() => open_instruct_demographics);
     close_instruct_demographics = await page.evaluate(() => close_instruct_demographics);
     open_instruct_WBF = await page.evaluate(() => open_instruct_WBF);
@@ -333,7 +333,7 @@ describe('VVR1', () => {
 describe('transfer_test1', () => {
 
   test('open instruction', async () => {
-      if(open_instruct_transfer_test) {
+      if(open_instruct_transfer_test && transfer_test1) {
         await page.waitForSelector('#jspsych-html-keyboard-response-stimulus');
         const open_instruct_text = await page.evaluate(() => document.querySelector('#jspsych-html-keyboard-response-stimulus').innerHTML);
         await expect(open_instruct_text).toContain(open_instruct_text_transfer_test);
@@ -343,25 +343,28 @@ describe('transfer_test1', () => {
   });
 
   test('stage', async () => {
-      await page.waitForSelector('#transfer-test');
-      for (let index = 1; index < block_num_transfer_test; index++) {
-        for (let i = 0; i < 8; i++) {
-          var items = ['ArrowLeft', 'ArrowRight'];
-          var item = items[Math.floor(Math.random() * items.length)];
-          await delay(stim_duration);
-          await page.keyboard.press(item);
-          await delay(ITI_duration);
-        };
-      };
+      if(transfer_test1) {
+        await page.waitForSelector('#transfer-test');
+        for (let index = 1; index < block_num_transfer_test; index++) {
+          for (let i = 0; i < 9; i++) {
+            var items = ['ArrowLeft', 'ArrowRight'];
+            var item = items[Math.floor(Math.random() * items.length)];
+            await delay(stim_duration);
+            await page.keyboard.press(item);
+            await delay(ITI_duration);
+          }
+        }
+      }
   }, timeout);
 
   test('close instruction', async () => {
-      if(close_instruct_transfer_test) {
+      if(close_instruct_transfer_test && transfer_test1) {
           await page.waitForSelector('#jspsych-html-keyboard-response-stimulus');
           const close_instruct_text = await page.evaluate(() => document.querySelector('#jspsych-html-keyboard-response-stimulus').innerHTML);
           await expect(close_instruct_text).toContain(close_instruct_text_transfer_test);
           await delay(close_instruct_latency);
           await page.click("#jspsych-html-keyboard-response-stimulus");
+          await delay(200);
       }
   });
 
@@ -372,16 +375,12 @@ describe('VVR2', () => {
   test('open instruction', async () => {
     if(open_instruct_VVR2) {
       await page.waitForSelector('#jspsych-html-keyboard-response-stimulus');
-      const VVR_2_text_instr_open = await page.evaluate(() => document.querySelector('#jspsych-html-keyboard-response-stimulus').innerHTML);
-      await expect(VVR_2_text_instr_open).toContain(open_instruct_text_VVR2);
       await delay(open_instruct_latency);
       await page.click("#jspsych-html-keyboard-response-stimulus");
     }
   });
 
   test('stage', async () => {
-
-    let is_vvr_1 = await raceSelectors(page, ['.vvr_stage', '.vvr_close_instruct']);
 
     let is_vvr_2 = await raceSelectors(page, ['.vvr_stage', '.vvr_close_instruct']);
     while (is_vvr_2 === '.vvr_stage') {
@@ -507,7 +506,7 @@ describe('Pav Conditioning', () => {
         }
     };
 
-  }, timeout);
+  }, 255000);
 
 
   test('close instruction', async () => {
@@ -524,7 +523,7 @@ describe('Pav Conditioning', () => {
 describe('transfer_test2', () => {
 
   test('open instruction', async () => {
-      if(open_instruct_transfer_test) {
+      if(open_instruct_transfer_test && transfer_test2) {
         await page.waitForSelector('#jspsych-html-keyboard-response-stimulus');
         const open_instruct_text = await page.evaluate(() => document.querySelector('#jspsych-html-keyboard-response-stimulus').innerHTML);
         await expect(open_instruct_text).toContain(open_instruct_text_transfer_test);
@@ -534,20 +533,22 @@ describe('transfer_test2', () => {
   });
 
   test('stage', async () => {
-      await page.waitForSelector('#transfer-test');
-      for (let index = 1; index < block_num_transfer_test; index++) {
-        for (let i = 0; i < 8; i++) {
-          var items = ['ArrowLeft', 'ArrowRight'];
-          var item = items[Math.floor(Math.random() * items.length)];
-          await delay(stim_duration);
-          await page.keyboard.press(item);
-          await delay(ITI_duration);
-        };
-      };
+      if(transfer_test2){
+        await page.waitForSelector('#transfer-test');
+        for (let index = 1; index < block_num_transfer_test; index++) {
+          for (let i = 0; i < 9; i++) {
+            var items = ['ArrowLeft', 'ArrowRight'];
+            var item = items[Math.floor(Math.random() * items.length)];
+            await delay(stim_duration);
+            await page.keyboard.press(item);
+            await delay(ITI_duration);
+          };
+        }
+      }
   }, timeout);
 
   test('close instruction', async () => {
-      if(close_instruct_transfer_test) {
+      if(close_instruct_transfer_test && transfer_test2) {
           await page.waitForSelector('#jspsych-html-keyboard-response-stimulus');
           const close_instruct_text = await page.evaluate(() => document.querySelector('#jspsych-html-keyboard-response-stimulus').innerHTML);
           await expect(close_instruct_text).toContain(close_instruct_text_transfer_test);
@@ -557,7 +558,6 @@ describe('transfer_test2', () => {
   });
 
 });
-
 
 describe('VVR3', () => {
 
@@ -641,7 +641,6 @@ describe('VVR3', () => {
 
 });
 
-
 describe('Deval video', () => {
 
   test('open instruction', async () => {
@@ -666,7 +665,6 @@ describe('Deval video', () => {
   });
 
 });
-
 
 describe('Deval test', () => {
 
@@ -767,11 +765,10 @@ describe('FHQ2', () => {
 
 });
 
-
 describe('transfer_test3', () => {
 
   test('open instruction', async () => {
-      if(open_instruct_transfer_test) {
+      if(open_instruct_transfer_test && transfer_test3) {
         await page.waitForSelector('#jspsych-html-keyboard-response-stimulus');
         const open_instruct_text = await page.evaluate(() => document.querySelector('#jspsych-html-keyboard-response-stimulus').innerHTML);
         await expect(open_instruct_text).toContain(open_instruct_text_transfer_test);
@@ -781,20 +778,22 @@ describe('transfer_test3', () => {
   });
 
   test('stage', async () => {
-      await page.waitForSelector('#transfer-test');
-      for (let index = 1; index < block_num_transfer_test; index++) {
-        for (let i = 0; i < 8; i++) {
-          var items = ['ArrowLeft', 'ArrowRight'];
-          var item = items[Math.floor(Math.random() * items.length)];
-          await delay(stim_duration);
-          await page.keyboard.press(item);
-          await delay(ITI_duration);
-        };
-      };
+      if(transfer_test3){
+        await page.waitForSelector('#transfer-test');
+        for (let index = 1; index < block_num_transfer_test; index++) {
+          for (let i = 0; i < 9; i++) {
+            var items = ['ArrowLeft', 'ArrowRight'];
+            var item = items[Math.floor(Math.random() * items.length)];
+            await delay(stim_duration);
+            await page.keyboard.press(item);
+            await delay(ITI_duration);
+          };
+        }
+      }
   }, timeout);
 
   test('close instruction', async () => {
-      if(close_instruct_transfer_test) {
+      if(close_instruct_transfer_test && transfer_test3) {
           await page.waitForSelector('#jspsych-html-keyboard-response-stimulus');
           const close_instruct_text = await page.evaluate(() => document.querySelector('#jspsych-html-keyboard-response-stimulus').innerHTML);
           await expect(close_instruct_text).toContain(close_instruct_text_transfer_test);
@@ -1357,12 +1356,14 @@ describe('Thanks', () => {
 
 
 describe("Finishing testing", () => {
-    // test('Experiment complete!', async () => {
-    //   await page.waitForSelector("#container-not-an-ad");
-    // }, timeout);
     test('Experiment complete!', async () => {
-      await page.waitForSelector("#jspsych-data-display");
+      await page.waitForSelector("#container-not-an-ad");
     }, timeout);
+
+    // debug mode
+    // test('Experiment complete!', async () => {
+    //   await page.waitForSelector("#jspsych-data-display");
+    // }, timeout);
 
     afterAll(async () => {
       await browser.close();
