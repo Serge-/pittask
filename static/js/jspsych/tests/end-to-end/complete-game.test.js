@@ -333,7 +333,7 @@ describe('VVR1', () => {
 describe('transfer_test1', () => {
 
   test('open instruction', async () => {
-      if(open_instruct_transfer_test) {
+      if(open_instruct_transfer_test && transfer_test1) {
         await page.waitForSelector('#jspsych-html-keyboard-response-stimulus');
         const open_instruct_text = await page.evaluate(() => document.querySelector('#jspsych-html-keyboard-response-stimulus').innerHTML);
         await expect(open_instruct_text).toContain(open_instruct_text_transfer_test);
@@ -358,7 +358,7 @@ describe('transfer_test1', () => {
   }, timeout);
 
   test('close instruction', async () => {
-      if(close_instruct_transfer_test) {
+      if(close_instruct_transfer_test && transfer_test1) {
           await page.waitForSelector('#jspsych-html-keyboard-response-stimulus');
           const close_instruct_text = await page.evaluate(() => document.querySelector('#jspsych-html-keyboard-response-stimulus').innerHTML);
           await expect(close_instruct_text).toContain(close_instruct_text_transfer_test);
@@ -523,7 +523,7 @@ describe('Pav Conditioning', () => {
 describe('transfer_test2', () => {
 
   test('open instruction', async () => {
-      if(open_instruct_transfer_test) {
+      if(open_instruct_transfer_test && transfer_test2) {
         await page.waitForSelector('#jspsych-html-keyboard-response-stimulus');
         const open_instruct_text = await page.evaluate(() => document.querySelector('#jspsych-html-keyboard-response-stimulus').innerHTML);
         await expect(open_instruct_text).toContain(open_instruct_text_transfer_test);
@@ -548,7 +548,7 @@ describe('transfer_test2', () => {
   }, timeout);
 
   test('close instruction', async () => {
-      if(close_instruct_transfer_test) {
+      if(close_instruct_transfer_test && transfer_test2) {
           await page.waitForSelector('#jspsych-html-keyboard-response-stimulus');
           const close_instruct_text = await page.evaluate(() => document.querySelector('#jspsych-html-keyboard-response-stimulus').innerHTML);
           await expect(close_instruct_text).toContain(close_instruct_text_transfer_test);
@@ -558,7 +558,6 @@ describe('transfer_test2', () => {
   });
 
 });
-
 
 describe('VVR3', () => {
 
@@ -642,7 +641,6 @@ describe('VVR3', () => {
 
 });
 
-
 describe('Deval video', () => {
 
   test('open instruction', async () => {
@@ -667,7 +665,6 @@ describe('Deval video', () => {
   });
 
 });
-
 
 describe('Deval test', () => {
 
@@ -768,11 +765,10 @@ describe('FHQ2', () => {
 
 });
 
-
 describe('transfer_test3', () => {
 
   test('open instruction', async () => {
-      if(open_instruct_transfer_test) {
+      if(open_instruct_transfer_test && transfer_test3) {
         await page.waitForSelector('#jspsych-html-keyboard-response-stimulus');
         const open_instruct_text = await page.evaluate(() => document.querySelector('#jspsych-html-keyboard-response-stimulus').innerHTML);
         await expect(open_instruct_text).toContain(open_instruct_text_transfer_test);
@@ -797,7 +793,7 @@ describe('transfer_test3', () => {
   }, timeout);
 
   test('close instruction', async () => {
-      if(close_instruct_transfer_test) {
+      if(close_instruct_transfer_test && transfer_test3) {
           await page.waitForSelector('#jspsych-html-keyboard-response-stimulus');
           const close_instruct_text = await page.evaluate(() => document.querySelector('#jspsych-html-keyboard-response-stimulus').innerHTML);
           await expect(close_instruct_text).toContain(close_instruct_text_transfer_test);

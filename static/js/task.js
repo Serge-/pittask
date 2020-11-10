@@ -1013,7 +1013,6 @@ var PAV_CONDITIONING_MAIN = {
         if(pav_correct_holder >= min_num_correct_pav || pav_incorrect_holder >= max_num_incorrect_pav) {
             pav_correct_holder = 0;
             pav_incorrect_holder = 0;
-            pav_is_correct = false;
             pav_multi_choice_counter = 0;
             pav_con_timer = 0;
             pav_multi_choice_array = jsPsych.randomization.shuffle(pav_stimuli);
