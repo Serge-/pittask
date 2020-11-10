@@ -1109,7 +1109,10 @@ var TRANSFER1 = {
                 return close_instruct_transfer_test;
             }
         }
-    ]
+    ],
+    conditional_function: function() {
+        return transfer_test1;
+    }
 };
 
 var TRANSFER2 = {
@@ -1154,7 +1157,10 @@ var TRANSFER2 = {
                 return close_instruct_transfer_test;
             }
         }
-    ]
+    ],
+    conditional_function: function() {
+        return transfer_test2;
+    }
 };
 
 var TRANSFER3 = {
@@ -1199,7 +1205,10 @@ var TRANSFER3 = {
                 return close_instruct_transfer_test;
             }
         }
-    ]
+    ],
+    conditional_function: function() {
+        return transfer_test3;
+    }
 };
 
 var DEVAL_VIDEO = {
@@ -1350,7 +1359,7 @@ timeline.push(FHQ1_OPEN, FHQ1_1, FHQ1_2, FHQ1_3, FHQ1_4, FHQ1_CLOSE);
 //  Instrumental Conditioning (VVR1)
 timeline.push(VVR1);
 // Transfer Test
-// timeline.push(TRANSFER1);
+timeline.push(TRANSFER1);
 // Instrumental Degradation (VVR2)
 timeline.push(VVR2);
 // Pavlovian Condition

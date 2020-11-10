@@ -267,6 +267,9 @@ var open_instruct_text_transfer_test =  "<p>The vending machine is still overflo
 "<p>Press any key to begin. </p>";
 var close_instruct_text_transfer_test = 'Close Instruction Transfer Test'
 var block_num_transfer_test  = 2; // default 2
+var transfer_test1 = false;
+var transfer_test2 = true;
+var transfer_test3 = true;
 /************************************************************
  * Deval Test
  ************************************************************/
