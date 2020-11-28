@@ -568,14 +568,12 @@ if(isClass(query))
       specs <- fromJSON(trialdata[parameters_index,]$specs)
       date <- format(as.IDate(dateTime[specs_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[specs_index]))
-      
-      for(j in 1:length(specs)){
-        Specs <- rbindlist(list(Specs, list(
-          PIN, complete, date, time,
-          country, commit, version,
-          specs[[3]], specs[[4]], specs[[5]], specs[[1]], specs[[2]]
-        )))
-      }
+
+      Specs <- rbindlist(list(Specs, list(
+        PIN, complete, date, time,
+        country, commit, version,
+        specs[[3]], specs[[4]], specs[[5]], specs[[1]], specs[[2]]
+      )))
     }
     
     # Demographics --------------------------------------------------------------------
