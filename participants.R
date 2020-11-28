@@ -568,14 +568,12 @@ if(isClass(query))
       specs <- fromJSON(trialdata[parameters_index,]$specs)
       date <- format(as.IDate(dateTime[specs_index]), "%d-%m-%Y")
       time <- as.character(as.ITime(dateTime[specs_index]))
-      
-      for(j in 1:length(specs)){
-        Specs <- rbindlist(list(Specs, list(
-          PIN, complete, date, time,
-          country, commit, version,
-          specs[[3]], specs[[4]], specs[[5]], specs[[1]], specs[[2]]
-        )))
-      }
+
+      Specs <- rbindlist(list(Specs, list(
+        PIN, complete, date, time,
+        country, commit, version,
+        specs[[3]], specs[[4]], specs[[5]], specs[[1]], specs[[2]]
+      )))
     }
     
     # Demographics --------------------------------------------------------------------
@@ -1196,7 +1194,8 @@ if(isClass(query))
         FoodRatings <- rbindlist(list(FoodRatings, list(
           PIN, complete,
           format(as.IDate(dateTime[food_ratings_indices[fr]]), "%d-%m-%Y"),
-          time, food_ratings$timestamp[fr], country, commit,
+          format(as.ITime(dateTime[food_ratings_indices[fr]])),
+          food_ratings$timestamp[fr], country, commit,
           version, fromJSON(food_ratings$food_item[fr]),
           ifelse(fromJSON(food_ratings$rating_status[fr]) == "pre-rating", fromJSON(food_ratings$rating[fr]), ""),
           ifelse(fromJSON(food_ratings$rating_status[fr]) == "post-rating", fromJSON(food_ratings$rating[fr]), "")
@@ -1212,13 +1211,13 @@ if(isClass(query))
     
     if(length(hunger_rating_indices) != 0){
       hunger_ratings <- trialdata[hunger_rating_indices,]
-      time <- as.character(as.ITime(dateTime[hunger_rating_indices]))
       
       for(hr in 1:dim(hunger_ratings)[1]) {
         HungerRating <- rbindlist(list(HungerRating, list(
           PIN, complete,
           format(as.IDate(dateTime[hunger_rating_indices[hr]]), "%d-%m-%Y"),
-          time, hunger_ratings$timestamp[hr], country, commit, version,
+          format(as.ITime(dateTime[hunger_rating_indices[hr]])),
+          hunger_ratings$timestamp[hr], country, commit, version,
           ifelse(fromJSON(hunger_ratings$rating_status[hr]) == "pre-rating", fromJSON(hunger_ratings$rating[hr]), ""),
           ifelse(fromJSON(hunger_ratings$rating_status[hr]) == "post-rating", fromJSON(hunger_ratings$rating[hr]), "")
         )))
