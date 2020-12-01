@@ -407,6 +407,22 @@ PavCondition <- data.table(
   correct = character()
 )
 
+Recall <- data.table(
+  PIN = character(),
+  complete = character(),
+  date = character(),
+  calendar_time = character(),
+  timestamp = numeric(),
+  commit = character(),
+  version = character(),
+  location = character(),
+  block = character(),  
+  item = numeric(),
+  response = character(),
+  correct = character(),
+  belief_strength = character()
+)
+
 # Geo ---------------------------------------------------------------------
 
 getGeoInfoByIP <- function(ipList){
@@ -1258,7 +1274,7 @@ if(isClass(query))
       for(j in 1:length(pav_condition_responses)){
         events <- trialdata[pav_condition_index,]
         response_submitted <- fromJSON(events$response_submitted[j])
-        correct <- events$event_raw_details[j]
+        correct <- events$correct[j]
         
         date <- format(as.IDate(dateTime[j]), "%d-%m-%Y")
         time <- as.character(as.ITime(dateTime[j]))
@@ -1270,6 +1286,31 @@ if(isClass(query))
       }
     }
     
+    # Recall -----------------------------------------------------------------
+
+    recall_index <- which(trialdata$stage_name %in% "\"recall\"")
+
+    if(length(recall_index) != 0){
+      recall_block_number <- trialdata[recall_index,]$block_number
+      recall_timestamp <- trialdata[recall_index,]$timestamp
+      response_submitted <- trialdata[recall_index,]$response_submitted
+      strength_of_belief <- trialdata[recall_index,]$strength_of_belief
+      recall_correct <- trialdata[recall_index,]$correct
+
+      for(j in 1:length(recall_block_number)){
+        date <- format(as.IDate(dateTime[j]), "%d-%m-%Y")
+        time <- as.character(as.ITime(dateTime[j]))
+
+        Recall <- rbindlist(list(Recall, list(
+          PIN, complete, date, time, recall_timestamp[j], commit, version, country, 
+          recall_block_number[j], j, 
+          ifelse(is.na(response_submitted[j]), "NA", fromJSON(response_submitted[j])),
+          recall_correct[j],
+          ifelse(is.na(strength_of_belief[j]), "NA", strength_of_belief[j])
+        )))
+      }
+
+    }
     # CompleteData ------------------------------------------------------------
     
     if(!is.null(trialdata$stage_name) & !is.null(version) & !is.null(trialdata$events)) {
@@ -1354,6 +1395,7 @@ if(isClass(query))
     "hunger_rating" = HungerRating,
     "consent_feedback" = ConsentFeedback,
     "pav_con" = PavCondition,
+    "recall" = Recall,
     "complete" = CompleteData
   )
   
