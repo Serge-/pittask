@@ -283,6 +283,15 @@ var open_instruct_text_deval_test =  "<p>The vending machine is still overflowin
 var close_instruct_text_deval_test = 'Close Instruction Deval Test'
 var deval_test_duration = 30000; // default 120000
 /************************************************************
+ * Recall(memory test)
+ ************************************************************/
+var open_instruct_recall = false;
+var close_instruct_recall = false;
+var open_instruct_text_recall =
+    "<p>Open instruction Recall</p>";
+var close_instruct_text_recall =
+    "<p>Close instruction Recall</p>";
+/************************************************************
  * Close HIT Questions
  ************************************************************/
 var close_instruct_text_close_HIT_q = 'Thank you for your participation!'
