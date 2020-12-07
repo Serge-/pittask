@@ -183,7 +183,7 @@ jsPsych.plugins['ISI'] = (function () {
         question_classes.push('jspsych-survey-multi-choice-horizontal');
       }
 
-      
+
       if(i !== 0) {
           html += '<div id="jspsych-survey-multi-choice-' + question_id + '" class="jspsych-survey-multi-choice-contain"  data-name="' + question.name + '">';
       } else {
@@ -208,7 +208,7 @@ jsPsych.plugins['ISI'] = (function () {
             }
             html += '</div>';
           }
-        } 
+        }
         else {
           if (j === 0) {
             html += '<div style="display: flex;"><div style="width: 100%; display: flex; justify-content: space-around;">';
@@ -237,7 +237,7 @@ jsPsych.plugins['ISI'] = (function () {
         }
 
       }
-      
+
       html += '</div>';
       for (var j = 0; j < question.options.length; j++) {
         if (question_id === 0) {
@@ -284,6 +284,26 @@ jsPsych.plugins['ISI'] = (function () {
             </div>
           </div>
       </div>`;
+
+    // Modal window content
+    html +=
+      `<div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+            <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+              <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+                <header class="modal__header">
+                  <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+                </header>
+                <main class="modal__content" id="modal-2-content">
+                  <p>
+                  ${ timerModule.getPopupText() }
+                  </p>
+                </main>
+                <footer class="modal__footer">
+                  <button class="modal__btn" data-micromodal-close aria-label="Close this dialog window">Close</button>
+                </footer>
+              </div>
+            </div>
+        </div>`;
 
     // render
     display_element.innerHTML = html;
@@ -340,12 +360,12 @@ jsPsych.plugins['ISI'] = (function () {
     });
 
     $("input[type=radio]").on("click change touchstart",function(){
-      var time_stamp_key = $(this).data('time-stamp'); 
+      var time_stamp_key = $(this).data('time-stamp');
       if(time_stamp_key) {
         trial.time_stamp[time_stamp_key] = jsPsych.totalTime();
       };
     });
-          
+
     $(".modal__btn, .modal__close").on("click touchstart",function(){
       response.trial_events.push({
         "event_type": "popup closed",

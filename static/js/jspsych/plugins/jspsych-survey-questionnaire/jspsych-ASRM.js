@@ -215,7 +215,27 @@ jsPsych.plugins['ASRM'] = (function () {
           </div>
         </div>
     </div>`;
-    
+
+    // Modal window content
+    html +=
+      `<div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+          <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+            <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+              <header class="modal__header">
+                <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+              </header>
+              <main class="modal__content" id="modal-2-content">
+                <p>
+                ${ timerModule.getPopupText() }
+                </p>
+              </main>
+              <footer class="modal__footer">
+                <button class="modal__btn" data-micromodal-close aria-label="Close this dialog window">Close</button>
+              </footer>
+            </div>
+          </div>
+      </div>`;
+
     // render
     display_element.innerHTML = html;
 
@@ -230,7 +250,7 @@ jsPsych.plugins['ASRM'] = (function () {
           "timestamp": jsPsych.totalTime(),
           "time_elapsed": jsPsych.totalTime() - timestamp_onload
         });
-        
+
         if(info.el) {
           if(info.el.dataset.timeStamp) {
             trial.time_stamp[info.el.dataset.timeStamp] = jsPsych.totalTime();
@@ -269,12 +289,12 @@ jsPsych.plugins['ASRM'] = (function () {
     });
 
     $("input[type=radio]").on("click change touchstart",function(){
-      var time_stamp_key = $(this).data('time-stamp'); 
+      var time_stamp_key = $(this).data('time-stamp');
       if(time_stamp_key) {
         trial.time_stamp[time_stamp_key] = jsPsych.totalTime();
       };
     });
-          
+
     $(".modal__btn, .modal__close").on("click touchstart",function(){
       response.trial_events.push({
         "event_type": "popup closed",
@@ -322,7 +342,7 @@ jsPsych.plugins['ASRM'] = (function () {
         timestamp_data[name] = trial.time_stamp['Q' + id];
         Object.assign(question_data, obje);
       }
-      
+
       if ($(".survey-error").length < 1) {
         // kill keyboard listeners
         if (typeof keyboardListener !== 'undefined') {

@@ -1,6 +1,6 @@
 jsPsych.plugins['LSAS'] = (function () {
     var plugin = {};
-  
+
     plugin.info = {
       name: 'LSAS',
       stage_name: 'LSAS',
@@ -90,15 +90,15 @@ jsPsych.plugins['LSAS'] = (function () {
     }
     plugin.trial = function (display_element, trial) {
       var plugin_id_name = "jspsych-survey-multi-choice-LSAS";
-  
+
       var html = "";
-  
+
       // store response
       var response = {
         trial_events: []
       };
       var timestamp_onload = jsPsych.totalTime();
-  
+
       response.trial_events.push({
         "event_type": trial.event_type,
         "event_raw_details": trial.event_raw_details,
@@ -106,7 +106,7 @@ jsPsych.plugins['LSAS'] = (function () {
         "timestamp": jsPsych.totalTime(),
         "time_elapsed": jsPsych.totalTime() - timestamp_onload
       });
-  
+
       $('body').prepend(
         `<header>
           <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -119,7 +119,7 @@ jsPsych.plugins['LSAS'] = (function () {
             </div>
           </nav>
         </header>`);
-  
+
       // inject CSS for trial
       html += '<style id="jspsych-survey-multi-choice-css">';
       html += ".jspsych-survey-multi-choice-question { display: flex; text-align: left; border-top: 1px solid }" +
@@ -159,12 +159,12 @@ jsPsych.plugins['LSAS'] = (function () {
           ".jspsych-survey-multi-choice-number { width: 25px; }" +
         "}"
       html += '</style>';
-  
+
       // show preamble text
       if (trial.preamble !== null) {
         html += '<div id="jspsych-survey-multi-choice-preamble" class="jspsych-survey-multi-choice-preamble">' + trial.preamble + '</div>';
       }
-  
+
       // form element
       html += '<div id="' + plugin_id_name + '">';
       html += '<form id="jspsych-survey-multi-choice-form" class="jspsych-survey-multi-choice-form">';
@@ -193,7 +193,7 @@ jsPsych.plugins['LSAS'] = (function () {
                 </div>
             </div>
         </div>`
-  
+
       // generate question order. this is randomized here as opposed to randomizing the order of trial.questions
       // so that the data are always associated with the same question regardless of order
       var question_order = [];
@@ -203,28 +203,28 @@ jsPsych.plugins['LSAS'] = (function () {
       if (trial.randomize_question_order) {
         question_order = jsPsych.randomization.shuffle(question_order);
       }
-  
+
       // add multiple-choice questions
       for (var i = 0; i < trial.questions.length; i++) {
-  
+
         // get question based on question_order
         var question = trial.questions[question_order[i]];
         var question_id = question_order[i];
-  
+
         // create question container
         var question_classes = ['jspsych-survey-multi-choice-question'];
         if (question.horizontal) {
           question_classes.push('jspsych-survey-multi-choice-horizontal');
         }
-  
+
         html += '<div id="jspsych-survey-multi-choice-' + question_id + '" class="' + question_classes.join(' ') + '"  data-name="' + question.name + '">';
-  
+
         // add question text
         html += '<div style="display: flex; width: 30%; border-right: 3px solid #fff; padding-bottom: 3rem; "><span class="jspsych-survey-multi-choice-number">' + (i + 1) + '.</span><p class="jspsych-survey-multi-choice-text survey-multi-choice jspsych-survey-multi-choice-question-text" style="text-align: left; width: 100%;">' + question.prompt
         // question.required
         html += '</p></div>';
         html += '<div style="display: flex; width: 70%; justify-content: space-around;">';
-  
+
         // create option radio buttons
         for (var j = 0; j < question.options.length; j++) {
           var timestamp_char = ['A','F']
@@ -238,9 +238,9 @@ jsPsych.plugins['LSAS'] = (function () {
             var option_id_name = "jspsych-survey-multi-choice-option-" + question_id + "-" + j + '-' + k;
             var input_name = 'jspsych-survey-multi-choice-response-' + question_id + '-' + j;
             var input_id = 'jspsych-survey-multi-choice-response-' + question_id + '-' + j + '-' + k;
-    
+
             var required_attr = question.required ? 'required' : '';
-    
+
             // add radio button container
             html += '<div id="' + option_id_name + '" class="jspsych-survey-multi-choice-option">';
             html += '<label class="jspsych-survey-multi-choice-text jspsych-survey-highlight" data-time-stamp="' + timestamp_char[j] + (i+1) + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" for="' + input_id + '">' + question.options[j][k] + '</label>';
@@ -249,17 +249,17 @@ jsPsych.plugins['LSAS'] = (function () {
           }
           html += '</div>';
         }
-        
+
         html += '</div></div>';
       }
-  
+
       // add submit button
       html += '<input type="submit" id="' + plugin_id_name + '-next" class="' + plugin_id_name + ' jspsych-btn"' + (trial.button_label ? ' value="' + trial.button_label + '"' : '') + '></input>';
-  
-  
+
+
       html += '</form>';
       html += '</div>';
-  
+
       html +=
         `<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
               <div class="modal__overlay" tabindex="-1" data-micromodal-close>
@@ -276,13 +276,33 @@ jsPsych.plugins['LSAS'] = (function () {
                 </div>
               </div>
           </div>`;
-  
+
+      // Modal window content
+      html +=
+        `<div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+            <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+              <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+                <header class="modal__header">
+                  <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+                </header>
+                <main class="modal__content" id="modal-2-content">
+                  <p>
+                  ${ timerModule.getPopupText() }
+                  </p>
+                </main>
+                <footer class="modal__footer">
+                  <button class="modal__btn" data-micromodal-close aria-label="Close this dialog window">Close</button>
+                </footer>
+              </div>
+            </div>
+        </div>`;
+
       // render
       display_element.innerHTML = html;
-  
+
       // function to handle key press responses
       var after_response = function (info) {
-  
+
         if (info.key_release === undefined) {
           response.trial_events.push({
             "event_type": "key press",
@@ -316,12 +336,12 @@ jsPsych.plugins['LSAS'] = (function () {
           });
         }
       }
-  
+
       $('.jspsych-survey-highlight').click(function () {
         $(this).parent().parent().find('.jspsych-survey-highlight').removeClass('bg-primary');
         $(this).addClass('bg-primary');
       });
-      
+
       $("label").on("click",function(){
         var labelID = $(this).attr('for');
         if('labelID') {
@@ -330,7 +350,7 @@ jsPsych.plugins['LSAS'] = (function () {
       });
 
       $("input[type=radio]").on("click change touchstart",function(){
-        var time_stamp_key = $(this).data('time-stamp'); 
+        var time_stamp_key = $(this).data('time-stamp');
         if(time_stamp_key) {
           trial.time_stamp[time_stamp_key] = jsPsych.totalTime();
         };
@@ -345,7 +365,7 @@ jsPsych.plugins['LSAS'] = (function () {
           "time_elapsed": jsPsych.totalTime() - timestamp_onload
         });
       });
-  
+
       document.querySelector('form').addEventListener('submit', function (event) {
         event.preventDefault();
         // measure response time
@@ -382,20 +402,20 @@ jsPsych.plugins['LSAS'] = (function () {
             }
             obje_f["F" + (i + 1)] = val_f;
             obje_a["A" + (i + 1)] = val_a;
-         
+
             timestamp_data["F" + (i + 1)] = trial.time_stamp['F' + (i+1)];
             timestamp_data["A" + (i + 1)] = trial.time_stamp['A' + (i+1)];
             Object.assign(question_data, obje_f, obje_a);
         }
 
-  
+
         if ($(".survey-error-after").length < 1) {
           // kill keyboard listeners
           if (typeof keyboardListener !== 'undefined') {
             jsPsych.pluginAPI.cancelKeyboardResponse(keyboardListener);
             jsPsych.pluginAPI.cancelClickResponse(clickListener);
           }
-  
+
           // save data
           var trial_data = {
             "stage_name": JSON.stringify(plugin.info.stage_name),
@@ -405,10 +425,10 @@ jsPsych.plugins['LSAS'] = (function () {
             "question_order": JSON.stringify(question_order),
             "events": JSON.stringify(response.trial_events)
           };
-  
+
           display_element.innerHTML = '';
           $('.navbar').remove();
-  
+
           // next trial
           jsPsych.finishTrial(trial_data);
         } else {
@@ -421,11 +441,11 @@ jsPsych.plugins['LSAS'] = (function () {
             "time_elapsed": jsPsych.totalTime() - timestamp_onload
           });
         }
-  
+
       });
-  
+
       var startTime = performance.now();
-  
+
       // start the response listener
       var keyboardListener = jsPsych.pluginAPI.getKeyboardResponse({
         callback_function: after_response,
@@ -442,6 +462,6 @@ jsPsych.plugins['LSAS'] = (function () {
         allow_held_key: false
       });
     };
-  
+
     return plugin;
   })();

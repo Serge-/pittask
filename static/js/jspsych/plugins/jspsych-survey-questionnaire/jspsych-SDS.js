@@ -1,6 +1,6 @@
 jsPsych.plugins['SDS'] = (function () {
     var plugin = {};
-  
+
     plugin.info = {
       name: 'SDS',
       stage_name: 'SDS',
@@ -90,15 +90,15 @@ jsPsych.plugins['SDS'] = (function () {
     }
     plugin.trial = function (display_element, trial) {
       var plugin_id_name = "jspsych-survey-multi-choice-SDS";
-  
+
       var html = "";
       var timestamp_onload = jsPsych.totalTime();
-  
+
       // store response
       var response = {
         trial_events: []
       };
-  
+
       response.trial_events.push({
         "event_type": trial.event_type,
         "event_raw_details": trial.event_raw_details,
@@ -106,7 +106,7 @@ jsPsych.plugins['SDS'] = (function () {
         "timestamp": jsPsych.totalTime(),
         "time_elapsed": jsPsych.totalTime() - timestamp_onload
       });
-  
+
       $('body').prepend(
         `<header>
           <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -117,7 +117,7 @@ jsPsych.plugins['SDS'] = (function () {
             </div>
           </nav>
         </header>`);
-  
+
       // inject CSS for trial
       html += '<style id="jspsych-survey-multi-choice-css">';
       html += ".jspsych-survey-multi-choice-question { text-align: center; outline: 1px solid #fff; padding: 2rem; margin: 2rem 0; }" +
@@ -146,8 +146,8 @@ jsPsych.plugins['SDS'] = (function () {
         ".bg-primary { border: 2px solid #428bca; box-shadow: 0 0 2px 0px #428bca inset, 0 0 2px 0px #428bca; background-color: #428bca; }" +
         "p { margin: 0 0 0px;}"
       html += '</style>';
-  
-  
+
+
       // form element
       html += '<div id="' + plugin_id_name + '">';
       html += '<form id="jspsych-survey-multi-choice-form" class="jspsych-survey-multi-choice-form">';
@@ -156,7 +156,7 @@ jsPsych.plugins['SDS'] = (function () {
       if (trial.preamble !== null) {
         html += '<div class="jspsych-survey-multi-choice-content"><div id="jspsych-survey-multi-choice-preamble" class="jspsych-survey-multi-choice-preamble">' + trial.preamble + '</div>';
       }
-   
+
       // generate question order. this is randomized here as opposed to randomizing the order of trial.questions
       // so that the data are always associated with the same question regardless of order
       var question_order = [];
@@ -166,23 +166,23 @@ jsPsych.plugins['SDS'] = (function () {
       if (trial.randomize_question_order) {
         question_order = jsPsych.randomization.shuffle(question_order);
       }
-  
+
       // add multiple-choice questions
       for (var i = 0; i < 3; i++) {
-  
+
         // get question based on question_order
         var question = trial.questions[question_order[i]];
         var question_id = question_order[i];
         var question_name = question.name;
-  
+
         // create question container
         var question_classes = ['jspsych-survey-multi-choice-question'];
         if (question.horizontal) {
           question_classes.push('jspsych-survey-multi-choice-horizontal');
         }
-  
+
         html += '<div id="jspsych-survey-multi-choice-' + question_id + '" class="' + question_classes.join(' ') + '"  data-name="' + question_name + '">';
-  
+
         // add question text
         html += '<div>' + question.prompt
         // question.required
@@ -229,16 +229,16 @@ jsPsych.plugins['SDS'] = (function () {
           var option_id_name = "jspsych-survey-multi-choice-option-" + question_id + "-" + j;
           var input_name = 'jspsych-survey-multi-choice-response-' + question_id;
           var input_id = 'jspsych-survey-multi-choice-response-' + question_id + '-' + j;
-  
+
           var required_attr = question.required ? 'required' : '';
-  
+
           // add radio button container
           html += '<div id="' + option_id_name + '" class="jspsych-survey-multi-choice-option">';
           html += '<input type="radio" name="' + input_name + '" id="' + input_id + '" class="form-radio hidden" value="' + question.options[j] + '" ' + required_attr + '></input>';
           html += '<label class="jspsych-survey-multi-choice-text jspsych-survey-highlight" data-time-stamp="Q' + (i+1) + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" for="' + input_id + '">' + question.options[j] + '</label>';
           html += '</div>';
         }
-  
+
         html += '</div>';
         if(i === 0) {
           html += '<div style="display: flex; padding: 2rem 0 2rem 2rem;">' +
@@ -247,7 +247,7 @@ jsPsych.plugins['SDS'] = (function () {
           '<p>* Work includes paid, unpaid volunteer work or training</p></div></div>';
         }
         html += '</div>';
-        
+
       }
 
 
@@ -274,7 +274,7 @@ jsPsych.plugins['SDS'] = (function () {
           html += '<span style="position: absolute; right: 0;">';
           html += '<label for="' + question_name + '">Select answer:</label>';
           html += '<select id="' + question_name + '" class="select-days-' + i + '"><option value="None">-</option>';
-          
+
           for (var j = 0; j < question.options.length; j++) {
             // add label and question text
             var option_id_name = "jspsych-survey-multi-choice-option-" + question_id + "-" + j;
@@ -287,13 +287,13 @@ jsPsych.plugins['SDS'] = (function () {
           html += '</div></div>';
       }
 
-      
+
       html += '</div>';
 
       // add submit button
       html += '<p><input type="submit" id="' + plugin_id_name + '-next" class="' + plugin_id_name + ' jspsych-btn"' + (trial.button_label ? ' value="' + trial.button_label + '"' : '') + '></input></p>';
       html += '</form>';
-  
+
       html +=
         `<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
               <div class="modal__overlay" tabindex="-1" data-micromodal-close>
@@ -312,10 +312,29 @@ jsPsych.plugins['SDS'] = (function () {
                 </div>
               </div>
           </div>`;
-  
+
+      html +=
+        `<div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+          <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+            <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+              <header class="modal__header">
+                <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+              </header>
+              <main class="modal__content" id="modal-2-content">
+                <p>
+                ${ timerModule.getPopupText() }
+                </p>
+              </main>
+              <footer class="modal__footer">
+                <button class="modal__btn" data-micromodal-close aria-label="Close this dialog window">Close</button>
+              </footer>
+            </div>
+          </div>
+      </div>`;
+
       // render
       display_element.innerHTML = html;
-  
+
       // function to handle key press responses
       var after_response = function (info) {
         if (info.key_release === undefined) {
@@ -351,9 +370,9 @@ jsPsych.plugins['SDS'] = (function () {
           });
         }
       };
-  
+
       $('.jspsych-survey-highlight').click(function () {
-        $(this).parent().parent().find(".jspsych-survey-highlight").removeClass('bg-primary'); // remove previous bg-primary items 
+        $(this).parent().parent().find(".jspsych-survey-highlight").removeClass('bg-primary'); // remove previous bg-primary items
         $(this).addClass('bg-primary');
         $(this).next('input').prop("checked", true);
       })
@@ -377,14 +396,14 @@ jsPsych.plugins['SDS'] = (function () {
           $("#" + labelID).prop('checked', true).trigger('click').trigger('change');
         };
       });
-  
+
       $("input[type=radio]").on("click change touchstart",function(){
-        var time_stamp_key = $(this).data('time-stamp'); 
+        var time_stamp_key = $(this).data('time-stamp');
         if(time_stamp_key) {
           trial.time_stamp[time_stamp_key] = jsPsych.totalTime();
         };
       });
-      
+
       $(".modal__btn, .modal__close").on("click touchstart",function(){
         response.trial_events.push({
           "event_type": "popup closed",
@@ -400,7 +419,7 @@ jsPsych.plugins['SDS'] = (function () {
         // measure response time
         var endTime = performance.now();
         var response_time = endTime - startTime;
-        
+
         response.trial_events.push({
           "event_type": "button clicked",
           "event_raw_details": 'Submit',
@@ -408,7 +427,7 @@ jsPsych.plugins['SDS'] = (function () {
           "timestamp": jsPsych.totalTime(),
           "time_elapsed": jsPsych.totalTime() - timestamp_onload
         });
-  
+
         // create object to hold responses
         var question_data = {};
         var timestamp_data = {};
@@ -416,7 +435,7 @@ jsPsych.plugins['SDS'] = (function () {
           var match = display_element.querySelector('#jspsych-survey-multi-choice-' + i);
           var id = i + 1;
           var val_not_working;
-          
+
           if (match.querySelector(".jspsych-survey-multi-choice-option input[type=radio]:checked") !== null) {
             var val = match.querySelector(".jspsych-survey-multi-choice-option input[type=radio]:checked").value;
             $(match).find('.question-title').removeClass('survey-error-after');
@@ -427,7 +446,7 @@ jsPsych.plugins['SDS'] = (function () {
 
           var obje = {};
           var name = id;
-      
+
           if (match.attributes['data-name'].value !== '') {
             name = match.attributes['data-name'].value;
           }
@@ -453,7 +472,7 @@ jsPsych.plugins['SDS'] = (function () {
           }
           Object.assign(question_data, obje, val_not_working);
         }
-        
+
         for (var i = 3; i < trial.questions.length; i++) {
           var match = display_element.querySelector('#jspsych-survey-multi-choice-' + i);
           var id = i + 1;
@@ -468,7 +487,7 @@ jsPsych.plugins['SDS'] = (function () {
 
           var obje = {};
           var name = id;
-      
+
           if (match.attributes['data-name'].value !== '') {
             name = match.attributes['data-name'].value;
           }
@@ -483,7 +502,7 @@ jsPsych.plugins['SDS'] = (function () {
             jsPsych.pluginAPI.cancelKeyboardResponse(keyboardListener);
             jsPsych.pluginAPI.cancelClickResponse(clickListener);
           }
-  
+
           // save data
           var trial_data = {
             "stage_name": JSON.stringify(plugin.info.stage_name),
@@ -493,10 +512,10 @@ jsPsych.plugins['SDS'] = (function () {
             "question_order": JSON.stringify(question_order),
             "events": JSON.stringify(response.trial_events)
           };
-  
+
           display_element.innerHTML = '';
           $('.navbar').remove();
-  
+
           // next trial
           jsPsych.finishTrial(trial_data);
         } else {
@@ -509,11 +528,11 @@ jsPsych.plugins['SDS'] = (function () {
             "time_elapsed": jsPsych.totalTime() - timestamp_onload
           });
         }
-  
+
       });
-  
+
       var startTime = performance.now();
-  
+
       // start the response listener
       var keyboardListener = jsPsych.pluginAPI.getKeyboardResponse({
         callback_function: after_response,
@@ -530,6 +549,6 @@ jsPsych.plugins['SDS'] = (function () {
         allow_held_key: false
       });
     };
-  
+
     return plugin;
   })();

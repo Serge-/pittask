@@ -1,6 +1,6 @@
 jsPsych.plugins['FTND'] = (function () {
     var plugin = {};
-  
+
     plugin.info = {
       name: 'FTND',
       stage_name: 'FTND',
@@ -90,15 +90,15 @@ jsPsych.plugins['FTND'] = (function () {
     }
     plugin.trial = function (display_element, trial) {
       var plugin_id_name = "jspsych-survey-multi-choice-FTND";
-  
+
       var html = "";
       var timestamp_onload = jsPsych.totalTime();
-  
+
       // store response
       var response = {
         trial_events: []
       };
-  
+
       response.trial_events.push({
         "event_type": trial.event_type,
         "event_raw_details": trial.event_raw_details,
@@ -106,7 +106,7 @@ jsPsych.plugins['FTND'] = (function () {
         "timestamp": jsPsych.totalTime(),
         "time_elapsed": jsPsych.totalTime() - timestamp_onload
       });
-  
+
       $('body').prepend(
         `<header>
           <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -117,7 +117,7 @@ jsPsych.plugins['FTND'] = (function () {
             </div>
           </nav>
         </header>`);
-  
+
       // inject CSS for trial
       html += '<style id="jspsych-survey-multi-choice-css">';
       html += ".jspsych-survey-multi-choice-question { display: flex; text-align: left; border-bottom: 1px solid;}" +
@@ -151,19 +151,19 @@ jsPsych.plugins['FTND'] = (function () {
           ".jspsych-survey-multi-choice-text { padding: 0 1rem; }" +
         "}"
       html += '</style>';
-  
-  
+
+
       // form element
       html += '<div id="' + plugin_id_name + '">';
       html += '<form id="jspsych-survey-multi-choice-form" class="jspsych-survey-multi-choice-form">';
-  
+
       // show preamble text
-  
+
       // show preamble text
       if (trial.preamble !== null) {
         html += '<div class="jspsych-survey-multi-choice-content"><div id="jspsych-survey-multi-choice-preamble" class="jspsych-survey-multi-choice-preamble">' + trial.preamble + '</div>';
       }
-  
+
       // generate question order. this is randomized here as opposed to randomizing the order of trial.questions
       // so that the data are always associated with the same question regardless of order
       var question_order = [];
@@ -173,52 +173,52 @@ jsPsych.plugins['FTND'] = (function () {
       if (trial.randomize_question_order) {
         question_order = jsPsych.randomization.shuffle(question_order);
       }
-  
+
       // add multiple-choice questions
       for (var i = 0; i < trial.questions.length; i++) {
-  
+
         // get question based on question_order
         var question = trial.questions[question_order[i]];
         var question_id = question_order[i];
-  
+
         // create question container
         var question_classes = ['jspsych-survey-multi-choice-question'];
         if (question.horizontal) {
           question_classes.push('jspsych-survey-multi-choice-horizontal');
         }
-  
+
         html += '<div id="jspsych-survey-multi-choice-' + question_id + '" class="' + question_classes.join(' ') + '"  data-name="' + (i + 1) + '">';
-  
+
         // add question text
         html += '<div class="jspsych-survey-multi-choice-option-left"><p class="jspsych-survey-multi-choice-text survey-multi-choice jspsych-survey-multi-choice-question-text" style="text-align: left; display: flex; width: 100%;"><span class="jspsych-survey-multi-choice-number">' + (i + 1) + '.</span>' + question.prompt
         // question.required
         html += '</p></div>';
         html += '<div class="jspsych-survey-multi-choice-option-right">';
-  
+
         // create option radio buttons
         for (var j = 0; j < question.options.length; j++) {
           // add label and question text
           var option_id_name = "jspsych-survey-multi-choice-option-" + question_id + "-" + j;
           var input_name = 'jspsych-survey-multi-choice-response-' + question_id;
           var input_id = 'jspsych-survey-multi-choice-response-' + question_id + '-' + j;
-  
+
           var required_attr = question.required ? 'required' : '';
-  
+
           // add radio button container
           html += '<div id="' + option_id_name + '" class="jspsych-survey-multi-choice-option">';
           html += '<input type="radio" name="' + input_name + '"  data-time-stamp="Q' + (i+1) + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" id="' + input_id + '" class="form-radio" value="' + question.options[j] + '" ' + required_attr + '></input>';
           html += '<label class="jspsych-survey-multi-choice-text" data-time-stamp="Q' + (i+1) + '" data-question-number="Q' + (i+1) +'A' + (j+1) +'" for="' + input_id + '">' + question.options[j] + '</label>';
           html += '</div>';
         }
-  
+
         html += '</div></div>';
       }
-  
+
       // add submit button
       html += '<p><input type="submit" id="' + plugin_id_name + '-next" class="' + plugin_id_name + ' jspsych-btn"' + (trial.button_label ? ' value="' + trial.button_label + '"' : '') + '></input></p>';
       html += '</form>';
       html += '</div>';
-      
+
       html +=
         `<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
               <div class="modal__overlay" tabindex="-1" data-micromodal-close>
@@ -237,13 +237,33 @@ jsPsych.plugins['FTND'] = (function () {
                 </div>
               </div>
           </div>`;
-  
+
+      // Modal window content
+      html +=
+        `<div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+            <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+              <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+                <header class="modal__header">
+                  <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+                </header>
+                <main class="modal__content" id="modal-2-content">
+                  <p>
+                  ${ timerModule.getPopupText() }
+                  </p>
+                </main>
+                <footer class="modal__footer">
+                  <button class="modal__btn" data-micromodal-close aria-label="Close this dialog window">Close</button>
+                </footer>
+              </div>
+            </div>
+        </div>`;
+
       // render
       display_element.innerHTML = html;
-  
+
       // function to handle key press responses
       var after_response = function (info) {
-  
+
         if (info.key_release === undefined) {
           response.trial_events.push({
             "event_type": "key press",
@@ -277,27 +297,27 @@ jsPsych.plugins['FTND'] = (function () {
           });
         }
       }
-  
+
       $('.jspsych-survey-highlight').click(function () {
         $(this).addClass('bg-primary');
         $(this).next('input').prop("checked", true);
       });
-      
+
       $("label").on("click",function(){
         var labelID = $(this).attr('for');
         if('labelID') {
           $("#" + labelID).prop('checked', true).trigger('click').trigger('change');
         };
       });
-  
+
       $("input[type=radio]").on("click change touchstart",function(){
-        var time_stamp_key = $(this).data('time-stamp'); 
+        var time_stamp_key = $(this).data('time-stamp');
         if(time_stamp_key) {
           trial.time_stamp[time_stamp_key] = jsPsych.totalTime();
         };
       });
 
-            
+
       $(".modal__btn, .modal__close").on("click touchstart",function(){
         response.trial_events.push({
           "event_type": "popup closed",
@@ -307,7 +327,7 @@ jsPsych.plugins['FTND'] = (function () {
           "time_elapsed": jsPsych.totalTime() - timestamp_onload
         });
       });
-  
+
       document.querySelector('form').addEventListener('submit', function (event) {
         event.preventDefault();
         // measure response time
@@ -321,14 +341,14 @@ jsPsych.plugins['FTND'] = (function () {
           "timestamp": jsPsych.totalTime(),
           "time_elapsed": jsPsych.totalTime() - timestamp_onload
         });
-  
+
         // create object to hold responses
         var question_data = {};
         var timestamp_data = {};
         for (var i = 0; i < trial.questions.length; i++) {
           var match = display_element.querySelector('#jspsych-survey-multi-choice-' + i);
           var id = (i + 1);
-          
+
           if (match.querySelector("input[type=radio]:checked") !== null) {
             var val = match.querySelector("input[type=radio]:checked").value;
             $(match).find('.jspsych-survey-multi-choice-question-text').removeClass('survey-error-after');
@@ -338,7 +358,7 @@ jsPsych.plugins['FTND'] = (function () {
           }
           var obje = {};
           var name = id;
-      
+
           if (match.attributes['data-name'].value !== '') {
             name = match.attributes['data-name'].value;
           }
@@ -346,14 +366,14 @@ jsPsych.plugins['FTND'] = (function () {
           timestamp_data[name] = trial.time_stamp['Q' + id];
           Object.assign(question_data, obje);
         }
-  
+
         if ($(".survey-error-after").length < 1) {
           // kill keyboard listeners
           if (typeof keyboardListener !== 'undefined') {
             jsPsych.pluginAPI.cancelKeyboardResponse(keyboardListener);
             jsPsych.pluginAPI.cancelClickResponse(clickListener);
           }
-  
+
           // save data
           var trial_data = {
             "stage_name": JSON.stringify(plugin.info.stage_name),
@@ -363,10 +383,10 @@ jsPsych.plugins['FTND'] = (function () {
             "question_order": JSON.stringify(question_order),
             "events": JSON.stringify(response.trial_events)
           };
-  
+
           display_element.innerHTML = '';
           $('.navbar').remove();
-  
+
           // next trial
           jsPsych.finishTrial(trial_data);
         } else {
@@ -379,11 +399,11 @@ jsPsych.plugins['FTND'] = (function () {
             "time_elapsed": jsPsych.totalTime() - timestamp_onload
           });
         }
-  
+
       });
-  
+
       var startTime = performance.now();
-  
+
       // start the response listener
       var keyboardListener = jsPsych.pluginAPI.getKeyboardResponse({
         callback_function: after_response,
@@ -432,6 +452,6 @@ jsPsych.plugins['FTND'] = (function () {
         jsPsych.finishTrial(trial_data);
       }
     };
-  
+
     return plugin;
   })();

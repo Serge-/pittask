@@ -156,7 +156,7 @@ jsPsych.plugins['PC-PTSD-5'] = (function() {
     // form element
     html += '<div id="' + plugin_id_name + '">';
     html += '<form id="jspsych-survey-multi-choice-form">';
-    
+
     // generate question order. this is randomized here as opposed to randomizing the order of trial.questions
     // so that the data are always associated with the same question regardless of order
     var question_order = [];
@@ -166,36 +166,36 @@ jsPsych.plugins['PC-PTSD-5'] = (function() {
     if(trial.randomize_question_order){
       question_order = jsPsych.randomization.shuffle(question_order);
     }
-    
+
     // add multiple-choice questions
     for (var i = 0; i < trial.questions.length; i++) {
-      
+
       // get question based on question_order
       var question = trial.questions[question_order[i]];
       var question_id = question_order[i];
-      
+
       // create question container
       var question_classes = ['jspsych-survey-multi-choice-question'];
       if (question.horizontal) {
         question_classes.push('jspsych-survey-multi-choice-horizontal');
       }
 
-      
+
       if(i === 0) {
         html += '<div style="margin-bottom: 8rem;" id="jspsych-survey-multi-choice-'+question_id+'" class="'+question_classes.join(' ')+'"  data-name="'+question.name+'">';
         // add question text
-        html += '<div class="jspsych-survey-multi-choice-option-left-first"><p class="jspsych-survey-multi-choice-text survey-multi-choice jspsych-survey-multi-choice-question-text" style="padding-top: 3px;">' +  question.prompt 
-      
+        html += '<div class="jspsych-survey-multi-choice-option-left-first"><p class="jspsych-survey-multi-choice-text survey-multi-choice jspsych-survey-multi-choice-question-text" style="padding-top: 3px;">' +  question.prompt
+
       } else {
         if(i === 1) {
           html += '<div class="'+question_classes.join(' ')+' hidden"  data-name="'+question.name+'"><p>In the past month, have you...</p></div>';
         };
         html += '<div id="jspsych-survey-multi-choice-'+question_id+'" class="'+question_classes.join(' ')+' hidden"  data-name="'+question.name+'">';
         // add question text
-        html += '<div class="jspsych-survey-multi-choice-option-left"><span class="jspsych-survey-multi-choice-number">' + i + '.</span><p class="jspsych-survey-multi-choice-text survey-multi-choice jspsych-survey-multi-choice-question-text">' +  question.prompt 
+        html += '<div class="jspsych-survey-multi-choice-option-left"><span class="jspsych-survey-multi-choice-number">' + i + '.</span><p class="jspsych-survey-multi-choice-text survey-multi-choice jspsych-survey-multi-choice-question-text">' +  question.prompt
       }
 
-  
+
       // question.required
       html += '</p></div>';
       html += '<div class="jspsych-survey-multi-choice-option-right">';
@@ -224,12 +224,12 @@ jsPsych.plugins['PC-PTSD-5'] = (function() {
 
       html += '</div></div>';
     }
-    
+
     // add submit button
     html += '<input type="submit" id="'+plugin_id_name+'-next" class="'+plugin_id_name+' jspsych-btn"' + (trial.button_label ? ' value="'+trial.button_label + '"': '') + '></input>';
     html += '</form>';
 
-    
+
     html +=
       `<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
           <div class="modal__overlay" tabindex="-1" data-micromodal-close>
@@ -239,6 +239,26 @@ jsPsych.plugins['PC-PTSD-5'] = (function() {
               </header>
               <main class="modal__content" id="modal-1-content">
                 <p>${popup_text_WBF}</p>
+              </main>
+              <footer class="modal__footer">
+                <button class="modal__btn" data-micromodal-close aria-label="Close this dialog window">Close</button>
+              </footer>
+            </div>
+          </div>
+      </div>`;
+
+    // Modal window content
+    html +=
+      `<div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+          <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+            <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+              <header class="modal__header">
+                <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+              </header>
+              <main class="modal__content" id="modal-2-content">
+                <p>
+                ${ timerModule.getPopupText() }
+                </p>
               </main>
               <footer class="modal__footer">
                 <button class="modal__btn" data-micromodal-close aria-label="Close this dialog window">Close</button>
@@ -299,7 +319,7 @@ jsPsych.plugins['PC-PTSD-5'] = (function() {
     });
 
     $("input[type=radio]").on("click change touchstart",function(){
-      var time_stamp_key = $(this).data('time-stamp'); 
+      var time_stamp_key = $(this).data('time-stamp');
       if(time_stamp_key) {
         trial.time_stamp[time_stamp_key] = jsPsych.totalTime();
       };
@@ -360,7 +380,7 @@ jsPsych.plugins['PC-PTSD-5'] = (function() {
           val = 'NA';
           $(match).find('.jspsych-survey-multi-choice-question-text').removeClass('survey-error-after');
         }
-       
+
         var obje = {};
         var name = id;
         if(match.attributes['data-name'].value !== ''){
@@ -368,7 +388,7 @@ jsPsych.plugins['PC-PTSD-5'] = (function() {
         }
 
         timestamp_data[name] = val === 'NA' ? val : trial.time_stamp['Q' + (i+1)];
-        obje[name] = val; 
+        obje[name] = val;
         Object.assign(question_data, obje);
       }
 
