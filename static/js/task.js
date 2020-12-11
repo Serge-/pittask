@@ -2,12 +2,10 @@
 
 var psiTurk = new PsiTurk(uniqueId, adServerLoc, mode);
 
-var mycondition = condition;  // these two variables are passed by the psiturk server process
-var mycounterbalance = counterbalance;  // they tell you which condition you have been assigned to
-// they are not used in the stroop code but may be useful to you
-
-// reset all previous data in case if page was reloaded
+// remove previous data from the database on page reloading
 psiTurk.taskdata.set('data', [])
+// reset all previous data in case if page was reloaded
+jsPsych.data.reset();
 
 var DEGRAD_PATTERN = {
     A0: {
@@ -1564,8 +1562,7 @@ function startExperiment(){
                 });
             }, 
             on_data_update: function(data) {
-                psiTurk.recordTrialData(data),
-                psiTurk.recordUnstructuredData(),
+                psiTurk.recordTrialData(data);
                 psiTurk.saveData();
 			}
         }
