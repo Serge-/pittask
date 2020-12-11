@@ -1081,14 +1081,16 @@ if(isClass(query))
       time_ms <- dateTime_ms[pid5bf_index] - time_elapsed
 
       for(j in 1:length(pid5bf_responses)){
+        timestamp <- ifelse(is.na(names(pid5bf_timestamps)[j]), 'NA', pid5bf_timestamps[[j]])
         PID_5_BF <- rbindlist(list(PID_5_BF, list(
           PIN, complete, date,
-          as.character(as.ITime(formatDateTime(time_ms + as.numeric(pid5bf_timestamps[[j]])))),
-          pid5bf_timestamps[[j]],
+          # as.character(as.ITime(formatDateTime(time_ms + as.numeric(pid5bf_timestamps[[j]])))),
+          as.character(as.ITime(formatDateTime(time_ms + as.numeric(timestamp)))),
+          timestamp,
           country, commit, version,
           names(pid5bf_responses)[j],
           pid5bf_responses[[j]]
-        )))
+        )), fill=TRUE)
       }
     } 
     
