@@ -1,5 +1,4 @@
 // Initalize psiturk object
-
 var psiTurk = new PsiTurk(uniqueId, adServerLoc, mode);
 
 // remove previous data from the database on page reloading

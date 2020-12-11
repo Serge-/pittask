@@ -263,11 +263,12 @@ jsPsych.plugins['survey-pav-multi-choice'] = (function() {
 
       // create object to hold responses
       var question_data = {};
+      var val;
       for(var i=0; i<trial.questions.length; i++){
         var match = display_element.querySelector('#jspsych-survey-multi-choice-'+i);
         var id = "Q" + i;
         if(match.querySelector("input[type=radio]:checked") !== null){
-          var val = match.querySelector("input[type=radio]:checked").value;
+          val = match.querySelector("input[type=radio]:checked").value;
           if(color_value === val) {
             pav_is_correct = true;
             pav_correct_holder ++;
@@ -276,7 +277,7 @@ jsPsych.plugins['survey-pav-multi-choice'] = (function() {
             pav_correct_holder = 0;
           }
         } else {
-          var val = "";
+          val = "";
           pav_incorrect_holder ++;
           pav_correct_holder = 0;
         }
@@ -306,7 +307,7 @@ jsPsych.plugins['survey-pav-multi-choice'] = (function() {
             response.trial_events.push({
               "event_type": "popup closed",
               "event_raw_details": 'Close',
-              "event_converted_details": trial.event_converted_details,
+              "event_converted_details": "question with " + color_name + " vending machine appears",
               "timestamp": jsPsych.totalTime(),
               "time_elapsed": jsPsych.totalTime() - timestamp_onload
             });
