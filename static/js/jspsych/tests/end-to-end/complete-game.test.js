@@ -158,6 +158,7 @@ describe('key testing', () => {
     close_instruct_recall = await page.evaluate(() => close_instruct_recall);
     open_instruct_text_recall = await page.evaluate(() => open_instruct_text_recall);
     close_instruct_text_recall = await page.evaluate(() => close_instruct_text_recall);
+    min_num_correct_pav = await page.evaluate(() => min_num_correct_pav);
   });
 
   test("open instruction", async () => {
@@ -467,47 +468,36 @@ describe('Pav Conditioning', () => {
   });
 
   test('stage', async () => {
-    await page.waitForSelector('.pav-conditioning');
-    await delay((stim_duration * 4) + (ITI_duration * 4));
+    for (let index = 0; index < min_num_correct_pav; index++) {
+      await page.waitForSelector('.pav-conditioning');
+      await delay((stim_duration * 4) + (ITI_duration * 4));
+      const machine_color = await raceSelectors(page, ['.stim1_colour', '.stim2_colour', '.stim3_colour', '.stim4_colour']);
 
-    let pav_con = await raceSelectors(page, ['.pavlovian-conditioning-form', '#jspsych-html-keyboard-response-stimulus']);
-
-    while (pav_con === '.pavlovian-conditioning-form' || pav_con === '.pav-conditioning') {
-
-        if(pav_con === '.pav-conditioning') {
-          await delay((stim_duration * 4) );
-        }
-
-        const machine_color = await raceSelectors(page, ['.stim1_colour', '.stim2_colour', '.stim3_colour', '.stim4_colour']);
-        switch (machine_color) {
-          case '.stim1_colour':
-            await page.evaluate(() => {
-              document.querySelector('#jspsych-survey-multi-choice-response-0-0').click();
-            });
-            break;
-          case '.stim2_colour':
-            await page.evaluate(() => {
-              document.querySelector('#jspsych-survey-multi-choice-response-0-1').click();
-            });
-            break;
-          case '.stim3_colour':
-            await page.evaluate(() => {
-              document.querySelector('#jspsych-survey-multi-choice-response-0-2').click();
-            });
-            break;
-          case '.stim4_colour':
-            await page.evaluate(() => {
-              document.querySelector('#jspsych-survey-multi-choice-response-0-3').click();
-            });
-            break;
-        }
-        await page.click(".jspsych-btn");
-        await delay(feedback_duration);
-        pav_con = await raceSelectors(page, ['.pav-conditioning', '.pavlovian-conditioning-form',  '#jspsych-html-keyboard-response-stimulus']);
-        if(pav_con === '#jspsych-html-keyboard-response-stimulus') {
+      switch (machine_color) {
+        case '.stim1_colour':
+          await page.evaluate(() => {
+            document.querySelector('#jspsych-survey-multi-choice-response-0-0').click();
+          });
           break;
-        }
-    };
+        case '.stim2_colour':
+          await page.evaluate(() => {
+            document.querySelector('#jspsych-survey-multi-choice-response-0-1').click();
+          });
+          break;
+        case '.stim3_colour':
+          await page.evaluate(() => {
+            document.querySelector('#jspsych-survey-multi-choice-response-0-2').click();
+          });
+          break;
+        case '.stim4_colour':
+          await page.evaluate(() => {
+            document.querySelector('#jspsych-survey-multi-choice-response-0-3').click();
+          });
+          break;
+      }
+      await page.click(".jspsych-btn");
+      await delay(feedback_duration);
+    }
 
   }, 255000);
 
