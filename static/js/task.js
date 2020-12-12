@@ -1,13 +1,10 @@
 // Initalize psiturk object
-
 var psiTurk = new PsiTurk(uniqueId, adServerLoc, mode);
 
-var mycondition = condition;  // these two variables are passed by the psiturk server process
-var mycounterbalance = counterbalance;  // they tell you which condition you have been assigned to
-// they are not used in the stroop code but may be useful to you
-
-// reset all previous data in case if page was reloaded
+// remove previous data from the database on page reloading
 psiTurk.taskdata.set('data', [])
+// reset all previous data in case if page was reloaded
+jsPsych.data.reset();
 
 var DEGRAD_PATTERN = {
     A0: {
@@ -1306,6 +1303,157 @@ var DEVAL_TEST = {
         DEVAL_TEST_INSTRUCT_OPEN, DEVAL_TEST_MAIN, DEVAL_TEST_INSTRUCT_CLOSE
     ]
 };
+// item_id = 1
+// Recall (memory test)
+var RECALL = {
+    timeline: [
+        {
+            timeline: [{
+                stage_name: 'recall_open',
+                type: 'html-keyboard-response',
+                stimulus: open_instruct_text_recall,
+                trial_latency: open_instruct_latency,
+                trial_duration: null,
+                response_ends_trial: false,
+                event_type: 'text appears',
+                event_raw_details: 'open_instruct_text_recall',
+                event_converted_details: "open_instruct_text_recall text appears",
+            }],
+            conditional_function: function() {
+                return open_instruct_recall;
+            }
+        },
+        {
+            timeline: [
+                {
+                    stage_name: 'recall',
+                    stage_type: 'pav_con',
+                    type: 'survey-pav-multi-choice',
+                    questions: [
+                        { prompt: "Which snack is overstocked?", name: 'response', options: [
+                            {
+                                name: 'M&Ms',
+                                value: 'MM',
+                                img: '/static/images/MM.png',
+                                response: 'a',
+                            },
+                            {
+                                name: 'BBQ',
+                                value: 'BBQ',
+                                img: '/static/images/BBQ.png',
+                                response: 'b',
+                            },
+                            {
+                                name: 'Tiny teddy',
+                                value: 'TT',
+                                img: '/static/images/TT.png',
+                                response: 'c',
+                            },
+                            {
+                                name: 'Empty',
+                                value: 'Empty',
+                                img: '/static/images/EMPTY.png',
+                                response: 'd',
+                            }
+                        ]
+                    }],
+                    button_label: 'submit answer',
+                },
+            ],
+            loop_function: function(){
+                pav_multi_choice_counter ++;
+                pav_is_correct = false;
+                if(pav_multi_choice_counter < 4) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        },
+        {
+            timeline: jsPsych.randomization.shuffle([
+                {
+                    type: 'survey-vvr-questions-left',
+                    stage_name: 'recall',
+                    stage_type: 'VVR',
+                    vvr_stage: null,
+                    details: {
+                        a: {
+                            event_type: 'question appears',
+                            event_raw_details: 'question 1(a) appears',
+                            event_converted_details: 'recall' + ' text appears',
+                        },
+                        b: {
+                            event_type: 'question appears',
+                            event_raw_details: 'question 1(b) appears',
+                            event_converted_details: 'recall' + ' text appears',
+                        }
+                    },
+                    vars: {
+                        VVR_q_text_a1: VVR_q_text_a1,
+                        VVR_q_text_a2: VVR_q_text_a2,
+                        VVR_q_text_b1: VVR_q_text_b1,
+                        VVR_q_text_b2: VVR_q_text_b2,
+                        VVR_q_text_b3: VVR_q_text_b3,
+                        VVR_q_text_b4: VVR_q_text_b4,
+                        max_num_correct_consecutive_questions: 1
+                    },
+                    popup_machine: false,
+                    popup_machine_duration: 1000,
+                    popup_machine_text: 'text popup'
+                },
+                {
+                    type: 'survey-vvr-questions-right',
+                    stage_name: 'recall',
+                    stage_type: 'VVR',
+                    vvr_stage: null,
+                    details: {
+                        a: {
+                            event_type: 'question appears',
+                            event_raw_details: 'question 1(a) appears',
+                            event_converted_details: 'recall' + ' text appears',
+                        },
+                        b: {
+                            event_type: 'question appears',
+                            event_raw_details: 'question 1(b) appears',
+                            event_converted_details: 'recall' + ' text appears',
+                        }
+                    },
+                    vars: {
+                        VVR_q_text_a1: VVR_q_text_a1,
+                        VVR_q_text_a2: VVR_q_text_a2,
+                        VVR_q_text_b1: VVR_q_text_b1,
+                        VVR_q_text_b2: VVR_q_text_b2,
+                        VVR_q_text_b3: VVR_q_text_b3,
+                        VVR_q_text_b4: VVR_q_text_b4,
+                        max_num_correct_consecutive_questions: 1
+                    },
+                    popup_machine: false,
+                    popup_machine_duration: 1000,
+                    popup_machine_text: 'text popup'
+                }
+            ])
+
+        },
+        {
+            timeline: [{
+                stage_name: 'recall_close',
+                type: 'html-keyboard-response',
+                stimulus: close_instruct_text_recall,
+                trial_latency: close_instruct_latency,
+                trial_duration: null,
+                response_ends_trial: false,
+                event_type: 'text appears',
+                event_raw_details: 'close_instruct_text_recall',
+                event_converted_details: "close_instruct_text_recall text appears",
+            }],
+            conditional_function: function() {
+                return close_instruct_recall;
+            }
+        }, 
+    ]
+};
+
 
 var CLOSE_HIT = {
     stage_name: 'close_HIT_q',
@@ -1392,6 +1540,8 @@ timeline.push(SDS);
 timeline.push(ICAR);
 // Close: That's it for the symptom questions. Now we're ready to start the online game
 // timeline.push(WBF_CLOSE);
+// Recall
+timeline.push(RECALL)
 //  Close HIT Questions
 timeline.push(CLOSE_HIT);
 // Thanks
@@ -1411,8 +1561,7 @@ function startExperiment(){
                 });
             }, 
             on_data_update: function(data) {
-                psiTurk.recordTrialData(data),
-                psiTurk.recordUnstructuredData(),
+                psiTurk.recordTrialData(data);
                 psiTurk.saveData();
 			}
         }

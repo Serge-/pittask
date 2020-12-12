@@ -154,7 +154,11 @@ describe('key testing', () => {
     close_instruct_ICAR = await page.evaluate(() => close_instruct_ICAR);
     open_instruct_SDS = await page.evaluate(() => open_instruct_SDS);
     close_instruct_SDS = await page.evaluate(() => close_instruct_SDS);
-  
+    open_instruct_recall = await page.evaluate(() => open_instruct_recall);
+    close_instruct_recall = await page.evaluate(() => close_instruct_recall);
+    open_instruct_text_recall = await page.evaluate(() => open_instruct_text_recall);
+    close_instruct_text_recall = await page.evaluate(() => close_instruct_text_recall);
+    min_num_correct_pav = await page.evaluate(() => min_num_correct_pav);
   });
 
   test("open instruction", async () => {
@@ -464,47 +468,36 @@ describe('Pav Conditioning', () => {
   });
 
   test('stage', async () => {
-    await page.waitForSelector('.pav-conditioning');
-    await delay((stim_duration * 4) + (ITI_duration * 4));
+    for (let index = 0; index < min_num_correct_pav; index++) {
+      await page.waitForSelector('.pav-conditioning');
+      await delay((stim_duration * 4) + (ITI_duration * 4));
+      const machine_color = await raceSelectors(page, ['.stim1_colour', '.stim2_colour', '.stim3_colour', '.stim4_colour']);
 
-    let pav_con = await raceSelectors(page, ['.pavlovian-conditioning-form', '#jspsych-html-keyboard-response-stimulus']);
-
-    while (pav_con === '.pavlovian-conditioning-form' || pav_con === '.pav-conditioning') {
-
-        if(pav_con === '.pav-conditioning') {
-          await delay((stim_duration * 4) );
-        }
-
-        const machine_color = await raceSelectors(page, ['.stim1_colour', '.stim2_colour', '.stim3_colour', '.stim4_colour']);
-        switch (machine_color) {
-          case '.stim1_colour':
-            await page.evaluate(() => {
-              document.querySelector('#jspsych-survey-multi-choice-response-0-0').click();
-            });
-            break;
-          case '.stim2_colour':
-            await page.evaluate(() => {
-              document.querySelector('#jspsych-survey-multi-choice-response-0-1').click();
-            });
-            break;
-          case '.stim3_colour':
-            await page.evaluate(() => {
-              document.querySelector('#jspsych-survey-multi-choice-response-0-2').click();
-            });
-            break;
-          case '.stim4_colour':
-            await page.evaluate(() => {
-              document.querySelector('#jspsych-survey-multi-choice-response-0-3').click();
-            });
-            break;
-        }
-        await page.click(".jspsych-btn");
-        await delay(feedback_duration);
-        pav_con = await raceSelectors(page, ['.pav-conditioning', '.pavlovian-conditioning-form',  '#jspsych-html-keyboard-response-stimulus']);
-        if(pav_con === '#jspsych-html-keyboard-response-stimulus') {
+      switch (machine_color) {
+        case '.stim1_colour':
+          await page.evaluate(() => {
+            document.querySelector('#jspsych-survey-multi-choice-response-0-0').click();
+          });
           break;
-        }
-    };
+        case '.stim2_colour':
+          await page.evaluate(() => {
+            document.querySelector('#jspsych-survey-multi-choice-response-0-1').click();
+          });
+          break;
+        case '.stim3_colour':
+          await page.evaluate(() => {
+            document.querySelector('#jspsych-survey-multi-choice-response-0-2').click();
+          });
+          break;
+        case '.stim4_colour':
+          await page.evaluate(() => {
+            document.querySelector('#jspsych-survey-multi-choice-response-0-3').click();
+          });
+          break;
+      }
+      await page.click(".jspsych-btn");
+      await delay(feedback_duration);
+    }
 
   }, 255000);
 
@@ -1329,6 +1322,72 @@ describe('WBF CLOSE', () => {
 
 });
 
+describe('Recall', () => {
+  test('open instruction', async () => {
+    if(open_instruct_recall) {
+      await page.waitForSelector('#jspsych-html-keyboard-response-stimulus');
+      const open_instruct_text = await page.evaluate(() => document.querySelector('#jspsych-html-keyboard-response-stimulus').innerHTML);
+      await expect(open_instruct_text).toContain(open_instruct_text_recall);
+      await delay(open_instruct_latency);
+      await page.click("#jspsych-html-keyboard-response-stimulus");
+    }
+  });
+
+  test('stage', async () => {
+    await page.waitForSelector("#jspsych-survey-multi-choice-form");
+    for (let index = 0; index < 4; index++) {
+      const itemID = getRandomInt(3);
+      await delay(getRandomInt(500));
+
+      await page.click("#jspsych-survey-multi-choice-response-0-" + itemID);
+      await page.click("#jspsych-survey-multi-choice-next");
+    };
+
+    await page.waitForSelector(".vvr-question-a");
+    await delay(answer_latency);
+    const innerTextOfButton_inst_cond_first = await raceSelectors(page, ['.vvr-question-left', '.vvr-question-right']);
+    if (innerTextOfButton_inst_cond_first === '.vvr-question-left') {
+      await page.keyboard.press('ArrowLeft');
+    } else if(innerTextOfButton_inst_cond_first === '.vvr-question-right') {
+      await page.keyboard.press('ArrowRight');
+    }
+    await page.waitForSelector('.ui-slider-handle');
+    let e = await page.$('.ui-slider-handle');
+    let box = await e.boundingBox();
+    await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+    await page.mouse.down();
+    await page.mouse.move(box.x + getRangeInt(-200, 200), box.y + box.height / 2); // move to (400, 200) coordinates
+    await page.mouse.up();
+
+    await page.waitForSelector(".vvr-question-a");
+    await delay(answer_latency);
+    const innerTextOfButton_inst_cond_second = await raceSelectors(page, ['.vvr-question-left', '.vvr-question-right']);
+    if (innerTextOfButton_inst_cond_second === '.vvr-question-left') {
+      await page.keyboard.press('ArrowLeft');
+    } else if(innerTextOfButton_inst_cond_second === '.vvr-question-right') {
+      await page.keyboard.press('ArrowRight');
+    }
+    await page.waitForSelector('.ui-slider-handle');
+    e = await page.$('.ui-slider-handle');
+    box = await e.boundingBox();
+    await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+    await page.mouse.down();
+    await page.mouse.move(box.x + getRangeInt(-200, 200), box.y + box.height / 2); // move to (400, 200) coordinates
+    await page.mouse.up();
+    await delay(feedback_duration);
+  });
+
+  test('close instruction', async () => {
+    if(close_instruct_recall) {
+      await page.waitForSelector('#jspsych-html-keyboard-response-stimulus');
+      const open_instruct_text = await page.evaluate(() => document.querySelector('#jspsych-html-keyboard-response-stimulus').innerHTML);
+      await expect(open_instruct_text).toContain(close_instruct_text_recall);
+      await delay(close_instruct_latency);
+      await page.click("#jspsych-html-keyboard-response-stimulus");
+    }
+  });
+
+});
 
 describe('Close HIT', () => {
 
@@ -1356,11 +1415,12 @@ describe('Thanks', () => {
 
 
 describe("Finishing testing", () => {
+    // production mode 
     test('Experiment complete!', async () => {
       await page.waitForSelector("#container-not-an-ad");
     }, timeout);
 
-    // debug mode
+    // // debug mode
     // test('Experiment complete!', async () => {
     //   await page.waitForSelector("#jspsych-data-display");
     // }, timeout);

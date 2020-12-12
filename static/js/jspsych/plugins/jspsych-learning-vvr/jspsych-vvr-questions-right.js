@@ -122,11 +122,12 @@ jsPsych.plugins['survey-vvr-questions-right'] = (function() {
             trial_events: []
         };
         var timestamp_onload = vvr_timer;
+        var question_number = item_id + 1;
 
         response.trial_events.push({
             "event_type": trial.details.a.event_type,
-            "event_raw_details": trial.details.a.event_raw_details,
-            "event_converted_details": trial.details.a.event_converted_details + '; ' +  counter_balancing[0].right + ' image appears',
+            "event_raw_details": "question " + question_number + "(a) appears",
+            "event_converted_details": "question " + question_number + "(a) appears; " +  counter_balancing[0].right + " image appears",
             "timestamp": jsPsych.totalTime(),
             "time_elapsed": jsPsych.totalTime() - timestamp_onload
         });
@@ -170,8 +171,8 @@ jsPsych.plugins['survey-vvr-questions-right'] = (function() {
             $('.vvr-question-b').fadeIn('slow');   
             response.trial_events.push({
                 "event_type": trial.details.b.event_type,
-                "event_raw_details": trial.details.b.event_raw_details,
-                "event_converted_details": trial.details.b.event_converted_details,
+                "event_raw_details": "question " + question_number + "(b) appears",
+                "event_converted_details": "question " + question_number + "(b) appears",
                 "timestamp": jsPsych.totalTime(),
                 "time_elapsed": jsPsych.totalTime() - timestamp_onload
             });
@@ -247,7 +248,6 @@ jsPsych.plugins['survey-vvr-questions-right'] = (function() {
             // gather the data to store for the trial
             var trial_data = {
                 "stage_name": JSON.stringify(trial.stage_name),
-                "vvr_stage": JSON.stringify(trial.vvr_stage),
                 "stimulus": trial.stimulus,
                 "timestamp": jsPsych.totalTime(),
                 "block_number": loop_node_counter_vvr,
@@ -257,6 +257,15 @@ jsPsych.plugins['survey-vvr-questions-right'] = (function() {
                 "strength_of_belief": vas_holder,
                 "events": JSON.stringify(response.trial_events)
             };
+
+            // add VVR stage name if plugin was called by VVR stage
+            // make exception for Recall stage
+            if(trial.vvr_stage !== null) {
+                trial_data.vvr_stage = JSON.stringify(trial.vvr_stage);
+            } else {
+                // required for Recall stage
+                trial_data.block_number = trial.stage_type;
+            }
 
             // clear the display
             display_element.innerHTML = '';
