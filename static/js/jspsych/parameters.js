@@ -68,30 +68,32 @@ var stim4_colour = 'rgb(255,215,0)';
  ************************************************************
  * Key-Testing
  ***********************************************************/
-var open_instruct_text_key_testing = "<p>This is a key-testing stage.</p> <p>We need to check whether your keyboard is working properly.</p> <p>Press any key when you are ready.</p>";
+var open_instruct_text_key_testing = "<p> We would like to test your keyboard. </p> <p>Press any key to begin. </p>";
 var close_instruct_text_key_testing = "<p>Thank you for your patience.</p> <p>Press any key when you are ready to start.</p>";
 /************************************************************
  * Web-based forms
  ***********************************************************/
 var open_instruct_WBF = true;
 var close_instruct_WBF = false;
-var open_instruct_text_WBF = "<p>Now we would like to ask you some questions.</p><br> <p>Press any key when you are ready.</p>";
+var open_instruct_text_WBF = "<p>We would like to ask you some questions about you.</p><br>" +   "<p>Your answers are anonymous and will not influence your payment.</p><br>" + 
+"<p>Press any key when you are ready.</p>";
 var close_instruct_text_WBF = "<p>Thank you.</p> <p>Press any key when you are ready to start.</p>";
 
 var open_instruct_inventory = true;
 var close_instruct_inventory = false;
 var open_instruct_text_inventory = 
     '<p>We would like to ask about some experiences you may have had.</p><br>' +
-    '<p>This is in order to help people who may be troubled by such experiences.</p><br>' +
-    '<p>Your answers are anonymous and will not influence your payment.</p><br>' +
-    '<p>Press any key to continue.</p>' 
+    '<p>This is to help people who may be troubled by such experiences.</p><br>' +
+'<p>If you become distressed while answering these questions, you do not need to continue your participation.</p><br>' +
+'<p>It may also help to talk to a friend, counsellor, or doctor about how you are feeling.</p><br>' +
+    '<p>Press any key to begin.</p>'; 
 var close_instruct_text_inventory = 'Symptom inventories close';
 
-var open_instruct_demographics = false;
+var open_instruct_demographics = true;
 var close_instruct_demographics = false;
 var open_instruct_text_demographics = 
-    '<p>We would like to ask some questions about you.</p><br>' +
-    '<p>Your answers are anonymous and will not influence your payment.</p><br>' +
+   '<p>This section of the HIT does take about 45 minutes and then you will be nearly finished.</p><br>' +
+    '<p>Please take your time and answer honestly. </p><br>' +
     '<p>Press any key to begin</p>';
 var close_instruct_text_demographics = 'Demographics close';
 
@@ -100,9 +102,12 @@ var close_instruct_SDS = false;
 var open_instruct_text_SDS = 'SDS open';
 var close_instruct_text_SDS = 'SDS close';
 
-var open_instruct_ICAR = false;
+var open_instruct_ICAR = true;
 var close_instruct_ICAR = false;
-var open_instruct_text_ICAR = 'ICAR open';
+var open_instruct_text_ICAR = 	
+	'<p>Thank you! You are nearly finished.</p><br>'+
+	'<p> There is only a final set of questions which should take about 15 minutes.</p><br>' + 
+	'<p>Press any key to begin.</p>';
 var close_instruct_text_ICAR = 'ICAR close';
 /************************************************************
  * Symptom Inventories
@@ -153,7 +158,7 @@ var video_duration = 30;
 var video_sound = false;
 var open_instruct_video = true;
 var open_instruct_text_video = '<p>You discover something new about one of the snacks. Watch and see what has changed.</p><br>' + '<p> press any key to begin.</p>';
-var close_instruct_video = true;
+var close_instruct_video = false;
 var close_instruct_text_video = 
     "<p>The vending machine is still overflowing, " +
     "and you can tip it again now.</p><br><br> " +
@@ -167,13 +172,13 @@ var close_instruct_text_video =
  ***********************************************************/
 var open_instruct_FHQ_pre_rating = true;
 var close_instruct_FHQ_pre_rating = true;
-var open_instruct_text_FHQ_pre_rating =  'Now we would like to ask you some questions about your food preferences.<br>' + '<p>Press any key to continue. </p>';
-var close_instruct_text_FHQ_pre_rating = 'Thank you. That is it for the food questions for now.<p> Press any key to continue. </p>';
+var open_instruct_text_FHQ_pre_rating =   '<p> We would like to ask you some questions about snacks.</p><br>' + '<p>Press any key to begin. </p>';
+var close_instruct_text_FHQ_pre_rating = '<p> Thank you. That is it for the food questions for now.</p><br>' + '<p> Press any key to continue. </p>';
 
 var open_instruct_FHQ_post_rating = true;
 var close_instruct_FHQ_post_rating = true;
-var open_instruct_text_FHQ_post_rating =  'Now we would again like to ask you some questions about your food preferences.<br>' + '<p>Press any key to continue. </p>';
-var close_instruct_text_FHQ_post_rating = 'Thank you. That is it for the food questions.<p> Press any key to continue. </p>';
+var open_instruct_text_FHQ_post_rating = '<p>We would like to ask you some questions about snacks again.</p><br>' + '<p>Press any key to begin. </p>';
+var close_instruct_text_FHQ_post_rating =  '<p>Thank you. That is it for the food questions.</p><br>' + '<p> Press any key to continue. </p>';
 
 var FHQ_1 = "How much would you like a Tiny Teddy?";
 var FHQ_2 = "How much would you like an M&M?";
@@ -201,7 +206,7 @@ var VVR_q_text_b4 = '<li><span>Please select your answer on the scale.</span></l
  ************************************************************/
 var open_instruct_VVR1 = true;
 var close_instruct_VVR1 = false;
-var open_instruct_text_VVR1 = "<p>A vending machine is overflowing with snacks.</p><br>" + "<p>You can tip the machine and " + "see what snacks fall out.</p><br>" + "<p>Get all the snacks that you want!</p><br>" + "<p>Press any key to begin.</p>";
+var open_instruct_text_VVR1 = "<p>The vending machine is still overflowing with snacks.</p><br>" + "<p>You can tip the machine and " + "see what snacks fall out.</p><br>" + "<p>Get all the snacks that you want!</p><br>" + "<p>Press any key to begin.</p>";
 var close_instruct_text_VVR1 = 'Thank you for your input. Proceeding to the next stage.';
 var degrad_pattern_VVR1 = ['d0'];
 var prob_value_VVR1 = [0.2];
@@ -225,7 +230,7 @@ var max_num_incorrect_VVR2 = 0;
  ************************************************************/
 var open_instruct_VVR3 = true;
 var close_instruct_VVR3 = false;
-var open_instruct_text_VVR3 = "<p>A vending machine is overflowing with snacks.</p><br>" + "<p>You can tip the machine and " + "see what snacks fall out.</p><br>" + "<p>Get all the snacks that you want!</p><br>"+ "<p>Press any key to begin.</p>";
+var open_instruct_text_VVR3 = "<p>The vending machine is still overflowing with snacks.</p><br>" + "<p>You can tip the machine and " + "see what snacks fall out.</p><br>" + "<p>Get all the snacks that you want!</p><br>"+ "<p>Press any key to begin.</p>";
 var close_instruct_text_VVR3 = 'Thank you for your input. Proceeding to the next stage.';
 var degrad_pattern_VVR3 = ['d0'];
 var prob_value_VVR3 = [0.2];
@@ -237,17 +242,13 @@ var max_num_incorrect_VVR3 = 4;
  ************************************************************/
 var open_instruct_pav = true;
 var close_instruct_pav = false;
-var open_instruct_text_pav = "<p>The vending machine is still overflowing. " +
-"But it cannot be tipped now.</p><br>" +
+var open_instruct_text_pav = "<p>You find a vending machine that is overflowing with snacks.</p><br>" +
 "<p>Coloured lights will appear on the machine will show you which snack will fall out.</p><br>" +
 "<p>Press any key to begin. </p>";
-/************************************************************
- * Pavlovian Conditioning
- ************************************************************/
 var min_num_correct_pav = 4;
 var max_num_incorrect_pav = 10;
 var close_instruct_text_pav = "<p>The vending machine is still overflowing, " +
-"and you can tip it again now.</p><br> " +
+"and you can tip it again now.</p><br>" +
 "<p>The coloured lights will sometimes appear.</p><br> " +
 "<p>You won't always see the snack fall out. " +
 "All the snacks you get will be recorded.</p><br>" +
@@ -267,9 +268,9 @@ var open_instruct_text_transfer_test =  "<p>The vending machine is still overflo
 "<p>Press any key to begin. </p>";
 var close_instruct_text_transfer_test = 'Close Instruction Transfer Test'
 var block_num_transfer_test  = 2; // default 2
-var transfer_test1 = false;
-var transfer_test2 = true;
-var transfer_test3 = true;
+var transfer_test1 = true;
+var transfer_test2 = false;
+var transfer_test3 = false;
 /************************************************************
  * Deval Test
  ************************************************************/
@@ -285,12 +286,16 @@ var deval_test_duration = 30000; // default 120000
 /************************************************************
  * Recall(memory test)
  ************************************************************/
-var open_instruct_recall = false;
-var close_instruct_recall = false;
+var open_instruct_recall = true;
+var close_instruct_recall = true;
 var open_instruct_text_recall =
-    "<p>Open instruction Recall</p>";
+"<p>We would like to ask some questions about the vending machine.</p><br>" +
+"<p>Remember what you have learnt about the snacks and the vending machine.</p><br>" +
+"<p>Press any key to begin.</p>"  
+;
 var close_instruct_text_recall =
-    "<p>Close instruction Recall</p>";
+    "<p>Thank you. That is it for the memory test.</p><br>" + "<p> Press any key to continue. </p>"
+;
 /************************************************************
  * Close HIT Questions
  ************************************************************/
