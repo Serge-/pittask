@@ -305,27 +305,6 @@ jsPsych.plugins.animation = (function () {
                 return $momentum.currentId++;
             }
         
-            function patchedSetInterval(callback, delay) {
-                var intervalId = generateId();
-        
-                $momentum.idToCallback[intervalId] = callback;
-                $momentum.worker.postMessage({
-                    type: 'setInterval',
-                    delay: delay,
-                    id: intervalId
-                });
-                return intervalId;
-            }
-        
-            function patchedClearInterval(intervalId) {
-                $momentum.worker.postMessage({
-                    type: 'clearInterval',
-                    id: intervalId
-                });
-        
-                delete $momentum.idToCallback[intervalId];
-            }
-        
             function patchedSetTimeout(callback, delay) {
                 var intervalId = generateId();
         
@@ -358,9 +337,6 @@ jsPsych.plugins.animation = (function () {
             };
         
             window.$momentum = $momentum;
-        
-            window.setInterval = patchedSetInterval;
-            window.clearInterval = patchedClearInterval;
             window.setTimeout = patchedSetTimeout;
             window.clearTimeout = patchedClearTimeout;
         })();
