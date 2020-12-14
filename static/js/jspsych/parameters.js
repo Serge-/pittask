@@ -334,6 +334,41 @@ var close_instruct_text_recall =
 "<p>Thank you. That is it for the memory test.</p><br>" +
 "<p> Press any key to continue. </p>";
 /************************************************************
+ * transfer_q
+ ************************************************************/
+var open_instruct_transfer_q = true;
+var close_instruct_transfer_q = false;
+var open_instruct_text_transfer_q =
+"<p>Open instruction for transfer_q</p>";
+var close_instruct_text_transfer_q =
+"<p>Close instruction for transfer_q</p>";
+var transfer_q_q1_stim1_colour = true;
+var transfer_q_q2_stim1_colour = true;
+var transfer_q_q3_stim1_colour = true;
+var transfer_q_q1_stim2_colour = true;
+var transfer_q_q2_stim2_colour = true;
+var transfer_q_q3_stim2_colour = true;
+var transfer_q_q1_stim3_colour = true;
+var transfer_q_q2_stim3_colour = true;
+var transfer_q_q3_stim3_colour = true;
+var transfer_q_q1_stim4_colour = true;
+var transfer_q_q2_stim4_colour = true;
+var transfer_q_q3_stim4_colour = true;
+var transfer_q_1a_questiontext = "How likely is it that you will you get food if you tilt the machine now?";
+var transfer_q_1b_questiontext = "How do you know?";
+var transfer_q_1a_lvas = "Very Unlikely";
+var transfer_q_1a_rvas = "Very Likely";
+var transfer_q_2a_questiontext = "Does it matter which direction you tilt the machine?";
+var transfer_q_2b_questiontext = "Why do you think so?";
+var transfer_q_2a_lvas = "Not Important";
+var transfer_q_2a_rvas = "Very Important";
+var transfer_q_3a_questiontext = "What direction should you tilt the machine to get a snack now?";
+var transfer_q_3b_questiontext = "How do you know?";
+var transfer_q_3a_lvas = "Left";
+var transfer_q_3a_rvas = "Right";
+var transfer_q_text_limit = 50;
+var transfer_popup_text = "You must provide your answer in the text box before proceeding (minimum of " + transfer_q_text_limit + " characters).";
+/************************************************************
  * Close HIT Questions
  ************************************************************/
 var close_instruct_text_close_HIT_q = "Thank you for your participation!";
