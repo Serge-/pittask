@@ -1303,7 +1303,7 @@ var DEVAL_TEST = {
         DEVAL_TEST_INSTRUCT_OPEN, DEVAL_TEST_MAIN, DEVAL_TEST_INSTRUCT_CLOSE
     ]
 };
-// item_id = 1
+
 // Recall (memory test)
 var RECALL = {
     timeline: [
@@ -1454,6 +1454,303 @@ var RECALL = {
     ]
 };
 
+// transfer_q
+var TRANSFER_Q = {
+    timeline: [
+        {
+            timeline: [{
+                stage_name: 'transfer_q_open',
+                type: 'html-keyboard-response',
+                stimulus: open_instruct_text_transfer_q,
+                trial_latency: open_instruct_latency,
+                trial_duration: null,
+                response_ends_trial: false,
+                event_type: 'text appears',
+                event_raw_details: 'open_instruct_text_transfer_q',
+                event_converted_details: "open_instruct_text_transfer_q text appears",
+            }],
+            conditional_function: function() {
+                return open_instruct_transfer_q;
+            }
+        }
+    ]
+};
+
+// shuffle transfer_q array of stages
+var transfer_q_holder = jsPsych.randomization.shuffle([
+    [{
+        timeline: [
+            {
+                stage_name: "transfer_q",
+                type: "transfer-q",
+                color: stim1_colour,
+                name: 'stim1_colour',
+                item_id: 1,
+                question_text1: transfer_q_1a_questiontext,
+                question_text2: transfer_q_1b_questiontext,
+                left_text: transfer_q_1a_lvas,
+                right_text: transfer_q_1a_rvas,
+                event_type: "text",
+                event_raw_details: "text",
+                event_converted_details: "text appears",
+            }
+        ],
+        conditional_function: function() {
+            return transfer_q_q1_stim1_colour;
+        }
+    },{
+        timeline: [
+            {
+                stage_name: "transfer_q",
+                type: "transfer-q",
+                color: stim1_colour,
+                name: 'stim1_colour',
+                item_id: 2,
+                question_text1: transfer_q_2a_questiontext,
+                question_text2: transfer_q_2b_questiontext,
+                left_text: transfer_q_2a_lvas,
+                right_text: transfer_q_2a_rvas,
+                event_type: "text",
+                event_raw_details: "text",
+                event_converted_details: "text appears",
+            }
+        ],
+        conditional_function: function() {
+            return transfer_q_q2_stim1_colour;
+        }
+    },{
+        timeline: [
+            {
+                stage_name: "transfer_q",
+                type: "transfer-q",
+                color: stim1_colour,
+                name: 'stim1_colour',
+                item_id: 3,
+                question_text1: transfer_q_3a_questiontext,
+                question_text2: transfer_q_3b_questiontext,
+                left_text: transfer_q_3a_lvas,
+                right_text: transfer_q_3a_rvas,
+                event_type: "text",
+                event_raw_details: "text",
+                event_converted_details: "text appears",
+            }
+        ],
+        conditional_function: function() {
+            return transfer_q_q3_stim1_colour;
+        }
+    }],
+    [{
+        timeline: [
+            {
+                stage_name: "transfer_q",
+                type: "transfer-q",
+                color: stim2_colour,
+                name: 'stim2_colour',
+                item_id: 1,
+                question_text1: transfer_q_1a_questiontext,
+                question_text2: transfer_q_1b_questiontext,
+                left_text: transfer_q_1a_lvas,
+                right_text: transfer_q_1a_rvas,
+                event_type: "text",
+                event_raw_details: "text",
+                event_converted_details: "text appears",
+            }
+        ],
+        conditional_function: function() {
+            return transfer_q_q1_stim2_colour;
+        }
+    },{
+        timeline: [
+            {
+                stage_name: "transfer_q",
+                type: "transfer-q",
+                color: stim2_colour,
+                name: 'stim2_colour',
+                item_id: 2,
+                question_text1: transfer_q_2a_questiontext,
+                question_text2: transfer_q_2b_questiontext,
+                left_text: transfer_q_2a_lvas,
+                right_text: transfer_q_2a_rvas,
+                event_type: "text",
+                event_raw_details: "text",
+                event_converted_details: "text appears",
+            }
+        ],
+        conditional_function: function() {
+            return transfer_q_q2_stim2_colour;
+        }
+    },{
+        timeline: [
+            {
+                stage_name: "transfer_q",
+                type: "transfer-q",
+                color: stim2_colour,
+                name: 'stim2_colour',
+                item_id: 3,
+                question_text1: transfer_q_3a_questiontext,
+                question_text2: transfer_q_3b_questiontext,
+                left_text: transfer_q_3a_lvas,
+                right_text: transfer_q_3a_rvas,
+                event_type: "text",
+                event_raw_details: "text",
+                event_converted_details: "text appears",
+            }
+        ],
+        conditional_function: function() {
+            return transfer_q_q3_stim2_colour;
+        }
+    }],
+    [{
+        timeline: [
+            {
+                stage_name: "transfer_q",
+                type: "transfer-q",
+                color: stim3_colour,
+                name: 'stim3_colour',
+                item_id: 1,
+                question_text1: transfer_q_1a_questiontext,
+                question_text2: transfer_q_1b_questiontext,
+                left_text: transfer_q_1a_lvas,
+                right_text: transfer_q_1a_rvas,
+                event_type: "text",
+                event_raw_details: "text",
+                event_converted_details: "text appears",
+            }
+        ],
+        conditional_function: function() {
+            return transfer_q_q1_stim3_colour;
+        }
+    },{
+        timeline: [
+            {
+                stage_name: "transfer_q",
+                type: "transfer-q",
+                color: stim3_colour,
+                name: 'stim3_colour',
+                item_id: 2,
+                question_text1: transfer_q_2a_questiontext,
+                question_text2: transfer_q_2b_questiontext,
+                left_text: transfer_q_2a_lvas,
+                right_text: transfer_q_2a_rvas,
+                event_type: "text",
+                event_raw_details: "text",
+                event_converted_details: "text appears",
+            }
+        ],
+        conditional_function: function() {
+            return transfer_q_q2_stim3_colour;
+        }
+    },{
+        timeline: [
+            {
+                stage_name: "transfer_q",
+                type: "transfer-q",
+                color: stim3_colour,
+                name: 'stim3_colour',
+                item_id: 3,
+                question_text1: transfer_q_3a_questiontext,
+                question_text2: transfer_q_3b_questiontext,
+                left_text: transfer_q_3a_lvas,
+                right_text: transfer_q_3a_rvas,
+                event_type: "text",
+                event_raw_details: "text",
+                event_converted_details: "text appears",
+            }
+        ],
+        conditional_function: function() {
+            return transfer_q_q3_stim3_colour;
+        }
+    }],
+    [{
+        timeline: [
+            {
+                stage_name: "transfer_q",
+                type: "transfer-q",
+                color: stim4_colour,
+                name: 'stim4_colour',
+                item_id: 1,
+                question_text1: transfer_q_1a_questiontext,
+                question_text2: transfer_q_1b_questiontext,
+                left_text: transfer_q_1a_lvas,
+                right_text: transfer_q_1a_rvas,
+                event_type: "text",
+                event_raw_details: "text",
+                event_converted_details: "text appears",
+            }
+        ],
+        conditional_function: function() {
+            return transfer_q_q1_stim4_colour;
+        }
+    },{
+        timeline: [
+            {
+                stage_name: "transfer_q",
+                type: "transfer-q",
+                color: stim4_colour,
+                name: 'stim4_colour',
+                item_id: 2,
+                question_text1: transfer_q_2a_questiontext,
+                question_text2: transfer_q_2b_questiontext,
+                left_text: transfer_q_2a_lvas,
+                right_text: transfer_q_2a_rvas,
+                event_type: "text",
+                event_raw_details: "text",
+                event_converted_details: "text appears",
+            }
+        ],
+        conditional_function: function() {
+            return transfer_q_q2_stim4_colour;
+        }
+    },{
+        timeline: [
+            {
+                stage_name: "transfer_q",
+                type: "transfer-q",
+                color: stim4_colour,
+                name: 'stim4_colour',
+                item_id: 3,
+                question_text1: transfer_q_3a_questiontext,
+                question_text2: transfer_q_3b_questiontext,
+                left_text: transfer_q_3a_lvas,
+                right_text: transfer_q_3a_rvas,
+                event_type: "text",
+                event_raw_details: "text",
+                event_converted_details: "text appears",
+            }
+        ],
+        conditional_function: function() {
+            return transfer_q_q3_stim4_colour;
+        }
+    }]
+]);
+
+// push transfer_q stages to the main TRANSFER_Q function
+transfer_q_holder.forEach(function(item) {
+    item.forEach(function(obj) {
+        // insert stages after open_instruct stage
+        TRANSFER_Q.timeline.push(obj);
+    });
+});
+
+// push close_instr object to transfer_q
+TRANSFER_Q.timeline.push(
+    {
+        timeline: [{
+            stage_name: 'transfer_q_close',
+            type: 'html-keyboard-response',
+            stimulus: close_instruct_text_transfer_q,
+            trial_latency: close_instruct_latency,
+            trial_duration: null,
+            response_ends_trial: false,
+            event_type: 'text appears',
+            event_raw_details: 'close_instruct_text_transfer_q',
+            event_converted_details: "close_instruct_text_transfer_q text appears",
+        }],
+        conditional_function: function() {
+            return close_instruct_transfer_q;
+        }
+    }
+);
 
 var CLOSE_HIT = {
     stage_name: 'close_HIT_q',
@@ -1542,6 +1839,8 @@ timeline.push(SDS);
 timeline.push(ICAR);
 // Close: That's it for the symptom questions. Now we're ready to start the online game
 timeline.push(WBF_CLOSE);
+// transfer_q
+timeline.push(TRANSFER_Q)
 //  Close HIT Questions
 timeline.push(CLOSE_HIT);
 // Thanks

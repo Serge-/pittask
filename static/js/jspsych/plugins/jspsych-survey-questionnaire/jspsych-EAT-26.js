@@ -392,9 +392,7 @@ jsPsych.plugins['EAT-26'] = (function () {
       // forced click event fix for some laptops touchpad
       $("label").on("click",function(){
         var labelID = $(this).attr('for');
-        if('labelID') {
-          $("#" + labelID).prop('checked', true).trigger('click').trigger('change');
-        };
+        $("#" + labelID).prop('checked', true).trigger('click').trigger('change');
       });
   
       // save timestamp on input click

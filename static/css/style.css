@@ -124,6 +124,14 @@ h1 {
   background-color: #f1f1f1;
 }
 
+/* prevents text selection for labels */
+label {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 /* remove focus outline */
 input[type=file]:focus, input[type=radio]:focus, input[type=checkbox]:focus {
   outline: none;
