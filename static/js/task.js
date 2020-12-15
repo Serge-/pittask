@@ -6,6 +6,12 @@ psiTurk.taskdata.set('data', [])
 // reset all previous data in case if page was reloaded
 jsPsych.data.reset();
 
+// adding beforeunload listener which will minimize
+// page reloading during the experiment
+$(window).on("beforeunload", function(){
+    return 'Changes you made may not be saved';
+});
+
 var DEGRAD_PATTERN = {
     A0: {
         d0: false,
@@ -1821,6 +1827,8 @@ timeline.push(DEVAL_TEST);
 timeline.push(FHQ2_OPEN, FHQ2_1, FHQ2_2, FHQ2_3, FHQ2_4, FHQ2_CLOSE);
 // Recall
 timeline.push(RECALL);
+// transfer_q
+timeline.push(TRANSFER_Q)
 // Transfer Test 3
 //timeline.push(TRANSFER3);
 // Intro: We'd like to briefly ask you about some symptoms before the online game.
@@ -1839,8 +1847,6 @@ timeline.push(SDS);
 timeline.push(ICAR);
 // Close: That's it for the symptom questions. Now we're ready to start the online game
 timeline.push(WBF_CLOSE);
-// transfer_q
-timeline.push(TRANSFER_Q)
 //  Close HIT Questions
 timeline.push(CLOSE_HIT);
 // Thanks
@@ -1850,15 +1856,20 @@ function startExperiment(){
     jsPsych.init({
             timeline: timeline,
             preload_images: images,
-            // on_finish: function(){ jsPsych.data.displayData(); }, // Debug mode, on_finish and on_data_update must be commented out in debug mode
+            // on_finish: function(){
+            //     // Debug mode, on_finish and on_data_update must be commented out in debug mode
+            //     $(window).off("beforeunload");
+            //     jsPsych.data.displayData(); 
+            // }, 
             on_finish: function() {
                 psiTurk.saveData({
-                    success: function() { 
+                    success: function() {
+                        $(window).off("beforeunload");
                         psiTurk.completeHIT();
                     },
                     error: prompt_resubmit
                 });
-            }, 
+            },
             on_data_update: function(data) {
                 psiTurk.recordTrialData(data);
                 psiTurk.saveData();
