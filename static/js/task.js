@@ -1821,6 +1821,8 @@ timeline.push(DEVAL_TEST);
 timeline.push(FHQ2_OPEN, FHQ2_1, FHQ2_2, FHQ2_3, FHQ2_4, FHQ2_CLOSE);
 // Recall
 timeline.push(RECALL);
+// transfer_q
+timeline.push(TRANSFER_Q)
 // Transfer Test 3
 //timeline.push(TRANSFER3);
 // Intro: We'd like to briefly ask you about some symptoms before the online game.
@@ -1839,8 +1841,6 @@ timeline.push(SDS);
 timeline.push(ICAR);
 // Close: That's it for the symptom questions. Now we're ready to start the online game
 timeline.push(WBF_CLOSE);
-// transfer_q
-timeline.push(TRANSFER_Q)
 //  Close HIT Questions
 timeline.push(CLOSE_HIT);
 // Thanks

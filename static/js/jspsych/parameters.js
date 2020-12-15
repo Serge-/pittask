@@ -325,7 +325,7 @@ var deval_test_duration = 30000; // default 120000
  * Recall(memory test)
  ************************************************************/
 var open_instruct_recall = true;
-var close_instruct_recall = true;
+var close_instruct_recall = false;
 var open_instruct_text_recall =
 "<p>We would like to ask some questions about the vending machine.</p><br>" +
 "<p>Remember what you have learnt about the snacks and the vending machine.</p><br>" +
@@ -336,23 +336,24 @@ var close_instruct_text_recall =
 /************************************************************
  * transfer_q
  ************************************************************/
-var open_instruct_transfer_q = true;
-var close_instruct_transfer_q = false;
+var open_instruct_transfer_q = false;
+var close_instruct_transfer_q = true;
 var open_instruct_text_transfer_q =
 "<p>Open instruction for transfer_q</p>";
 var close_instruct_text_transfer_q =
-"<p>Close instruction for transfer_q</p>";
+"<p>Thank you. That is it for the memory test.</p><br>" +
+"<p> Press any key to continue. </p>";
 var transfer_q_q1_stim1_colour = true;
-var transfer_q_q2_stim1_colour = true;
+var transfer_q_q2_stim1_colour = false;
 var transfer_q_q3_stim1_colour = true;
 var transfer_q_q1_stim2_colour = true;
-var transfer_q_q2_stim2_colour = true;
+var transfer_q_q2_stim2_colour = false;
 var transfer_q_q3_stim2_colour = true;
 var transfer_q_q1_stim3_colour = true;
-var transfer_q_q2_stim3_colour = true;
+var transfer_q_q2_stim3_colour = false;
 var transfer_q_q3_stim3_colour = true;
 var transfer_q_q1_stim4_colour = true;
-var transfer_q_q2_stim4_colour = true;
+var transfer_q_q2_stim4_colour = false;
 var transfer_q_q3_stim4_colour = true;
 var transfer_q_1a_questiontext = "How likely is it that you will you get food if you tilt the machine now?";
 var transfer_q_1b_questiontext = "How do you know?";
@@ -366,7 +367,7 @@ var transfer_q_3a_questiontext = "What direction should you tilt the machine to 
 var transfer_q_3b_questiontext = "How do you know?";
 var transfer_q_3a_lvas = "Left";
 var transfer_q_3a_rvas = "Right";
-var transfer_q_text_limit = 50;
+var transfer_q_text_limit = 5;
 var transfer_popup_text = "You must provide your answer in the text box before proceeding (minimum of " + transfer_q_text_limit + " characters).";
 /************************************************************
  * Close HIT Questions
