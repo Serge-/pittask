@@ -31,10 +31,8 @@ var re_captcha_duration = 15
 var full_screen_mode = true;
 var open_instruct_latency = 1500;
 var close_instruct_latency = 500;
-var popup_text_behav = 
-"Please provide your answer prior to submission.";
-var popup_text_WBF =
-"Sorry, all questions need to be answered prior to submission.";
+var popup_text_behav = "Please provide your answer prior to submission.";
+var popup_text_WBF = "Sorry, all questions need to be answered prior to submission.";
 
 /************************************************************
 * ==================== WEB-BASED FORMS ====================
@@ -230,15 +228,14 @@ var interval_duration = 500;
 var interval_num = 60;
 var answer_latency_countdown = false;
 var answer_latency = 1000;
-var answer_latency_text =
-"Please wait for a moment till you can answer the question...";
+var answer_latency_text = "Please wait for a moment till you can answer the question...";
 var VVR_q_text_a1 = "Which direction did you tilt to get";
 var VVR_q_text_a2 = "Press left or right button";
 var VVR_q_text_b1 = "How strongly do you believe in your answer?";
 var VVR_q_text_b2 = "Very little";
 var VVR_q_text_b3 = "Very much";
 var VVR_q_text_b4 =
-  "<li><span>Please select your answer on the scale.</span></li>";
+"<li><span>Please select your answer on the scale.</span></li>";
 /************************************************************
  * Instrumental conditioning [VVR_1]
  ************************************************************/
@@ -246,12 +243,10 @@ var open_instruct_VVR1 = true;
 var close_instruct_VVR1 = false;
 var open_instruct_text_VVR1 =
 "<p>The vending machine is still overflowing with snacks.</p><br>" +
-"<p>You can tip the machine and " +
-"see what snacks fall out.</p><br>" +
+"<p>You can tip the machine and see what snacks fall out.</p><br>" +
 "<p>Get all the snacks that you want!</p><br>" +
 "<p>Press any key to begin.</p>";
-var close_instruct_text_VVR1 =
-"Thank you for your input. Proceeding to the next stage.";
+var close_instruct_text_VVR1 = "Thank you for your input. Proceeding to the next stage.";
 var degrad_pattern_VVR1 = ['d0'];
 var prob_value_VVR1 = [0.2];
 var min_blocks_num_VVR1 = 2;
@@ -267,8 +262,7 @@ var open_instruct_text_VVR2 =
 "<p>You can tip the machine and see what snacks fall out.</p><br>" +
 "<p>Get all the snacks that you want!</p><br>" +
 "<p>Press any key to begin.</p>";
-var close_instruct_text_VVR2 =
-"Thank you for your input. Proceeding to the next stage.";
+var close_instruct_text_VVR2 = "Thank you for your input. Proceeding to the next stage.";
 var degrad_pattern_VVR2 = ['d1'];
 var prob_value_VVR2 = [0.2];
 var min_blocks_num_VVR2 = 2;
@@ -284,8 +278,7 @@ var open_instruct_text_VVR3 =
 "<p>You can tip the machine and see what snacks fall out.</p><br>" +
 "<p>Get all the snacks that you want!</p><br>" +
 "<p>Press any key to begin.</p>";
-var close_instruct_text_VVR3 =
-"Thank you for your input. Proceeding to the next stage.";
+var close_instruct_text_VVR3 = "Thank you for your input. Proceeding to the next stage.";
 var degrad_pattern_VVR3 = ['d0'];
 var prob_value_VVR3 = [0.2];
 var min_blocks_num_VVR3 = 2;
@@ -322,8 +315,7 @@ var open_instruct_text_video =
 "<p> press any key to begin.</p>";
 var close_instruct_video = false;
 var close_instruct_text_video = 
-"<p>The vending machine is still overflowing, " +
-"and you can tip it again now.</p><br><br> " +
+"<p>The vending machine is still overflowing, and you can tip it again now.</p><br><br> " +
 "<p>You won't always see the snack fall out. All the snacks you get will be recorded.</p><br>" +
 "<p>Get all the snacks that you want!</p><br>" +
 "<p>Press any key to begin. </p>";
