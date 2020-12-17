@@ -23,56 +23,22 @@
  * There are a lot of other HTML tags more information about you can find here https://www.w3schools.com/tags/ref_byfunc.asp
  ***********************************************************/
 
+/************************************************************
+* General Parameters (including instructions and popups)
+***********************************************************/
 var re_captcha = false;
 var re_captcha_duration = 15
 var full_screen_mode = true;
 var open_instruct_latency = 1500;
 var close_instruct_latency = 500;
-var outcome_duration = 1000;
-var stim_duration = 6000;
-var ITI_duration = 6000;
-var interval_duration = 500;
-var interval_num = 60;
-var answer_latency_countdown = false;
-var answer_latency = 1000;
-var answer_latency_text =
-"Please wait for a moment till you can answer the question...";
-var correct_text = "";
-var incorrect_text = "";
-var feedback_duration = 1;
 var popup_text_behav = 
 "Please provide your answer prior to submission.";
 var popup_text_WBF =
 "Sorry, all questions need to be answered prior to submission.";
+
 /************************************************************
- * Vending Machine Animation Parameters
- ***********************************************************/
-var left_tilt = 37;
-var right_tilt = 39;
-var shake_right_rotate = 15;
-var shake_right_translateX = 5;
-var shake_left_rotate = -15;
-var shake_left_translateX = -5;
-var shake_return_time = 300;
-var shake_transition = 0.05;
-/************************************************************
- * ===================== GUI COLORS =========================
- * stim1_colour = green - associated with MM image
- * stim2_colour = blue - associated with BBQ image
- * stim3_colour = red - associated with TT image
- * stim4_colour = yellow - associated with Empty image 
- ************************************************************/
-var stim1_colour = "rgb(0,128,0)";
-var stim2_colour = "rgb(0,0,255)";
-var stim3_colour = "rgb(255,0,0)";
-var stim4_colour = "rgb(255,215,0)";
-/************************************************************
- * ==================== WEB-BASED FORMS ====================
- ************************************************************
- * Key-Testing
- ***********************************************************/
-var open_instruct_text_key_testing = "<p> We would like to test your keyboard. </p> <p>Press any key to begin. </p>";
-var close_instruct_text_key_testing = "<p>Thank you for your patience.</p> <p>Press any key when you are ready to start.</p>";
+* ==================== WEB-BASED FORMS ====================
+************************************************************
 /************************************************************
  * Web-based forms
  ***********************************************************/
@@ -116,6 +82,7 @@ var open_instruct_text_ICAR =
 "<p> There is only a final set of questions which should take about 15 minutes.</p><br>" +
 "<p>Press any key to begin.</p>";
 var close_instruct_text_ICAR = "ICAR close";
+
 /************************************************************
  * Symptom Inventories
  ***********************************************************/
@@ -159,26 +126,42 @@ var symptom_inventory = [
     PID
 ]
 /************************************************************
- * Deval Video
- ***********************************************************/
-var video_duration = 30;
-var video_sound = false;
-var open_instruct_video = true;
-var open_instruct_text_video =
-"<p>You discover something new about one of the snacks. Watch and see what has changed.</p><br>" +
-"<p> press any key to begin.</p>";
-var close_instruct_video = false;
-var close_instruct_text_video = 
-"<p>The vending machine is still overflowing, " +
-"and you can tip it again now.</p><br><br> " +
-"<p>You won't always see the snack fall out. All the snacks you get will be recorded.</p><br>" +
-"<p>Get all the snacks that you want!</p><br>" +
-"<p>Press any key to begin. </p>"
+* =================== BEHAVIOURAL STAGES ===================
+************************************************************
+* Vending Machine Animation Parameters
+***********************************************************/
+var left_tilt = 37;
+var right_tilt = 39;
+var shake_right_rotate = 15;
+var shake_right_translateX = 5;
+var shake_left_rotate = -15;
+var shake_left_translateX = -5;
+var shake_return_time = 300;
+var shake_transition = 0.05;
+
 /************************************************************
- * =================== BEHAVIOURAL STAGES ===================
- ************************************************************
- * Food and Hunger Questions
- ***********************************************************/
+* behavioural stages
+***********************************************************/
+var outcome_duration = 1000;
+var stim_duration = 6000;
+var ITI_duration = 6000;
+var correct_text = "";
+var incorrect_text = "";
+var feedback_duration = 1;
+
+/************************************************************
+* Key-Testing
+***********************************************************/
+var open_instruct_text_key_testing = 
+"<p> We would like to test your keyboard. </p>" +
+"<p>Press any key to begin. </p>";
+var close_instruct_text_key_testing = 
+"<p>Thank you for your patience.</p>" +
+"<p>Press any key when you are ready to start.</p>";
+
+/************************************************************
+* Food and Hunger Questions
+***********************************************************/
 var open_instruct_FHQ_pre_rating = true;
 var close_instruct_FHQ_pre_rating = true;
 var open_instruct_text_FHQ_pre_rating =
@@ -209,9 +192,46 @@ var FHQ_VAS_center = "";
 var FHQ_VAS_right = "Very much";
 var FHQ_VAS_left_hungry = "Not at All";
 var FHQ_VAS_right_hungry = "Extremely";
+
+/************************************************************
+ * ===================== GUI COLORS =========================
+ * stim1_colour = green - associated with MM image
+ * stim2_colour = blue - associated with BBQ image
+ * stim3_colour = red - associated with TT image
+ * stim4_colour = yellow - associated with Empty image 
+ ************************************************************/
+var stim1_colour = "rgb(0,128,0)";
+var stim2_colour = "rgb(0,0,255)";
+var stim3_colour = "rgb(255,0,0)";
+var stim4_colour = "rgb(255,215,0)";
+
+/************************************************************
+ * Pavlovian Conditioning
+ ************************************************************/
+var open_instruct_pav = true;
+var close_instruct_pav = false;
+var open_instruct_text_pav =
+"<p>You find a vending machine that is overflowing with snacks.</p><br>" +
+"<p>Coloured lights will appear on the machine will show you which snack will fall out.</p><br>" +
+"<p>Press any key to begin. </p>";
+var min_num_correct_pav = 4;
+var max_num_incorrect_pav = 10;
+var close_instruct_text_pav =
+"<p>The vending machine is still overflowing, and you can tip it again now.</p><br>" +
+"<p>The coloured lights will sometimes appear.</p><br> " +
+"<p>You won't always see the snack fall out. All the snacks you get will be recorded.</p><br>" +
+"<p>Get all the snacks that you want!</p>" +
+"<br><p>Press any key to begin. </p>";
+
 /************************************************************
  * VVR
  ************************************************************/
+var interval_duration = 500;
+var interval_num = 60;
+var answer_latency_countdown = false;
+var answer_latency = 1000;
+var answer_latency_text =
+"Please wait for a moment till you can answer the question...";
 var VVR_q_text_a1 = "Which direction did you tilt to get";
 var VVR_q_text_a2 = "Press left or right button";
 var VVR_q_text_b1 = "How strongly do you believe in your answer?";
@@ -244,8 +264,7 @@ var open_instruct_VVR2 = true;
 var close_instruct_VVR2 = false;
 var open_instruct_text_VVR2 =
 "<p>The vending machine is still overflowing with snacks.</p><br>" +
-"<p>You can tip the machine and " +
-"see what snacks fall out.</p><br>" +
+"<p>You can tip the machine and see what snacks fall out.</p><br>" +
 "<p>Get all the snacks that you want!</p><br>" +
 "<p>Press any key to begin.</p>";
 var close_instruct_text_VVR2 =
@@ -262,8 +281,7 @@ var open_instruct_VVR3 = true;
 var close_instruct_VVR3 = false;
 var open_instruct_text_VVR3 =
 "<p>The vending machine is still overflowing with snacks.</p><br>" +
-"<p>You can tip the machine and " +
-"see what snacks fall out.</p><br>" +
+"<p>You can tip the machine and see what snacks fall out.</p><br>" +
 "<p>Get all the snacks that you want!</p><br>" +
 "<p>Press any key to begin.</p>";
 var close_instruct_text_VVR3 =
@@ -273,25 +291,7 @@ var prob_value_VVR3 = [0.2];
 var min_blocks_num_VVR3 = 2;
 var min_num_correct_VVR3 = 2;
 var max_num_incorrect_VVR3 = 4;
-/************************************************************
- * Pavlovian Conditioning
- ************************************************************/
-var open_instruct_pav = true;
-var close_instruct_pav = false;
-var open_instruct_text_pav =
-"<p>You find a vending machine that is overflowing with snacks.</p><br>" +
-"<p>Coloured lights will appear on the machine will show you which snack will fall out.</p><br>" +
-"<p>Press any key to begin. </p>";
-var min_num_correct_pav = 4;
-var max_num_incorrect_pav = 10;
-var close_instruct_text_pav =
-"<p>The vending machine is still overflowing, " +
-"and you can tip it again now.</p><br>" +
-"<p>The coloured lights will sometimes appear.</p><br> " +
-"<p>You won't always see the snack fall out. " +
-"All the snacks you get will be recorded.</p><br>" +
-"<p>Get all the snacks that you want!</p>" +
-"<br><p>Press any key to begin. </p>";
+
 /************************************************************
  * Transfer Test
  ************************************************************/
@@ -306,9 +306,28 @@ var open_instruct_text_transfer_test =  "<p>The vending machine is still overflo
 "<p>Press any key to begin. </p>";
 var close_instruct_text_transfer_test = "Close Instruction Transfer Test";
 var block_num_transfer_test  = 2; // default 2
+
 var transfer_test1 = true;
 var transfer_test2 = false;
 var transfer_test3 = false;
+
+/************************************************************
+ * Deval Video
+ ***********************************************************/
+var video_duration = 30;
+var video_sound = false;
+var open_instruct_video = true;
+var open_instruct_text_video =
+"<p>You discover something new about one of the snacks. Watch and see what has changed.</p><br>" +
+"<p> press any key to begin.</p>";
+var close_instruct_video = false;
+var close_instruct_text_video = 
+"<p>The vending machine is still overflowing, " +
+"and you can tip it again now.</p><br><br> " +
+"<p>You won't always see the snack fall out. All the snacks you get will be recorded.</p><br>" +
+"<p>Get all the snacks that you want!</p><br>" +
+"<p>Press any key to begin. </p>";
+
 /************************************************************
  * Deval Test
  ************************************************************/
@@ -321,11 +340,12 @@ var open_instruct_text_deval_test =  "<p>The vending machine is still overflowin
 "<p>Press any key to begin. </p>";
 var close_instruct_text_deval_test = "Close Instruction Deval Test";
 var deval_test_duration = 30000; // default 120000
+
 /************************************************************
  * Recall(memory test)
  ************************************************************/
 var open_instruct_recall = true;
-var close_instruct_recall = true;
+var close_instruct_recall = false;
 var open_instruct_text_recall =
 "<p>We would like to ask some questions about the vending machine.</p><br>" +
 "<p>Remember what you have learnt about the snacks and the vending machine.</p><br>" +
@@ -333,26 +353,28 @@ var open_instruct_text_recall =
 var close_instruct_text_recall =
 "<p>Thank you. That is it for the memory test.</p><br>" +
 "<p> Press any key to continue. </p>";
+
 /************************************************************
  * transfer_q
  ************************************************************/
-var open_instruct_transfer_q = true;
-var close_instruct_transfer_q = false;
+var open_instruct_transfer_q = false;
+var close_instruct_transfer_q = true;
 var open_instruct_text_transfer_q =
 "<p>Open instruction for transfer_q</p>";
 var close_instruct_text_transfer_q =
-"<p>Close instruction for transfer_q</p>";
+"<p>Thank you. That is it for the memory test.</p><br>" +
+"<p> Press any key to continue. </p>";
 var transfer_q_q1_stim1_colour = true;
-var transfer_q_q2_stim1_colour = true;
+var transfer_q_q2_stim1_colour = false;
 var transfer_q_q3_stim1_colour = true;
 var transfer_q_q1_stim2_colour = true;
-var transfer_q_q2_stim2_colour = true;
+var transfer_q_q2_stim2_colour = false;
 var transfer_q_q3_stim2_colour = true;
 var transfer_q_q1_stim3_colour = true;
-var transfer_q_q2_stim3_colour = true;
+var transfer_q_q2_stim3_colour = false;
 var transfer_q_q3_stim3_colour = true;
 var transfer_q_q1_stim4_colour = true;
-var transfer_q_q2_stim4_colour = true;
+var transfer_q_q2_stim4_colour = false;
 var transfer_q_q3_stim4_colour = true;
 var transfer_q_1a_questiontext = "How likely is it that you will you get food if you tilt the machine now?";
 var transfer_q_1b_questiontext = "How do you know?";
@@ -366,15 +388,18 @@ var transfer_q_3a_questiontext = "What direction should you tilt the machine to 
 var transfer_q_3b_questiontext = "How do you know?";
 var transfer_q_3a_lvas = "Left";
 var transfer_q_3a_rvas = "Right";
-var transfer_q_text_limit = 50;
+var transfer_q_text_limit = 5;
 var transfer_popup_text = "You must provide your answer in the text box before proceeding (minimum of " + transfer_q_text_limit + " characters).";
+
 /************************************************************
  * Close HIT Questions
  ************************************************************/
 var close_instruct_text_close_HIT_q = "Thank you for your participation!";
+
 /************************************************************
  * Thanks
  ************************************************************/
+
 var close_instruct_text_thanks = 
 "<p>Thank you!</p>" +
 "<p>Press any key to return to the Amazon Mechanical Turk page.</p>" +

@@ -91,10 +91,10 @@ jsPsych.plugins["html-keyboard-response"] = (function() {
       timestamp_onload = pav_con_timer;
     };
     
-    var new_html = '<div id="jspsych-html-keyboard-response-stimulus" class="jspsych-html-keyboard-response-stimulus">'+trial.stimulus+'</div>';
+    var html = '<div id="jspsych-html-keyboard-response-stimulus" class="jspsych-html-keyboard-response-stimulus">'+trial.stimulus+'</div>';
 
     if(trial.id) {
-      new_html = '<div id="jspsych-html-keyboard-response-stimulus" class="' + trial.id  +'">'+trial.stimulus+'</div>';
+      html = '<div id="jspsych-html-keyboard-response-stimulus" class="' + trial.id  +'">'+trial.stimulus+'</div>';
     }
 
     response.trial_events.push({
@@ -106,7 +106,7 @@ jsPsych.plugins["html-keyboard-response"] = (function() {
     });
 
     // render
-    display_element.innerHTML = new_html;
+    display_element.innerHTML = html;
 
     // function to end trial when it is time
     var end_trial = function() {
