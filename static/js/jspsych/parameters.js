@@ -47,7 +47,7 @@ var close_instruct_WBF = false;
 var open_instruct_text_WBF = 
 "<p>We would like to ask you some questions about you.</p><br>" +
 "<p>Your answers are anonymous and will not influence your payment.</p><br>" + 
-"<p>Press any key when you are ready.</p>";
+"<p>Press any key to begin.</p>";
 var close_instruct_text_WBF = 
 "<p>Thank you.</p>" +
 "<p>Press any key when you are ready to start.</p>";
@@ -168,8 +168,12 @@ var open_instruct_text_FHQ_pre_rating =
 "<p> We would like to ask you some questions about snacks.</p><br>" +
 "<p>Press any key to begin. </p>";
 var close_instruct_text_FHQ_pre_rating =
-"<p> Thank you. That is it for the food questions for now.</p><br>" +
-"<p> Press any key to continue. </p>";
+"<p> We have arranged a food reward game for you.</p><br>" +
+"<p> Please play the game to learn how it works.</p><br>" +
+"<p> We will ask you questions to check that you are paying attention.</p><br>" +
+"<p> In order to advance to the next stage of the game,</p>" +
+"<p> you must answer the questions correctly.</p><br>" +
+"<p>Press any key to begin.</p>";
 
 var open_instruct_FHQ_post_rating = true;
 var close_instruct_FHQ_post_rating = true;
@@ -211,11 +215,12 @@ var stim4_colour = "rgb(255,215,0)";
 var open_instruct_pav = true;
 var close_instruct_pav = false;
 var open_instruct_text_pav =
-"<p>You find a vending machine that is overflowing with snacks.</p><br>" +
-"<p>Coloured lights will appear on the machine will show you which snack will fall out.</p><br>" +
+"<p>In this stage the vending machine cannot be tipped but it is malfunctioning and free snacks are dropping out.</p><br>" +
+"<p>Coloured lights on the machine predict which snack will fall out.</p><br>" +
+"<p>Pay careful attention to what the lights predict.</p><br>" +
 "<p>Press any key to begin. </p>";
 var min_num_correct_pav = 4;
-var max_num_incorrect_pav = 10;
+var max_num_incorrect_pav = 50;
 var close_instruct_text_pav =
 "<p>The vending machine is still overflowing, and you can tip it again now.</p><br>" +
 "<p>The coloured lights will sometimes appear.</p><br> " +
@@ -255,8 +260,8 @@ var close_instruct_text_VVR1 =
 var degrad_pattern_VVR1 = ['d0'];
 var prob_value_VVR1 = [0.2];
 var min_blocks_num_VVR1 = 2;
-var min_num_correct_VVR1 = 4;
-var max_num_incorrect_VVR1 = 10;
+var min_num_correct_VVR1 = 6;
+var max_num_incorrect_VVR1 = 50;
 /************************************************************
  * Contingency degradation [VVR_2]
  ************************************************************/
@@ -318,7 +323,8 @@ var video_duration = 30;
 var video_sound = false;
 var open_instruct_video = true;
 var open_instruct_text_video =
-"<p>You discover something new about one of the snacks. Watch and see what has changed.</p><br>" +
+"<p>You discover something new about one of the snacks.</p><br>" +
+"<p>Watch and see what has changed.</p><br>" +
 "<p> press any key to begin.</p>";
 var close_instruct_video = false;
 var close_instruct_text_video = 
@@ -333,7 +339,8 @@ var close_instruct_text_video =
  ************************************************************/
 var open_instruct_deval_test = true;
 var close_instruct_deval_test = false;
-var open_instruct_text_deval_test =  "<p>The vending machine is still overflowing.</p><br>" + "<p>You can again tip the machine at any time.</p>" +
+var open_instruct_text_deval_test =  "<p>The vending machine is still overflowing.</p><br>" + 
+"<p>You can again tip the machine at any time.</p><br>" +
 "<p>No coloured lights or snacks will appear,</p>" +
 "<p>but the snacks you get will be recorded. </p><br>" +
 "<p>Get all the snacks that you want!</p><br>" +
@@ -347,11 +354,10 @@ var deval_test_duration = 30000; // default 120000
 var open_instruct_recall = true;
 var close_instruct_recall = false;
 var open_instruct_text_recall =
-"<p>We would like to ask some questions about the vending machine.</p><br>" +
-"<p>Remember what you have learnt about the snacks and the vending machine.</p><br>" +
+"<p>We would like to ask some questions on what you learnt about the snacks and the vending machine.</p><br>" +
 "<p>Press any key to begin.</p>";
 var close_instruct_text_recall =
-"<p>Thank you. That is it for the memory test.</p><br>" +
+"<p>Thank you. </p><br>" +
 "<p> Press any key to continue. </p>";
 
 /************************************************************
@@ -401,8 +407,8 @@ var close_instruct_text_close_HIT_q = "Thank you for your participation!";
  ************************************************************/
 
 var close_instruct_text_thanks = 
-"<p>Thank you!</p>" +
-"<p>Press any key to return to the Amazon Mechanical Turk page.</p>" +
+"<p>Thank you!</p><br>" +
+"<p>Press any key to return to the Amazon Mechanical Turk page.</p><br>" +
 "<p>This window will close automatically after any keypress on the keyboard.</p><br>" +
 "<p>Please do NOT close the window by clicking on the ‘X’ at the top right corner of this window.</p>" +
 "<p>Otherwise, we cannot process your payment.</p>";
