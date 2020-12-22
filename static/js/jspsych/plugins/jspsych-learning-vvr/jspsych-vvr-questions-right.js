@@ -102,17 +102,24 @@ jsPsych.plugins['survey-vvr-questions-right'] = (function() {
                     </svg>
                 </div>
                 <div class='vvr-question-b' style='display: none'>
-                    <p style="padding-bottom: 5rem;">${trial.vars.VVR_q_text_b1}</p>
-                    <div class="votes-container">
-                        <div class="description">
-                            <div class="description--left">${trial.vars.VVR_q_text_b2}</div>
-                            <div class="description--center"></div>
-                            <div class="description--right">${trial.vars.VVR_q_text_b3}</div>
+                    <div>
+                        <p style="padding-bottom: 5rem;">${trial.vars.VVR_q_text_b1}</p>
+                        <div class="votes-container">
+                            <div class="description">
+                                <div class="description--left">${trial.vars.VVR_q_text_b2}</div>
+                                <div class="description--center"></div>
+                                <div class="description--right">${trial.vars.VVR_q_text_b3}</div>
+                            </div>
+                            <div id="slider">
+                                <span class="line"></span>
+                            </div>
                         </div>
-                        <div id="slider">
-                            <span class="line"></span>
+                    </div>
+                    <div>
+                        <button class="jspsych-btn" style="margin-bottom: 3rem;">Submit answer</button>
+                        <div class="instructions-wrap">
+                            <ul class="instructions">${trial.vars.VVR_q_text_b4}</ul>
                         </div>
-                        <ul>${trial.vars.VVR_q_text_b4}</ul>
                     </div>
                 </div>
             </div>`;
@@ -143,7 +150,7 @@ jsPsych.plugins['survey-vvr-questions-right'] = (function() {
             step: 0.01,
             change: function(event, ui) {
                 $(".ui-slider .ui-slider-handle").css('visibility', 'visible');
-                $("#slider").slider("disable");
+                $('.jspsych-btn').prop('disabled', false);
                 vas_holder = ui.value.toFixed(2);
                 response.trial_events.push({
                     "event_type": 'VAS answer has been made',
@@ -152,10 +159,19 @@ jsPsych.plugins['survey-vvr-questions-right'] = (function() {
                     "timestamp": jsPsych.totalTime(),
                     "time_elapsed": jsPsych.totalTime() - timestamp_onload
                 });
-                setTimeout(function() {
-                    end_trial();
-                }, 500);
             }
+        });
+
+        $('.jspsych-btn').prop('disabled', true);
+        $('.jspsych-btn').on('click', function() {
+            response.trial_events.push({
+                "event_type": "button clicked",
+                "event_raw_details": 'Submit',
+                "event_converted_details": '"Submit" selected',
+                "timestamp": jsPsych.totalTime(),
+                "time_elapsed": jsPsych.totalTime() - timestamp_onload
+            });
+            end_trial();
         });
 
          // countdown instruction for preventing random response
@@ -177,14 +193,6 @@ jsPsych.plugins['survey-vvr-questions-right'] = (function() {
                 "time_elapsed": jsPsych.totalTime() - timestamp_onload
             });
         };
-
-        // solution to move VAS up/down to prevent equal responses by mouse click
-        if (item_id === 0) {
-            $('.votes-container').css('margin-bottom', '8rem');
-        } else if(item_id === 1) {
-            $('.votes-container').css('margin-top', '8rem');
-        }
-
         
         // function to handle responses by the subject
         var after_response = function(info) {
