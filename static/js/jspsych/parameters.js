@@ -168,7 +168,7 @@ var open_instruct_text_FHQ_pre_rating =
 "<p>Press any key to begin. </p>";
 var close_instruct_text_FHQ_pre_rating =
 "<p> We have arranged a food reward game for you.</p><br>" +
-"<p> Press any key to continue. </p>";	"<p> Please play the game to learn how it works.</p><br>" +
+"<p> Please play the game to learn how it works.</p><br>" +
 "<p> We will ask you questions to check that you are paying attention.</p><br>" +
 "<p> In order to advance to the next stage of the game,</p>" +
 "<p> you must answer the questions correctly.</p><br>" +
@@ -262,7 +262,6 @@ var open_instruct_text_VVR1 =
 "<p>Get all the snacks that you want!</p><br>" +
 "<p>Press any key to begin.</p>";
 var close_instruct_text_VVR1 = "Thank you for your input. Proceeding to the next stage.";
-
 /************************************************************
  * Contingency degradation [VVR_2]
  ************************************************************/
@@ -339,8 +338,7 @@ var close_instruct_text_video =
 var deval_test_duration = 30000; // default 120000
 var open_instruct_deval_test = true;
 var close_instruct_deval_test = false;
-var open_instruct_text_deval_test =  
-"<p>The vending machine is still overflowing.</p><br>" + 
+var open_instruct_text_deval_test =  "<p>The vending machine is still overflowing.</p><br>" + 
 "<p>You can again tip the machine at any time.</p><br>" +
 "<p>No coloured lights or snacks will appear,</p>" +
 "<p>but the snacks you get will be recorded. </p><br>" +
@@ -354,8 +352,7 @@ var close_instruct_text_deval_test = "Close Instruction Deval Test";
 var open_instruct_recall = true;
 var close_instruct_recall = false;
 var open_instruct_text_recall =
-"<p>We would like to ask some questions about the vending machine.</p><br>" +
-"<p>Remember what you have learnt about the snacks and the vending machine.</p><br>" +
+"<p>We would like to ask some questions on what you learnt about the snacks and the vending machine.</p><br>" +
 "<p>Press any key to begin.</p>";
 var close_instruct_text_recall =
 "<p>Thank you. </p><br>" +
