@@ -299,7 +299,7 @@ var close_instruct_text_VVR3 = "Thank you for your input. Proceeding to the next
 /************************************************************
  * Transfer Test
  ************************************************************/
-var block_num_transfer_test  = 2; // default 2
+var block_num_transfer_test  = 6; // default 2
 var transfer_test1 = true;
 var transfer_test2 = false;
 var transfer_test3 = false;

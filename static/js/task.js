@@ -1846,7 +1846,7 @@ timeline.push(SDS);
 // ICAR
 timeline.push(ICAR);
 // Close: That's it for the symptom questions. Now we're ready to start the online game
-timeline.push(WBF_CLOSE);
+// timeline.push(WBF_CLOSE);
 //  Close HIT Questions
 timeline.push(CLOSE_HIT);
 // Thanks
