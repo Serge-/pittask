@@ -21,12 +21,10 @@ jsPsych.plugins['EAT-26'] = (function () {
           restartResponseTimer();
         },
       };
-      var recordedResponseTimes = [];
       var minAnswerTime = 4000;
       var maxAnswerTime = 10000;
 
       var timer = setInterval(function() {
-        firstTime += 10;
         tmpAnswerTime += 10;
       }, 10);
 
@@ -35,17 +33,12 @@ jsPsych.plugins['EAT-26'] = (function () {
       }
 
       function restartResponseTimer() {
+        tmpAnswerTime = 0;
         clearInterval(timer);
 
         timer = setInterval(function() {
           tmpAnswerTime += 10;
         }, 10);
-      }
-
-      function findRecord(id) {
-        return recordedResponseTimes.find(function(record) {
-          return record.id === id;
-        });
       }
 
       function showPopup() {
@@ -61,7 +54,12 @@ jsPsych.plugins['EAT-26'] = (function () {
         getFirstTime: function() {
           return firstTime;
         },
-        addRecord: function(answerId) {
+        check: function() {
+          if (!wasFirstClick) {
+            wasFirstClick = true;
+            firstTime = tmpAnswerTime;
+          }
+
           if (tmpAnswerTime < minAnswerTime) {
             setPopupText(popupFloorText);
             showPopup();
@@ -69,28 +67,15 @@ jsPsych.plugins['EAT-26'] = (function () {
             return false;
           }
 
-          var record = findRecord(answerId);
-
-          if (record) {
-            record.time = tmpAnswerTime;
-          } else {
-            recordedResponseTimes.push({
-              id: answerId,
-              time: tmpAnswerTime,
-            });
+          if (tmpAnswerTime > maxAnswerTime) {
+            setPopupText(popupCeilingText);
+            showPopup();
+            stopTimer();
+            return false;
           }
 
           restartResponseTimer();
           return true;
-        },
-        getRecordsCollection: function() {
-          return recordedResponseTimes;
-        },
-        getWasFirstClick: function() {
-          return wasFirstClick;
-        },
-        setWasFirstClick: function(value) {
-          wasFirstClick = value;
         },
         getPopupText: function() {
           return popupText;
@@ -112,7 +97,7 @@ jsPsych.plugins['EAT-26'] = (function () {
           maxAnswerTime = value;
         },
       };
-    })()
+    })();
 
     plugin.info = {
       name: 'EAT-26',
@@ -525,34 +510,29 @@ jsPsych.plugins['EAT-26'] = (function () {
         $(this).next('input').prop("checked", true);
       })
 
-      $("label").on("click",function(){
+      $("label").on("click", function() {
         var labelID = $(this).attr('for');
-        if('labelID') {
-          $("#" + labelID).prop('checked', true).trigger('click').trigger('change');
-        };
-      });
 
-      $("input[type=radio]").on("click change touchstart",function(){
-        var time_stamp_key = $(this).data('time-stamp');
-        if(time_stamp_key) {
-          trial.time_stamp[time_stamp_key] = jsPsych.totalTime();
+        if (labelID) {
+          $("#" + labelID).prop('checked', true).trigger('click').trigger('change');
         }
       });
 
       // Registration of responses
-      $('.form-radio').on('click', function($event) {
-        $event.preventDefault();
-        var isSuccess;
+      $('.form-radio').on('click change touchstart', function(event) {
+        if (event.type === 'click') {
+          var isSuccess = timerModule.check();
+          var time_stamp_key;
 
-        if (!timerModule.getWasFirstClick()) {
-          timerModule.setWasFirstClick(true);
-          isSuccess = timerModule.addRecord($(this).data('question-number'));
-        } else {
-          isSuccess = timerModule.addRecord($(this).data('question-number'));
-        }
+          if (isSuccess) {
+            time_stamp_key = $(this).data('time-stamp');
 
-        if (isSuccess && $(this).is(':checked')) {
-          $(this).attr('checked', true);
+            if (time_stamp_key) {
+              trial.time_stamp[time_stamp_key] = jsPsych.totalTime();
+            }
+          }
+
+          return isSuccess
         }
       });
 
