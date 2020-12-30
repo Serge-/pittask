@@ -1403,10 +1403,7 @@ var RECALL = {
                         VVR_q_text_b3: VVR_q_text_b3,
                         VVR_q_text_b4: VVR_q_text_b4,
                         max_num_correct_consecutive_questions: 1
-                    },
-                    popup_machine: false,
-                    popup_machine_duration: 1000,
-                    popup_machine_text: 'text popup'
+                    }
                 },
                 {
                     type: 'survey-vvr-questions-right',
@@ -1433,10 +1430,7 @@ var RECALL = {
                         VVR_q_text_b3: VVR_q_text_b3,
                         VVR_q_text_b4: VVR_q_text_b4,
                         max_num_correct_consecutive_questions: 1
-                    },
-                    popup_machine: false,
-                    popup_machine_duration: 1000,
-                    popup_machine_text: 'text popup'
+                    }
                 }
             ])
 

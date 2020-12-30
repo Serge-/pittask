@@ -195,7 +195,6 @@ var FHQ_VAS_center = "";
 var FHQ_VAS_right = "Very much";
 var FHQ_VAS_left_hungry = "Not at All";
 var FHQ_VAS_right_hungry = "Extremely";
-
 var FHQ_VAS_instruct = "<li><span>Please select your answer on the scale.</span></li>";
 
 /************************************************************
