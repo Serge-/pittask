@@ -11,24 +11,45 @@ jsPsych.plugins['EAT-26'] = (function () {
     var timerModule = (function() {
       var firstTime = 0;
       var tmpAnswerTime = 0;
+      var ceilingTime = 0;
       var wasFirstClick = false;
       var popupText = '';
       var popupFloorText = '';
       var popupCeilingText = '';
+      var minAnswerTime = 4000;
+      var maxAnswerTime = 10000;
+      var ceilingTimer = null;
+      var timer = null;
       var microModalConfig = {
         onShow: function() {},
         onClose: function() {
           restartResponseTimer();
+          restartCeilingTimer();
         },
       };
-      var minAnswerTime = 4000;
-      var maxAnswerTime = 10000;
 
-      var timer = setInterval(function() {
-        tmpAnswerTime += 10;
-      }, 10);
+      startFloorTimer();
+      startCeilingTimer();
 
-      function stopTimer() {
+      function startFloorTimer() {
+        timer = setInterval(function() {
+          tmpAnswerTime += 10;
+        }, 10);
+      }
+
+      function startCeilingTimer() {
+        ceilingTimer = setInterval(function() {
+          ceilingTime += 10;
+
+          if (ceilingTime >= maxAnswerTime) {
+            setPopupText(popupCeilingText);
+            showPopup();
+            stopTimer(ceilingTimer);
+          }
+        }, 10);
+      }
+
+      function stopTimer(timer) {
         clearInterval(timer);
       }
 
@@ -36,9 +57,14 @@ jsPsych.plugins['EAT-26'] = (function () {
         tmpAnswerTime = 0;
         clearInterval(timer);
 
-        timer = setInterval(function() {
-          tmpAnswerTime += 10;
-        }, 10);
+        startFloorTimer();
+      }
+
+      function restartCeilingTimer() {
+        ceilingTime = 0;
+        clearInterval(ceilingTimer);
+
+        startCeilingTimer();
       }
 
       function showPopup() {
@@ -63,18 +89,13 @@ jsPsych.plugins['EAT-26'] = (function () {
           if (tmpAnswerTime < minAnswerTime) {
             setPopupText(popupFloorText);
             showPopup();
-            stopTimer();
-            return false;
-          }
-
-          if (tmpAnswerTime > maxAnswerTime) {
-            setPopupText(popupCeilingText);
-            showPopup();
-            stopTimer();
+            stopTimer(timer);
+            stopTimer(ceilingTimer);
             return false;
           }
 
           restartResponseTimer();
+          restartCeilingTimer();
           return true;
         },
         getPopupText: function() {
@@ -185,7 +206,7 @@ jsPsych.plugins['EAT-26'] = (function () {
           description: 'Event converted details'
         }
       }
-    }
+    };
 
     plugin.trial = function(display_element, trial) {
       var plugin_id_name = "jspsych-survey-multi-choice-EAT-26";
@@ -260,7 +281,6 @@ jsPsych.plugins['EAT-26'] = (function () {
       "}"
       html += '</style>';
 
-
       // form element
       html += '<div id="' + plugin_id_name + '">'
       html += '<form id="jspsych-survey-multi-choice-form" class="jspsych-survey-multi-choice-form">';
@@ -285,26 +305,27 @@ jsPsych.plugins['EAT-26'] = (function () {
             </ul>
         </div>`
 
-
       // generate question order. this is randomized here as opposed to randomizing the order of trial.questions
       // so that the data are always associated with the same question regardless of order
       var question_order = [];
+
       for (var i = 0; i < trial.questions.length; i++) {
         question_order.push(i);
       }
+
       if (trial.randomize_question_order) {
         question_order = jsPsych.randomization.shuffle(question_order);
       }
 
       // add multiple-choice questions
       for (var i = 0; i < 26; i++) {
-
         // get question based on question_order
         var question = trial.questions[question_order[i]];
         var question_id = question_order[i];
 
         // create question container
         var question_classes = ['jspsych-survey-multi-choice-question'];
+
         if (question.horizontal) {
           question_classes.push('jspsych-survey-multi-choice-horizontal');
         }
@@ -338,13 +359,13 @@ jsPsych.plugins['EAT-26'] = (function () {
 
       // add title questions
       for (var i = 0; i < 1; i++) {
-
         // get question based on question_order
         var question = trial.questions[question_order[i]];
         var question_id = question_order[i];
 
         // create question container
         var question_classes = ['jspsych-survey-multi-choice-question'];
+
         if (question.horizontal) {
           question_classes.push('jspsych-survey-multi-choice-horizontal');
         }
@@ -480,11 +501,11 @@ jsPsych.plugins['EAT-26'] = (function () {
             "time_elapsed": jsPsych.totalTime() - timestamp_onload
           });
 
-          if(info.el) {
-            if(info.el.dataset.timeStamp) {
+          if (info.el) {
+            if (info.el.dataset.timeStamp) {
               trial.time_stamp[info.el.dataset.timeStamp] = jsPsych.totalTime();
             }
-            if(info.el.dataset.questionNumber) {
+            if (info.el.dataset.questionNumber) {
               response.trial_events.push({
                 "event_type": "answer displayed",
                 "event_raw_details": info.el.dataset.questionNumber,
@@ -505,7 +526,7 @@ jsPsych.plugins['EAT-26'] = (function () {
         }
       }
 
-      $('.jspsych-survey-highlight').click(function () {
+      $('.jspsych-survey-highlight').click(function() {
         $(this).addClass('bg-primary');
         $(this).next('input').prop("checked", true);
       })
@@ -552,7 +573,6 @@ jsPsych.plugins['EAT-26'] = (function () {
         var endTime = performance.now();
         var response_time = endTime - startTime;
 
-
         response.trial_events.push({
           "event_type": "button clicked",
           "event_raw_details": 'Submit',
@@ -583,6 +603,7 @@ jsPsych.plugins['EAT-26'] = (function () {
           if (match.attributes['data-name'].value !== '') {
             name = match.attributes['data-name'].value;
           }
+
           obje[name] = val;
           timestamp_data[name] = trial.time_stamp['Q' + id];
           Object.assign(question_data, obje);
@@ -620,7 +641,6 @@ jsPsych.plugins['EAT-26'] = (function () {
             "time_elapsed": jsPsych.totalTime() - timestamp_onload
           });
         }
-
       });
 
       var startTime = performance.now();
@@ -633,6 +653,7 @@ jsPsych.plugins['EAT-26'] = (function () {
         persist: true,
         allow_held_key: false
       });
+
       var clickListener = jsPsych.pluginAPI.getMouseResponse({
         callback_function: after_response,
         valid_responses: jsPsych.ALL_KEYS,
