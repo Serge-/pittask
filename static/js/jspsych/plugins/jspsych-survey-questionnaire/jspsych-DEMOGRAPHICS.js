@@ -2,13 +2,13 @@ jsPsych.plugins['Demographics'] = (function () {
   var plugin = {};
 
   /**
-   * Timer Module.
+   * Timer Module Factory.
    *
    * firstTime {Number} - Time in milliseconds.
    * secondTime {Number} - Time in milliseconds.
    * wasFirstClick {Boolean} - First press indicator.
    */
-  var timerModule = (function() {
+  var timerModuleFactory = function() {
     var firstTime = 0;
     var tmpAnswerTime = 0;
     var ceilingTime = 0;
@@ -118,7 +118,8 @@ jsPsych.plugins['Demographics'] = (function () {
         maxAnswerTime = value;
       },
     };
-  })();
+  };
+  var timerModule = null;
 
   plugin.info = {
     name: 'Demographics',
@@ -210,6 +211,10 @@ jsPsych.plugins['Demographics'] = (function () {
 
   plugin.trial = function (display_element, trial) {
     var plugin_id_name = "jspsych-survey-multi-choice-DEMOGRAPHICS";
+
+    if (trial.type === 'DEMOGRAPHICS') {
+      timerModule = timerModuleFactory();
+    }
 
     timerModule.setPopupFloorText(answer_latency_text_floor);
     timerModule.setPopupCeilingText(answer_latency_text_ceiling);
@@ -555,8 +560,8 @@ jsPsych.plugins['Demographics'] = (function () {
                 <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
               </header>
               <main class="modal__content" id="modal-2-content">
-                <p>
-                ${ timerModule.getPopupText() }
+                <p id="modal-2-content__text">
+                  ${ timerModule.getPopupText() }
                 </p>
               </main>
               <footer class="modal__footer">
