@@ -1,6 +1,125 @@
 jsPsych.plugins['PC-PTSD-5'] = (function() {
   var plugin = {};
 
+  /**
+   * Timer Module.
+   *
+   * firstTime {Number} - Time in milliseconds.
+   * secondTime {Number} - Time in milliseconds.
+   * wasFirstClick {Boolean} - First press indicator.
+   */
+  var timerModule = (function() {
+    var firstTime = 0;
+    var tmpAnswerTime = 0;
+    var ceilingTime = 0;
+    var wasFirstClick = false;
+    var popupText = '';
+    var popupFloorText = '';
+    var popupCeilingText = '';
+    var minAnswerTime = 4000;
+    var maxAnswerTime = 10000;
+    var ceilingTimer = null;
+    var timer = null;
+    var microModalConfig = {
+      onShow: function() {},
+      onClose: function() {
+        restartResponseTimer();
+        restartCeilingTimer();
+      },
+    };
+
+    startFloorTimer();
+    startCeilingTimer();
+
+    function startFloorTimer() {
+      timer = setInterval(function() {
+        tmpAnswerTime += 10;
+      }, 10);
+    }
+
+    function startCeilingTimer() {
+      ceilingTimer = setInterval(function() {
+        ceilingTime += 10;
+
+        if (ceilingTime >= maxAnswerTime) {
+          setPopupText(popupCeilingText);
+          showPopup();
+          stopTimer(ceilingTimer);
+        }
+      }, 10);
+    }
+
+    function stopTimer(timer) {
+      clearInterval(timer);
+    }
+
+    function restartResponseTimer() {
+      tmpAnswerTime = 0;
+      clearInterval(timer);
+
+      startFloorTimer();
+    }
+
+    function restartCeilingTimer() {
+      ceilingTime = 0;
+      clearInterval(ceilingTimer);
+
+      startCeilingTimer();
+    }
+
+    function showPopup() {
+      MicroModal.show('modal-2', microModalConfig);
+    }
+
+    function setPopupText(value) {
+      popupText = value;
+      window.document.getElementById('modal-2-content__text').innerText = value;
+    }
+
+    return {
+      getFirstTime: function() {
+        return firstTime;
+      },
+      check: function() {
+        if (!wasFirstClick) {
+          wasFirstClick = true;
+          firstTime = tmpAnswerTime;
+        }
+
+        if (tmpAnswerTime < minAnswerTime) {
+          setPopupText(popupFloorText);
+          showPopup();
+          stopTimer(timer);
+          stopTimer(ceilingTimer);
+          return false;
+        }
+
+        restartResponseTimer();
+        restartCeilingTimer();
+        return true;
+      },
+      getPopupText: function() {
+        return popupText;
+      },
+      setPopupFloorText: function(value) {
+        popupFloorText = value;
+        popupText = value;
+      },
+      setPopupCeilingText: function(value) {
+        popupCeilingText = value;
+      },
+      getMicroModalConfig: function() {
+        return microModalConfig;
+      },
+      setMinAnswerTime: function(value) {
+        minAnswerTime = value;
+      },
+      setMaxAnswerTime: function(value) {
+        maxAnswerTime = value;
+      },
+    };
+  })();
+
   plugin.info = {
     name: 'PC-PTSD-5',
     stage_name: 'PC-PTSD-5',
@@ -87,11 +206,17 @@ jsPsych.plugins['PC-PTSD-5'] = (function() {
         description: 'Event converted details'
       }
     }
-  }
+  };
+
   plugin.trial = function(display_element, trial) {
     var plugin_id_name = "jspsych-survey-multi-choice-PC-PTSD-5";
     var isHidden = false;
     var html = "";
+
+    timerModule.setPopupFloorText(answer_latency_text_floor);
+    timerModule.setPopupCeilingText(answer_latency_text_ceiling);
+    timerModule.setMinAnswerTime(answer_latency_floor);
+    timerModule.setMaxAnswerTime(answer_latency_ceiling);
 
     // store response
     var response = {
@@ -180,7 +305,6 @@ jsPsych.plugins['PC-PTSD-5'] = (function() {
         question_classes.push('jspsych-survey-multi-choice-horizontal');
       }
 
-
       if(i === 0) {
         html += '<div style="margin-bottom: 8rem;" id="jspsych-survey-multi-choice-'+question_id+'" class="'+question_classes.join(' ')+'"  data-name="'+question.name+'">';
         // add question text
@@ -194,7 +318,6 @@ jsPsych.plugins['PC-PTSD-5'] = (function() {
         // add question text
         html += '<div class="jspsych-survey-multi-choice-option-left"><span class="jspsych-survey-multi-choice-number">' + i + '.</span><p class="jspsych-survey-multi-choice-text survey-multi-choice jspsych-survey-multi-choice-question-text">' +  question.prompt
       }
-
 
       // question.required
       html += '</p></div>';
@@ -228,7 +351,6 @@ jsPsych.plugins['PC-PTSD-5'] = (function() {
     // add submit button
     html += '<input type="submit" id="'+plugin_id_name+'-next" class="'+plugin_id_name+' jspsych-btn"' + (trial.button_label ? ' value="'+trial.button_label + '"': '') + '></input>';
     html += '</form>';
-
 
     html +=
       `<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">

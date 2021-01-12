@@ -1,6 +1,125 @@
 jsPsych.plugins['PRIME-R'] = (function () {
   var plugin = {};
 
+  /**
+   * Timer Module.
+   *
+   * firstTime {Number} - Time in milliseconds.
+   * secondTime {Number} - Time in milliseconds.
+   * wasFirstClick {Boolean} - First press indicator.
+   */
+  var timerModule = (function() {
+    var firstTime = 0;
+    var tmpAnswerTime = 0;
+    var ceilingTime = 0;
+    var wasFirstClick = false;
+    var popupText = '';
+    var popupFloorText = '';
+    var popupCeilingText = '';
+    var minAnswerTime = 4000;
+    var maxAnswerTime = 10000;
+    var ceilingTimer = null;
+    var timer = null;
+    var microModalConfig = {
+      onShow: function() {},
+      onClose: function() {
+        restartResponseTimer();
+        restartCeilingTimer();
+      },
+    };
+
+    startFloorTimer();
+    startCeilingTimer();
+
+    function startFloorTimer() {
+      timer = setInterval(function() {
+        tmpAnswerTime += 10;
+      }, 10);
+    }
+
+    function startCeilingTimer() {
+      ceilingTimer = setInterval(function() {
+        ceilingTime += 10;
+
+        if (ceilingTime >= maxAnswerTime) {
+          setPopupText(popupCeilingText);
+          showPopup();
+          stopTimer(ceilingTimer);
+        }
+      }, 10);
+    }
+
+    function stopTimer(timer) {
+      clearInterval(timer);
+    }
+
+    function restartResponseTimer() {
+      tmpAnswerTime = 0;
+      clearInterval(timer);
+
+      startFloorTimer();
+    }
+
+    function restartCeilingTimer() {
+      ceilingTime = 0;
+      clearInterval(ceilingTimer);
+
+      startCeilingTimer();
+    }
+
+    function showPopup() {
+      MicroModal.show('modal-2', microModalConfig);
+    }
+
+    function setPopupText(value) {
+      popupText = value;
+      window.document.getElementById('modal-2-content__text').innerText = value;
+    }
+
+    return {
+      getFirstTime: function() {
+        return firstTime;
+      },
+      check: function() {
+        if (!wasFirstClick) {
+          wasFirstClick = true;
+          firstTime = tmpAnswerTime;
+        }
+
+        if (tmpAnswerTime < minAnswerTime) {
+          setPopupText(popupFloorText);
+          showPopup();
+          stopTimer(timer);
+          stopTimer(ceilingTimer);
+          return false;
+        }
+
+        restartResponseTimer();
+        restartCeilingTimer();
+        return true;
+      },
+      getPopupText: function() {
+        return popupText;
+      },
+      setPopupFloorText: function(value) {
+        popupFloorText = value;
+        popupText = value;
+      },
+      setPopupCeilingText: function(value) {
+        popupCeilingText = value;
+      },
+      getMicroModalConfig: function() {
+        return microModalConfig;
+      },
+      setMinAnswerTime: function(value) {
+        minAnswerTime = value;
+      },
+      setMaxAnswerTime: function(value) {
+        maxAnswerTime = value;
+      },
+    };
+  })();
+
   plugin.info = {
     name: 'PRIME',
     stage_name: 'PRIME-R',
@@ -87,9 +206,15 @@ jsPsych.plugins['PRIME-R'] = (function () {
         description: 'Event converted details'
       }
     }
-  }
+  };
+
   plugin.trial = function (display_element, trial) {
     var plugin_id_name = "jspsych-survey-multi-choice-PRIME";
+
+    timerModule.setPopupFloorText(answer_latency_text_floor);
+    timerModule.setPopupCeilingText(answer_latency_text_ceiling);
+    timerModule.setMinAnswerTime(answer_latency_floor);
+    timerModule.setMaxAnswerTime(answer_latency_ceiling);
 
     var html = "";
 
@@ -161,11 +286,9 @@ jsPsych.plugins['PRIME-R'] = (function () {
       html += '<div id="jspsych-survey-multi-choice-preamble" class="jspsych-survey-multi-choice-preamble">' + trial.preamble + '</div>';
     }
 
-
     // form element
     html += '<div id="' + plugin_id_name + '">';
     html += '<form id="jspsych-survey-multi-choice-form" class="jspsych-survey-multi-choice-form">';
-
 
     html +=
       `<div id="jspsych-survey-multi-choice-preamble" class="jspsych-survey-multi-choice-instructions">
@@ -179,8 +302,7 @@ jsPsych.plugins['PRIME-R'] = (function () {
             <li><div>Somewhat agree</div></li>
             <li><div>Definitely agree</div></li>
           </ul>
-      </div>`
-
+      </div>`;
 
     // generate question order. this is randomized here as opposed to randomizing the order of trial.questions
     // so that the data are always associated with the same question regardless of order
@@ -234,7 +356,6 @@ jsPsych.plugins['PRIME-R'] = (function () {
 
     // add submit button
     html += '<input type="submit" id="' + plugin_id_name + '-next" class="' + plugin_id_name + ' jspsych-btn"' + (trial.button_label ? ' value="' + trial.button_label + '"' : '') + '></input>';
-
 
     html += '</form>';
     html += '</div>';

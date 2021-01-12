@@ -1,6 +1,125 @@
 jsPsych.plugins['RAADS-14'] = (function () {
   var plugin = {};
 
+  /**
+   * Timer Module.
+   *
+   * firstTime {Number} - Time in milliseconds.
+   * secondTime {Number} - Time in milliseconds.
+   * wasFirstClick {Boolean} - First press indicator.
+   */
+  var timerModule = (function() {
+    var firstTime = 0;
+    var tmpAnswerTime = 0;
+    var ceilingTime = 0;
+    var wasFirstClick = false;
+    var popupText = '';
+    var popupFloorText = '';
+    var popupCeilingText = '';
+    var minAnswerTime = 4000;
+    var maxAnswerTime = 10000;
+    var ceilingTimer = null;
+    var timer = null;
+    var microModalConfig = {
+      onShow: function() {},
+      onClose: function() {
+        restartResponseTimer();
+        restartCeilingTimer();
+      },
+    };
+
+    startFloorTimer();
+    startCeilingTimer();
+
+    function startFloorTimer() {
+      timer = setInterval(function() {
+        tmpAnswerTime += 10;
+      }, 10);
+    }
+
+    function startCeilingTimer() {
+      ceilingTimer = setInterval(function() {
+        ceilingTime += 10;
+
+        if (ceilingTime >= maxAnswerTime) {
+          setPopupText(popupCeilingText);
+          showPopup();
+          stopTimer(ceilingTimer);
+        }
+      }, 10);
+    }
+
+    function stopTimer(timer) {
+      clearInterval(timer);
+    }
+
+    function restartResponseTimer() {
+      tmpAnswerTime = 0;
+      clearInterval(timer);
+
+      startFloorTimer();
+    }
+
+    function restartCeilingTimer() {
+      ceilingTime = 0;
+      clearInterval(ceilingTimer);
+
+      startCeilingTimer();
+    }
+
+    function showPopup() {
+      MicroModal.show('modal-2', microModalConfig);
+    }
+
+    function setPopupText(value) {
+      popupText = value;
+      window.document.getElementById('modal-2-content__text').innerText = value;
+    }
+
+    return {
+      getFirstTime: function() {
+        return firstTime;
+      },
+      check: function() {
+        if (!wasFirstClick) {
+          wasFirstClick = true;
+          firstTime = tmpAnswerTime;
+        }
+
+        if (tmpAnswerTime < minAnswerTime) {
+          setPopupText(popupFloorText);
+          showPopup();
+          stopTimer(timer);
+          stopTimer(ceilingTimer);
+          return false;
+        }
+
+        restartResponseTimer();
+        restartCeilingTimer();
+        return true;
+      },
+      getPopupText: function() {
+        return popupText;
+      },
+      setPopupFloorText: function(value) {
+        popupFloorText = value;
+        popupText = value;
+      },
+      setPopupCeilingText: function(value) {
+        popupCeilingText = value;
+      },
+      getMicroModalConfig: function() {
+        return microModalConfig;
+      },
+      setMinAnswerTime: function(value) {
+        minAnswerTime = value;
+      },
+      setMaxAnswerTime: function(value) {
+        maxAnswerTime = value;
+      },
+    };
+  })();
+
   plugin.info = {
     name: 'RAADS-14',
     stage_name: 'RAADS-14',
@@ -87,9 +206,15 @@ jsPsych.plugins['RAADS-14'] = (function () {
         description: 'Event converted details'
       }
     }
-  }
+  };
+
   plugin.trial = function (display_element, trial) {
     var plugin_id_name = "jspsych-survey-multi-choice-RAADS-14";
+
+    timerModule.setPopupFloorText(answer_latency_text_floor);
+    timerModule.setPopupCeilingText(answer_latency_text_ceiling);
+    timerModule.setMinAnswerTime(answer_latency_floor);
+    timerModule.setMaxAnswerTime(answer_latency_ceiling);
 
     var html = "";
 
@@ -267,7 +392,6 @@ jsPsych.plugins['RAADS-14'] = (function () {
             </div>
           </div>
       </div>`;
-
 
     // render
     display_element.innerHTML = html;
