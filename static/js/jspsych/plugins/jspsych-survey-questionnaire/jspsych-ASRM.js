@@ -213,7 +213,6 @@ jsPsych.plugins['ASRM'] = (function () {
     var plugin_id_name = "jspsych-survey-multi-choice-ASRM";
 
     if (trial.type === 'ASRM') {
-      console.log(trial.type);
       timerModule = timerModuleFactory();
     }
 
@@ -278,22 +277,24 @@ jsPsych.plugins['ASRM'] = (function () {
     // generate question order. this is randomized here as opposed to randomizing the order of trial.questions
     // so that the data are always associated with the same question regardless of order
     var question_order = [];
+
     for (var i = 0; i < trial.questions.length; i++) {
       question_order.push(i);
     }
+
     if (trial.randomize_question_order) {
       question_order = jsPsych.randomization.shuffle(question_order);
     }
 
     // add multiple-choice questions
     for (var i = 0; i < trial.questions.length; i++) {
-
       // get question based on question_order
       var question = trial.questions[question_order[i]];
       var question_id = question_order[i];
 
       // create question container
       var question_classes = ['jspsych-survey-multi-choice-question'];
+
       if (question.horizontal) {
         question_classes.push('jspsych-survey-multi-choice-horizontal');
       }
@@ -382,11 +383,12 @@ jsPsych.plugins['ASRM'] = (function () {
           "time_elapsed": jsPsych.totalTime() - timestamp_onload
         });
 
-        if(info.el) {
-          if(info.el.dataset.timeStamp) {
+        if (info.el) {
+          if (info.el.dataset.timeStamp) {
             trial.time_stamp[info.el.dataset.timeStamp] = jsPsych.totalTime();
           }
-          if(info.el.dataset.questionNumber) {
+
+          if (info.el.dataset.questionNumber) {
             response.trial_events.push({
               "event_type": "answer displayed",
               "event_raw_details": info.el.dataset.questionNumber,
@@ -407,26 +409,46 @@ jsPsych.plugins['ASRM'] = (function () {
       }
     }
 
-    $('.jspsych-survey-highlight').click(function () {
+    $('.jspsych-survey-highlight').click(function() {
       $(this).parent().parent().find('.jspsych-survey-highlight').removeClass('bg-primary');
       $(this).addClass('bg-primary');
     });
 
-    $("label").on("click",function(){
+    $('label').on('click', function() {
       var labelID = $(this).attr('for');
-      if('labelID') {
+
+      if ('labelID') {
         $("#" + labelID).prop('checked', true).trigger('click').trigger('change');
-      };
+      }
     });
 
-    $("input[type=radio]").on("click change touchstart",function(){
-      var time_stamp_key = $(this).data('time-stamp');
-      if(time_stamp_key) {
-        trial.time_stamp[time_stamp_key] = jsPsych.totalTime();
-      };
+    // Registration of responses
+    $('input[type=radio]').on('click change touchstart', function(event) {
+      if (event.type === 'click') {
+        var isSuccess = timerModule.check();
+        var time_stamp_key;
+
+        if (isSuccess) {
+          time_stamp_key = $(this).data('time-stamp');
+
+          if (time_stamp_key) {
+            trial.time_stamp[time_stamp_key] = jsPsych.totalTime();
+          }
+        }
+
+        return isSuccess
+      }
     });
 
-    $(".modal__btn, .modal__close").on("click touchstart",function(){
+    // $("input[type=radio]").on("click change touchstart", function() {
+    //   var time_stamp_key = $(this).data('time-stamp');
+    //
+    //   if(time_stamp_key) {
+    //     trial.time_stamp[time_stamp_key] = jsPsych.totalTime();
+    //   }
+    // });
+
+    $(".modal__btn, .modal__close").on("click touchstart", function() {
       response.trial_events.push({
         "event_type": "popup closed",
         "event_raw_details": 'Close',
@@ -453,10 +475,12 @@ jsPsych.plugins['ASRM'] = (function () {
       // create object to hold responses
       var question_data = {};
       var timestamp_data = {};
+
       for (var i = 0; i < trial.questions.length; i++) {
         var match = display_element.querySelector('#jspsych-survey-multi-choice-' + i);
         var id = i + 1;
         var val = "";
+
         if (match.querySelector("input[type=radio]:checked") !== null) {
           val = match.querySelector("input[type=radio]:checked").value;
           $(match).find('.jspsych-survey-multi-choice-question').removeClass('survey-error');
@@ -464,11 +488,14 @@ jsPsych.plugins['ASRM'] = (function () {
           val = "";
           $(match).find('.jspsych-survey-multi-choice-question').addClass('survey-error');
         }
+
         var obje = {};
         var name = id;
+
         if (match.attributes['data-name'].value !== '') {
           name = match.attributes['data-name'].value;
         }
+
         obje[name] = val;
         timestamp_data[name] = trial.time_stamp['Q' + id];
         Object.assign(question_data, obje);
@@ -518,6 +545,7 @@ jsPsych.plugins['ASRM'] = (function () {
       persist: true,
       allow_held_key: false
     });
+
     var clickListener = jsPsych.pluginAPI.getMouseResponse({
       callback_function: after_response,
       valid_responses: jsPsych.ALL_KEYS,
