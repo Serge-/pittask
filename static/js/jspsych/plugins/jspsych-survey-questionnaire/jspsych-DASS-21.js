@@ -1,6 +1,8 @@
 jsPsych.plugins['DASS'] = (function() {
   var plugin = {};
 
+  console.log('Dass');
+
   /**
    * Timer Module Factory.
    *
@@ -237,7 +239,7 @@ jsPsych.plugins['DASS'] = (function() {
       "time_elapsed": jsPsych.totalTime() - timestamp_onload
     });
 
- $('body').prepend(
+  $('body').prepend(
   `<header>
       <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
@@ -292,7 +294,7 @@ jsPsych.plugins['DASS'] = (function() {
     html += '</style>';
 
     // show preamble text
-    if(trial.preamble !== null){
+    if (trial.preamble !== null) {
         html += '<div id="jspsych-survey-multi-choice-preamble" class="jspsych-survey-multi-choice-preamble">'+trial.preamble+'</div>';
     }
 
@@ -314,22 +316,24 @@ jsPsych.plugins['DASS'] = (function() {
     // generate question order. this is randomized here as opposed to randomizing the order of trial.questions
     // so that the data are always associated with the same question regardless of order
     var question_order = [];
-    for(var i=0; i<trial.questions.length; i++){
+
+    for (var i=0; i<trial.questions.length; i++) {
       question_order.push(i);
     }
-    if(trial.randomize_question_order){
+
+    if (trial.randomize_question_order) {
       question_order = jsPsych.randomization.shuffle(question_order);
     }
 
     // add multiple-choice questions
     for (var i = 0; i < trial.questions.length; i++) {
-
       // get question based on question_order
       var question = trial.questions[question_order[i]];
       var question_id = question_order[i];
 
       // create question container
       var question_classes = ['jspsych-survey-multi-choice-question'];
+
       if (question.horizontal) {
         question_classes.push('jspsych-survey-multi-choice-horizontal');
       }
@@ -408,8 +412,7 @@ jsPsych.plugins['DASS'] = (function() {
     display_element.innerHTML = html;
 
     // function to handle key press responses
-    var after_response = function (info) {
-
+    var after_response = function(info) {
       if (info.key_release === undefined) {
         response.trial_events.push({
           "event_type": "key press",
@@ -419,10 +422,11 @@ jsPsych.plugins['DASS'] = (function() {
           "time_elapsed": jsPsych.totalTime() - timestamp_onload
         });
 
-        if(info.el) {
-          if(info.el.dataset.timeStamp) {
+        if (info.el) {
+          if (info.el.dataset.timeStamp) {
             trial.time_stamp[info.el.dataset.timeStamp] = jsPsych.totalTime();
           }
+
           if(info.el.dataset.questionNumber) {
             response.trial_events.push({
               "event_type": "answer displayed",
@@ -449,21 +453,41 @@ jsPsych.plugins['DASS'] = (function() {
         $(this).addClass('bg-primary');
     })
 
-    $("label").on("click",function(){
+    $("label").on("click", function() {
       var labelID = $(this).attr('for');
+
       if('labelID') {
         $("#" + labelID).prop('checked', true).trigger('click').trigger('change');
-      };
+      }
     });
 
-    $("input[type=radio]").on("click change touchstart",function(){
-      var time_stamp_key = $(this).data('time-stamp');
-      if(time_stamp_key) {
-        trial.time_stamp[time_stamp_key] = jsPsych.totalTime();
-      };
+    // Registration of responses
+    $('input[type=radio]').on('click change touchstart', function(event) {
+      if (event.type === 'click') {
+        var isSuccess = timerModule.check();
+        var time_stamp_key;
+
+        if (isSuccess) {
+          time_stamp_key = $(this).data('time-stamp');
+
+          if (time_stamp_key) {
+            trial.time_stamp[time_stamp_key] = jsPsych.totalTime();
+          }
+        }
+
+        return isSuccess
+      }
     });
 
-    $(".modal__btn, .modal__close").on("click touchstart",function(){
+    // $("input[type=radio]").on("click change touchstart", function() {
+    //   var time_stamp_key = $(this).data('time-stamp');
+    //
+    //   if(time_stamp_key) {
+    //     trial.time_stamp[time_stamp_key] = jsPsych.totalTime();
+    //   }
+    // });
+
+    $(".modal__btn, .modal__close").on("click touchstart", function() {
       response.trial_events.push({
         "event_type": "popup closed",
         "event_raw_details": 'Close',
