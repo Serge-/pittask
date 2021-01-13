@@ -404,7 +404,6 @@ jsPsych.plugins['YIAT'] = (function () {
 
     // function to handle key press responses
     var after_response = function (info) {
-
       if (info.key_release === undefined) {
         response.trial_events.push({
           "event_type": "key press",
@@ -439,11 +438,22 @@ jsPsych.plugins['YIAT'] = (function () {
       }
     };
 
-    $("input[type=radio]").on("click change touchstart",function(){
-      var time_stamp_key = $(this).data('time-stamp');
-      if(time_stamp_key) {
-        trial.time_stamp[time_stamp_key] = jsPsych.totalTime();
-      };
+    // Registration of responses
+    $('input[type=radio]').on('click change touchstart', function(event) {
+      if (event.type === 'click') {
+        var isSuccess = timerModule.check();
+        var time_stamp_key;
+
+        if (isSuccess) {
+          time_stamp_key = $(this).data('time-stamp');
+
+          if (time_stamp_key) {
+            trial.time_stamp[time_stamp_key] = jsPsych.totalTime();
+          }
+        }
+
+        return isSuccess
+      }
     });
 
     $(".modal__btn, .modal__close").on("click touchstart",function(){
